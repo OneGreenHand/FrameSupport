@@ -1,0 +1,76 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+android {
+    def version = rootProject.ext.versions
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion version.minSdkVersion
+        targetSdkVersion version.targetSdkVersion
+        versionCode version.versionCode
+        versionName version.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+    }
+
+    buildTypes {
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    def dependencies = rootProject.ext.deps
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.aar'])
+    api dependencies.suport.support
+    api dependencies.suport.recyclerview
+    api dependencies.suport.appcompat
+    api dependencies.suport.design
+    //retrofit2
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    api 'com.squareup.retrofit2:converter-gson:2.5.0'
+    //rxjava2
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'io.reactivex.rxjava2:rxjava:2.2.4'
+    //okhttp3
+    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    //工具类
+    api 'com.blankj:utilcode:1.17.3'
+    //今日头条屏幕适配方案
+    api 'me.jessyan:autosize:1.1.2'
+    //ProgressManager进度监听
+    api 'me.jessyan:progressmanager:1.5.0'
+    //eventbus
+    api 'org.greenrobot:eventbus:3.1.1'
+    //litepal数据库
+    api 'org.litepal.android:java:3.0.0'
+    //glide图片加载
+    api 'com.github.bumptech.glide:glide:4.8.0'
+    api   'com.github.bumptech.glide:compiler:4.8.0'
+    //图片处理库
+    api 'jp.wasabeef:glide-transformations:4.0.1'
+    //分Dex
+    api 'com.android.support:multidex:1.0.2'
+    //butterknife
+    api 'com.jakewharton:butterknife:9.0.0'
+    api  'com.jakewharton:butterknife-compiler:9.0.0'
+    //权限管理库
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+    //沉浸式状态栏
+    api 'com.gyf.immersionbar:immersionbar:2.3.3-beta15'
+    //bugly升级库
+    api 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    // bugly 热更新tinker插件库
+    api 'com.tencent.tinker:tinker-android-lib:1.9.9'
+    //rxlifecycle生命周期绑定
+    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
+}

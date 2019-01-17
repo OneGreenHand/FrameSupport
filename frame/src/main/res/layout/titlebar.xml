@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/titlebar"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/title_bar">
+
+    <ImageView
+        android:id="@+id/img_finish"
+        android:layout_width="33dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scaleType="center"
+        android:src="@drawable/go_back_black" />
+
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center_vertical"
+        android:text="@string/app_name"
+        android:textColor="@color/title_name"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/other"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="17dp"
+        android:paddingRight="17dp"
+        android:text="保存"
+        android:textColor="@color/color3"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <View
+        style="@style/DividerX"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

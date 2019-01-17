@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+apply from: 'tinker-support.gradle'
+android {
+    def version = rootProject.ext.versions
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
+    defaultConfig {
+        applicationId version.applicationId
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
+        multiDexEnabled true
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "armeabi", "x86_64", "mips", 'mips64'
+        }
+        //解决AndroidStudio 3.0的问题
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file("FrameSupport.jks")//签名文件路径
+            storePassword "FrameSupport"
+            keyAlias "FrameSupport"
+            keyPassword "FrameSupport"//签名密码
+        }
+        debug {
+            storeFile file("FrameSupport.jks")//签名文件路径
+            storePassword "FrameSupport"
+            keyAlias "FrameSupport"
+            keyPassword "FrameSupport"//签名密码
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            debuggable true//是否允许调试
+            minifyEnabled true//是否开启代码混淆
+            zipAlignEnabled true//是否优化apk文件，将apk文件中未压缩的数据在4个字节边界上对齐
+            shrinkResources true//是否去除无用资源，任何在编译过程中没有用到的资源或者代码都会被删除，可以有效减小apk体积
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
+            buildConfigField "boolean", "ISDEBUG", "true"
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        //  true--所有正式版构建执行规则生成崩溃的lint检查，如果有崩溃问题将停止构建
+        checkReleaseBuilds false
+        // true--错误发生后停止gradle构建
+        abortOnError false
+        // 关闭指定问题检查
+        disable 'MissingTranslation'
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+    allprojects {
+        repositories {
+            jcenter()
+            flatDir {
+                dirs 'libs'
+            }
+        }
+    }
+    dexOptions {//解决编译内存溢出问题
+        dexInProcess true
+        preDexLibraries true
+        javaMaxHeapSize "8g"//越大越好
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.aar'], dir: 'libs')
+    implementation project(':frame')
+}

@@ -1,0 +1,28 @@
+apply from: 'config.gradle'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.0'
+        //tinkersupport插件,bugly热更新
+        classpath "com.tencent.bugly:tinker-support:1.1.5"
+        //butterknife
+        classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0'
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+        jcenter()
+        google()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -1,5 +1,7 @@
 package com.frame.config;
 
+import com.blankj.utilcode.util.AppUtils;
+
 /**
  * 应用程序配置类：用于保存用户相关信息及设置
  */
@@ -13,10 +15,10 @@ public class AppConfig {
     /**
      * App全局用到的包名
      */
-    public static final String PACKAGE_NAME = "com.example.frame";
+    public static final String PACKAGE_NAME = AppUtils.getAppPackageName();
     //分页参数
     public static final class ViewPage{
-        //起始页下表
+        //起始页下标
         public static final int START_INDEX = 1;
         //每页的数据量
         public static final int PAGE_COUNT = 20;

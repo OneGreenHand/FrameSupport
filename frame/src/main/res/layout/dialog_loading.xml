@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <com.frame.widget.dialog.LoadingView
-        android:id="@+id/loadView"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-</RelativeLayout>
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/toast_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingTop="15dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="15dp">
+
+        <com.frame.widget.dialog.IntertwineLoadingView
+            android:id="@+id/loadView"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:animDuration="1000"
+            app:firstBallColor="@android:color/holo_red_dark"
+            app:secondBallColor="@android:color/holo_orange_dark" />
+
+        <TextView
+            android:id="@+id/loading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/load_ing"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

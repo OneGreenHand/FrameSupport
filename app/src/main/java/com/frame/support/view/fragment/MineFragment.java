@@ -3,6 +3,7 @@ package com.frame.support.view.fragment;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.frame.support.R;
 import com.frame.support.util.AlertDialog;
@@ -11,7 +12,6 @@ import com.frame.support.view.activity.HeadFootExampleActivity;
 import com.frame.support.view.activity.NoDataExampleActivity;
 import com.frame.support.view.activity.RefreshRequestActivity;
 import com.frame.util.IntentUtil;
-import com.frame.widget.dialog.LoadingView;
 
 import butterknife.OnClick;
 
@@ -39,8 +39,8 @@ public class MineFragment extends BaseFragment {
                 new AlertDialog(mActivity).setLayoutId(R.layout.dialog_loading).getContentView(new AlertDialog.ContentView() {
                     @Override
                     public void initDialog(Dialog dialog) {
-                        LoadingView loadingView = dialog.findViewById(R.id.loadView);
-                        loadingView.setLoadingText("自定义文字");
+                        TextView textView = dialog.findViewById(R.id.loading_text);
+                        textView.setText("自定义文字");
                     }
                 }).show();
                 break;

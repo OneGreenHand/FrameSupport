@@ -3,12 +3,12 @@ package com.frame.view;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
-import android.view.View;
+import android.widget.TextView;
 
 import com.frame.R;
 import com.frame.R2;
 import com.frame.base.BaseDialog;
-import com.frame.widget.dialog.LoadingView;
+import com.frame.widget.dialog.IntertwineLoadingView;
 
 import butterknife.BindView;
 
@@ -18,7 +18,9 @@ import butterknife.BindView;
  */
 public class LoadingDialog extends BaseDialog {
     @BindView(R2.id.loadView)
-    LoadingView loadView;
+    IntertwineLoadingView loadView;
+    @BindView(R2.id.loading_text)
+    TextView loadingText;
 
     public LoadingDialog(@NonNull Context context) {
         super(context, R.style.DialogStyle, R.style.PopWindowAnimStyle);
@@ -29,14 +31,14 @@ public class LoadingDialog extends BaseDialog {
         setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                loadView.setVisibility(View.GONE);
+                loadView.release();
             }
         });
     }
 
     @Override
     public void show() {
-    //    loadView.setVisibility(View.VISIBLE);
+        loadView.start();
         super.show();
     }
 
@@ -46,7 +48,7 @@ public class LoadingDialog extends BaseDialog {
     }
 
     public void setMsg(String msg) {
-        loadView.setLoadingText(msg);
+        loadingText.setText(msg);
     }
 
     public void setCancle(boolean isCancle) {

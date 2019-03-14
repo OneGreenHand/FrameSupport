@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<template
+    format="5"
+    revision="5"
+    name="框架模版界面"
+    minApi="9"
+    minBuildApi="14"
+    description="创建一套基于Frame依赖的界面(请在包路径下创建)">
+
+    <category value="Activity" />
+    <formfactor value="Mobile" />
+   <!-- 类,默认为FrameActivity -->
+    <parameter
+        id="activityClass"
+        name="类名称(无需尾缀)"
+        type="string"
+        constraints="class|unique|nonempty"
+        suggest="${layoutToActivity(layoutName)}"
+        default=""
+        help="创建一个Activity或者Fragmen文件,无需书写尾缀" />
+		
+   <parameter
+        id="selectViewType"
+        name="选择View类型"
+        type="enum"
+        default="activity"
+        help="选择创建Activity或Fragment">
+        <option id="activity">Activity</option>
+        <option id="fragment">Fragment</option>
+    </parameter>
+
+    <parameter
+        id="frameSupperActivity"
+        name="选择继承Activity类型"
+        type="enum"
+        visibility = "selectViewType == 'activity'"
+        default="Base"
+        help="选择继承的模板类型，根据继承的模板对象会生成对应的模板代码，包括Activity/Presenter/Layout/Adapter等">     
+        <option id="Base">BaseActivity</option>
+		<option id="BaseRequest">BaseRequestActivity</option>
+        <option id="BaseSwipe">BaseSwipeActivity</option>
+        <option id="BaseSwipeList">BaseSwipeListActivity</option>
+    </parameter>
+	
+     <parameter
+        id="frameSupperFragment"
+        name="选择继承Fragment类型"
+        type="enum"
+        visibility = "selectViewType == 'fragment'"
+        default="Base"
+        help="选择继承的模板类型，根据继承的模板对象会生成对应的模板代码，包括Fragment/Presenter/Layout/Adapter等">
+		<option id="Base">BaseFragment</option>
+        <option id="BaseRequest">BaseRequestFragment</option>
+        <option id="BaseSwipe">BaseSwipeFragment</option>
+        <option id="BaseSwipeList">BaseSwipeListFragment</option>
+    </parameter>
+	<!-- 是否生成布局文件 -->
+	<parameter
+        id="generateLayout"
+        name="Generate Layout File"
+        type="boolean"
+        default="true"
+        help="If true, a layout file will be generated" />
+    <!-- 生成布局文件,默认为activity_frame -->
+   <parameter
+        id="layoutName"
+        name="Activity布局名称"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="${activityToLayout(activityClass)}"
+        default="activity_main"
+        visibility="generateLayout &amp;&amp; selectViewType == 'activity'"
+        help="The name of the layout to create for the activity" />
+    <parameter
+        id="layoutFragmentName"
+        name="Fragment布局名称"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="fragment_${classToResource(activityClass)}"
+        default="fragment_main"
+        visibility="generateLayout &amp;&amp; selectViewType == 'fragment'"
+        help="The name of the layout to create for the fragment" />
+		
+    <!-- 填写包名,默认为com.mycompany.myapp-->	
+    <parameter
+        id="packageName"
+        name="Package name"
+        type="string"
+        constraints="package"
+        default="com.mycompany.myapp" />
+	 <!-- 下面不知道是干嘛的 -->	 
+	 	 
+	   <parameter
+        id="includeInstantAppUrl"
+        name="Associate a URL with this Activity"
+        type="boolean"
+        default="false"
+        visibility="isInstantApp!false"
+        help="If true, this activity will be associated with URL, improving discovery of your Instant App" />
+	 
+		<parameter
+        id="instantAppActivityHost"
+        name="Instant App URL Host"
+        type="string"
+        suggest="${companyDomain}"
+        default="instantapp.example.com"
+        visibility="isInstantApp!false"
+        help="The domain to use in the Instant App route for this activity"/>
+
+    <parameter
+        id="instantAppActivityRouteType"
+        name="Instant App URL Route Type"
+        type="enum"
+        default="pathPattern"
+        visibility="isInstantApp!false"
+        help="The type of route to use in the Instant App route for this activity" >
+        <option id="path">Path</option>
+        <option id="pathPrefix">Path Prefix</option>
+        <option id="pathPattern">Path Pattern</option>
+    </parameter>
+
+    <parameter
+        id="instantAppActivityRoute"
+        name="Instant App URL Route"
+        type="string"
+        default="/.*"
+        visibility="isInstantApp!false"
+        help="The route to use in the Instant App route for this activity"/>
+
+    <!-- 128x128 thumbnails relative to template.xml -->
+    <thumbs>
+        <!-- default thumbnail is required -->
+        <thumb>template_blank_activity.png</thumb>
+    </thumbs>
+
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+
+</template>

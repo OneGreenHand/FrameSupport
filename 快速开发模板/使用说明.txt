@@ -1,0 +1,2 @@
+将OghMvpActivity文件夹放置于AS安装目录下的\plugins\android\lib\templates\activities目录
+然后重启Stuido即可

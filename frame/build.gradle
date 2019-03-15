@@ -16,14 +16,26 @@ android {
 
     buildTypes {
         release {
-            consumerProguardFiles 'proguard-rules.pro'
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            zipAlignEnabled false
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    allprojects {
+        repositories {
+            // 支付宝 SDK AAR 包所需的配置(这里是为了让moudle找到arr)
+            flatDir {
+               dirs 'libs'  //系统将在lib目录下搜索依赖
+            }
+        }
+    }
 }
 
 dependencies {
@@ -73,4 +85,8 @@ dependencies {
     api 'com.tencent.tinker:tinker-android-lib:1.9.9'
     //rxlifecycle生命周期绑定
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
+    //微信支付
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    // 支付宝 SDK AAR 包所需的配置
+    api (name: 'alipaySdk-15.6.0-20190226104053', ext: 'aar')
 }

@@ -86,4 +86,9 @@
         <item name="android:layout_height">0.7dp</item>
         <item name="android:background">@color/title_bar</item>
     </style>
+    <!--解决微信支付回调页面闪动问题-->
+    <style name="wx_theme" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

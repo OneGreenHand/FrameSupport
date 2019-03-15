@@ -4,6 +4,7 @@
 -dontskipnonpubliclibraryclasses    # 是否混淆第三方jar
 -dontpreverify                      # 混淆时是否做预校验
 -verbose                            # 混淆时是否记录日志
+-printmapping proguardMapping.txt
 #不跳过非公共的库的类成员
 -dontskipnonpubliclibraryclassmembers
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*    # 混淆时所采用的算法
@@ -42,7 +43,8 @@ public <init>(android.content.Context);
 public <init>(android.content.Context, android.util.AttributeSet);
 public <init>(android.content.Context, android.util.AttributeSet, int);
 public void set*(***);
-*** get* ();
+*** get*();
+void set*(***);
 }
 # 保留Parcelable序列化的类不能被混淆
 -keep class * implements android.os.Parcelable{
@@ -68,11 +70,31 @@ public static final int *;
 -keepclassmembers class * {
 void *(**On*Event);
 }
+-keepclassmembers class * {
+    void *(*Event);
+}
 #Fragment不需要在AndroidManifest.xml中注册，需要额外保护下
 -keep public class * extends android.support.v4.app.Fragment
 -keep public class * extends android.app.Fragment
-#保持泛型
--keepattributes Signature
+-keepattributes Signature# 避免混淆泛型
+-keepattributes *Annotation*,InnerClasses
+-keepattributes EnclosingMethod
+-keepattributes SourceFile,LineNumberTable #运行抛出异常时保留代码行号
+-keepattributes Exceptions # 解决AGPBI警告
+# natvie 方法不混淆
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+#（可选）避免Log打印输出
+-assumenosideeffects class android.util.Log {
+   public static *** v(...);
+   public static *** d(...);
+   public static *** i(...);
+   public static *** w(...);
+ }
 #----------------------------- WebView(项目中没有可以忽略) -----------------------------
 #webView需要进行特殊处理
 -keepclassmembers class fqcn.of.javascript.interface.for.Webview {
@@ -95,6 +117,20 @@ void *(**On*Event);
 -keep class com.frame.support.bean.** {*;}
 #自定义控件不混淆
 -keep class com.frame.support.widget.** {*;}
+#Frame框架部分
+-keep class com.frame.bean.** {*;}
+-keep class com.frame.adapter.** {*;}
+-keep class com.frame.widget.** {*;}
+-keep class com.frame.base.** {*;}
+-keep class com.frame.adapter.** {
+*;
+}
+-keep public class * extends com.frame.base.BaseQuickHolder
+-keep public class * extends com.frame.adapter.BaseQuickAdapter
+-keep public class * extends com.frame.adapter.BaseViewHolder
+-keepclassmembers  class **$** extends com.frame.adapter.BaseViewHolder {
+     <init>(...);
+}
 #---------------------------------第三方库及jar包-------------------------------
 #第三方不混淆
 # support-v4
@@ -112,3 +148,124 @@ void *(**On*Event);
 -keep class android.support.design.** { *; }
 -keep interface android.support.design.** { *; }
 -keep public class android.support.design.R$* { *; }
+# Retrofit
+-keep class retrofit2.** { *; }
+-dontwarn retrofit2.**
+-keepattributes Signature
+-keepattributes Exceptions
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+# RxJava RxAndroid
+-dontwarn rx.*
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQuene*Field*{
+long producerIndex;
+long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+rx.internal.util.atomic.LinkedQueueNode producerNode;
+rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+# okhttp
+-dontwarn com.squareup.okhttp.**
+-keep class com.squareup.okhttp.{*;}
+-dontwarn javax.annotation.**
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
+#com.goole
+-keep class com.goole.gson.** { *; }
+# gson解析
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.** {*;}
+-keep class com.google.**{*;}
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.stream.** { *; }
+-keep class com.qiancheng.carsmangersystem.**{*;}
+#ProgressManager进度监听
+-keep class me.jessyan.progressmanager.** { *; }
+-keep interface me.jessyan.progressmanager.** { *; }
+# RxPermissions权限库
+-keep class com.tbruyelle.rxpermissions2.** { *; }
+-keep interface com.tbruyelle.rxpermissions2.** { *; }
+#EventBus
+-keepattributes *Annotation*
+-keepclassmembers class * {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
+}
+#litepal数据库
+-keep class org.litepal.** {
+    *;
+}
+-keep class * extends org.litepal.crud.DataSupport {
+    *;
+}
+-keep class * extends org.litepal.crud.LitePalSupport {
+    *;
+}
+#Glide图片加载
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep class com.bumptech.glide.GeneratedAppGlideModuleImpl
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+#butterknife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+#immersionbar沉浸式状态栏
+-keep class com.gyf.barlibrary.* {*;}
+#bugly异常捕获
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+# tinker混淆规则
+-dontwarn com.tencent.tinker.**
+-keep class com.tencent.tinker.** { *; }
+#支付宝支付
+-keep class com.alipay.android.app.IAlixPay{*;}
+-keep class com.alipay.android.app.IAlixPay$Stub{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
+-keep class com.alipay.sdk.app.PayTask{ public *;}
+-keep class com.alipay.sdk.app.AuthTask{ public *;}
+-keep class com.alipay.sdk.app.H5PayCallback {
+    <fields>;
+    <methods>;
+}
+-keep class com.alipay.android.phone.mrpc.core.** { *; }
+-keep class com.alipay.apmobilesecuritysdk.** { *; }
+-keep class com.alipay.mobile.framework.service.annotation.** { *; }
+-keep class com.alipay.mobilesecuritysdk.face.** { *; }
+-keep class com.alipay.tscenter.biz.rpc.** { *; }
+-keep class org.json.alipay.** { *; }
+-keep class com.alipay.tscenter.** { *; }
+-keep class com.ta.utdid2.** { *;}
+-keep class com.ut.device.** { *;}
+#微信支付
+-keep class com.tencent.** { *;}
+-keep class com.tencent.mm.sdk.** {
+   *;
+}
+-keep class com.tencent.mm.opensdk.** {
+   *;
+}
+-keep class com.tencent.wxop.** {
+   *;
+}

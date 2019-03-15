@@ -28,20 +28,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    allprojects {
-        repositories {
-            // 支付宝 SDK AAR 包所需的配置(这里是为了让moudle找到arr)
-            flatDir {
-               dirs 'libs'  //系统将在lib目录下搜索依赖
-            }
-        }
-    }
 }
 
 dependencies {
     def dependencies = rootProject.ext.deps
-    api fileTree(dir: 'libs', include: ['*.jar'])
-    api fileTree(dir: 'libs', include: ['*.aar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.aar'], dir: 'libs')
     api dependencies.suport.support
     api dependencies.suport.recyclerview
     api dependencies.suport.appcompat
@@ -67,14 +59,14 @@ dependencies {
     api 'org.litepal.android:java:3.0.0'
     //glide图片加载
     api 'com.github.bumptech.glide:glide:4.8.0'
-    api   'com.github.bumptech.glide:compiler:4.8.0'
+    api 'com.github.bumptech.glide:compiler:4.8.0'
     //图片处理库
     api 'jp.wasabeef:glide-transformations:4.0.1'
     //分Dex
     api 'com.android.support:multidex:1.0.2'
     //butterknife
     api 'com.jakewharton:butterknife:9.0.0'
-    api  'com.jakewharton:butterknife-compiler:9.0.0'
+    api 'com.jakewharton:butterknife-compiler:9.0.0'
     //权限管理库
     api 'com.github.tbruyelle:rxpermissions:0.10.2'
     //沉浸式状态栏
@@ -87,6 +79,6 @@ dependencies {
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
     //微信支付
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
-    // 支付宝 SDK AAR 包所需的配置
-    api (name: 'alipaySdk-15.6.0-20190226104053', ext: 'aar')
+    // 支付宝支付
+    api files('libs/alipaySdk-20180601.jar')
 }

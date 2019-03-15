@@ -68,15 +68,7 @@ android {
             jniLibs.srcDirs = ['src/main/jniLibs']
         }
     }
-    allprojects {
-        repositories {
-            // 支付宝 SDK AAR 包所需的配置(这里是为了让moudle找到arr)
-            flatDir {
-                dirs 'libs', '../frame/libs'//(这里因为aar文件放在frame中，所以路径变了)
-           //   dirs 'libs'  //系统将在lib目录下搜索依赖
-            }
-        }
-    }
+
     dexOptions {//解决编译内存溢出问题
         dexInProcess true
         preDexLibraries true

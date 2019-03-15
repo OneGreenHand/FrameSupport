@@ -3,7 +3,7 @@ ext {
     // app 相关版本控制
     versions = [
             applicationId    : "com.frame.support",//默认和包名一致，修改任一一方相互不影响
-            minSdkVersion    : 15,//app最低支持的sdk版本号(Android4.0.3,4.0.4)
+            minSdkVersion    : 16,//app最低支持的sdk版本号(Android4.0.3,4.0.4)
             targetSdkVersion : 28,//兼容targetSdkVersion 28(含)以下版本
 
             compileSdkVersion: 28,//使用 Android SDK 28版本编译你的应用

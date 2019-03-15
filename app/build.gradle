@@ -1,5 +1,13 @@
 apply plugin: 'com.android.application'
 apply from: 'tinker-support.gradle'
+def keystorePropertiesFile = rootProject.file("keystore.properties")//打包文件配置
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+def releaseTime() {//设置打包时间
+    return new Date().format("MMddhh", TimeZone.getTimeZone("UTC"))
+}
+
 android {
     def version = rootProject.ext.versions
     compileSdkVersion versions.compileSdkVersion
@@ -20,19 +28,34 @@ android {
                 includeCompileClasspath = true
             }
         }
+        //版本名后面添加一句话，意思就是flavor dimension 它的维度就是该版本号，这样维度就是都是统一的了
+        flavorDimensions "versionCode"
     }
     signingConfigs {
         release {
-            storeFile file("FrameSupport.jks")//签名文件路径
-            storePassword "FrameSupport"
-            keyAlias "FrameSupport"
-            keyPassword "FrameSupport"//签名密码
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
         debug {
-            storeFile file("FrameSupport.jks")//签名文件路径
-            storePassword "FrameSupport"
-            keyAlias "FrameSupport"
-            keyPassword "FrameSupport"//签名密码
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    productFlavors {//渠道名字
+        develop {}
+        tencent {}
+        xiaomi {}
+        huawei {}
+        meizu {}
+    }
+    android.applicationVariants.all { variant ->//修改打包后的名字
+        variant.outputs.all {
+            //    outputFileName = "apk_" + productFlavors[0].name + "_v" + defaultConfig.versionName + "-${releaseTime()}.apk"
+            outputFileName = "apk_" + productFlavors[0].name + "_" + buildType.name + "_v" + defaultConfig.versionName + "-${releaseTime()}.apk"
         }
     }
     buildTypes {
@@ -46,9 +69,10 @@ android {
         }
         debug {
             signingConfig signingConfigs.release
-            buildConfigField "boolean", "ISDEBUG", "true"
             debuggable true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
         }
     }
     compileOptions {

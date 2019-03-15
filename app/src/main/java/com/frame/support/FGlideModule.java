@@ -26,4 +26,3 @@ public  final class FGlideModule extends AppGlideModule {
         super.registerComponents(context, glide, registry);
     }
 }
-

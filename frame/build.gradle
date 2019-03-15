@@ -16,11 +16,7 @@ android {
 
     buildTypes {
         release {
-            buildConfigField "boolean", "LOG_DEBUG", "true"
-            zipAlignEnabled false
-            shrinkResources false
             minifyEnabled false
-            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -34,51 +30,52 @@ dependencies {
     def dependencies = rootProject.ext.deps
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation fileTree(include: ['*.aar'], dir: 'libs')
+    // Support libraries
     api dependencies.suport.support
     api dependencies.suport.recyclerview
     api dependencies.suport.appcompat
     api dependencies.suport.design
     //retrofit2
-    api 'com.squareup.retrofit2:retrofit:2.5.0'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
-    api 'com.squareup.retrofit2:converter-gson:2.5.0'
+    api dependencies.retrofit2.retrofit
+    api dependencies.retrofit2.adapter_rxjava2
+    api dependencies.retrofit2.converter_gson
     //rxjava2
-    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    api 'io.reactivex.rxjava2:rxjava:2.2.4'
+    api dependencies.rxjava2.rxjava
+    api dependencies.rxjava2.rxandroid
     //okhttp3
-    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    api dependencies.okhttp3
     //工具类
-    api 'com.blankj:utilcode:1.17.3'
+    api dependencies.utilcode
     //今日头条屏幕适配方案
-    api 'me.jessyan:autosize:1.1.2'
+    api dependencies.autosize
     //ProgressManager进度监听
-    api 'me.jessyan:progressmanager:1.5.0'
+    api dependencies.progressmanager
     //eventbus
-    api 'org.greenrobot:eventbus:3.1.1'
+    api dependencies.eventbus
     //litepal数据库
-    api 'org.litepal.android:java:3.0.0'
+    api dependencies.litepal
     //glide图片加载
-    api 'com.github.bumptech.glide:glide:4.8.0'
-    api 'com.github.bumptech.glide:compiler:4.8.0'
+    api dependencies.glide.glide
+    api dependencies.glide.compiler
     //图片处理库
-    api 'jp.wasabeef:glide-transformations:4.0.1'
+    api dependencies.glide.transformations
     //分Dex
-    api 'com.android.support:multidex:1.0.2'
+    api dependencies.multidex
     //butterknife
-    api 'com.jakewharton:butterknife:9.0.0'
-    api 'com.jakewharton:butterknife-compiler:9.0.0'
+    api dependencies.butterknife.butterknife
+    api dependencies.butterknife.compiler
     //权限管理库
-    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+    api dependencies.rxpermissions
     //沉浸式状态栏
-    api 'com.gyf.immersionbar:immersionbar:2.3.3-beta15'
+    api dependencies.immersionbar
     //bugly升级库
-    api 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    api dependencies.bugly.crashreport_upgrade
     // bugly 热更新tinker插件库
-    api 'com.tencent.tinker:tinker-android-lib:1.9.9'
+    api dependencies.bugly.tinker
     //rxlifecycle生命周期绑定
-    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
+    api dependencies.rxlifecycle
     //微信支付
-    api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    api dependencies.wxpay
     // 支付宝支付
     api files('libs/alipaySdk-20180601.jar')
 }

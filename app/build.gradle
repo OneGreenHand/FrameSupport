@@ -101,7 +101,10 @@ android {
 }
 
 dependencies {
+    def dependencies = rootProject.ext.deps
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation fileTree(include: ['*.aar'], dir: 'libs')
+    annotationProcessor dependencies.glide.compiler
+    annotationProcessor dependencies.butterknife.compiler
     implementation project(':frame')
 }

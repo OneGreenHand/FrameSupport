@@ -56,14 +56,14 @@ dependencies {
     api dependencies.litepal
     //glide图片加载
     api dependencies.glide.glide
-    api dependencies.glide.compiler
+    annotationProcessor dependencies.glide.compiler
     //图片处理库
     api dependencies.glide.transformations
     //分Dex
     api dependencies.multidex
     //butterknife
     api dependencies.butterknife.butterknife
-    api dependencies.butterknife.compiler
+    annotationProcessor dependencies.butterknife.compiler
     //权限管理库
     api dependencies.rxpermissions
     //沉浸式状态栏

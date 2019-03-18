@@ -1,7 +1,11 @@
 <?xml version="1.0"?>	
 <recipe>
 <#if selectViewType == "activity">
-	<#if generateLayout>   
+	<#if generateLayout&&frameSupperActivity == "BaseSwipeList">   
+	<instantiate from="root/src/app_package/xml/layout_rv_simple.xml.ftl"
+                   to="${escapeXmlAttribute(resOut)}/layout/${layoutName}.xml" />  
+    <open file="${escapeXmlAttribute(resOut)}/layout/${layoutName}.xml" />
+	<#elseif generateLayout>
 	<instantiate from="root/src/app_package/xml/layout_simple.xml.ftl"
                    to="${escapeXmlAttribute(resOut)}/layout/${layoutName}.xml" />  
     <open file="${escapeXmlAttribute(resOut)}/layout/${layoutName}.xml" />

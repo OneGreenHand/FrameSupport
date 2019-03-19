@@ -36,6 +36,7 @@ public class RetrofitWrapper {
                 .addInterceptor(new okhttp3.logging.HttpLoggingInterceptor().setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY))//此处设置的拦截器用来查看请求日志
                 .addInterceptor(new HttpLoggingInterceptor())//此处设置的拦截器用来添加统一的请求头
                 .protocols(Collections.singletonList(Protocol.HTTP_1_1))//解决协议错误问题
+              //  .addInterceptor(new ParamInterceptor())//添加公共请求参数
                 .build();
         retrofit = new Retrofit.Builder()
                 .baseUrl(AppConfig.config.getUrl())

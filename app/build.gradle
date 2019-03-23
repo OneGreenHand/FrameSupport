@@ -10,14 +10,14 @@ def releaseTime() {//设置打包时间
 
 android {
     def version = rootProject.ext.versions
-    compileSdkVersion versions.compileSdkVersion
-    buildToolsVersion versions.buildToolsVersion
+    compileSdkVersion version.compileSdkVersion
+    buildToolsVersion version.buildToolsVersion
     defaultConfig {
         applicationId version.applicationId
-        minSdkVersion versions.minSdkVersion
-        targetSdkVersion versions.targetSdkVersion
-        versionCode versions.versionCode
-        versionName versions.versionName
+        minSdkVersion version.minSdkVersion
+        targetSdkVersion version.targetSdkVersion
+        versionCode version.versionCode
+        versionName version.versionName
         multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "armeabi", "x86_64", "mips", 'mips64'

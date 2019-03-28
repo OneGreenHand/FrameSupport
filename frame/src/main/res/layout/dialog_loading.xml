@@ -24,8 +24,8 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             app:animDuration="1000"
-            app:firstBallColor="@android:color/holo_red_dark"
-            app:secondBallColor="@android:color/holo_orange_dark" />
+            app:firstBallColor="@android:color/white"
+            app:secondBallColor="@android:color/white" />
 
         <TextView
             android:id="@+id/loading_text"

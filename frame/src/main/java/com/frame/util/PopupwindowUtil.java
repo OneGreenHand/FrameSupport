@@ -47,12 +47,12 @@ public class PopupwindowUtil {
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         if (isAlpha) {
             //设置PopupWindow弹出后有阴影
-            Util.setBackgroundAlpha((Activity) context, 0.8f);
+            CommonUtil.setBackgroundAlpha((Activity) context, 0.8f);
             //设置PopupWindow消失后阴影也消失
             popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {
-                    Util.setBackgroundAlpha((Activity) context, 1.0f);
+                    CommonUtil.setBackgroundAlpha((Activity) context, 1.0f);
                 }
             });
         }

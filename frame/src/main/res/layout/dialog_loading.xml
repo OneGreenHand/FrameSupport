@@ -34,8 +34,8 @@
             android:layout_marginTop="15dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@string/load_ing"
-            android:textColor="@color/white"
+            android:text="@string/frame_load_ing"
+            android:textColor="@color/frame_white"
             android:textSize="14sp" />
     </LinearLayout>
 

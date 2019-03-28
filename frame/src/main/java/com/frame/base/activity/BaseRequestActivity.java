@@ -62,7 +62,7 @@ public abstract class BaseRequestActivity<P extends BasePresenter, B extends Bas
             else if (emptyViewMsg != null && emptyViewMsg instanceof Integer)
                 mVaryViewHelperController.showEmpty(getResString((Integer) emptyViewMsg));
             else
-                mVaryViewHelperController.showEmpty(getResString(R.string.no_data));
+                mVaryViewHelperController.showEmpty(getResString(R.string.frame_no_data));
         }
     }
 
@@ -97,7 +97,7 @@ public abstract class BaseRequestActivity<P extends BasePresenter, B extends Bas
 
     //设置空数据布局背景颜色
     public int getEmptyViewBg() {
-        return R.color.transparent;
+        return R.color.frame_transparent;
     }
 
     //重写更换空数据布局

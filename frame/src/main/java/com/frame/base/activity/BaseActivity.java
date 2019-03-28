@@ -129,7 +129,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
 
     protected void initImmersionBar() {
         //在BaseActivity里初始化（解决状态栏和布局重叠问题，并且指定状态栏和导航栏颜色为黄白，通用设置）
-        ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.color1).navigationBarColor(R.color.white).init();
+        ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.frame_color1).navigationBarColor(R.color.frame_white).init();
     }
 
     /**

@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">FrameSupport</string>
-    <string name="action_settings">Settings</string>
-    <string name="no_data">暂无数据</string>
-    <string name="load_ing">玩命加载中...</string>
+    <string name="frame_app_name">FrameSupport</string>
+    <string name="frame_action_settings">Settings</string>
+    <string name="frame_no_data">暂无数据</string>
+    <string name="frame_load_ing">玩命加载中...</string>
     <string name="frame_request_loading">正在玩命加载中. . .</string>
     <string name="frame_request_error">无法访问网络,请检查您的网络状态</string>
     <string name="frame_load_failed">加载失败,点击重新加载</string>

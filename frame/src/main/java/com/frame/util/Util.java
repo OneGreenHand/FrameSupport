@@ -3,18 +3,28 @@ package com.frame.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationManagerCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 import com.frame.FrameApplication;
+import com.frame.R;
 import com.frame.view.CommonPromptDialog;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -93,7 +103,6 @@ public class Util {
 //        SharedPreferencesUtil.putString(AppContext.mContext, "userInfo", infoJson);
 //    }
     /*************************登录和退出相关操作结束*******************************/
-
 
     /**
      * 请求权限弹框
@@ -284,6 +293,12 @@ public class Util {
         return false;
     }
 
+   // 使用正则表达式来判断字符串中是否包含字母
+    public static boolean judgeContainsStr(String str) {
+        String regex = ".*[a-zA-Z]+.*";
+        Matcher m = Pattern.compile(regex).matcher(str);
+        return m.matches();
+    }
     /**
      * 设置页面的透明度
      * @param bgAlpha 1表示不透明
@@ -299,4 +314,138 @@ public class Util {
         activity.getWindow().setAttributes(lp);
     }
 
+    //跳转到浏览器
+    public static void intentToBrowsable(Context mContext, String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse(url));
+        mContext.startActivity(intent);
+    }
+
+
+    //跳转QQ
+    public static void intentToQQ(Context mContext, String qq) {
+        // 跳转之前，可以先判断手机是否安装QQ
+        if (isQQClientAvailable(mContext)) {
+            // 跳转到客服的QQ
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("295268305" + qq));
+            // 跳转前先判断Uri是否存在，如果打开一个不存在的Uri，App可能会崩溃
+            if (isValidIntent(mContext, intent)) {
+                mContext.startActivity(intent);
+            } else {
+                ToastUtil.showCenterToast(mContext, "链接客服地址不存在！");
+            }
+        } else {
+            ToastUtil.showCenterToast(mContext, "请先安装QQ客户端！");
+        }
+    }
+
+    //判断 Uri是否有效
+    public static boolean isValidIntent(Context context, Intent intent) {
+        PackageManager packageManager = context.getPackageManager();
+        List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
+        return !activities.isEmpty();
+    }
+
+    //判断 用户是否安装QQ客户端
+    public static boolean isQQClientAvailable(Context context) {
+        final PackageManager packageManager = context.getPackageManager();
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
+        if (pinfo != null) {
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                if (pn.equalsIgnoreCase("com.tencent.qqlite") || pn.equalsIgnoreCase("com.tencent.mobileqq") || pn.equalsIgnoreCase("com.tencent.tim")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    /**
+     * 密码8-20，不能为中文且必须包含字符，不能为纯数字
+     */
+    public static boolean checkPassword(Context mContext, EditText edInput) {
+        String txt = edInput.getText().toString().trim();
+        if (txt.isEmpty()) {
+            ToastUtil.showCenterToast(mContext, "密码输入不能为空");
+            return false;
+        } else if (txt.length() < 8) {
+            ToastUtil.showCenterToast(mContext, "密码长度为8-20位");
+            return false;
+        } else {
+            Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
+            Matcher m = p.matcher(txt);
+            if (!m.find()) {
+                p = Pattern.compile("[0-9]*");
+                Matcher m2 = p.matcher(txt);
+                if (m2.matches()) {
+                    ToastUtil.showCenterToast(mContext, "密码不能为纯数字");
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                ToastUtil.showCenterToast(mContext, "密码不能包含中文");
+                return false;
+            }
+        }
+    }
+
+    /**
+     * 检测GPS是否打开
+     *
+     * @return
+     */
+    public static boolean checkGPSIsOpen(Context mContext) {
+        boolean isOpen;
+        LocationManager locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+        isOpen = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return isOpen;
+    }
+
+    /**
+     * 跳转GPS设置界面
+     *
+     * @param fragment
+     * @param requestCode
+     */
+    public static void fragmentIntentToOpenGPS(Fragment fragment, int requestCode) {
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        fragment.startActivityForResult(intent, requestCode);
+    }
+
+    /**
+     * 跳转GPS设置界面
+     *
+     * @param activity
+     * @param requestCode
+     */
+    public static void activityIntentToOpenGPS(Activity activity, int requestCode) {
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        activity.startActivityForResult(intent, requestCode);
+    }
+    /**
+     * 设置消息小图标
+     */
+    public static void setMsgCountIcon(String count, TextView tv) {
+        if (!count.isEmpty()) {
+            if (Integer.parseInt(count) == 0) {
+                tv.setVisibility(View.INVISIBLE);
+            } else if (Integer.parseInt(count) < 10) {
+                tv.setVisibility(View.VISIBLE);
+                tv.setText(count);
+                tv.setBackgroundResource(R.drawable.shape_msg_circular);
+            } else if (Integer.parseInt(count) >= 10) {
+                tv.setVisibility(View.VISIBLE);
+                tv.setText(count);
+                tv.setBackgroundResource(R.drawable.shape_msg_square);
+            } else if (Integer.parseInt(count) >= 100) {
+                tv.setVisibility(View.VISIBLE);
+                tv.setText("99+");
+                tv.setBackgroundResource(R.drawable.shape_msg_square);
+            }
+        } else {
+            tv.setVisibility(View.INVISIBLE);
+        }
+    }
 }

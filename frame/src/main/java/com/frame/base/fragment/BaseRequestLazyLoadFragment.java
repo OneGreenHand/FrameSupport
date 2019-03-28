@@ -92,6 +92,6 @@ public abstract class BaseRequestLazyLoadFragment<P extends BasePresenter, B ext
 
     //重写更换空数据布局的提示文本
     public Object getEmptyViewMsg() {
-        return R.string.no_data;
+        return R.string.frame_no_data;
     }
 }

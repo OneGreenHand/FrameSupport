@@ -24,8 +24,8 @@
             android:paddingBottom="17dp"
             android:paddingTop="17dp"
             android:text="这是标题"
-            android:textColor="@color/color4"
-            android:textSize="@dimen/font_15sp" />
+            android:textColor="@color/frame_color4"
+            android:textSize="@dimen/frame_font_15sp" />
 
         <View
             style="@style/DividerX"
@@ -40,8 +40,8 @@
             android:gravity="center"
             android:minHeight="50dp"
             android:text="这里是内容区域"
-            android:textColor="@color/color3"
-            android:textSize="@dimen/font_12sp" />
+            android:textColor="@color/frame_color3"
+            android:textSize="@dimen/frame_font_12sp" />
 
         <View
             style="@style/DividerX"
@@ -62,14 +62,14 @@
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:text="取消"
-                android:textColor="@color/title_name"
+                android:textColor="@color/frame_title_name"
                 android:textSize="13sp" />
 
             <View
                 android:id="@+id/line_view"
                 android:layout_width="0.7dp"
                 android:layout_height="match_parent"
-                android:background="@color/title_bar" />
+                android:background="@color/frame_title_bar" />
 
             <TextView
                 android:id="@+id/sure"
@@ -81,7 +81,7 @@
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:text="确定"
-                android:textColor="@color/title_name"
+                android:textColor="@color/frame_title_name"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>

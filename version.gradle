@@ -30,7 +30,7 @@ ext {
             multidex                 : "1.0.2",
             butterknife              : "9.0.0",
             rxpermissions            : "0.10.2",
-            immersionbar             : "2.3.3-beta15",
+            immersionbar             : "2.3.3",
             bugly_crashreport_upgrade: "1.3.7",
             bugly_tinker             : "1.9.9",
             rxlifecycle              : "2.2.2",

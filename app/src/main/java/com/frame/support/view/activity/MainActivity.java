@@ -103,6 +103,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
+                //TODO 这里使用的是viewpage+framge方式，暂未实现沉浸式状态栏，如需实现，只需在此方法中实现即可，具体可参考 https://github.com/gyf-dev/ImmersionBar/blob/master/sample/src/main/java/com/gyf/immersionbar/activity/FragmentThreeActivity.java
                 if (position >= 2)//第三个为悬浮按钮
                     position++;
                 if (menuItem != null) {

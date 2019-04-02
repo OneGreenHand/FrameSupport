@@ -58,9 +58,4 @@ public class OnlineFragment extends BaseRequestFragment<OnlinePt, BaseBean> {
         CityWeatherBean cityWeatherBean = (CityWeatherBean) data;
         requestMsg.setText("城市：" + cityWeatherBean.data.city + "\n日期：" + cityWeatherBean.data.yesterday.date + "\n最低温度：" + cityWeatherBean.data.yesterday.low + "\n最高温度：" + cityWeatherBean.data.yesterday.high);
     }
-
-    @Override
-    public void initImmersionBar() {
-
-    }
 }

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/titlebar"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="55dp"
     android:background="@color/frame_title_bar">
 
     <ImageView
@@ -14,7 +14,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:scaleType="center"
-        android:src="@drawable/go_back_black" />
+        android:src="@drawable/back_black" />
 
     <TextView
         android:id="@+id/app_title"
@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:gravity="center_vertical"
-        android:text="@string/app_name"
+        android:text="@string/frame_app_name"
         android:textColor="@color/frame_title_name"
         android:textSize="17sp" />
 

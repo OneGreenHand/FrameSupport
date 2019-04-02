@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -67,7 +66,8 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Immer
         return rootView;
     }
 
-    protected void initCommon() {}
+    protected void initCommon() {
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -111,6 +111,7 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Immer
 
     /**
      * 接收到分发到事件
+     *
      * @param event 事件
      */
     protected void receiveEvent(EventBean event) {
@@ -118,6 +119,7 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Immer
 
     /**
      * 接受到分发的粘性事件
+     *
      * @param event 粘性事件
      */
     protected void receiveStickyEvent(EventBean event) {
@@ -262,11 +264,19 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Immer
     }
 
     /**
+     * 初始化沉浸式代码
+     */
+    @Override
+    public void initImmersionBar() {
+
+    }
+
+    /**
      * 是否可以实现沉浸式，当为true的时候才可以执行initImmersionBar方法
      */
     @Override
     public boolean immersionBarEnabled() {
-        return true;
+        return false;
     }
 
 }

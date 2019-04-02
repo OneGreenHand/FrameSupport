@@ -22,9 +22,4 @@ public class GameFragment extends BaseFragment {
         return R.layout.fragment_game;
     }
 
-
-    @Override
-    public void initImmersionBar() {
-
-    }
 }

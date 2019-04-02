@@ -20,6 +20,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.frame.R;
 import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
@@ -27,6 +28,7 @@ import com.frame.util.AppManager;
 import com.frame.view.LoadingDialog;
 import com.frame.widget.RecycleViewDivider;
 import com.gyf.barlibrary.ImmersionBar;
+import com.gyf.barlibrary.OSUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -45,6 +47,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     protected LoadingDialog progressDialog;
     protected RxPermissions rxPermissions;
     private boolean isDestroyed = false;//是否真的被finish
+    private InputMethodManager mInputMethodManager;
 
     @Override
     public void startActivity(Intent intent) {
@@ -128,8 +131,25 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     }
 
     protected void initImmersionBar() {
-        //在BaseActivity里初始化（解决状态栏和布局重叠问题，并且指定状态栏和导航栏颜色为黄白，通用设置）
-        ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.frame_color1).navigationBarColor(R.color.frame_white).init();
+        //在BaseActivity里初始化,设置导航栏、状态栏为白色，并且状态栏字体和导航栏图标变色，同时解决状态栏和布局重叠问题（这里主要用于标题栏为白色的布局）
+        ImmersionBar.with(this).statusBarColor(R.color.frame_white).navigationBarColor(R.color.frame_white).autoDarkModeEnable(true).fitsSystemWindows(true).init();
+    }
+
+    /**
+     * 重置默认状态栏(主要用于fragamen切换和头部为图片或背景的情况)
+     * 状态栏为透明色，会有重叠问题，可以设置marginTop或者指定头部
+     */
+    public void resetImmersionBar() {
+        ImmersionBar.with(this).reset().navigationBarColor(R.color.frame_white).init();
+    }
+
+    /**
+     * 重置默认状态栏(主要用于标题栏为非白色)
+     *
+     * @param color 状态栏的颜色
+     */
+    public void resetImmersionBar(int color) {
+        ImmersionBar.with(this).reset().statusBarColor(color).navigationBarColor(R.color.frame_white).fitsSystemWindows(true).init();
     }
 
     /**
@@ -247,8 +267,10 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      */
     private void hideKeyboard(IBinder token) {
         if (token != null) {
-            InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
+            if (mInputMethodManager == null) {
+                mInputMethodManager = ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE));
+                mInputMethodManager.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
+            }
         }
     }
 
@@ -302,6 +324,18 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        // 非必加
+        // 如果你的app可以横竖屏切换，适配了华为emui3系列系统手机，并且navigationBarWithEMUI3Enable为true，
+        // 请在onResume方法里添加这句代码（同时满足这三个条件才需要加上代码哦：1、横竖屏可以切换；2、华为emui3系列系统手机；3、navigationBarWithEMUI3Enable为true）
+        // 否则请忽略
+        if (OSUtils.isEMUI3_x() && isImmersionBarEnabled()) {
+            ImmersionBar.with(this).init();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         destroy();
@@ -311,7 +345,10 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (isImmersionBarEnabled()) {
-            // 如果你的app可以横竖屏切换，并且适配4.4或者emui3手机请务必在onConfigurationChanged方法里添加这句话
+            // 非必加
+            // 如果你的app可以横竖屏切换，适配了4.4或者华为emui3.1系统手机，并且navigationBarWithKitkatEnable为true，
+            // 请务必在onConfigurationChanged方法里添加如下代码（同时满足这三个条件才需要加上代码哦：1、横竖屏可以切换；2、android4.4或者华为emui3.1系统手机；3、navigationBarWithKitkatEnable为true）
+            // 否则请忽略
             ImmersionBar.with(this).init();
         }
     }
@@ -323,6 +360,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
         if (isDestroyed) {
             return;
         } else {
+            mInputMethodManager = null;
             // 必须调用该方法，防止内存泄漏
             if (isImmersionBarEnabled()) {
                 ImmersionBar.with(this).destroy();

@@ -55,9 +55,4 @@ public class MineFragment extends BaseFragment {
                 break;
         }
     }
-
-    @Override
-    public void initImmersionBar() {
-
-    }
 }

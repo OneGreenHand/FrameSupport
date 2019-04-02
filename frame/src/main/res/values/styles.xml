@@ -83,7 +83,7 @@
     <!-- 竖线 -->
     <style name="DividerY">
         <item name="android:layout_width">0.7dp</item>
-        <item name="android:layout_height">0.7dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/frame_title_bar</item>
     </style>
     <!--解决微信支付回调页面闪动问题-->

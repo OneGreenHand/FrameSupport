@@ -99,9 +99,11 @@ public abstract class BaseLazyLoadFragment extends BaseFragment implements BaseV
     protected abstract void lazyLoad();
 
     // 当视图已经对用户不可见并且加载过数据，如果需要在切换到其他页面时停止加载数据，可以覆写此方法
-    protected void stopLoad() {}
+    protected void stopLoad() {
+    }
 
-    protected void initCommon() {}
+    protected void initCommon() {
+    }
 
     protected abstract void init(Bundle savedInstanceState);
 
@@ -137,6 +139,7 @@ public abstract class BaseLazyLoadFragment extends BaseFragment implements BaseV
 
     /**
      * 接收到分发到事件
+     *
      * @param event 事件
      */
     protected void receiveEvent(EventBean event) {
@@ -144,6 +147,7 @@ public abstract class BaseLazyLoadFragment extends BaseFragment implements BaseV
 
     /**
      * 接受到分发的粘性事件
+     *
      * @param event 粘性事件
      */
     protected void receiveStickyEvent(EventBean event) {
@@ -264,10 +268,18 @@ public abstract class BaseLazyLoadFragment extends BaseFragment implements BaseV
     }
 
     /**
+     * 初始化沉浸式代码
+     */
+    @Override
+    public void initImmersionBar() {
+
+    }
+
+    /**
      * 是否可以实现沉浸式，当为true的时候才可以执行initImmersionBar方法
      */
     @Override
     public boolean immersionBarEnabled() {
-        return true;
+        return false;
     }
 }

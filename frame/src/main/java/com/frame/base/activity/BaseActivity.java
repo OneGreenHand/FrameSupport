@@ -370,7 +370,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
             if (isRegisterEventBus())
                 EventBus.getDefault().unregister(this);
             // 结束Activity&从堆栈中移除
-            AppManager.getAppManager().removeActivityFromStack(this);
+            AppManager.getAppManager().finishActivity(this);
             //RxAPIManager.get().cancel(this.getClass().getName());//取消网络请求
         }
     }

@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:gravity="center"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-
-    
     <ImageView
-        android:src="@drawable/frame_pager_error"
         android:layout_width="160dp"
-        android:layout_height="147dp"/>
-    
+        android:layout_height="147dp"
+        android:src="@drawable/frame_pager_error" />
+
     <TextView
         android:id="@+id/v_tips"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/frame_view_net_error"
-        android:textSize="14sp"
-        android:textColor="@color/frame_text_hint_color"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/frame_view_net_error"
+        android:textColor="#999999"
+        android:textSize="14sp" />
 
     <TextView
-        android:background="@drawable/frame_shape_btn_bg"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:layout_marginTop="80dp"
         android:id="@+id/tv_view_pager_error_load"
-        android:text="@string/frame_load_again"
-        android:textSize="14sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/frame_shape_btn_bg"
+        android:paddingLeft="40dp"
+        android:paddingTop="8dp"
+        android:paddingRight="40dp"
+        android:paddingBottom="8dp"
+        android:text="@string/frame_load_again"
+        android:textSize="14sp" />
 </LinearLayout>

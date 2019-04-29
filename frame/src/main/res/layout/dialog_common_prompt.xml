@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#00000000"
+    android:background="@color/frame_transparent"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -21,11 +21,11 @@
             android:ellipsize="end"
             android:gravity="center_horizontal"
             android:maxLines="1"
-            android:paddingBottom="17dp"
             android:paddingTop="17dp"
+            android:paddingBottom="17dp"
             android:text="这是标题"
-            android:textColor="@color/frame_color4"
-            android:textSize="@dimen/frame_font_15sp" />
+            android:textColor="#333333"
+            android:textSize="15sp" />
 
         <View
             style="@style/DividerX"
@@ -40,8 +40,8 @@
             android:gravity="center"
             android:minHeight="50dp"
             android:text="这里是内容区域"
-            android:textColor="@color/frame_color3"
-            android:textSize="@dimen/frame_font_12sp" />
+            android:textColor="#666666"
+            android:textSize="12sp" />
 
         <View
             style="@style/DividerX"
@@ -59,8 +59,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector_cmdialog_left"
                 android:gravity="center"
-                android:paddingBottom="10dp"
                 android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="取消"
                 android:textColor="@color/frame_title_name"
                 android:textSize="13sp" />
@@ -69,7 +69,7 @@
                 android:id="@+id/line_view"
                 android:layout_width="0.7dp"
                 android:layout_height="match_parent"
-                android:background="@color/frame_title_bar" />
+                android:background="#F0F2F5" />
 
             <TextView
                 android:id="@+id/sure"
@@ -78,8 +78,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector_cmdialog_right"
                 android:gravity="center"
-                android:paddingBottom="10dp"
                 android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="确定"
                 android:textColor="@color/frame_title_name"
                 android:textSize="13sp" />

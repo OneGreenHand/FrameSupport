@@ -78,4 +78,5 @@ dependencies {
     api dependencies.wxpay
     // 支付宝支付
     api files('libs/alipaySdk-20180601.jar')
+    api 'top.zibin:Luban:1.1.8'
 }

@@ -2,6 +2,7 @@ package com.frame.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Looper;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -9,14 +10,24 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.frame.R;
 
 import java.io.File;
 import java.math.BigDecimal;
+
+import jp.wasabeef.glide.transformations.ColorFilterTransformation;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.CropSquareTransformation;
+import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+import jp.wasabeef.glide.transformations.MaskTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import retrofit2.http.PUT;
 
 /**
  * 图片处理类
@@ -36,37 +47,71 @@ public class GlideImageUtil {
                 .into(view);
     }
 
+
     /**
-     * 圆形头像
+     * 将图片显示在指定的图片形状中
+     *
+     * @param drawable 要显示的图片形状
      */
-    public static void showCircularImage(final Context context, String url, ImageView view) {
+    public static void showMaskImage(final Context context, String url, int drawable, ImageView view) {
         Glide.with(context)
-                .asBitmap()
                 .load(url)
-                .thumbnail(0.1f)
-                .apply(new RequestOptions()
+                .apply(RequestOptions.bitmapTransform(new MultiTransformation<Bitmap>(new CenterCrop(), new MaskTransformation(drawable)))
                         .placeholder(R.drawable.img_showing)
                         .error(R.drawable.img_show_error))
-                //   .load( Uri.fromFile( new File( filePath ) ))  //(显示本地视频)
-                //   .asGif()//显示gif动画,asGif()判断是否是gif动画
-                // .skipMemoryCache()//跳过内存缓存
-                // .diskCacheStrategy(DiskCacheStrategy.NONE)//跳过硬盘缓存(什么都不缓存)
-                //    .diskCacheStrategy(DiskCacheStrategy.SOURCE)仅仅只缓存原来的全分辨率的图像
-                //     .diskCacheStrategy(DiskCacheStrategy.RESULT)仅仅缓存最终的图像
-                //     .diskCacheStrategy(DiskCacheStrategy.ALL)缓存所有版本的图像（默认行为）
-                //.priority(Priority.HIGH)//设置图片加载的顺序
-                // .bitmapTransform(new CropCircleTransformation(context))//圆形图
-                .into(new BitmapImageViewTarget(view) {
-                    @Override
-                    protected void setResource(Bitmap resource) {
-                        RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                        circularBitmapDrawable.setCircular(true);
-                        view.setImageDrawable(circularBitmapDrawable);
-                    }
-                });
-        //   .bitmapTransform(new BlurTransformation(context, radius))//实现高斯模糊radius取值1-25,值越大图片越模糊
-        //   .bitmapTransform(new BlurTransformation(context, 25), new CropCircleTransformation(context))//原图基础上变换成圆图 +毛玻璃（高斯模糊）
-        //   .bitmapTransform(new RoundedCornersTransformation(context, 30, 0, RoundedCornersTransformation.CornerType.BOTTOM))//原图处理成圆角 如果是四周已经是圆角则RoundedCornersTransformation.CornerType.ALL
+                .into(view);
+    }
+
+    /**
+     * 圆形、圆圈
+     */
+    public static void showCircleImage(final Context context, String url, ImageView view) {
+        Glide.with(context)
+                .load(url)
+                .apply(RequestOptions.bitmapTransform(new CropCircleTransformation())
+                        .placeholder(R.drawable.img_showing)
+                        .error(R.drawable.img_show_error))
+                .into(view);
+    }
+
+    /**
+     * 圆角
+     *
+     * @param radius     圆角大小
+     * @param cornerType 显示的方式，例如 RoundedCornersTransformation.CornerType.ALL
+     */
+    public static void showRoundedCornersImage(final Context context, String url, ImageView view, int radius, RoundedCornersTransformation.CornerType cornerType) {
+        Glide.with(context)
+                .load(url)
+                .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(radius, 0,
+                        cornerType))
+                        .placeholder(R.drawable.img_showing)
+                        .error(R.drawable.img_show_error))
+                .into(view);
+    }
+
+    /**
+     * 方形
+     */
+    public static void showSquareImage(final Context context, String url, ImageView view) {
+        Glide.with(context)
+                .load(url)
+                .apply(RequestOptions.bitmapTransform(new CropSquareTransformation())
+                        .placeholder(R.drawable.img_showing)
+                        .error(R.drawable.img_show_error))
+                .into(view);
+    }
+
+    /**
+     * 加遮罩颜色
+     */
+    public static void showGrayImage(final Context context, String url, int color, ImageView view) {
+        Glide.with(context)
+                .load(url)
+                .apply(RequestOptions.bitmapTransform(new ColorFilterTransformation(color))
+                        .placeholder(R.drawable.img_showing)
+                        .error(R.drawable.img_show_error))
+                .into(view);
     }
 
     /**

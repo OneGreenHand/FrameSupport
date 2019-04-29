@@ -8,7 +8,7 @@
                 android:bottomRightRadius="6dp"
                 android:topLeftRadius="0dp"
                 android:topRightRadius="0dp"/>
-            <solid android:color="@color/frame_color3" />
+            <solid android:color="#666666" />
         </shape>
     </item>
     <item android:state_focused="false" android:state_pressed="false">

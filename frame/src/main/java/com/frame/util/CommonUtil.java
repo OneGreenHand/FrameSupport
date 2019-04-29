@@ -11,7 +11,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationManagerCompat;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
@@ -50,7 +53,7 @@ public class CommonUtil {
         if (dialog == null)
             dialog = new CommonPromptDialog(context);
         if (tips == null || tips.trim().isEmpty())
-            dialog.setContentText("应用缺少必要权限，该功能暂时无法使用。如若需要，请单击【确定】按钮前往设置中心进行权限授权。");
+            dialog.setContentText("为了给您提供更好的服务，请设置相应权限哦！如若需要，请单击【确定】按钮前往设置中心进行权限授权。");
         else
             dialog.setContentText(tips);
         dialog.setCancel(false);
@@ -108,6 +111,19 @@ public class CommonUtil {
             return true;
         lastClickTime = time;
         return false;
+    }
+
+    /**
+     * 设置文本大小及颜色
+     */
+    public static Spanned setHtmlColor(String string) {
+        Spanned spanned;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            spanned = Html.fromHtml(string, Html.FROM_HTML_MODE_COMPACT);
+        } else {
+            spanned = Html.fromHtml(string);
+        }
+        return spanned;
     }
 
     /**
@@ -251,41 +267,32 @@ public class CommonUtil {
         mContext.startActivity(intent);
     }
 
-    //跳转QQ
-    public static void intentToQQ(Context mContext, String qq) {
-        // 跳转之前，可以先判断手机是否安装QQ
-        if (isQQClientAvailable(mContext)) {
-            // 跳转到客服的QQ
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("295268305" + qq));
-            // 跳转前先判断Uri是否存在，如果打开一个不存在的Uri，App可能会崩溃
-            if (isValidIntent(mContext, intent)) {
-                mContext.startActivity(intent);
-            } else {
-                ToastUtil.showCenterToast(mContext, "链接客服地址不存在！");
-            }
+    /**
+     * 跳转QQ
+     */
+    public static void ContactQQ(Context context, String qq) {
+        String url = "";
+        if (isAvilible(context, "com.tencent.mobileqq") || isAvilible(context, "com.tencent.tim") || isAvilible(context, "com.tencent.qqlite")) {
+            url = "mqqwpa://im/chat?chat_type=wpa&uin=" + qq + "";
         } else {
-            ToastUtil.showCenterToast(mContext, "请先安装QQ客户端！");
+            url = "http://wpa.qq.com/msgrd?v=3&uin=" + qq + "&site=qq&menu=yes";
         }
+        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
-    //判断 Uri是否有效
-    public static boolean isValidIntent(Context context, Intent intent) {
-        PackageManager packageManager = context.getPackageManager();
-        List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
-        return !activities.isEmpty();
-    }
-
-    //判断 用户是否安装QQ客户端
-    public static boolean isQQClientAvailable(Context context) {
+    /**
+     * 检查手机上是否安装了指定的软件
+     */
+    public static boolean isAvilible(Context context, String packageName) {
+        if (packageName == null || packageName.isEmpty())
+            return false;
         final PackageManager packageManager = context.getPackageManager();
-        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
-        if (pinfo != null) {
-            for (int i = 0; i < pinfo.size(); i++) {
-                String pn = pinfo.get(i).packageName;
-                if (pn.equalsIgnoreCase("com.tencent.qqlite") || pn.equalsIgnoreCase("com.tencent.mobileqq") || pn.equalsIgnoreCase("com.tencent.tim")) {
-                    return true;
-                }
-            }
+        List<PackageInfo> packageInfos = packageManager.getInstalledPackages(0);
+        if (packageInfos == null || packageInfos.isEmpty())
+            return false;
+        for (int i = 0; i < packageInfos.size(); i++) {
+            if (packageInfos.get(i).packageName.equalsIgnoreCase(packageName))
+                return true;
         }
         return false;
     }
@@ -327,15 +334,14 @@ public class CommonUtil {
     }
 
     //跳转GPS设置界面
-    public static void fragmentIntentToOpenGPS(Fragment fragment, int requestCode) {
+    public static void fragmentIntentToOpenGPS(Context context, int requestCode) {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        fragment.startActivityForResult(intent, requestCode);
-    }
-
-    //跳转GPS设置界面
-    public static void activityIntentToOpenGPS(Activity activity, int requestCode) {
-        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        activity.startActivityForResult(intent, requestCode);
+        Object obj = context;
+        if (obj instanceof FragmentActivity) {
+            ((FragmentActivity) obj).startActivityForResult(intent, requestCode);
+        } else if (obj instanceof Fragment) {
+            ((Fragment) obj).startActivityForResult(intent, requestCode);
+        }
     }
 
     //设置消息小图标

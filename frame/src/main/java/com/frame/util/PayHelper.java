@@ -70,7 +70,8 @@ public class PayHelper {
     /********************************支付宝支付**************************************/
     private final int SDK_PAY_FLAG = 1;
 
-    public void AliPay(Activity activity, final String orderInfo) {
+    public void AliPay(Activity activity, final String orderInfo,IPayListener mIPayListener) {
+        this.mIPayListener = mIPayListener;
         Runnable payRunnable = new Runnable() {
             @Override
             public void run() {

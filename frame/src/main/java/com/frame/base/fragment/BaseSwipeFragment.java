@@ -22,8 +22,7 @@ public abstract class BaseSwipeFragment<P extends BasePresenter, B extends BaseB
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         mSwipeRefreshLayout = new VpSwipeRefreshLayout(mActivity);
-        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_light, android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light, android.R.color.holo_red_light);
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_light, android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_red_light);
         mSwipeRefreshLayout.addView(rootView);
         mSwipeRefreshLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mSwipeRefreshLayout.setOnRefreshListener(this);

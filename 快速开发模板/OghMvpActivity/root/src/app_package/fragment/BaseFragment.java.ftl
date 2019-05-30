@@ -19,8 +19,4 @@ public class ${activityClass}Fragment extends BaseFragment {
         return <#if generateLayout>R.layout.${layoutFragmentName}<#else>0</#if>;
     }
 	
-    @Override
-    public void initImmersionBar() {
-        
-    }
 }

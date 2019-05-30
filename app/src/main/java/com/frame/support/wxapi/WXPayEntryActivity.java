@@ -43,15 +43,15 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			switch (resp.errCode){
 				case 0:
-					ToastUtil.showCenterToast(this,"支付成功");
+					ToastUtil.showShortToast( "支付成功");
 					finish();
 					break;
 				case -2:
-					ToastUtil.showCenterToast(this,"支付取消");
+					ToastUtil.showShortToast( "支付取消");
 					finish();
 					break;
 				default:
-					ToastUtil.showCenterToast(this, "支付失败，错误码：" + resp.errCode);
+					ToastUtil.showShortToast(  "支付失败，错误码：" + resp.errCode);
 					finish();
 					break;
 			}

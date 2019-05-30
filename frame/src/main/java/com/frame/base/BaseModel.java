@@ -63,9 +63,9 @@ public class BaseModel {
         }
         if (mBuilder.isSyncLifeCycle) {//是否需要同步生命周期
             if (mBuilder.mBaseRequestView instanceof RxAppCompatActivity) {
-                mHttpRequest.post(api, mBuilder.mParam, ((RxAppCompatActivity) mBuilder.mBaseRequestView).bindUntilEvent(ActivityEvent.PAUSE)).subscribe(responseBodySubscriber);
+                mHttpRequest.post(api, mBuilder.mParam, ((RxAppCompatActivity) mBuilder.mBaseRequestView).bindUntilEvent(ActivityEvent.DESTROY)).subscribe(responseBodySubscriber);
             } else if (mBuilder.mBaseRequestView instanceof RxFragment) {
-                mHttpRequest.post(api, mBuilder.mParam, ((RxFragment) mBuilder.mBaseRequestView).bindUntilEvent(FragmentEvent.PAUSE)).subscribe(responseBodySubscriber);
+                mHttpRequest.post(api, mBuilder.mParam, ((RxFragment) mBuilder.mBaseRequestView).bindUntilEvent(FragmentEvent.DESTROY)).subscribe(responseBodySubscriber);
             } else {
                 mHttpRequest.post(api, mBuilder.mParam, null).subscribe(responseBodySubscriber);
             }
@@ -149,7 +149,7 @@ public class BaseModel {
             }
             if (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW)
                 mBuilder.mBaseRequestView.showNetErrorView();
-            ToastUtil.showCenterToast(FrameApplication.mContext, "请检查您的网络！");
+            ToastUtil.showShortToast("请检查您的网络~");
             return null;
         }
         Observer<ResponseBody> subscriber = new Observer<ResponseBody>() {
@@ -208,21 +208,21 @@ public class BaseModel {
                     B bean = GsonUtil.getBean(requestBody.string(), clazz);
                     mIsEmpty = bean.isEmpty();
                     if (bean.code == APIException.SUCCESS) {
-                        mBuilder.mBaseRequestView.requestSuccess(bean, mBuilder.mLoadMode, mBuilder.requestTag == null ? tag : mBuilder.requestTag,mBuilder.pageCount);
+                        mBuilder.mBaseRequestView.requestSuccess(bean, mBuilder.mLoadMode, mBuilder.requestTag == null ? tag : mBuilder.requestTag, mBuilder.pageCount);
                     } else {
                         mBuilder.mBaseRequestView.requestFail(bean, mBuilder.requestTag == null ? tag : mBuilder.requestTag);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                     //如果数据异常，判断是否是网络不可用
-                    Observable.create((ObservableOnSubscribe<Boolean>) emitter ->
-                            emitter.onNext(NetworkUtils.isAvailableByPing()))
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(b -> {
-                                if (!b && (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW))
-                                    mBuilder.mBaseRequestView.showNetErrorView();
-                            });
+//                    Observable.create((ObservableOnSubscribe<Boolean>) emitter ->
+//                            emitter.onNext(NetworkUtils.isAvailableByPing()))
+//                            .subscribeOn(Schedulers.io())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribe(b -> {
+//                                if (!b && (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW))
+//                                    mBuilder.mBaseRequestView.showNetErrorView();
+//                            });
                     //json解析异常
                     throw new RuntimeException("数据解析异常");
                     //  mBuilder.mBaseRequestView.requestError(e, mBuilder.requestTag == null ? tag : mBuilder.requestTag);

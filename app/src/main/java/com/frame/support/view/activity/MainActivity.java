@@ -14,13 +14,13 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.AppUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.frame.base.activity.BaseActivity;
 import com.frame.support.R;
 import com.frame.support.view.fragment.GameFragment;
 import com.frame.support.view.fragment.HomeFragment;
 import com.frame.support.view.fragment.MineFragment;
 import com.frame.support.view.fragment.OnlineFragment;
+import com.frame.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,6 +154,6 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.floating_action)
     public void onViewClicked() {
-        ToastUtils.showShort("MvpFrame");
+        ToastUtil.showShortToast( "MvpFrame");
     }
 }

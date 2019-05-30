@@ -37,11 +37,6 @@ public class ${activityClass}Fragment extends BaseSwipeFragment<${activityClass}
     @Override
     protected int getLayoutID() {     
         return <#if generateLayout>R.layout.${layoutFragmentName}<#else>0</#if>;
-    }
-	
-	@Override
-    public void initImmersionBar() {
-        
-    }
+    }	
 
 }

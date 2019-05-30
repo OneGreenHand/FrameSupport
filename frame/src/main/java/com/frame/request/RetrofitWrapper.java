@@ -1,14 +1,7 @@
 package com.frame.request;
-
-
 import com.frame.config.AppConfig;
-import com.frame.config.Config;
-
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
-
-
-import me.jessyan.progressmanager.ProgressManager;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import retrofit2.Retrofit;
@@ -29,13 +22,16 @@ public class RetrofitWrapper {
 
     private RetrofitWrapper() {
         // OkHttpClient okHttpClient = new OkHttpClient.Builder()
-        //  构建 OkHttpClient 时,将 OkHttpClient.Builder() 传入 with() 方法,进行初始化配置( 用于Okhttp/Retofit Glide上传下载进度监听)
-        OkHttpClient okHttpClient = ProgressManager.getInstance().with(new OkHttpClient.Builder())
+        //  构建 OkHttpClient 时,将 OkHttpClient.Builder() 传入 with() 方法,进行初始化配置( 用于Okhttp/Retofit Glide上传下载进度监听,还有动态切换baseUrl)
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                // RetrofitUrlManager.getInstance().with(new OkHttpClient.Builder())//动态切换URL
+                //ProgressManager.getInstance().with(new OkHttpClient.Builder())//监听下载
+                // ProgressManager.getInstance().with(RetrofitUrlManager.getInstance().with(new OkHttpClient.Builder()))(组合写法)
                 .connectTimeout(CONN_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .protocols(Collections.singletonList(Protocol.HTTP_1_1))//解决协议错误问题
                 .addInterceptor(new HttpLoggingInterceptor())//此处设置的拦截器用来添加统一的请求头
-      //          .addInterceptor(new ParamInterceptor())//添加公共请求参数
+                //          .addInterceptor(new ParamInterceptor())//添加公共请求参数
                 .addInterceptor(new okhttp3.logging.HttpLoggingInterceptor().setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY))//此处设置的拦截器用来查看请求日志
                 .build();
         retrofit = new Retrofit.Builder()
@@ -49,9 +45,8 @@ public class RetrofitWrapper {
     public static RetrofitWrapper getInstance() {
         if (instance == null) {
             synchronized (RetrofitWrapper.class) {
-                if (instance == null) {
+                if (instance == null)
                     instance = new RetrofitWrapper();
-                }
             }
         }
         return instance;

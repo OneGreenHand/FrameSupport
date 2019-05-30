@@ -11,7 +11,7 @@ import com.frame.wrapper.WrapperDialog;
 public class DialogUtil {
 
     public static WrapperDialog getDialog(Context context, int view) {
-        return getDialog(context, view,4);
+        return getDialog(context, view, 4);
     }
 
     public static WrapperDialog getDialog(Context context, int view, int location) {
@@ -28,11 +28,10 @@ public class DialogUtil {
      */
     public static WrapperDialog getDialog(Context context, int view, int location, boolean cancel, boolean needBG) {
         WrapperDialog dialog;
-        if (needBG) {//是否需要黑色背景
+        if (needBG) //是否需要黑色背景
             dialog = new WrapperDialog(context, R.style.ActionSheetDialogStyle);
-        } else {
+        else
             dialog = new WrapperDialog(context, R.style.ActionSheetDialogStyle2);
-        }
         dialog.setCancelable(cancel);//弹出后会点击屏幕或物理返回键，dialog不消失
         dialog.setCanceledOnTouchOutside(cancel);// 弹出后会点击屏幕，dialog不消失；点击物理返回键dialog消失
         dialog.getWindow().setContentView(view);

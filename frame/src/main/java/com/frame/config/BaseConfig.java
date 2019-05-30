@@ -13,7 +13,7 @@ import java.io.File;
  */
 public class BaseConfig {
     //文件操作路径
-    public static final String SDCARD_PATH = SDCardUtils.getSDCardPaths().get(0);    //sd卡路径
+    public static final String SDCARD_PATH = SDCardUtils.getSDCardPathByEnvironment();    //sd卡路径
     public static final String DATA_PATH = Environment.getDataDirectory().getAbsolutePath();//内存路径
     public static final String APP_FOLDER = SDCARD_PATH + File.separator + "FrameSupport" + File.separator;    //客户端文件夹路径
     public static final String PHOTO_FOLDER = SDCARD_PATH + File.separator + "FrameSupport" + File.separator + "photos" + File.separator;    //客户端照片文件路径
@@ -21,5 +21,5 @@ public class BaseConfig {
     //SharedPreferences,统一以sp_开头命名
     public static final String SP_NAME = "SP_FrameSupport"; //客户端sp名字
     //微信支付AppId
-    public  static  final String  WEIXIN_APP_ID="wx87c75a5bc154737c";
+    public static final String WEIXIN_APP_ID = "wx87c75a5bc154737c";
 }

@@ -1,39 +1,26 @@
 package com.frame.util;
 
-import android.app.Application;
-import android.content.Context;
-import android.os.Looper;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.TextView;
+import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.frame.R;
+import com.frame.FrameApplication;
 
 public class ToastUtil {
 
-    private static Toast toastCenter = null;
+    /**
+     * 系统短吐司(因为用别人的有时候会不出现toash)
+     */
+    public static void showShortToast(String content) {
+        if (TextUtils.isEmpty(content))
+            Toast.makeText(FrameApplication.mContext, "额，好像什么也没有说~", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(FrameApplication.mContext, content, Toast.LENGTH_SHORT).show();
+    }
 
-    public static void showCenterToast(Context context, String content) {
-        //加载Toast布局
-        View view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null);
-        //为控件设置属性
-        TextView tv = view.findViewById(R.id.content);
-        tv.setText(content);
-        //Toast的初始化
-        if (toastCenter != null) {
-            toastCenter.cancel();
-        }
-        toastCenter = new Toast(context);
-        //获取屏幕高度
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        int height = wm.getDefaultDisplay().getHeight();
-        //Toast的Y坐标是屏幕高度的1/3，不会出现不适配的问题
-        toastCenter.setGravity(Gravity.BOTTOM, 0, height / 5);
-        toastCenter.setDuration(Toast.LENGTH_SHORT);
-        toastCenter.setView(view);
-        toastCenter.show();
+    public static void showLongToast(String content) {
+        if (TextUtils.isEmpty(content))
+            Toast.makeText(FrameApplication.mContext, "额，好像什么也没有说~", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(FrameApplication.mContext, content, Toast.LENGTH_LONG).show();
     }
 }

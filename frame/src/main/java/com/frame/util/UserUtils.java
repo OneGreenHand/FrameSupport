@@ -1,6 +1,10 @@
 package com.frame.util;
 
 
+import android.text.TextUtils;
+
+import com.frame.FrameApplication;
+
 /**
  * @author OneGreenHand
  * @package com.ogh.module.common.util
@@ -9,24 +13,20 @@ package com.frame.util;
  * @describe 用户操作工具类
  */
 public class UserUtils {
-    private static String TOKEN;
     // private static UserInfoEntity userInfo;
     /*************************登录和退出相关操作开始*******************************/
     /**
      * 获取token
      */
-    public static String getTOKEN() {
-        if (TOKEN == null || TOKEN.trim().equals(""))
-            TOKEN = SharedPreferencesUtil.getString(CommonUtil.getContext(), "TOKEN", null);
-        return TOKEN;
+    public static String getToken() {
+        return SharedPreferencesUtil.getString(FrameApplication.mContext, "TOKEN", "");
     }
 
     /**
      * 设置token
      */
-    public static void setTOKEN(String TOKEN) {
-        SharedPreferencesUtil.putString(CommonUtil.getContext(), "TOKEN", TOKEN);
-        UserUtils.TOKEN = TOKEN;
+    public static void setToken(String token) {
+        SharedPreferencesUtil.putString(FrameApplication.mContext, "TOKEN", token);
     }
 
     /**
@@ -34,18 +34,18 @@ public class UserUtils {
      * 目前是根据token来判断
      */
     public static boolean isLogin() {
-        if (getTOKEN() != null && !getTOKEN().trim().equals(""))
-            return true;
-         else
+        String token = getToken();
+        if (TextUtils.isEmpty(token) || token.trim().equals(""))
             return false;
+        else
+            return true;
     }
 
     /**
      * 退出登录
      */
     public static void logout() {
-        SharedPreferencesUtil.putString(CommonUtil.getContext(), "TOKEN", null);
-        TOKEN = null;
+        SharedPreferencesUtil.putString(CommonUtil.getContext(), "TOKEN", "");
     }
 //    /**
 //     * 得到用户信息

@@ -5,46 +5,61 @@ import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ScreenUtils;
 import com.frame.R;
 import com.frame.R2;
 import com.frame.base.BaseDialog;
+import com.frame.util.CommonUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 通用提示dialog
+ * @author luo
+ * @package com.frame.view
+ * @fileName TipDialog
+ * @data on 2019/5/23 16:30
  */
-public class CommonPromptDialog extends BaseDialog {
-
+public class TipDialog extends BaseDialog {
     @BindView(R2.id.title)
     TextView title;
     @BindView(R2.id.content)
     TextView content;
     @BindView(R2.id.cancel)
     TextView cancel;
+    @BindView(R2.id.line_view)
+    View line_view;
     @BindView(R2.id.sure)
     TextView sure;
-    @BindView(R2.id.dialog_layout)
-    LinearLayout dialogLayout;
-    @BindView(R2.id.line_view)
-    View lineView;
     private SureCalk sureCalk;
     private CancelCalk cancelCalk;
 
+    public void setOnSureClick(SureCalk sureCalk) {
+        this.sureCalk = sureCalk;
+    }
 
-    public CommonPromptDialog(@NonNull Context context) {
-        super(context);
+    public void setOnCancelClick(CancelCalk sureCalk) {
+        this.cancelCalk = sureCalk;
+    }
+
+    public interface SureCalk {
+        void OnClick(View view);
+    }
+
+    public interface CancelCalk {
+        void OnClick(View view);
     }
 
     @Override
-    protected void initView(Context context) {
-
+    public void show() {
+//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) dialogLayout.getLayoutParams();
+//        params.width = (int) (ScreenUtils.getScreenWidth() * 0.8);//设置为屏幕的一半
+//        dialogLayout.setLayoutParams(params);
+        content.getViewTreeObserver().addOnGlobalLayoutListener(listener);
+        super.show();
     }
+
 
     /**
      * 是否可以点击取消
@@ -54,38 +69,36 @@ public class CommonPromptDialog extends BaseDialog {
         setCanceledOnTouchOutside(canCancel);
         if (!canCancel) {
             cancel.setVisibility(View.GONE);
-            lineView.setVisibility(View.GONE);
-            sure.setBackgroundResource(R.drawable.selector_cmdialog_all);
+            line_view.setVisibility(View.GONE);
         } else {
             cancel.setVisibility(View.VISIBLE);
-            lineView.setVisibility(View.VISIBLE);
-            sure.setBackgroundResource(R.drawable.selector_cmdialog_right);
+            line_view.setVisibility(View.VISIBLE);
         }
     }
 
-    public void setContentText(String msg) {
+    public void setTitle(String msg) {
+        title.setText(msg);
+    }
+
+    public void setContent(String msg) {
         content.setText(msg);
     }
 
-    public void setContfrimText(String msg) {
+    public void setSureText(String msg) {
         sure.setText(msg);
+    }
+
+    /**
+     * 设置带颜色的问题(html)
+     *
+     * @param msg
+     */
+    public void setSureColorText(String msg) {
+        sure.setText(CommonUtil.setHtmlColor(msg));
     }
 
     public void setCancelText(String msg) {
         cancel.setText(msg);
-    }
-
-    public void setTitleText(String msg) {
-        title.setText(msg);
-    }
-
-    @Override
-    public void show() {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) dialogLayout.getLayoutParams();
-        params.width = (int) (ScreenUtils.getScreenWidth() * 0.7);//设置为屏幕的一半
-        dialogLayout.setLayoutParams(params);
-        content.getViewTreeObserver().addOnGlobalLayoutListener(listener);
-        super.show();
     }
 
     private ViewTreeObserver.OnGlobalLayoutListener listener = new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -101,20 +114,6 @@ public class CommonPromptDialog extends BaseDialog {
     };
 
 
-    @Override
-    protected int getLayoutID() {
-        return R.layout.dialog_common_prompt;
-    }
-
-
-    public void setOnSureClick(SureCalk sureCalk) {
-        this.sureCalk = sureCalk;
-    }
-
-    public void setOnCancelClick(CancelCalk sureCalk) {
-        this.cancelCalk = sureCalk;
-    }
-
     @OnClick({R2.id.cancel, R2.id.sure})
     public void onViewClicked(View view) {
         int v = view.getId();
@@ -129,11 +128,13 @@ public class CommonPromptDialog extends BaseDialog {
         }
     }
 
-    public interface SureCalk {
-        void OnClick(View view);
+
+    public TipDialog(@NonNull Context context) {
+        super(context);
     }
 
-    public interface CancelCalk {
-        void OnClick(View view);
+    @Override
+    protected int getLayoutID() {
+        return R.layout.dialog_tips;
     }
 }

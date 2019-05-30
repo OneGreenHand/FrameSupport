@@ -178,7 +178,9 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -dontwarn okhttp3.internal.platform.ConscryptPlatform
 #com.goole
 -keep class com.goole.gson.** { *; }
-# gson解析
+# gson&& protobuf
+-dontwarn com.google.**
+-keep class com.google.protobuf.** {*;}
 -keepattributes Signature
 -keepattributes *Annotation*
 -keep class sun.misc.Unsafe { *; }
@@ -269,3 +271,26 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keep class com.tencent.wxop.** {
    *;
 }
+#鲁班图片压缩
+-keep class top.zibin.luban.** {*;}
+#Aria下载上传
+-dontwarn com.arialyy.aria.**
+-keep class com.arialyy.aria.**{*;}
+-keep class aria.apache.commons.new.**{*;}
+-keep class com.arialyy.annotations.**{*;}
+-keep class **$$DownloadListenerProxy{ *; }
+-keep class **$$UploadListenerProxy{ *; }
+-keep class **$$DownloadGroupListenerProxy{ *; }
+-keepclasseswithmembernames class * {
+    @Download.* <methods>;
+    @Upload.* <methods>;
+    @DownloadGroup.* <methods>;
+}
+#其他
+-keep class com.trello.rxlifecycle2.** {*;}
+-keep class com.trello.rxlifecycle2.android.** {*;}
+-keep class com.trello.rxlifecycle2.components.** {*;}
+-keep class com.trello.rxlifecycle2.components.support.** {*;}
+-dontwarn org.xmlpull.v1.XmlPullParser
+-dontwarn org.xmlpull.v1.XmlSerializer
+-keep class org.xmlpull.v1.* {*;}

@@ -37,7 +37,7 @@ import com.frame.R;
  * @package com.goume.heyding.widget
  * @fileName CircleImageView
  * @data on 2018/7/28 16:23
- * @describe 圆形头像 https://www.cnblogs.com/mo-xue/p/5933429.html
+ * @describe 圆形头像 https://github.com/hdodenhof/CircleImageView
  */
 public class CircleImageView extends ImageView {
 

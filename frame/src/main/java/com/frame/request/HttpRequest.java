@@ -72,9 +72,8 @@ public class HttpRequest {
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
         if (params != null) {
-            for (String key : params.keySet()) { //添加请求参数
+            for (String key : params.keySet())  //添加请求参数
                 builder.addFormDataPart(key, params.get(key).toString());
-            }
         }
         if (!fileList.isEmpty())
             if (!TextUtils.isEmpty(mutilFileKey)) {//类型：photos[0]、photos[1]、photos[2]
@@ -84,9 +83,8 @@ public class HttpRequest {
                     i++;
                 }
             } else {//类型：pic1、pic2、pic3
-                for (FileInfoBean fileInfoBean : fileList) {
+                for (FileInfoBean fileInfoBean : fileList)
                     builder.addFormDataPart(fileInfoBean.getParamName(), fileInfoBean.getFile().getName(), RequestBody.create(MediaType.parse("multipart/form-data"), fileInfoBean.getFile()));
-                }
             }
         RequestBody requestBody = builder.build();
         Observable<ResponseBody> observable = apiService.upload(url, requestBody)
@@ -99,9 +97,8 @@ public class HttpRequest {
         //断点续传时请求的总长度
         File file = new File(fileFolder, fileName);
         String totalLength = "-";
-        if (file.exists()) {
+        if (file.exists())
             totalLength += file.length();
-        }
         apiService.download("bytes=" + Long.toString(range) + totalLength, url)
                 .subscribeOn(Schedulers.io())
                 .subscribe(observer);

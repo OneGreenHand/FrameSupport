@@ -13,13 +13,13 @@ public class DateUtil {
     /**
      * 获取当前系统时间
      */
-    public static String getDate(int type){
+    public static String getDate(int type) {
         // 使用默认时区和语言环境获得一个日历
         Calendar cale = Calendar.getInstance();
         // 将Calendar类型转换成Date类型
         Date tasktime = cale.getTime();
         String pattern = "";
-        switch (type){
+        switch (type) {
             case 1:
                 pattern = "yyyy-MM-dd HH:mm:ss";
                 break;
@@ -70,46 +70,74 @@ public class DateUtil {
     /**
      * 设置时间
      */
-    public static Calendar setCalendar(int year, int month, int date){
+    public static Calendar setCalendar(int year, int month, int date) {
         Calendar cl = Calendar.getInstance();
-        cl.set(year, month-1, date);
+        cl.set(year, month - 1, date);
         return cl;
     }
 
     /**
      * 获取当前时间的前一天时间
      */
-    public static Calendar getBeforeDay(Calendar cl){
+    public static Calendar getBeforeDay(Calendar cl) {
         //使用roll方法进行向前回滚
         //cl.roll(Calendar.DATE, -1);
         //使用set方法直接进行设置
         int day = cl.get(Calendar.DATE);
-        cl.set(Calendar.DATE, day-1);
+        cl.set(Calendar.DATE, day - 1);
         return cl;
     }
 
     /**
      * 获取当前时间的后一天时间
      */
-    public static Calendar getAfterDay(Calendar cl){
+    public static Calendar getAfterDay(Calendar cl) {
         //使用roll方法进行回滚到后一天的时间
         //cl.roll(Calendar.DATE, 1);
         //使用set方法直接设置时间值
         int day = cl.get(Calendar.DATE);
-        cl.set(Calendar.DATE, day+1);
+        cl.set(Calendar.DATE, day + 1);
         return cl;
     }
 
     /**
      * 获取当前时间的后30天时间
      */
-    public static Calendar getAfter30Day(Calendar cl){
+    public static Calendar getAfter30Day(Calendar cl) {
         //使用roll方法进行回滚到后30天的时间
         //cl.roll(Calendar.DATE, 30);
         //使用set方法直接设置时间值
         int day = cl.get(Calendar.DATE);
-        cl.set(Calendar.DATE, day+30);
+        cl.set(Calendar.DATE, day + 30);
         return cl;
+    }
+
+    /**
+     * 得到几天前的时间
+     *
+     * @param d
+     * @param day
+     * @return
+     */
+    public static Date getDateBefore(Date d, int day) {
+        Calendar now = Calendar.getInstance();
+        now.setTime(d);
+        now.set(Calendar.DATE, now.get(Calendar.DATE) - day);
+        return now.getTime();
+    }
+
+    /**
+     * 得到几天后的时间
+     *
+     * @param d
+     * @param day
+     * @return
+     */
+    public static Date getDateAfter(Date d, int day) {
+        Calendar now = Calendar.getInstance();
+        now.setTime(d);
+        now.set(Calendar.DATE, now.get(Calendar.DATE) + day);
+        return now.getTime();
     }
 
     /**
@@ -140,6 +168,7 @@ public class DateUtil {
 
     /**
      * 描述：计算两个日期所差的天数.
+     *
      * @param date1 第一个时间的毫秒表示
      * @param date2 第二个时间的毫秒表示
      * @return int 所差的天数
@@ -170,6 +199,7 @@ public class DateUtil {
 
     /**
      * 描述：计算两个日期所差的小时数.
+     *
      * @param date1 第一个时间的毫秒表示
      * @param date2 第二个时间的毫秒表示
      * @return int 所差的小时数
@@ -189,6 +219,7 @@ public class DateUtil {
 
     /**
      * 描述：计算两个日期所差的分钟数.
+     *
      * @param date1 第一个时间的毫秒表示
      * @param date2 第二个时间的毫秒表示
      * @return int 所差的分钟数
@@ -205,6 +236,5 @@ public class DateUtil {
         m = m1 - m2 + h * 60;
         return m;
     }
-
 
 }

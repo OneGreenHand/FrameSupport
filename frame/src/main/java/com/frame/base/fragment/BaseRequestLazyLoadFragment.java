@@ -10,8 +10,6 @@ import com.frame.loadingView.VaryViewHelperController;
 import com.frame.util.LogUtil;
 import com.frame.util.ToastUtil;
 
-import butterknife.ButterKnife;
-
 /**
  * @des 通用请求fragmen（懒加载）
  */
@@ -31,7 +29,7 @@ public abstract class BaseRequestLazyLoadFragment<P extends BasePresenter, B ext
 
     @Override
     public void requestFail(B data, Object tag) {
-        ToastUtil.showCenterToast(mActivity, data.msg);
+        ToastUtil.showShortToast(  data.msg);
     }
 
     //重新请求数据

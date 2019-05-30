@@ -20,8 +20,8 @@ public class PopupwindowUtil {
      * @param cancel   是否可以点击取消
      * @param isAlpha  是否背景半透明
      */
-    public static Solve7PopupWindow getPopupwindow(final Context context, View layout, boolean isMathch, boolean cancel, boolean isAlpha) {
-        final Solve7PopupWindow popupWindow = new Solve7PopupWindow();
+    public static Solve7PopupWindow getPopupwindow( Context context, View layout, boolean isMathch, boolean cancel, boolean isAlpha) {
+        Solve7PopupWindow popupWindow = new Solve7PopupWindow();
         //设置PopupWindow的View
         popupWindow.setContentView(layout);
         //设置PopupWindow弹出窗体的宽

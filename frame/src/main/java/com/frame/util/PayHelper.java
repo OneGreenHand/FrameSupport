@@ -30,16 +30,14 @@ public class PayHelper {
     public static PayHelper getInstance() {
         if (mPayHelper == null) {
             synchronized (PayHelper.class) {
-                if (mPayHelper == null) {
+                if (mPayHelper == null)
                     mPayHelper = new PayHelper();
-                }
             }
         }
         return mPayHelper;
     }
 
     public PayHelper() {
-
     }
 
     /********************************微信支付**************************************/
@@ -52,7 +50,7 @@ public class PayHelper {
         }
         PayReq req = new PayReq();
         if (!wxapi.isWXAppInstalled()) {
-            ToastUtil.showCenterToast(FrameApplication.mContext, "未安装微信客户端!");
+            ToastUtil.showShortToast("未安装微信客户端!");
             return;
         }
         if (result != null) {
@@ -70,7 +68,7 @@ public class PayHelper {
     /********************************支付宝支付**************************************/
     private final int SDK_PAY_FLAG = 1;
 
-    public void AliPay(Activity activity, final String orderInfo,IPayListener mIPayListener) {
+    public void AliPay(Activity activity, final String orderInfo, IPayListener mIPayListener) {
         this.mIPayListener = mIPayListener;
         Runnable payRunnable = new Runnable() {
             @Override
@@ -104,14 +102,12 @@ public class PayHelper {
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                        if (mIPayListener != null) {
+                        if (mIPayListener != null)
                             mIPayListener.onSuccess(resultInfo);
-                        }
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-                        if (mIPayListener != null) {
+                        if (mIPayListener != null)
                             mIPayListener.onFail(resultInfo);
-                        }
                     }
                     break;
             }

@@ -35,15 +35,13 @@ public abstract class BaseSwipeListActivity<P extends BasePresenter, B extends B
     protected void initCommon() {
         super.initCommon();
         mRecyclerView = findViewById(R.id.frame_recycleView);
-        if (mRecyclerView == null) {
+        if (mRecyclerView == null)
             throw new RuntimeException("布局中必须有RecyclerView，并且RecyclerView中的ID为frame_recycleView");
-        }
         mRecyclerView.setLayoutManager(setLayoutManager());
         mBaseAdapter = setAdapter();
         mRecyclerView.setAdapter(mBaseAdapter);
-        mEmptyView = LayoutInflater.from(this).inflate(getEmptyView()==-1?R.layout.frame_view_pager_no_data:getEmptyView(), (ViewGroup) mRecyclerView.getParent(), false);
-        //设置空数据提示文本
-        Object emptyViewMsg = getEmptyViewMsg();
+        mEmptyView = LayoutInflater.from(this).inflate(getEmptyView() == -1 ? R.layout.frame_view_pager_no_data : getEmptyView(), (ViewGroup) mRecyclerView.getParent(), false);
+        Object emptyViewMsg = getEmptyViewMsg(); //设置空数据提示文本
         if (emptyViewMsg != null && emptyViewMsg instanceof String)
             ((TextView) mEmptyView.findViewById(R.id.tv_view_pager_no_data_content)).setText((String) emptyViewMsg);
         else if (emptyViewMsg != null && emptyViewMsg instanceof Integer)
@@ -51,9 +49,8 @@ public abstract class BaseSwipeListActivity<P extends BasePresenter, B extends B
         mEmptyView.setBackgroundColor(getResources().getColor(getEmptyViewBg()));
     }
 
-
     //自动更新adapter状态
-    public void notifyAdapterStatus(List<AB> data, BaseModel.LoadMode loadMode,int pageCount) {
+    public void notifyAdapterStatus(List<AB> data, BaseModel.LoadMode loadMode, int pageCount) {
         if (loadMode == BaseModel.LoadMode.LOAD_MODE) {
             if (data == null) {
                 mBaseAdapter.loadMoreEnd(false);

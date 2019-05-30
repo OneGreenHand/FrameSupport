@@ -18,15 +18,13 @@ import java.io.IOException;
 class ImageUtil {
 
     private ImageUtil() {
-
     }
 
     static File compressImage(File imageFile, int reqWidth, int reqHeight, Bitmap.CompressFormat compressFormat, int quality, String destinationPath) throws IOException {
         FileOutputStream fileOutputStream = null;
         File file = new File(destinationPath).getParentFile();
-        if (!file.exists()) {
+        if (!file.exists())
             file.mkdirs();
-        }
         try {
             fileOutputStream = new FileOutputStream(destinationPath);
             // write the compressed bitmap at the destination specified by destinationPath.
@@ -37,7 +35,6 @@ class ImageUtil {
                 fileOutputStream.close();
             }
         }
-
         return new File(destinationPath);
     }
 
@@ -46,15 +43,11 @@ class ImageUtil {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
-
         // Calculate inSampleSize
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
-
         Bitmap scaledBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
-
         //check the rotation of the image and display it properly
         ExifInterface exif;
         exif = new ExifInterface(imageFile.getAbsolutePath());
@@ -76,19 +69,15 @@ class ImageUtil {
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;
-
         if (height > reqHeight || width > reqWidth) {
-
             final int halfHeight = height / 2;
             final int halfWidth = width / 2;
-
             // Calculate the largest inSampleSize value that is a power of 2 and keeps both
             // height and width larger than the requested height and width.
             while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth) {
                 inSampleSize *= 2;
             }
         }
-
         return inSampleSize;
     }
 }

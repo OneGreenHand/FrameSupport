@@ -14,7 +14,7 @@ import java.util.Stack;
  */
 public class AppManager {
 
-    private static Stack<Activity> activityStack;
+    private static Stack<Activity> activityStack = new Stack<>();
     private static AppManager instance;
 
     private AppManager() {
@@ -26,9 +26,8 @@ public class AppManager {
     public static AppManager getAppManager() {
         if (instance == null) {
             synchronized (AppManager.class) {
-                if (instance == null) {
+                if (instance == null)
                     instance = new AppManager();
-                }
             }
         }
         return instance;
@@ -38,9 +37,8 @@ public class AppManager {
      * 添加Activity到堆栈
      */
     public void addActivity(Activity activity) {
-        if (activityStack == null) {
+        if (activityStack == null)
             activityStack = new Stack<Activity>();
-        }
         activityStack.add(activity);
     }
 
@@ -48,16 +46,14 @@ public class AppManager {
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     public Activity currentActivity() {
-        Activity activity = activityStack.lastElement();
-        return activity;
+        return activityStack.lastElement();
     }
 
     /**
      * 结束当前Activity（堆栈中最后一个压入的）
      */
     public void finishActivity() {
-        Activity activity = activityStack.lastElement();
-        finishActivity(activity);
+        finishActivity(activityStack.lastElement());
     }
 
     /**
@@ -77,13 +73,11 @@ public class AppManager {
     public void finishActivity(Class<?> cls) {
         ArrayList<Activity> delList = new ArrayList<Activity>();
         for (Activity activity : activityStack) {
-            if (activity.getClass().equals(cls)) {
+            if (activity.getClass().equals(cls))
                 delList.add(activity);
-            }
         }
-        for (Activity activity : delList) {
+        for (Activity activity : delList)
             finishActivity(activity);
-        }
     }
 
     /**
@@ -91,9 +85,8 @@ public class AppManager {
      */
     public void finishAllActivity() {
         for (int i = 0, size = activityStack.size(); i < size; i++) {
-            if (null != activityStack.get(i)) {
+            if (null != activityStack.get(i))
                 activityStack.get(i).finish();
-            }
         }
         activityStack.clear();
     }
@@ -105,8 +98,7 @@ public class AppManager {
     public void AppExit(Context context) {
         try {
             finishAllActivity();
-            ActivityManager activityMgr = (ActivityManager) context
-                    .getSystemService(Context.ACTIVITY_SERVICE);
+            ActivityManager activityMgr = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
             activityMgr.restartPackage(context.getPackageName());
             System.exit(0);
         } catch (Exception e) {
@@ -125,9 +117,8 @@ public class AppManager {
      */
     public boolean contains(Class<?> cls) {
         for (Activity activity : activityStack) {
-            if (activity.getClass().equals(cls)) {
+            if (activity.getClass().equals(cls))
                 return true;
-            }
         }
         return false;
     }
@@ -137,9 +128,8 @@ public class AppManager {
      */
     public Activity getActivity(Class<?> cls) {
         for (Activity activity : activityStack) {
-            if (activity.getClass().equals(cls)) {
+            if (activity.getClass().equals(cls))
                 return activity;
-            }
         }
         return null;
     }

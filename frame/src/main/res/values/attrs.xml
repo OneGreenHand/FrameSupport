@@ -7,10 +7,4 @@
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_circle_background_color" format="color" />
     </declare-styleable>
-    <!--加载动画-->
-    <declare-styleable name="IntertwineLoadingView">
-        <attr name="firstBallColor" format="color|reference"></attr>
-        <attr name="secondBallColor" format="color|reference"></attr>
-        <attr name="animDuration" format="integer"></attr>
-    </declare-styleable>
 </resources>

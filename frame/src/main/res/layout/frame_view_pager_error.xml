@@ -31,5 +31,6 @@
         android:paddingRight="40dp"
         android:paddingBottom="8dp"
         android:text="@string/frame_load_again"
+        android:textColor="@color/frame_title_name"
         android:textSize="14sp" />
 </LinearLayout>

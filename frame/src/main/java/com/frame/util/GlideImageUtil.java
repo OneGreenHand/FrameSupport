@@ -2,10 +2,7 @@ package com.frame.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Looper;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
@@ -15,7 +12,6 @@ import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.frame.R;
 
 import java.io.File;
@@ -24,10 +20,8 @@ import java.math.BigDecimal;
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.CropSquareTransformation;
-import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import jp.wasabeef.glide.transformations.MaskTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-import retrofit2.http.PUT;
 
 /**
  * 图片处理类
@@ -39,11 +33,9 @@ public class GlideImageUtil {
      */
     public static void showImage(Context context, String url, ImageView view) {
         Glide.with(context).load(url)//图片地址
-                .thumbnail(0.1f)//先加载缩略图 然后在加载全图
                 .apply(new RequestOptions().placeholder(R.drawable.img_showing)
                         .error(R.drawable.img_show_error))
                 //  .override(600,600)//指定尺寸(图片大小在xml中不能写死,是wrap_content才可以指定尺寸)
-                //    .crossFade(300)//加载动画(默认300)
                 .into(view);
     }
 
@@ -121,7 +113,6 @@ public class GlideImageUtil {
         Glide.with(context)
                 .asGif()
                 .load(url)
-                .thumbnail(0.1f)
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.img_showing)
                         .error(R.drawable.img_show_error))
@@ -136,7 +127,6 @@ public class GlideImageUtil {
             Glide.with(context)
                     .asGif()
                     .load(url)
-                    .thumbnail(0.1f)
                     .apply(new RequestOptions()
                             .placeholder(R.drawable.img_showing)
                             .error(R.drawable.img_show_error))
@@ -144,7 +134,6 @@ public class GlideImageUtil {
         } else {
             Glide.with(context)
                     .load(url)
-                    .thumbnail(0.1f)
                     .apply(new RequestOptions()
                             .placeholder(R.drawable.img_showing)
                             .error(R.drawable.img_show_error))
@@ -158,11 +147,10 @@ public class GlideImageUtil {
      * 当列表在滑动的时候，调用pauseRequests()取消请求，滑动停止时，调用resumeRequests()恢复请求。
      */
     public static void suspendImage(Context context, int type) {
-        if (type == 0) {
+        if (type == 0)
             Glide.with(context).pauseRequests();
-        } else {
+        else
             Glide.with(context).resumeRequests();
-        }
     }
 
     /**
@@ -190,9 +178,8 @@ public class GlideImageUtil {
      */
     public static void clearImageMemoryCache(Context context) {
         try {
-            if (Looper.myLooper() == Looper.getMainLooper()) { //只能在主线程执行
+            if (Looper.myLooper() == Looper.getMainLooper()) //只能在主线程执行
                 Glide.get(context).clearMemory();
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -228,11 +215,10 @@ public class GlideImageUtil {
         try {
             File[] fileList = file.listFiles();
             for (File aFileList : fileList) {
-                if (aFileList.isDirectory()) {
+                if (aFileList.isDirectory())
                     size = size + getFolderSize(aFileList);
-                } else {
+                else
                     size = size + aFileList.length();
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -292,9 +278,7 @@ public class GlideImageUtil {
             return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB";
         }
         BigDecimal result4 = new BigDecimal(teraBytes);
-
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
     }
-
 
 }

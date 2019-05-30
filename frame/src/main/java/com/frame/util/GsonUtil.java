@@ -23,7 +23,6 @@ import java.util.Map;
  */
 public class GsonUtil {
 
-
     private static Gson buildGson() {
         GsonBuilder gsonBulder = new GsonBuilder();
         gsonBulder
@@ -38,9 +37,6 @@ public class GsonUtil {
 
     /**
      * Object转成String
-     *
-     * @param object
-     * @return
      */
     public static String getString(Object object) {
         Gson gson = buildGson();
@@ -50,10 +46,6 @@ public class GsonUtil {
 
     /**
      * Object转成Bean
-     *
-     * @param object
-     * @param clz
-     * @return
      */
     public static <T> T getBean(Object object, Class<T> clz) {
         Gson gson = buildGson();
@@ -63,11 +55,6 @@ public class GsonUtil {
 
     /**
      * 指定JSONObject转成Bean
-     *
-     * @param key
-     * @param json
-     * @param clz
-     * @return
      */
     public static <T> T getBean(String key, JSONObject json, Class<T> clz) throws JSONException {
         Gson gson = buildGson();
@@ -77,9 +64,6 @@ public class GsonUtil {
 
     /**
      * Object转成JSONObject
-     *
-     * @param object
-     * @return
      */
     public static JSONObject getJSONObject(Object object) throws JSONException {
         Gson gson = buildGson();
@@ -90,10 +74,6 @@ public class GsonUtil {
 
     /**
      * Object转成List<T>
-     *
-     * @param object
-     * @param typeToken
-     * @return
      */
     public static <T> List<T> getBeanList(Object object, TypeToken<List<T>> typeToken) {
         Gson gson = buildGson();
@@ -103,9 +83,6 @@ public class GsonUtil {
 
     /**
      * Object转成list中有map的
-     *
-     * @param object
-     * @return
      */
     public static <T> List<Map<String, T>> getListMap(Object object) {
         Gson gson = buildGson();
@@ -116,9 +93,6 @@ public class GsonUtil {
 
     /**
      * Object转成Map
-     *
-     * @param object
-     * @return
      */
     public static <T> Map<String, T> getMap(Object object) {
         Gson gson = buildGson();
@@ -131,27 +105,20 @@ public class GsonUtil {
     /***
      *
      * 获取JSON类型
-     *         判断规则
-     *             判断第一个字母是否为{或[ 如果都不是则不是一个JSON格式的文本
-     *
-     * @param str
+     * 判断规则:判断第一个字母是否为{或[ 如果都不是则不是一个JSON格式的文本
      * @return 0不是JSON格式的字符串 2JSONObject 1JSONArray
      */
     public static int getJsonType(String str) {
-        if (TextUtils.isEmpty(str)) {
+        if (TextUtils.isEmpty(str))
             return 0;
-        }
-
         final char[] strChar = str.substring(0, 1).toCharArray();
         final char firstChar = strChar[0];
-
-        if (firstChar == '{') {
+        if (firstChar == '{')
             return 2;
-        } else if (firstChar == '[') {
+        else if (firstChar == '[')
             return 1;
-        } else {
+        else
             return 0;
-        }
     }
 
     /**

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply from: 'tinker-support.gradle'
+//apply from: 'tinker-support.gradle'(热更新相关)
 def keystorePropertiesFile = rootProject.file("keystore.properties")//打包文件配置
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
@@ -46,16 +46,31 @@ android {
         }
     }
     productFlavors {//渠道名字
-        develop {}
-        tencent {}
-        xiaomi {}
-        huawei {}
-        meizu {}
+        develop {
+            manifestPlaceholders = [CHANNEL: "AA000",//AndroidManifest也有这个字段
+            ]
+        }
+        tencent {
+            manifestPlaceholders = [CHANNEL: "AA001",
+            ]
+        }
+        xiaomi {
+            manifestPlaceholders = [CHANNEL: "AA002",
+            ]
+        }
+        huawei {
+            manifestPlaceholders = [CHANNEL: "AA003",
+            ]
+        }
+        meizu {
+            manifestPlaceholders = [CHANNEL: "AA004",
+            ]
+        }
     }
     android.applicationVariants.all { variant ->//修改打包后的名字
         variant.outputs.all {
-            //    outputFileName = "apk_" + productFlavors[0].name + "_v" + defaultConfig.versionName + "-${releaseTime()}.apk"
-            outputFileName = "apk_" + productFlavors[0].name + "_" + buildType.name + "_v" + defaultConfig.versionName + "-${releaseTime()}.apk"
+            outputFileName = "apk_" + productFlavors[0].name + "_v" + defaultConfig.versionName + "-${releaseTime()}.apk"
+            //    outputFileName = "apk_" + productFlavors[0].name + "_" + buildType.name + "_v" + defaultConfig.versionName + "-${releaseTime()}.apk"
         }
     }
     buildTypes {
@@ -106,5 +121,7 @@ dependencies {
     implementation fileTree(include: ['*.aar'], dir: 'libs')
     annotationProcessor dependencies.glide.compiler
     annotationProcessor dependencies.butterknife.compiler
+    //下载上传工具类
+    annotationProcessor dependencies.aria.aria_compiler
     implementation project(':frame')
 }

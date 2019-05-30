@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_loading_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/toast_background"
+        android:layout_width="140dp"
+        android:layout_height="120dp"
+        android:background="@drawable/shape_c90000000_7"
         android:gravity="center"
-        android:orientation="vertical"
-        android:paddingLeft="30dp"
-        android:paddingTop="15dp"
-        android:paddingRight="30dp"
-        android:paddingBottom="15dp">
+        android:orientation="vertical">
 
-        <com.frame.widget.dialog.IntertwineLoadingView
-            android:id="@+id/loadView"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:animDuration="1000"
-            app:firstBallColor="@android:color/white"
-            app:secondBallColor="@android:color/white" />
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:indeterminateTint="@color/frame_white"
+            android:indeterminateTintMode="src_atop" />
 
         <TextView
             android:id="@+id/loading_text"
@@ -36,7 +30,7 @@
             android:maxLines="1"
             android:text="@string/frame_load_ing"
             android:textColor="@color/frame_white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>

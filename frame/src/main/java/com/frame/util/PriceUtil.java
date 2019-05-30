@@ -25,8 +25,7 @@ public class PriceUtil {
      */
     public static String qianWeiFenGe(float num, int digit) {
         DecimalFormat df = new DecimalFormat(digit == 1 ? "#,##0.0" : "#,##0.00");
-        String ss = df.format(num);
-        return ss;
+        return df.format(num);
     }
 
     /**
@@ -74,20 +73,19 @@ public class PriceUtil {
     // m 转化为 km(四舍五入，保留小数点一位)
     public static String KmConversion(int m) {
         String distance = m + "";
-        if (distance.length() <= 3) {
+        if (distance.length() <= 3)
             distance = m + "m";
-        } else {
+        else
             distance = round2((float) ((m / 100) * 0.1), 1).toString() + "km";
-        }
         return distance;
     }
 
     // 值转化为W(不四舍五入保留两位小数,最多99亿)
     public static String PopularityConversion(int popularity) {
         String distance = popularity + "";
-        if (distance.length() <= 4) {
+        if (distance.length() <= 4)
             distance = popularity + "";
-        } else {
+        else {
             if (popularity % 10000 == 0) {//整数
                 distance = popularity / 10000 + "w";
             } else {

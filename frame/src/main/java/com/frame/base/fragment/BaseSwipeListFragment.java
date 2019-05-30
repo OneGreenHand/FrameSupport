@@ -35,9 +35,8 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
     protected void initCommon() {
         super.initCommon();
         mRecyclerView = rootView.findViewById(R.id.frame_recycleView);
-        if (mRecyclerView == null) {
+        if (mRecyclerView == null)
             throw new RuntimeException("布局中必须有RecyclerView，并且RecyclerView中的ID为frame_recycleView");
-        }
         mRecyclerView.setLayoutManager(setLayoutManager());
         mBaseAdapter = setAdapter();
         mRecyclerView.setAdapter(mBaseAdapter);

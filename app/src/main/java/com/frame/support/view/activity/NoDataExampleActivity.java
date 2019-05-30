@@ -2,12 +2,12 @@ package com.frame.support.view.activity;
 
 import android.os.Bundle;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.frame.support.R;
 import com.frame.support.presenter.RequestErrorExamplePt;
 import com.frame.base.BaseModel;
 import com.frame.base.activity.BaseSwipeActivity;
 import com.frame.bean.BaseBean;
+import com.frame.util.ToastUtil;
 
 /**
  * @describe 无数据显示示例
@@ -15,7 +15,7 @@ import com.frame.bean.BaseBean;
 public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExamplePt, BaseBean> {
     @Override
     protected void onRefreshRequest() {
-        ToastUtils.showShort("下拉刷新");
+        ToastUtil.showShortToast("下拉刷新");
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
@@ -26,7 +26,7 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
 
     @Override
     protected void reRequest() {
-        ToastUtils.showShort("重新请求");
+        ToastUtil.showShortToast("重新请求");
     }
 
     @Override
@@ -45,7 +45,7 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
     }
 
     @Override
-    public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag,int pageCount) {
-        ToastUtils.showShort(data.msg);
+    public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
+        ToastUtil.showShortToast(data.msg);
     }
 }

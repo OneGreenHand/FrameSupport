@@ -3,11 +3,9 @@ package com.frame.base.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -21,14 +19,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.arialyy.aria.core.Aria;
 import com.frame.R;
 import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
 import com.frame.util.AppManager;
 import com.frame.view.LoadingDialog;
 import com.frame.widget.RecycleViewDivider;
-import com.gyf.barlibrary.ImmersionBar;
-import com.gyf.barlibrary.OSUtils;
+import com.gyf.immersionbar.ImmersionBar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -66,20 +64,19 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
         super.onCreate(savedInstanceState);
         AppManager.getAppManager().addActivity(this);// 添加Activity到堆栈
         requestWindowFeature(Window.FEATURE_NO_TITLE);// 去除标题
-        if (isRegisterEventBus()) {
-            EventBus.getDefault().register(this);
-        }
         setContentView(getLayoutID());
         ButterKnife.bind(this);
-        if (rxPermissions == null) {
-            rxPermissions = new RxPermissions(this);
-        }
         initCommon();
         init(savedInstanceState);//初始化
         //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
-        if (isImmersionBarEnabled()) {
+        if (isImmersionBarEnabled())
             initImmersionBar();
-        }
+        if (rxPermissions == null)
+            rxPermissions = new RxPermissions(this);
+        if (isRegisterEventBus())
+            EventBus.getDefault().register(this);
+        if (isUserAria())
+            Aria.download(this).register();
         initData();
     }
 
@@ -94,9 +91,8 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     public void onClick(View view) {
         int i = view.getId();
         if (i == R.id.img_finish) {
-            if (needFinsh()) {
+            if (needFinsh())
                 finish();
-            }
         }
     }
 
@@ -124,32 +120,61 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     }
 
     /**
+     * 是否需要使用下载工具类
+     */
+    protected boolean isUserAria() {
+        return false;
+    }
+
+    /**
      * 是否需要开启沉浸式
      */
     protected boolean isImmersionBarEnabled() {
         return true;
     }
 
+    /**
+     * 默认设置的沉浸式状态栏配置(状态栏为粉红色，并且状态栏字体和导航栏图标变色，同时解决状态栏和布局重叠问题)
+     */
     protected void initImmersionBar() {
-        //在BaseActivity里初始化,设置导航栏、状态栏为白色，并且状态栏字体和导航栏图标变色，同时解决状态栏和布局重叠问题（这里主要用于标题栏为白色的布局）
-        ImmersionBar.with(this).statusBarColor(R.color.frame_white).navigationBarColor(R.color.frame_white).autoDarkModeEnable(true).fitsSystemWindows(true).init();
+        ImmersionBar.with(this).statusBarColor(R.color.frame_colorAccent).autoDarkModeEnable(true).fitsSystemWindows(true).init();
     }
 
     /**
-     * 重置默认状态栏(主要用于fragamen切换和头部为图片或背景的情况)
-     * 状态栏为透明色，会有重叠问题，可以设置marginTop或者指定头部
+     * 解决布局顶部和状态栏重叠问题(方案一)
+     * 在标题栏的上方增加View标签，高度根据android版本来判断，如下述代码。
+     * <View
+     * android:layout_width="match_parent"
+     * android:layout_height="25dp"
+     * android:background="@color/c_F44444" 顶部为图片时无需设置这项/>
+     * 指定高度为25dp（20~25dp最佳，根据需求定）
      */
     public void resetImmersionBar() {
-        ImmersionBar.with(this).reset().navigationBarColor(R.color.frame_white).init();
+        ImmersionBar.with(this).reset().init();
     }
 
     /**
-     * 重置默认状态栏(主要用于标题栏为非白色)
+     * 解决布局顶部和状态栏重叠问题(方案二)
+     * 在标题栏的上方增加View标签，但是高度指定为0dp。
+     * <View
+     * android:id="@+id/status_bar_view"
+     * android:layout_width="match_parent"
+     * android:layout_height="0dp"
+     * android:background="@color/c_F44444" 顶部为图片时无需设置这项/>
+     *
+     * @param view 标题栏上方的view，如上述代码示例
+     */
+    public void resetImmersionBar(View view) {
+        ImmersionBar.with(this).reset().statusBarView(view).init();
+    }
+
+    /**
+     * 设置其他颜色，主要用于和通用标题栏颜色不符的情况
      *
      * @param color 状态栏的颜色
      */
     public void resetImmersionBar(int color) {
-        ImmersionBar.with(this).reset().statusBarColor(color).navigationBarColor(R.color.frame_white).fitsSystemWindows(true).init();
+        ImmersionBar.with(this).reset().statusBarColor(color).fitsSystemWindows(true).init();
     }
 
     /**
@@ -295,14 +320,12 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
         } else if (msgType instanceof Integer) {
             message = getResString((int) msgType);
         }
-        if (progressDialog == null) {
+        if (progressDialog == null)
             progressDialog = new LoadingDialog(mContext);
-        }
         progressDialog.setCancle(isCancel);
         progressDialog.setMsg(message);
-        if (!progressDialog.isShowing()) {
+        if (!progressDialog.isShowing())
             progressDialog.show();
-        }
     }
 
     /**
@@ -310,47 +333,21 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      */
     @Override
     public void dismissLoadingDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
+        if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
-        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (isFinishing()) {
+        if (isFinishing())
             destroy();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // 非必加
-        // 如果你的app可以横竖屏切换，适配了华为emui3系列系统手机，并且navigationBarWithEMUI3Enable为true，
-        // 请在onResume方法里添加这句代码（同时满足这三个条件才需要加上代码哦：1、横竖屏可以切换；2、华为emui3系列系统手机；3、navigationBarWithEMUI3Enable为true）
-        // 否则请忽略
-        if (OSUtils.isEMUI3_x() && isImmersionBarEnabled()) {
-            ImmersionBar.with(this).init();
-        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         destroy();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (isImmersionBarEnabled()) {
-            // 非必加
-            // 如果你的app可以横竖屏切换，适配了4.4或者华为emui3.1系统手机，并且navigationBarWithKitkatEnable为true，
-            // 请务必在onConfigurationChanged方法里添加如下代码（同时满足这三个条件才需要加上代码哦：1、横竖屏可以切换；2、android4.4或者华为emui3.1系统手机；3、navigationBarWithKitkatEnable为true）
-            // 否则请忽略
-            ImmersionBar.with(this).init();
-        }
     }
 
     /**
@@ -361,10 +358,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
             return;
         } else {
             mInputMethodManager = null;
-            // 必须调用该方法，防止内存泄漏
-            if (isImmersionBarEnabled()) {
-                ImmersionBar.with(this).destroy();
-            }
             // 回收资源
             isDestroyed = true;
             if (isRegisterEventBus())

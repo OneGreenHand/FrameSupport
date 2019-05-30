@@ -108,7 +108,7 @@ public class BaseQuickHolder extends BaseViewHolder {
      * 设置布局管理器
      * direction （0 水平 1 垂直）
      */
-    public BaseQuickHolder setLayoutManager(int viewId, RecyclerView.Adapter adapter, Context mContext, int direction,String color,int height, int width, int hdCount, int ftCount) {
+    public BaseQuickHolder setLayoutManager(int viewId, RecyclerView.Adapter adapter, Context mContext, int direction, String color, int height, int width, int hdCount, int ftCount) {
         RecyclerView rv = getView(viewId);
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);

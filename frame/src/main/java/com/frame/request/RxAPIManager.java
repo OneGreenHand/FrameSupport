@@ -19,9 +19,8 @@ public class RxAPIManager {
     public static RxAPIManager get() {
         if (sInstance == null) {
             synchronized (RxAPIManager.class) {
-                if (sInstance == null) {
+                if (sInstance == null)
                     sInstance = new RxAPIManager();
-                }
             }
         }
         return sInstance;
@@ -36,12 +35,10 @@ public class RxAPIManager {
     }
 
     public void cancel(Object tag) {
-        if (maps.isEmpty()) {
+        if (maps.isEmpty())
             return;
-        }
-        if (maps.get(tag) == null) {
+        if (maps.get(tag) == null)
             return;
-        }
         if (!maps.get(tag).isDisposed()) {
             maps.get(tag).dispose();
             maps.remove(tag);
@@ -49,9 +46,8 @@ public class RxAPIManager {
     }
 
     public void cancelAll() {
-        if (maps.isEmpty()) {
+        if (maps.isEmpty())
             return;
-        }
         Set<Object> keys = maps.keySet();
         for (Object apiKey : keys) {
             cancel(apiKey);

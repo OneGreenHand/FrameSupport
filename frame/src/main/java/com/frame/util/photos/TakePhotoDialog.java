@@ -19,13 +19,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.FileUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.frame.FrameApplication;
 import com.frame.R;
 import com.frame.R2;
 import com.frame.base.BaseDialog;
 import com.frame.config.BaseConfig;
 import com.frame.util.CommonUtil;
+import com.frame.util.ToastUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -97,18 +97,16 @@ public class TakePhotoDialog extends BaseDialog {
     public void onViewClicked(View view) {
         if (view.getId() == R.id.tv_take_photo) {//拍照
             dismiss();
-            if (mActivity != null) {
+            if (mActivity != null)
                 mActivity.startActivityForResult(PhotoUtil.takePhoto(FileUtils.getFileByPath(imagePath + imageName)), 0x001);
-            } else {
+            else
                 mFragment.startActivityForResult(PhotoUtil.takePhoto(FileUtils.getFileByPath(imagePath + imageName)), 0x001);
-            }
         } else if (view.getId() == R.id.tv_pick_photo) {//图库
             dismiss();
-            if (mActivity != null) {
+            if (mActivity != null)
                 mActivity.startActivityForResult(PhotoUtil.pickPhoto(), 0x002);
-            } else {
+            else
                 mFragment.startActivityForResult(PhotoUtil.pickPhoto(), 0x002);
-            }
         } else if (view.getId() == R.id.tv_cancle) {
             dismiss();
         }
@@ -134,15 +132,14 @@ public class TakePhotoDialog extends BaseDialog {
                         if (FileUtils.createOrExistsDir(imagePath))  //创建photo目录
                             show();
                         else
-                            ToastUtils.showShort("出现未知错误，请稍候重试！");
+                            ToastUtil.showShortToast("出现未知错误，请稍候重试！");
                     } else if (permission.shouldShowRequestPermissionRationale) {//拒绝申请权限
-                        ToastUtils.showShort("您拒绝了权限申请");
+                        ToastUtil.showShortToast("您拒绝了权限申请");
                     } else {//不在提醒申请权限
-                        if (mActivity != null) {
+                        if (mActivity != null)
                             CommonUtil.getPermissions(mActivity, null);
-                        } else {
+                        else
                             CommonUtil.getPermissions(mFragment.getActivity(), null);
-                        }
                     }
                 });
     }
@@ -153,13 +150,12 @@ public class TakePhotoDialog extends BaseDialog {
     public void onResult(int requestCode, int resultCode, Intent data, IPhotoResult iPhotoResult) {
         //拍照和选择图片结果回调
         if (resultCode != Activity.RESULT_CANCELED) {
-            if (requestCode == 0x001) {// 拍照返回
+            if (requestCode == 0x001) // 拍照返回
                 takePhotoResult(iPhotoResult);
-            } else if (requestCode == 0x002) {// 选择本地图片返回
+            else if (requestCode == 0x002) // 选择本地图片返回
                 pickPhotoResult(data, iPhotoResult);
-            } else if (requestCode == 0x003) {//裁剪图片后
+            else if (requestCode == 0x003) //裁剪图片后
                 cropPhotoResult(iPhotoResult);
-            }
         }
     }
 
@@ -171,11 +167,10 @@ public class TakePhotoDialog extends BaseDialog {
             deleteImagePath = "";
             File file = FileUtils.getFileByPath(imagePath + imageName);//源文件
             File outFile = FileUtils.getFileByPath(imagePath + cropImageName);//裁剪后的文件
-            if (mActivity != null) {
+            if (mActivity != null)
                 mActivity.startActivityForResult(PhotoUtil.cropPhoto(file, outFile), 0x003);
-            } else {
+            else
                 mFragment.startActivityForResult(PhotoUtil.cropPhoto(file, outFile), 0x003);
-            }
         } else {
             compressTheImg(imagePath + imageName, iPhotoResult);
         }
@@ -185,17 +180,15 @@ public class TakePhotoDialog extends BaseDialog {
      * 选择本地图片返回后的逻辑操作
      */
     private void pickPhotoResult(Intent data, IPhotoResult iPhotoResult) {
-
         if (null != data) {//为了取消选取不报空指针用的
             Uri imageUri = data.getData();
             if (isCrop) {
                 deleteImagePath = getPathByUri(imageUri);
                 File outFile = FileUtils.getFileByPath(imagePath + cropImageName);//裁剪后的文件
-                if (mActivity != null) {
+                if (mActivity != null)
                     mActivity.startActivityForResult(PhotoUtil.cropPhoto(new File(getPathByUri(imageUri)), outFile), 0x003);
-                } else {
+                else
                     mFragment.startActivityForResult(PhotoUtil.cropPhoto(new File(getPathByUri(imageUri)), outFile), 0x003);
-                }
             } else {
                 compressTheImg(getPathByUri(imageUri), iPhotoResult);
             }
@@ -207,24 +200,22 @@ public class TakePhotoDialog extends BaseDialog {
      */
     private void cropPhotoResult(IPhotoResult iPhotoResult) {
         if (TextUtils.isEmpty(deleteImagePath)) {//删除拍照相关创建的文件
-            FileUtils.deleteFile(imagePath + imageName);//删除未压缩的拍照源文件
-            FileUtils.deleteFile(imagePath + cropImageName);//删除拍照裁剪后的未压缩文件
+            FileUtils.deleteFile(imagePath + imageName);//删除拍照后的源文件
             deleteImagePath = "";
         } else {//删除选择的图片相关创建的文件
-            FileUtils.deleteFile(deleteImagePath);//删除图库的未压缩文件
+            FileUtils.deleteFile(deleteImagePath);//删除图库选择的源文件
             deleteImagePath = "";
         }
         compressTheImg(imagePath + cropImageName, iPhotoResult);
     }
 
     /**
-     * 压缩图片
+     * 压缩图片(luban)
      */
     @SuppressLint("CheckResult")
     private void compressTheImg(String path, IPhotoResult iPhotoResult) {
         Flowable.just(path)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .map(new Function<String, File>() {
                     @Override
                     public File apply(@NonNull String str) throws Exception {
@@ -240,12 +231,15 @@ public class TakePhotoDialog extends BaseDialog {
                                 }).get(str);
                     }
                 })
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<File>() {
                     @Override
                     public void accept(File files) throws Exception {
                         if (files.exists()) {//压缩成功返回压缩后的文件和文件路径
-                            if (iPhotoResult != null)
+                            if (iPhotoResult != null) {
                                 iPhotoResult.onResult(files, files.getPath());
+                         //       FileUtils.deleteFile(path);//删除压缩前的文件
+                            }
                         } else {//压缩失败直接返回源文件和路径
                             if (iPhotoResult != null)
                                 iPhotoResult.onResult(new File(path), path);
@@ -287,9 +281,8 @@ public class TakePhotoDialog extends BaseDialog {
             CrashReport.postCatchedException(e);
             return "";
         } finally {
-            if (cursor != null) {
+            if (cursor != null)
                 cursor.close();
-            }
         }
     }
 

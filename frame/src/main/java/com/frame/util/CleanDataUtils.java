@@ -16,9 +16,8 @@ public class CleanDataUtils {
      */
     public static String getTotalCacheSize(Context context) throws Exception {
         long cacheSize = FileUtils.getDirLength(context.getCacheDir());//获取内部缓存大小
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {//sd卡正常挂载
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) //sd卡正常挂载
             cacheSize += FileUtils.getDirLength(context.getExternalCacheDir());//获取外部缓存大小
-        }
         cacheSize += FileUtils.getDirLength(new File(context.getCacheDir() + "/" + InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR));//获取glide的图片缓存大小
         return getFormatSize(cacheSize);
     }
@@ -31,7 +30,6 @@ public class CleanDataUtils {
         CleanUtils.cleanExternalCache();//清除外部缓存
     }
 
-
     /**
      * 格式化单位
      */
@@ -40,21 +38,18 @@ public class CleanDataUtils {
 //        if (kiloByte < 1) {
 //            return size + "Byte";
 //        }
-
         double megaByte = kiloByte / 1024;
         if (megaByte < 1) {
             BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
             return result1.setScale(2, BigDecimal.ROUND_HALF_UP)
                     .toPlainString() + "K";
         }
-
         double gigaByte = megaByte / 1024;
         if (gigaByte < 1) {
             BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
             return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
                     .toPlainString() + "M";
         }
-
         double teraBytes = gigaByte / 1024;
         if (teraBytes < 1) {
             BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));

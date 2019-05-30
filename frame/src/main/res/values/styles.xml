@@ -8,7 +8,7 @@
         <!--控制各个控件被选中时的颜色-->
         <item name="colorAccent">@color/frame_colorPrimaryDark</item>
         <item name="android:textSize">13sp</item>
-        <item name="android:textColor">#434343</item>
+        <item name="android:textColor">@color/frame_title_name</item>
         <item name="android:listDivider">@drawable/divider_default</item>
         <!--页面背景色-->
         <item name="android:windowBackground">@color/frame_white</item>

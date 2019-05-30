@@ -29,7 +29,6 @@ public class KeyWordUtil {
         try {
             keyword = escapeExprSpecialWord(keyword);
             text = escapeExprSpecialWord(text);
-
             List<String> keywordTemp = Arrays.asList(keyword.split(""));
             int i = 0;
             Iterator<String> it = keywordTemp.iterator();
@@ -53,7 +52,6 @@ public class KeyWordUtil {
 
     /**
      * 转义正则特殊字符 （$()*+.[]?\^{},|）
-     *
      * @param keyword
      * @return keyword
      */

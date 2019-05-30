@@ -17,10 +17,8 @@ public class PayResult {
     private String memo;
 
     public PayResult(Map<String, String> rawResult) {
-        if (rawResult == null) {
+        if (rawResult == null)
             return;
-        }
-
         for (String key : rawResult.keySet()) {
             if (TextUtils.equals(key, "resultStatus")) {
                 resultStatus = rawResult.get(key);

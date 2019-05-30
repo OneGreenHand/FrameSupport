@@ -33,7 +33,7 @@ public abstract class BaseRequestActivity<P extends BasePresenter, B extends Bas
 
     @Override
     public void requestFail(B data, Object tag) {
-        ToastUtil.showCenterToast(this, data.msg);
+        ToastUtil.showShortToast(data.msg);
     }
 
     //重新请求数据

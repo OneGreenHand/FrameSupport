@@ -48,14 +48,16 @@ dependencies {
     api dependencies.utilcode
     //今日头条屏幕适配方案
     api dependencies.autosize
-    //ProgressManager进度监听
-    api dependencies.progressmanager
+    //动态切换baseurl
+    //  api dependencies.retrofiturl
+    //litepal数据库
+    // api dependencies.litepal
     //eventbus
     api dependencies.eventbus
-    //litepal数据库
-    api dependencies.litepal
     //glide图片加载
-    api dependencies.glide.glide
+    api(dependencies.glide.glide) {
+        exclude group: 'com.android.support'
+    }
     annotationProcessor dependencies.glide.compiler
     //图片处理库
     api dependencies.glide.transformations
@@ -69,14 +71,22 @@ dependencies {
     //沉浸式状态栏
     api dependencies.immersionbar
     //bugly升级库
-    api dependencies.bugly.crashreport_upgrade
+    //  api dependencies.bugly.crashreport_upgrade
     // bugly 热更新tinker插件库
-    api dependencies.bugly.tinker
+    // api dependencies.bugly.tinker
+    //bugly异常捕获（升级库和异常捕获二选一，因为升级库包含了异常捕获）
+    api dependencies.bugly.crashreport
     //rxlifecycle生命周期绑定
     api dependencies.rxlifecycle
     //微信支付
     api dependencies.wxpay
     // 支付宝支付
     api files('libs/alipaySdk-20180601.jar')
-    api 'top.zibin:Luban:1.1.8'
+    //鲁班图片压缩
+    api dependencies.luban
+    //下载工具类
+    api(dependencies.aria.aria_core) {
+        exclude group: 'com.android.support'
+    }
+    // annotationProcessor dependencies.aria.aria_compiler(基类库暂时不用下载相关)
 }

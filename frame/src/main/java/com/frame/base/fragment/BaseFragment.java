@@ -2,7 +2,6 @@ package com.frame.base.fragment;
 
 
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,12 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.arialyy.aria.core.Aria;
 import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
 import com.frame.view.LoadingDialog;
 import com.frame.widget.RecycleViewDivider;
-import com.gyf.barlibrary.ImmersionOwner;
-import com.gyf.barlibrary.ImmersionProxy;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
@@ -32,7 +30,7 @@ import butterknife.ButterKnife;
 /**
  * @Description: Fragment基类
  */
-public abstract class BaseFragment extends RxFragment implements BaseView, ImmersionOwner {
+public abstract class BaseFragment extends RxFragment implements BaseView {
     protected Activity mActivity;
     protected LoadingDialog progressDialog;
     protected View rootView;
@@ -50,7 +48,6 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Immer
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mImmersionProxy.onCreate(savedInstanceState);
     }
 
     @Override
@@ -58,11 +55,13 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Immer
         mActivity = getActivity();
         rootView = inflater.inflate(getLayoutID(), container, false);
         ButterKnife.bind(this, rootView);//绑定framgent
-        if (isRegisterEventBus())
-            EventBus.getDefault().register(this);
         initCommon();
         if (rxPermissions == null)
             rxPermissions = new RxPermissions(this);
+        if (isRegisterEventBus())
+            EventBus.getDefault().register(this);
+        if (isUserAria())
+            Aria.download(this).register();
         return rootView;
     }
 
@@ -74,7 +73,6 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Immer
         super.onActivityCreated(savedInstanceState);
         init(savedInstanceState);
         initData();
-        mImmersionProxy.onActivityCreated(savedInstanceState);
     }
 
     protected abstract void init(Bundle savedInstanceState);
@@ -91,22 +89,30 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Immer
         return getResources().getInteger(res);
     }
 
+    /**
+     * 是否需要注册EventBus
+     */
     public boolean isRegisterEventBus() {
+        return false;
+    }
+
+    /**
+     * 是否需要使用下载工具类
+     */
+    protected boolean isUserAria() {
         return false;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventBusCome(EventBean event) {
-        if (event != null) {
+        if (event != null)
             receiveEvent(event);
-        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onStickyEventBusCome(EventBean event) {
-        if (event != null) {
+        if (event != null)
             receiveStickyEvent(event);
-        }
     }
 
     /**
@@ -131,30 +137,27 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Immer
     @Override
     public void showLoadingDialog(Object msgType, boolean isCancel) {
         String message = "玩命加载中...";
-        if (msgType == null) {
+        if (msgType == null || (msgType instanceof String && ((String) msgType).isEmpty())) {
             message = "请求中...";
         } else if (msgType instanceof String) {
             message = (String) msgType;
         } else if (msgType instanceof Integer) {
             message = getResString((int) msgType);
         }
-        if (progressDialog == null) {
+        if (progressDialog == null)
             progressDialog = new LoadingDialog(mActivity);
-        }
         progressDialog.setCancle(isCancel);
         progressDialog.setMsg(message);
-        if (!progressDialog.isShowing()) {
+        if (!progressDialog.isShowing())
             progressDialog.show();
-        }
     }
 
     /**
      * 隐藏加载对话框
      */
     public void dismissLoadingDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
+        if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
-        }
     }
 
     /**
@@ -187,96 +190,14 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Immer
                 .build());
     }
 
-    /**
-     * ImmersionBar代理类(fragment中使用沉浸式通过实现ImmersionOwner接口来实现沉浸式)
-     */
-    private ImmersionProxy mImmersionProxy = new ImmersionProxy(this);
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        mImmersionProxy.setUserVisibleHint(isVisibleToUser);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mImmersionProxy.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mImmersionProxy.onPause();
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         //页面销毁时隐藏dialog，否则重新打开页面时可能会报java.lang.IllegalArgumentException: View not attached to window manager
         dismissLoadingDialog();
-        if (isRegisterEventBus()) {
+        if (isRegisterEventBus())
             EventBus.getDefault().unregister(this);
-        }
         //取消请求
         //RxAPIManager.get().cancel(this);
-        mImmersionProxy.onDestroy();
     }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mImmersionProxy.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        mImmersionProxy.onHiddenChanged(hidden);
-    }
-
-    /**
-     * 懒加载，在view初始化完成之前执行
-     */
-    @Override
-    public void onLazyBeforeView() {
-    }
-
-    /**
-     * 懒加载，在view初始化完成之后执行
-     */
-    @Override
-    public void onLazyAfterView() {
-    }
-
-    /**
-     * Fragment用户可见时候调用
-     */
-    @Override
-    public void onVisible() {
-    }
-
-    /**
-     * Fragment用户不可见时候调用
-     */
-    @Override
-    public void onInvisible() {
-    }
-
-    /**
-     * 初始化沉浸式代码
-     */
-    @Override
-    public void initImmersionBar() {
-
-    }
-
-    /**
-     * 是否可以实现沉浸式，当为true的时候才可以执行initImmersionBar方法
-     */
-    @Override
-    public boolean immersionBarEnabled() {
-        return false;
-    }
-
 }

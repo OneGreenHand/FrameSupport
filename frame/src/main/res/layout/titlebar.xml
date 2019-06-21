@@ -18,7 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:ellipsize="end"
         android:gravity="center_vertical"
+        android:maxWidth="250dp"
+        android:singleLine="true"
         android:text="@string/frame_app_name"
         android:textColor="@color/frame_white"
         android:textSize="17sp" />
@@ -32,7 +35,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:text="保存"
-        android:textColor="#666666"
+        android:textColor="@color/frame_white"
         android:textSize="15sp"
         android:visibility="gone" />
 

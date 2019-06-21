@@ -154,6 +154,6 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.floating_action)
     public void onViewClicked() {
-        ToastUtil.showShortToast( "MvpFrame");
+        ToastUtil.showShortToast("这是一个按钮~");
     }
 }

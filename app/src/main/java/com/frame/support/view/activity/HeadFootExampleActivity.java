@@ -2,6 +2,7 @@ package com.frame.support.view.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.widget.TextView;
@@ -42,8 +43,8 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt
     @Override
     protected void init(Bundle savedInstanceState) {
         initTitleBar("添加头部和脚部的示例");
+        recycleview.setLayoutManager(new LinearLayoutManager(mContext));
         adapter = new ExampleAdapter();
-        initLlManager(recycleview, 1, "#F0F2F5", 10, 0, 1, 1);
         initHeadFootView();
         recycleview.setAdapter(adapter);
     }
@@ -75,7 +76,7 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt
     }
 
     @Override
-    public void requestSuccess(PersonalizedSignatureBean data, BaseModel.LoadMode loadMode, Object tag,int pageCount) {
-        adapter.addData(data.data);
+    public void requestSuccess(PersonalizedSignatureBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
+        adapter.setNewData(data.data);
     }
 }

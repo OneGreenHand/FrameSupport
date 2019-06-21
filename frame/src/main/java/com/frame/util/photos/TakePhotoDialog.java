@@ -116,7 +116,7 @@ public class TakePhotoDialog extends BaseDialog {
      * 申请权限并进行拍照
      */
     @SuppressLint("CheckResult")
-    public void start() {
+    public void takePhoto() {
         if (mActivity != null) {
             if (rxPermissions == null)
                 rxPermissions = new RxPermissions(mActivity);
@@ -132,9 +132,9 @@ public class TakePhotoDialog extends BaseDialog {
                         if (FileUtils.createOrExistsDir(imagePath))  //创建photo目录
                             show();
                         else
-                            ToastUtil.showShortToast("出现未知错误，请稍候重试！");
+                            ToastUtil.showShortToast("出现未知错误，请稍候重试~");
                     } else if (permission.shouldShowRequestPermissionRationale) {//拒绝申请权限
-                        ToastUtil.showShortToast("您拒绝了权限申请");
+                        ToastUtil.showShortToast("您拒绝了应用权限，该功能暂时无法使用~");
                     } else {//不在提醒申请权限
                         if (mActivity != null)
                             CommonUtil.getPermissions(mActivity, null);
@@ -147,9 +147,9 @@ public class TakePhotoDialog extends BaseDialog {
     /**
      * 拍照回调
      */
-    public void onResult(int requestCode, int resultCode, Intent data, IPhotoResult iPhotoResult) {
+    public void onPhotoResult(int requestCode, int resultCode, Intent data, IPhotoResult iPhotoResult) {
         //拍照和选择图片结果回调
-        if (resultCode != Activity.RESULT_CANCELED) {
+        if (resultCode != 0) {
             if (requestCode == 0x001) // 拍照返回
                 takePhotoResult(iPhotoResult);
             else if (requestCode == 0x002) // 选择本地图片返回
@@ -195,17 +195,24 @@ public class TakePhotoDialog extends BaseDialog {
         }
     }
 
+    public boolean isCrop() {
+        return isCrop;
+    }
+
+    public void isCrop(boolean isCrop) {
+        this.isCrop = isCrop;
+    }
+
     /**
      * 裁剪图片返回后的逻辑操作
      */
     private void cropPhotoResult(IPhotoResult iPhotoResult) {
         if (TextUtils.isEmpty(deleteImagePath)) {//删除拍照相关创建的文件
             FileUtils.deleteFile(imagePath + imageName);//删除拍照后的源文件
-            deleteImagePath = "";
         } else {//删除选择的图片相关创建的文件
             FileUtils.deleteFile(deleteImagePath);//删除图库选择的源文件
-            deleteImagePath = "";
         }
+        deleteImagePath = "";
         compressTheImg(imagePath + cropImageName, iPhotoResult);
     }
 
@@ -238,7 +245,7 @@ public class TakePhotoDialog extends BaseDialog {
                         if (files.exists()) {//压缩成功返回压缩后的文件和文件路径
                             if (iPhotoResult != null) {
                                 iPhotoResult.onResult(files, files.getPath());
-                         //       FileUtils.deleteFile(path);//删除压缩前的文件
+                                FileUtils.deleteFile(path);//删除压缩前的文件
                             }
                         } else {//压缩失败直接返回源文件和路径
                             if (iPhotoResult != null)
@@ -278,7 +285,7 @@ public class TakePhotoDialog extends BaseDialog {
             return cursor.getString(columnIndex);
         } catch (Exception e) {
             e.printStackTrace();
-            CrashReport.postCatchedException(e);
+            CrashReport.postCatchedException(e);//手动上报异常到bugly
             return "";
         } finally {
             if (cursor != null)

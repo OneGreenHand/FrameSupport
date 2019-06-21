@@ -178,6 +178,14 @@ public class XRadioGroup extends LinearLayout {
     }
 
     /**
+     * <p>Register a callback to be invoked when the checked radio button
+     * changes in this group.</p>
+     */
+    public void removeOnCheckedChangeListener() {
+        mOnCheckedChangeListener = null;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -288,7 +296,7 @@ public class XRadioGroup extends LinearLayout {
          * @param group     the group in which the checked radio button has changed
          * @param checkedId the unique identifier of the newly checked radio button
          */
-        public void onCheckedChanged(XRadioGroup group, int checkedId);
+        void onCheckedChanged(XRadioGroup group, int checkedId);
     }
 
     private class CheckedStateTracker implements CompoundButton.OnCheckedChangeListener {

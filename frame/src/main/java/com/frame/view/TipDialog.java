@@ -84,6 +84,10 @@ public class TipDialog extends BaseDialog {
         content.setText(msg);
     }
 
+    public void setColorContent(String msg) {
+        content.setText(CommonUtil.setHtmlColor(msg));
+    }
+
     public void setSureText(String msg) {
         sure.setText(msg);
     }

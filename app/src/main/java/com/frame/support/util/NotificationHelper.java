@@ -100,6 +100,4 @@ public class NotificationHelper {
         NotificationCompat.Builder builder = getNofity(NotificationTitle, text).setProgress(100, 100, false).setContentIntent(pendingIntentClick);
         getManager().notify(NOTIFICATION_ID, builder.build());
     }
-
-
 }

@@ -7,14 +7,22 @@ import com.blankj.utilcode.util.AppUtils;
  */
 public class AppConfig {
 
-    public static Config config = Config.product;
-    /**
-     * debug为true打开调试信息，false则关闭调试信息
-     */
-    public static boolean DEBUG = config.isDebug();
+    //  debug为true打开调试信息，false则关闭调试信息
+    public static boolean DEBUG = false;
+    //通用请求地址
+    private static String Url = "https://www.apiopen.top/";
+
+    public static String getUrl() {
+        return DEBUG ? "https://www.apiopen.top/" : Url;
+    }
+
+    public static void setUrl(String url) {
+        if (!DEBUG)
+            Url = url;
+    }
 
     //分页参数
-    public static final class ViewPage{
+    public static final class ViewPage {
         //起始页下标
         public static final int START_INDEX = 1;
         //每页的数据量

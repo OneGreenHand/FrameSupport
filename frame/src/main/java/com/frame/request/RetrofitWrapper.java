@@ -1,7 +1,10 @@
 package com.frame.request;
+
 import com.frame.config.AppConfig;
+
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import retrofit2.Retrofit;
@@ -35,7 +38,7 @@ public class RetrofitWrapper {
                 .addInterceptor(new okhttp3.logging.HttpLoggingInterceptor().setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY))//此处设置的拦截器用来查看请求日志
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl(AppConfig.config.getUrl())
+                .baseUrl(AppConfig.getUrl())
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())

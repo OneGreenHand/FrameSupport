@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
@@ -52,10 +51,11 @@
             android:value="portrait|landscape" />
         <!--设置文件共享-->
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name=".MainFileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
@@ -66,13 +66,21 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.HeadFootExampleActivity" />
-        <activity android:name=".view.activity.RefreshRequestActivity" />
-        <activity android:name=".view.activity.NoDataExampleActivity" />
+        <activity
+            android:name=".view.activity.HeadFootExampleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.RefreshRequestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.NoDataExampleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.VideoWebActivity"
+            android:screenOrientation="portrait" />
         <!--微信支付-->
         <activity
             android:name=".wxapi.WXPayEntryActivity"

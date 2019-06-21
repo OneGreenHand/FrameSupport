@@ -88,5 +88,5 @@ dependencies {
     api(dependencies.aria.aria_core) {
         exclude group: 'com.android.support'
     }
-    // annotationProcessor dependencies.aria.aria_compiler(基类库暂时不用下载相关)
+    // annotationProcessor dependencies.aria.aria_compiler(基类库暂时不用下载)
 }

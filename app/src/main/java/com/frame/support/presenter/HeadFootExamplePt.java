@@ -14,11 +14,11 @@ public class HeadFootExamplePt extends BasePresenter<HeadFootExampleActivity> {
     /**
      * 获取个性签名
      */
-    public  void getPersonalizedSignature(int page){
+    public void getPersonalizedSignature(int page) {
         createRequestBuilder()
                 .setLoadStyle(BaseModel.LoadStyle.DIALOG)
-                .putParam("page",page)
+                .putParam("page", page)
                 .create()
-                .post(API.PERSONALIZED_SIGNATURE,PersonalizedSignatureBean.class);
+                .post(API.PERSONALIZED_SIGNATURE, PersonalizedSignatureBean.class);
     }
 }

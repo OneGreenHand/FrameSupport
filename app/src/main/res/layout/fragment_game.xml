@@ -2,11 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/video_web"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="游戏" />
+        android:background="@color/blue"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="可播放视频的WebView"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/download_apk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="通知栏下载APK(Service)"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/no_notice_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/violet"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="静默下载APK(Service)"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/clear_download_apk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="清除已下载文件"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="地址：http://sqdd.myapp.com/myapp/qqteam/tim/down/tim.apk\n文件名：tim.apk\t\t\t\t文件大小：51.9Mb\n下载方式：Aria+Service下载，内部封装了权限请求\n备注：本地存在文件不会重复下载，需重新下载请先清除下载文件\n文件地址：/storage/emulated/0/FrameSupport/files/tim.apk" />
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.frame.support.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
 import android.text.TextUtils;
 
@@ -28,6 +29,13 @@ public class DownloadService extends Service {
     private String title;
     private NotificationHelper notificationHelper;
     private boolean isDownloading = false;//是否在下载中
+    private boolean isShowProgress = true;//是否显示下载进度
+
+    public NotificationHelper getNotification() {
+        if (notificationHelper == null)
+            notificationHelper = new NotificationHelper(getApplicationContext());
+        return notificationHelper;
+    }
 
     @Override
     public void onCreate() {
@@ -50,19 +58,34 @@ public class DownloadService extends Service {
         fileUrl = intent.getStringExtra("fileUrl");
         fileName = intent.getStringExtra("fileName");
         title = intent.getStringExtra("title");
+        isShowProgress = intent.getBooleanExtra("isShowProgress", true);
         if (TextUtils.isEmpty(fileUrl) || TextUtils.isEmpty(fileName))
             return;
         if (!FileUtils.createOrExistsDir(BaseConfig.FILE_FOLDER)) //判断目录是否存在，不存在则判断是否创建成功(这里不检查权限了，在外面检查)
             return;
         if (!isDownloading) {//没有在下载中才可以下载
-            if (FileUtils.isFileExists(BaseConfig.FILE_FOLDER + fileName)) //如果更新之前存在apk就先删除
-                FileUtils.deleteFile(BaseConfig.FILE_FOLDER + fileName);
-            Aria.download(this)
-                    .load(fileUrl)
-                    .setFilePath(BaseConfig.FILE_FOLDER + fileName, true)
-                    .start();
+            if (FileUtils.isFileExists(BaseConfig.FILE_FOLDER + fileName)) {  //如果更新之前存在apk就直接安装
+                if (isShowProgress) {
+                    AppUtils.installApp(BaseConfig.FILE_FOLDER + fileName);
+                } else {//如果是静默下载，并且本地有安装包那就延时三秒安装
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            AppUtils.installApp(BaseConfig.FILE_FOLDER + fileName);
+                        }
+                    }, 3000);
+                }
+            } else {
+                if (isShowProgress)
+                    ToastUtil.showShortToast("正在为您后台下载应用中...");
+                Aria.download(this)
+                        .load(fileUrl)
+                        .setFilePath(BaseConfig.FILE_FOLDER + fileName, true)
+                        .start();
+            }
         } else {
-            ToastUtil.showShortToast( "已经在下载中啦~");
+            if (isShowProgress)
+                ToastUtil.showShortToast("已经在下载中啦~");
         }
     }
 
@@ -79,28 +102,35 @@ public class DownloadService extends Service {
 
     @Download.onTaskStart
     public void onTaskStart(DownloadTask task) {
-        notificationHelper = new NotificationHelper(getApplicationContext());
-        notificationHelper.showNotification(title);
+        if (isShowProgress) {
+            getNotification().showNotification(title);
+        }
         isDownloading = true;
     }
 
     @Download.onTaskCancel
     public void onTaskCancel(DownloadTask task) {
-        notificationHelper.updateProgress(-1);
+        if (isShowProgress) {
+            getNotification().updateProgress(-1);
+        }
         isDownloading = false;
         stopSelf();
     }
 
     @Download.onTaskFail
     public void onTaskFail(DownloadTask task) {
-        notificationHelper.updateProgress(-1);
+        if (isShowProgress) {
+            getNotification().updateProgress(-1);
+        }
         isDownloading = false;
         stopSelf();
     }
 
     @Download.onTaskComplete
     public void onTaskComplete(DownloadTask task) {
-        notificationHelper.downloadComplete(fileName);//手动设置下载完成，并且设置通知栏点击事件(这里进度显示会有问题)
+        if (isShowProgress) {
+            getNotification().downloadComplete(fileName);//手动设置下载完成，并且设置通知栏点击事件(这里进度显示会有问题)
+        }
         isDownloading = false;
         if (FileUtils.isFileExists(BaseConfig.FILE_FOLDER + fileName)) //如果本地存在文件，直接调用安装操作
             AppUtils.installApp(BaseConfig.FILE_FOLDER + fileName);
@@ -110,9 +140,12 @@ public class DownloadService extends Service {
     @Download.onTaskRunning
     public void onTaskRunning(DownloadTask task) {
         long len = task.getFileSize();
-        if (len == 0)
-            notificationHelper.updateProgress(-1);
-        else
-            notificationHelper.updateProgress((int) (task.getCurrentProgress() * 100 / len));
+        if (isShowProgress) {
+            if (len == 0) {
+                getNotification().updateProgress(-1);
+            } else {
+                getNotification().updateProgress((int) (task.getCurrentProgress() * 100 / len));
+            }
+        }
     }
 }

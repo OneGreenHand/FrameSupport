@@ -5,21 +5,42 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/post_request"
+        android:id="@+id/get_weather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/blue"
         android:gravity="center"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:text="获取深圳城市天气"
+        android:text="获取城市天气(深圳)"
         android:textColor="@color/white" />
 
+    <TextView
+        android:id="@+id/select_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="选择照片(单张+压缩)"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/crop_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="选择照片(单张+压缩+裁剪)"
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/request_msg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="这里是数据请求结果" />
+        android:text="这里是返回结果" />
 </LinearLayout>

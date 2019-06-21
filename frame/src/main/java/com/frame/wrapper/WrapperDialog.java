@@ -34,7 +34,6 @@ public class WrapperDialog extends Dialog {
         mListener = listener;
         if (mListener != null && mIds != null && mIds.length != 0) {
             for (int id : mIds) {
-
                 findViewById(id).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

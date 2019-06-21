@@ -56,33 +56,31 @@ public class CommonUtil {
     /**
      * 请求打开通知权限
      */
-    public static void notificationAuthority(Context context) {
+    public static boolean notificationAuthority(Context context) {
         NotificationManagerCompat manager = NotificationManagerCompat.from(context);
         boolean isOpened = manager.areNotificationsEnabled();//API 19以上也可以用这个判断
         if (!isOpened) {//没有授予通知权限
             TipDialog dialog = new TipDialog(context);
             dialog.setContent("检测到你未开启系统通知栏权限，将影响部分功能正常使用，是否前往开启？");
-            dialog.setOnSureClick(new TipDialog.SureCalk() {
-                @Override
-                public void OnClick(View view) {
-                    Intent intent = new Intent();
-                    if (Build.VERSION.SDK_INT >= 26) { // android 8.0引导
-                        intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
-                        intent.putExtra("android.provider.extra.APP_PACKAGE", context.getPackageName());
-                    } else if (Build.VERSION.SDK_INT >= 21) {  // android 5.0-7.0
-                        intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
-                        intent.putExtra("app_package", context.getPackageName());
-                        intent.putExtra("app_uid", context.getApplicationInfo().uid);
-                    } else {   // 其他
-                        intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-                        intent.setData(Uri.fromParts("package", context.getPackageName(), null));
-                    }
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+            dialog.setOnSureClick(view -> {
+                Intent intent = new Intent();
+                if (Build.VERSION.SDK_INT >= 26) { // android 8.0引导
+                    intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+                    intent.putExtra("android.provider.extra.APP_PACKAGE", context.getPackageName());
+                } else if (Build.VERSION.SDK_INT >= 21) {  // android 5.0-7.0
+                    intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+                    intent.putExtra("app_package", context.getPackageName());
+                    intent.putExtra("app_uid", context.getApplicationInfo().uid);
+                } else {   // 其他
+                    intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+                    intent.setData(Uri.fromParts("package", context.getPackageName(), null));
                 }
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             });
             dialog.show();
         }
+        return isOpened;
     }
 
     private static long lastClickTime = 0;//上次点击的时间
@@ -174,6 +172,30 @@ public class CommonUtil {
             return numner;
         else
             return numner.substring(numner.length() - 4, numner.length());
+    }
+
+    /**
+     * 将银行卡中间位数设置为*号
+     */
+    public static String getHideBankCardNum(String bankCardNum) {
+        try {
+            if (TextUtils.isEmpty(bankCardNum)) return "未绑定银行卡";
+            int length = bankCardNum.length();
+            if (length < 8) {//如果小于9位直接返回
+                return bankCardNum;
+            } else {
+                String startNum = bankCardNum.substring(0, 4);
+                String endNum = bankCardNum.substring(length - 4, length);
+                String str = "";
+                for (int i = 0; i < bankCardNum.substring(4, bankCardNum.length() - 4).length(); i++) {
+                    str = str + "*";
+                }
+                bankCardNum = startNum + str + endNum;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bankCardNum;
     }
 
     /**
@@ -330,7 +352,7 @@ public class CommonUtil {
         try {
             Intent intent = new Intent(context, getActivityClassName(intentUrl.contains("?") ? intentUrl.split("\\?")[0] : intentUrl));
             if (intentUrl.contains("?")) {//说明带参数
-                for (String kv : intentUrl.split("\\?")[1].split("&")) {//拿到？后面的，然后对&分割处理
+                for (String kv : intentUrl.split("\\?")[1].split("\\&")) {//拿到？后面的，然后对&分割处理
                     String k = kv.split("=")[0];//拿到参数名
                     String v = kv.split("=")[1];//拿到参数
                     intent.putExtra(k, v);
@@ -344,7 +366,7 @@ public class CommonUtil {
 
     public static Class getActivityClassName(String className) {
         try {
-            return Class.forName("com.mcht.redpacket.view.activity." + className);
+            return Class.forName("com.frame.support.view.activity." + className);
         } catch (Exception e) {
             ToastUtil.showShortToast("未找到跳转对象");
             return null;

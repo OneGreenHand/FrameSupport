@@ -41,7 +41,7 @@ public class AppContext extends FrameApplication {
 
 
     /**
-     * 初始化崩溃捕获
+     * 创建APP文件
      */
     @SuppressLint("MissingPermission")
     private void initFolder() {
@@ -62,16 +62,13 @@ public class AppContext extends FrameApplication {
      */
     private void initBugly() {
         Context context = getApplicationContext();
-        // 获取当前包名
-        String packageName = context.getPackageName();
-        // 获取当前进程名
-        String processName = getProcessName(android.os.Process.myPid());
-        // 设置是否为上报进程
-        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
+        String packageName = context.getPackageName();  // 获取当前包名
+        String processName = getProcessName(android.os.Process.myPid());   // 获取当前进程名
+        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);// 设置是否为上报进程
         strategy.setUploadProcess(processName == null || processName.equals(packageName));
         strategy.setAppChannel(ChannelUtils.getChannel());  //设置渠道
-        // 初始化Bugly
-        CrashReport.initCrashReport(context, "f2b3e1f187", AppConfig.DEBUG, strategy);
+        // CrashReport.setUserId("");//设置用户ID(用于定位具体用户)
+        CrashReport.initCrashReport(context, "f2b3e1f187", AppConfig.DEBUG, strategy); // 初始化Bugly
     }
 
     /**
@@ -86,17 +83,15 @@ public class AppContext extends FrameApplication {
         try {
             reader = new BufferedReader(new FileReader("/proc/" + pid + "/cmdline"));
             String processName = reader.readLine();
-            if (!TextUtils.isEmpty(processName)) {
+            if (!TextUtils.isEmpty(processName))
                 processName = processName.trim();
-            }
             return processName;
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         } finally {
             try {
-                if (reader != null) {
+                if (reader != null)
                     reader.close();
-                }
             } catch (IOException exception) {
                 exception.printStackTrace();
             }

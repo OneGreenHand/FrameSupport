@@ -232,8 +232,13 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keepclasseswithmembernames class * {
     @butterknife.* <methods>;
 }
+#AndroidUtilCode
+-keep class com.blankj.utilcode.** { *; }
+-keepclassmembers class com.blankj.utilcode.** { *; }
+-dontwarn com.blankj.utilcode.**
 #immersionbar沉浸式状态栏
--keep class com.gyf.barlibrary.* {*;}
+-keep class com.gyf.immersionbar.* {*;}
+-dontwarn com.gyf.immersionbar.**
 #bugly异常捕获
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
@@ -294,3 +299,6 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -dontwarn org.xmlpull.v1.XmlPullParser
 -dontwarn org.xmlpull.v1.XmlSerializer
 -keep class org.xmlpull.v1.* {*;}
+-keep class com.frame.support.service.** {*;}
+-keep class com.frame.support.receiver.** {*;}
+-keep class com.frame.support.util.** {*;}

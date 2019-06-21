@@ -195,6 +195,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     public void onStickyEventBusCome(EventBean event) {
         if (event != null) {
             receiveStickyEvent(event);
+            EventBus.getDefault().removeStickyEvent(event);//手动移除，不然还是会接收到
         }
     }
 

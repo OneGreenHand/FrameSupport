@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.Utils;
 import com.frame.config.BaseConfig;
+import com.frame.support.AppContext;
 import com.frame.support.R;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
@@ -31,18 +32,15 @@ public class ShareUtils {
     public static void shareWeChatTxt(String content, int type, String transaction) {
         WXTextObject textObject = new WXTextObject();
         textObject.text = content;
-
         WXMediaMessage mediaMessage = new WXMediaMessage();
         mediaMessage.mediaObject = textObject;
         mediaMessage.description = content;
-
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = transaction;
         req.message = mediaMessage;
         req.scene = type == 1 ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
-
         String appId = BaseConfig.WEIXIN_APP_ID;
-        IWXAPI iwxapi = WXAPIFactory.createWXAPI(Utils.getApp(), appId);
+        IWXAPI iwxapi = WXAPIFactory.createWXAPI(AppContext.mContext, appId);
         iwxapi.registerApp(appId);
         iwxapi.sendReq(req);
     }
@@ -71,9 +69,8 @@ public class ShareUtils {
         req.transaction = transaction;
         req.message = mediaMessage;
         req.scene = type == 1 ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
-
         String appId = BaseConfig.WEIXIN_APP_ID;
-        IWXAPI iwxapi = WXAPIFactory.createWXAPI(Utils.getApp(), appId);
+        IWXAPI iwxapi = WXAPIFactory.createWXAPI(AppContext.mContext, appId);
         iwxapi.registerApp(appId);
         iwxapi.sendReq(req);
     }

@@ -23,7 +23,7 @@ import butterknife.OnClick;
 public class OnlineFragment extends BaseRequestFragment<OnlinePt, BaseBean> {
     @BindView(R.id.request_msg)
     TextView requestMsg;
-    TakePhotoDialog dialog;
+    TakePhotoDialog photoDialog;
 
     @Override
     protected void init(Bundle savedInstanceState) {
@@ -39,28 +39,40 @@ public class OnlineFragment extends BaseRequestFragment<OnlinePt, BaseBean> {
         return R.layout.fragment_online;
     }
 
-    private boolean isCrio;
 
-    @OnClick({R.id.post_request})
+    @OnClick({R.id.get_weather, R.id.select_photo, R.id.crop_photo})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.post_request:
-                dialog = new TakePhotoDialog(this, isCrio);
-                dialog.start();
-                //   mPresenter.getCityWeather();
+            case R.id.get_weather:
+                mPresenter.getCityWeather();
+                break;
+            case R.id.select_photo:
+                takePhoto(false);
+                break;
+            case R.id.crop_photo:
+                takePhoto(true);
                 break;
         }
     }
 
+
+    public void takePhoto(boolean isCrop) {
+        if (photoDialog == null)
+            photoDialog = new TakePhotoDialog(this);
+        photoDialog.isCrop(isCrop);
+        photoDialog.takePhoto();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        dialog.onResult(requestCode, resultCode, data, new IPhotoResult() {
+        photoDialog.onPhotoResult(requestCode, resultCode, data, new IPhotoResult() {
             @Override
             public void onResult(File file, String path) {
-                isCrio = true;
-                Log.e("paht1", file.getPath());
-                Log.e("paht2", file.getAbsolutePath());
-                Log.e("paht3", path);
+                Log.e("路径", file.getPath());
+                requestMsg.setText("图片路径(压缩后)："
+                        + "\nPath：" + file.getPath()
+                        + "\nAbsolutePath：" + file.getAbsolutePath()
+                        + "\n返回的path：" + path);
             }
         });
         super.onActivityResult(requestCode, resultCode, data);
@@ -80,6 +92,6 @@ public class OnlineFragment extends BaseRequestFragment<OnlinePt, BaseBean> {
     @Override
     public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
         CityWeatherBean cityWeatherBean = (CityWeatherBean) data;
-        requestMsg.setText("城市：" + cityWeatherBean.data.city + "\n日期：" + cityWeatherBean.data.yesterday.date + "\n最低温度：" + cityWeatherBean.data.yesterday.low + "\n最高温度：" + cityWeatherBean.data.yesterday.high);
+        requestMsg.setText("深圳部分天气信息如下：" + "\n当前城市：" + cityWeatherBean.data.city + "\n今日温度：" + cityWeatherBean.data.wendu + "℃" + "\n感冒情况：" + cityWeatherBean.data.ganmao + "\n\n天气日期(昨日)：" + cityWeatherBean.data.yesterday.date + "\n昨日最低温度：" + cityWeatherBean.data.yesterday.low + "\n昨日最高温度：" + cityWeatherBean.data.yesterday.high);
     }
 }

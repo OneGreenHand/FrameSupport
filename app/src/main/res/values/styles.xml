@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--验证码倒计时-->
+    <declare-styleable name="VerificationCode">
+        <attr name="VcConductColor" format="reference|color" />
+        <attr name="VcEndColor" format="reference|color" />
+        <attr name="VcEndText" format="string" />
+        <attr name="VcCompany" format="string" />
+        <attr name="VcDuration" format="integer" />
+        <attr name="VcIntervalTime" format="integer" />
+    </declare-styleable>
+</resources>

@@ -17,6 +17,7 @@ public class OnlinePt extends BasePresenter<OnlineFragment> {
      */
     public void getCityWeather() {
         createRequestBuilder()
+                .setMsgType("获取天气信息中~")
                 .setLoadStyle(BaseModel.LoadStyle.DIALOG)
                 .create()
                 .get(API.CITY_WEATHER, CityWeatherBean.class);

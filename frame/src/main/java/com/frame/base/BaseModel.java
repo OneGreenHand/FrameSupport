@@ -14,6 +14,7 @@ import com.frame.request.APIException;
 import com.frame.request.HttpRequest;
 import com.frame.util.GsonUtil;
 import com.frame.util.ToastUtil;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -214,6 +215,7 @@ public class BaseModel {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    CrashReport.postCatchedException(e);//手动上报异常到bugly
                     //如果数据异常，判断是否是网络不可用
 //                    Observable.create((ObservableOnSubscribe<Boolean>) emitter ->
 //                            emitter.onNext(NetworkUtils.isAvailableByPing()))

@@ -30,7 +30,7 @@ public class IntentUtil {
     public static void goActivity(Context context, Class<?> activity, Bundle bundle, boolean ifLogin, boolean ifAgainCycle) {
         Intent intent = new Intent();
         //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (ifLogin && !InfoUtil.isLogin()) {
+        if (ifLogin && !UserUtil.isLogin()) {
             if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
                 if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
                     AppManager.getAppManager().finishActivity(activity);
@@ -65,7 +65,7 @@ public class IntentUtil {
     public static void goActivityForResult(Activity context, Class<?> activity, Bundle bundle, int requestCode, boolean ifLogin, boolean ifAgainCycle) {
         Intent intent = new Intent();
         //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (ifLogin && !InfoUtil.isLogin()) {
+        if (ifLogin && !UserUtil.isLogin()) {
             if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
                 if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
                     AppManager.getAppManager().finishActivity(activity);
@@ -100,7 +100,7 @@ public class IntentUtil {
         Intent intent = new Intent();
         Context mContext = FrameApplication.mContext;
         //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (ifLogin && !InfoUtil.isLogin()) {
+        if (ifLogin && !UserUtil.isLogin()) {
             if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
                 if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
                     AppManager.getAppManager().finishActivity(activity);

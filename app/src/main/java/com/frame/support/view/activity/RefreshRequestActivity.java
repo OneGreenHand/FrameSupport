@@ -18,8 +18,6 @@ import butterknife.BindView;
  * @describe 上拉刷新和下拉加载
  */
 public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequestPt, PersonalizedSignatureBean, PersonalizedSignatureBean.DataBean> {
-    @BindView(R.id.frame_recycleView)
-    RecyclerView recycleview;
 
     @Override
     public BaseQuickAdapter<PersonalizedSignatureBean.DataBean, BaseQuickHolder> setAdapter() {
@@ -49,7 +47,6 @@ public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequest
     @Override
     protected void init(Bundle savedInstanceState) {
         initTitleBar("下拉刷新上拉加载示例");
-        initLlManager(recycleview, 1, "#F0F2F5", 10, 0, 0, 0);
     }
 
     @Override

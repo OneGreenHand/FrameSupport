@@ -26,7 +26,7 @@
          <instantiate from="root/src/app_package/adapter/BaseAdapter.java.ftl"
                         to="${escapeXmlAttribute(srcOut)}/view/adapter/${activityClass}Adapter.java" />          
          <instantiate from="root/src/app_package/xml/item_adapter.xml.ftl"
-                        to="${escapeXmlAttribute(resOut)}/layout/item_${activityClass}.xml" />
+                        to="${escapeXmlAttribute(resOut)}/layout/item_${layoutName}.xml" />
     <#elseif frameSupperActivity == "BaseRequest">
        <instantiate from="root/src/app_package/activity/BaseRequestActivity.java.ftl"
 					  to="${escapeXmlAttribute(srcOut)}/view/activity/${activityClass}Activity.java" />

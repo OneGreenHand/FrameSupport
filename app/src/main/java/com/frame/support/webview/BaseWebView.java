@@ -21,10 +21,8 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.frame.view.LoadingDialog;
 
 /**
- * Description:
- * -
- * Author：chasen
- * Date： 2018/11/20 10:59
+ * 基类 WebView
+ * 备注：使用的时候不要设置 android:scrollbars="none"，不然部分机型会显示空白
  */
 public class BaseWebView extends WebView {
 
@@ -41,21 +39,20 @@ public class BaseWebView extends WebView {
         //  getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         if (Build.VERSION.SDK_INT >= 19)
             getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//加载缓存否则网络
-        if (Build.VERSION.SDK_INT >= 19) {
+        if (Build.VERSION.SDK_INT >= 19)
             getSettings().setLoadsImagesAutomatically(true);//图片自动缩放 打开
-        } else {
+        else
             getSettings().setLoadsImagesAutomatically(false);//图片自动缩放 关闭
-        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);//软件解码
         setLayerType(View.LAYER_TYPE_HARDWARE, null);//硬件解码
-//        webSettings.setAllowContentAccess(true);
-//        webSettings.setAllowFileAccessFromFileURLs(true);
-//        webSettings.setAppCacheEnabled(true);
+        //webSettings.setAllowContentAccess(true);
+        //webSettings.setAllowFileAccessFromFileURLs(true);
+        //webSettings.setAppCacheEnabled(true);
         getSettings().setJavaScriptEnabled(true); // 设置支持javascript脚本
-//        webSettings.setPluginState(WebSettings.PluginState.ON);
+        //webSettings.setPluginState(WebSettings.PluginState.ON);
         getSettings().setSupportZoom(true);// 设置可以支持缩放
         getSettings().setBuiltInZoomControls(true);// 设置出现缩放工具 是否使用WebView内置的缩放组件，由浮动在窗口上的缩放控制和手势缩放控制组成，默认false
         getSettings().setDisplayZoomControls(false);//隐藏缩放工具
@@ -120,10 +117,12 @@ public class BaseWebView extends WebView {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                if (loadCompleteClick != null)
-                    loadCompleteClick.loadComplete();
+                if (!getSettings().getLoadsImagesAutomatically())//不设置的话，部分机型不显示图片
+                    getSettings().setLoadsImagesAutomatically(true);
                 if (isShowLoading)
                     dismissProgressDialog();
+                if (loadCompleteClick != null)
+                    loadCompleteClick.loadComplete();
             }
         });
         addJavascriptInterface(new JSInterface(getContext()), "JSInterface");

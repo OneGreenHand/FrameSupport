@@ -56,8 +56,10 @@ public abstract class BaseFragment extends RxFragment implements BaseView {
         rootView = inflater.inflate(getLayoutID(), container, false);
         ButterKnife.bind(this, rootView);//绑定framgent
         initCommon();
-        if (rxPermissions == null)
-            rxPermissions = new RxPermissions(this);
+        if (isUserRxPermissions()) {
+            if (rxPermissions == null)
+                rxPermissions = new RxPermissions(this);
+        }
         if (isRegisterEventBus())
             EventBus.getDefault().register(this);
         if (isUserAria())
@@ -93,6 +95,13 @@ public abstract class BaseFragment extends RxFragment implements BaseView {
      * 是否需要注册EventBus
      */
     public boolean isRegisterEventBus() {
+        return false;
+    }
+
+    /**
+     * 是否需要使用RxPermissions类
+     */
+    protected boolean isUserRxPermissions() {
         return false;
     }
 

@@ -71,8 +71,10 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
         //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
         if (isImmersionBarEnabled())
             initImmersionBar();
-        if (rxPermissions == null)
-            rxPermissions = new RxPermissions(this);
+        if (isUserRxPermissions()) {
+            if (rxPermissions == null)
+                rxPermissions = new RxPermissions(this);
+        }
         if (isRegisterEventBus())
             EventBus.getDefault().register(this);
         if (isUserAria())
@@ -123,6 +125,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      * 是否需要使用下载工具类
      */
     protected boolean isUserAria() {
+        return false;
+    }
+
+    /**
+     * 是否需要使用RxPermissions类
+     */
+    protected boolean isUserRxPermissions() {
         return false;
     }
 

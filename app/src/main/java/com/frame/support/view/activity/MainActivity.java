@@ -16,11 +16,13 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.AppUtils;
 import com.frame.base.activity.BaseActivity;
 import com.frame.support.R;
+import com.frame.support.util.ChannelUtils;
 import com.frame.support.view.fragment.GameFragment;
 import com.frame.support.view.fragment.HomeFragment;
 import com.frame.support.view.fragment.MineFragment;
 import com.frame.support.view.fragment.OnlineFragment;
 import com.frame.util.ToastUtil;
+import com.meituan.android.walle.WalleChannelReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,5 +157,7 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.floating_action)
     public void onViewClicked() {
         ToastUtil.showShortToast("这是一个按钮~");
+        //WalleChannelReader.get(this, "CHANNEL");//使用walle获取到的渠道号
+        // ChannelUtils.getChannel();//这里获取到的信息是build中manifestPlaceholders对应的CHANNEL信息
     }
 }

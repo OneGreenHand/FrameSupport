@@ -28991,37 +28991,38 @@ com.frame.base.activity.-$$Lambda$BaseRequestActivity$dO22ZLMu1OsJhGwRZj8WRZF9s7
     com.frame.base.activity.BaseRequestActivity f$0 -> a
 com.frame.base.activity.BaseActivity -> com.frame.base.activity.BaseActivity:
     43:47:void <init>() -> <init>
-    358:370:void destroy() -> destroy
-    337:339:void dismissLoadingDialog() -> dismissLoadingDialog
-    259:265:boolean dispatchTouchEvent(android.view.MotionEvent) -> dispatchTouchEvent
+    367:379:void destroy() -> destroy
+    346:348:void dismissLoadingDialog() -> dismissLoadingDialog
+    268:274:boolean dispatchTouchEvent(android.view.MotionEvent) -> dispatchTouchEvent
     58:60:void finish() -> finish
-    119:119:int getResInt(int) -> getResInt
-    115:115:java.lang.String getResString(int) -> getResString
-    295:301:void hideKeyboard(android.os.IBinder) -> hideKeyboard
-    100:100:void initCommon() -> initCommon
-    246:255:void initGlManager(android.support.v7.widget.RecyclerView,int,int,java.lang.String,int,int,int,int) -> initGlManager
-    140:141:void initImmersionBar() -> initImmersionBar
-    230:240:void initLlManager(android.support.v7.widget.RecyclerView,int,java.lang.String,int,int,int,int) -> initLlManager
-    222:224:void initTitleBar(java.lang.String) -> initTitleBar
-    133:133:boolean isImmersionBarEnabled() -> isImmersionBarEnabled
-    184:184:boolean isRegisterEventBus() -> isRegisterEventBus
-    272:288:boolean isShouldHideKeyboard(android.view.View,android.view.MotionEvent) -> isShouldHideKeyboard
-    126:126:boolean isUserAria() -> isUserAria
-    87:87:boolean needFinsh() -> needFinsh
-    92:97:void onClick(android.view.View) -> onClick
-    64:81:void onCreate(android.os.Bundle) -> onCreate
-    350:352:void onDestroy() -> onDestroy
-    189:192:void onEventBusCome(com.frame.bean.EventBean) -> onEventBusCome
-    305:308:boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
-    343:346:void onPause() -> onPause
-    196:200:void onStickyEventBusCome(com.frame.bean.EventBean) -> onStickyEventBusCome
-    208:208:void receiveEvent(com.frame.bean.EventBean) -> receiveEvent
-    216:216:void receiveStickyEvent(com.frame.bean.EventBean) -> receiveStickyEvent
-    153:154:void resetImmersionBar() -> resetImmersionBar
-    168:169:void resetImmersionBar(android.view.View) -> resetImmersionBar
-    177:178:void resetImmersionBar(int) -> resetImmersionBar
-    110:112:void setContentView(int) -> setContentView
-    316:330:void showLoadingDialog(java.lang.Object,boolean) -> showLoadingDialog
+    121:121:int getResInt(int) -> getResInt
+    117:117:java.lang.String getResString(int) -> getResString
+    304:310:void hideKeyboard(android.os.IBinder) -> hideKeyboard
+    102:102:void initCommon() -> initCommon
+    255:264:void initGlManager(android.support.v7.widget.RecyclerView,int,int,java.lang.String,int,int,int,int) -> initGlManager
+    149:150:void initImmersionBar() -> initImmersionBar
+    239:249:void initLlManager(android.support.v7.widget.RecyclerView,int,java.lang.String,int,int,int,int) -> initLlManager
+    231:233:void initTitleBar(java.lang.String) -> initTitleBar
+    142:142:boolean isImmersionBarEnabled() -> isImmersionBarEnabled
+    193:193:boolean isRegisterEventBus() -> isRegisterEventBus
+    281:297:boolean isShouldHideKeyboard(android.view.View,android.view.MotionEvent) -> isShouldHideKeyboard
+    128:128:boolean isUserAria() -> isUserAria
+    135:135:boolean isUserRxPermissions() -> isUserRxPermissions
+    89:89:boolean needFinsh() -> needFinsh
+    94:99:void onClick(android.view.View) -> onClick
+    64:83:void onCreate(android.os.Bundle) -> onCreate
+    359:361:void onDestroy() -> onDestroy
+    198:201:void onEventBusCome(com.frame.bean.EventBean) -> onEventBusCome
+    314:317:boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    352:355:void onPause() -> onPause
+    205:209:void onStickyEventBusCome(com.frame.bean.EventBean) -> onStickyEventBusCome
+    217:217:void receiveEvent(com.frame.bean.EventBean) -> receiveEvent
+    225:225:void receiveStickyEvent(com.frame.bean.EventBean) -> receiveStickyEvent
+    162:163:void resetImmersionBar() -> resetImmersionBar
+    177:178:void resetImmersionBar(android.view.View) -> resetImmersionBar
+    186:187:void resetImmersionBar(int) -> resetImmersionBar
+    112:114:void setContentView(int) -> setContentView
+    325:339:void showLoadingDialog(java.lang.Object,boolean) -> showLoadingDialog
     52:54:void startActivity(android.content.Intent) -> startActivity
 com.frame.base.activity.BaseRequestActivity -> com.frame.base.activity.BaseRequestActivity:
     18:18:void <init>() -> <init>
@@ -29080,24 +29081,25 @@ com.frame.base.fragment.-$$Lambda$BaseRequestLazyLoadFragment$DMh-3eIzHL3WYcNFGC
     com.frame.base.fragment.BaseRequestLazyLoadFragment f$0 -> a
 com.frame.base.fragment.BaseFragment -> com.frame.base.fragment.BaseFragment:
     40:41:void <init>() -> <init>
-    160:162:void dismissLoadingDialog() -> dismissLoadingDialog
-    89:89:int getResInt(int) -> getResInt
-    85:85:java.lang.String getResString(int) -> getResString
-    69:69:void initCommon() -> initCommon
-    183:192:void initGlManager(android.support.v7.widget.RecyclerView,int,int,java.lang.String,int,int,int,int) -> initGlManager
-    168:177:void initLlManager(android.support.v7.widget.RecyclerView,int,java.lang.String,int,int,int,int) -> initLlManager
-    96:96:boolean isRegisterEventBus() -> isRegisterEventBus
-    103:103:boolean isUserAria() -> isUserAria
-    73:76:void onActivityCreated(android.os.Bundle) -> onActivityCreated
+    169:171:void dismissLoadingDialog() -> dismissLoadingDialog
+    91:91:int getResInt(int) -> getResInt
+    87:87:java.lang.String getResString(int) -> getResString
+    71:71:void initCommon() -> initCommon
+    192:201:void initGlManager(android.support.v7.widget.RecyclerView,int,int,java.lang.String,int,int,int,int) -> initGlManager
+    177:186:void initLlManager(android.support.v7.widget.RecyclerView,int,java.lang.String,int,int,int,int) -> initLlManager
+    98:98:boolean isRegisterEventBus() -> isRegisterEventBus
+    112:112:boolean isUserAria() -> isUserAria
+    105:105:boolean isUserRxPermissions() -> isUserRxPermissions
+    75:78:void onActivityCreated(android.os.Bundle) -> onActivityCreated
     45:46:void onAttach(android.app.Activity) -> onAttach
     50:51:void onCreate(android.os.Bundle) -> onCreate
-    55:65:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    196:203:void onDestroy() -> onDestroy
-    108:110:void onEventBusCome(com.frame.bean.EventBean) -> onEventBusCome
-    114:117:void onStickyEventBusCome(com.frame.bean.EventBean) -> onStickyEventBusCome
-    125:125:void receiveEvent(com.frame.bean.EventBean) -> receiveEvent
-    133:133:void receiveStickyEvent(com.frame.bean.EventBean) -> receiveStickyEvent
-    140:154:void showLoadingDialog(java.lang.Object,boolean) -> showLoadingDialog
+    55:67:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    205:212:void onDestroy() -> onDestroy
+    117:119:void onEventBusCome(com.frame.bean.EventBean) -> onEventBusCome
+    123:126:void onStickyEventBusCome(com.frame.bean.EventBean) -> onStickyEventBusCome
+    134:134:void receiveEvent(com.frame.bean.EventBean) -> receiveEvent
+    142:142:void receiveStickyEvent(com.frame.bean.EventBean) -> receiveStickyEvent
+    149:163:void showLoadingDialog(java.lang.Object,boolean) -> showLoadingDialog
 com.frame.base.fragment.BaseLazyLoadFragment -> com.frame.base.fragment.BaseLazyLoadFragment:
     18:19:void <init>() -> <init>
     44:55:void isCanLoadData() -> isCanLoadData
@@ -29292,10 +29294,10 @@ com.frame.request.RetrofitWrapper -> com.frame.c.d:
     49:55:com.frame.request.RetrofitWrapper getInstance() -> a
     59:59:java.lang.Object createApi(java.lang.Class) -> a
 com.frame.support.AppContext -> com.frame.support.AppContext:
-    21:21:void <init>() -> <init>
-    49:58:void initFolder() -> a
-    36:40:void attachBaseContext(android.content.Context) -> attachBaseContext
-    25:29:void onCreate() -> onCreate
+    22:22:void <init>() -> <init>
+    49:57:void initFolder() -> a
+    37:41:void attachBaseContext(android.content.Context) -> attachBaseContext
+    26:30:void onCreate() -> onCreate
 com.frame.support.MainFileProvider -> com.frame.support.MainFileProvider:
     11:11:void <init>() -> <init>
 com.frame.support.R$styleable -> com.frame.support.a:
@@ -29351,15 +29353,15 @@ com.frame.support.service.DownloadService -> com.frame.support.service.DownloadS
 com.frame.support.service.DownloadService$$DownloadListenerProxy -> com.frame.support.service.DownloadService$$DownloadListenerProxy:
     16:17:void <init>() -> <init>
     13:13:void onTaskCancel(com.arialyy.aria.core.inf.ITask) -> onTaskCancel
-    21:22:void onTaskCancel(com.arialyy.aria.core.download.DownloadTask) -> onTaskCancel
+    41:42:void onTaskCancel(com.arialyy.aria.core.download.DownloadTask) -> onTaskCancel
     13:13:void onTaskComplete(com.arialyy.aria.core.inf.ITask) -> onTaskComplete
-    41:42:void onTaskComplete(com.arialyy.aria.core.download.DownloadTask) -> onTaskComplete
+    26:27:void onTaskComplete(com.arialyy.aria.core.download.DownloadTask) -> onTaskComplete
     13:13:void onTaskFail(com.arialyy.aria.core.inf.ITask,java.lang.Exception) -> onTaskFail
-    36:37:void onTaskFail(com.arialyy.aria.core.download.DownloadTask,java.lang.Exception) -> onTaskFail
+    31:32:void onTaskFail(com.arialyy.aria.core.download.DownloadTask,java.lang.Exception) -> onTaskFail
     13:13:void onTaskRunning(com.arialyy.aria.core.inf.ITask) -> onTaskRunning
-    31:32:void onTaskRunning(com.arialyy.aria.core.download.DownloadTask) -> onTaskRunning
+    21:22:void onTaskRunning(com.arialyy.aria.core.download.DownloadTask) -> onTaskRunning
     13:13:void onTaskStart(com.arialyy.aria.core.inf.ITask) -> onTaskStart
-    26:27:void onTaskStart(com.arialyy.aria.core.download.DownloadTask) -> onTaskStart
+    36:37:void onTaskStart(com.arialyy.aria.core.download.DownloadTask) -> onTaskStart
     46:47:void setListener(java.lang.Object) -> setListener
 com.frame.support.service.DownloadService$1 -> com.frame.support.service.DownloadService$1:
     71:71:void <init>(com.frame.support.service.DownloadService) -> <init>
@@ -29613,31 +29615,31 @@ com.frame.support.webview.BaseWebView -> com.frame.support.webview.BaseWebView:
     boolean isShowLoading -> e
     android.webkit.ValueCallback filePathCallback -> b
     int FILECHOOSER_RESULTCODE -> a
-    32:32:void <clinit>() -> <clinit>
-    40:131:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
-    29:29:android.webkit.ValueCallback access$002(com.frame.support.webview.BaseWebView,android.webkit.ValueCallback) -> a
-    29:29:boolean access$100(com.frame.support.webview.BaseWebView) -> a
-    144:145:void isShowLoading(boolean) -> a
-    151:166:void showProgressDialog(java.lang.Object,boolean) -> a
-    172:174:void dismissProgressDialog() -> a
-    29:29:com.frame.support.webview.BaseWebView$LoadCompleteClick access$200(com.frame.support.webview.BaseWebView) -> b
-    135:136:void destroy() -> destroy
-    204:216:void onScrollChanged(int,int,int,int) -> onScrollChanged
-    219:220:void setOnScrollChangeListener(com.frame.support.webview.BaseWebView$OnScrollChangeListener) -> setOnScrollChangeListener
+    30:30:void <clinit>() -> <clinit>
+    38:130:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
+    27:27:android.webkit.ValueCallback access$002(com.frame.support.webview.BaseWebView,android.webkit.ValueCallback) -> a
+    27:27:boolean access$100(com.frame.support.webview.BaseWebView) -> a
+    143:144:void isShowLoading(boolean) -> a
+    150:165:void showProgressDialog(java.lang.Object,boolean) -> a
+    171:173:void dismissProgressDialog() -> a
+    27:27:com.frame.support.webview.BaseWebView$LoadCompleteClick access$200(com.frame.support.webview.BaseWebView) -> b
+    134:135:void destroy() -> destroy
+    203:215:void onScrollChanged(int,int,int,int) -> onScrollChanged
+    218:219:void setOnScrollChangeListener(com.frame.support.webview.BaseWebView$OnScrollChangeListener) -> setOnScrollChangeListener
 com.frame.support.webview.BaseWebView$1 -> com.frame.support.webview.a:
     com.frame.support.webview.BaseWebView this$0 -> a
-    73:73:void <init>(com.frame.support.webview.BaseWebView) -> <init>
-    76:84:boolean onShowFileChooser(android.webkit.WebView,android.webkit.ValueCallback,android.webkit.WebChromeClient$FileChooserParams) -> onShowFileChooser
+    70:70:void <init>(com.frame.support.webview.BaseWebView) -> <init>
+    73:81:boolean onShowFileChooser(android.webkit.WebView,android.webkit.ValueCallback,android.webkit.WebChromeClient$FileChooserParams) -> onShowFileChooser
 com.frame.support.webview.BaseWebView$2 -> com.frame.support.webview.b:
     com.frame.support.webview.BaseWebView this$0 -> a
-    87:87:void <init>(com.frame.support.webview.BaseWebView) -> <init>
-    90:94:void onDownloadStart(java.lang.String,java.lang.String,java.lang.String,java.lang.String,long) -> onDownloadStart
+    84:84:void <init>(com.frame.support.webview.BaseWebView) -> <init>
+    87:91:void onDownloadStart(java.lang.String,java.lang.String,java.lang.String,java.lang.String,long) -> onDownloadStart
 com.frame.support.webview.BaseWebView$3 -> com.frame.support.webview.c:
     com.frame.support.webview.BaseWebView this$0 -> a
-    96:96:void <init>(com.frame.support.webview.BaseWebView) -> <init>
-    122:127:void onPageFinished(android.webkit.WebView,java.lang.String) -> onPageFinished
-    115:118:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap) -> onPageStarted
-    99:101:boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
+    93:93:void <init>(com.frame.support.webview.BaseWebView) -> <init>
+    119:126:void onPageFinished(android.webkit.WebView,java.lang.String) -> onPageFinished
+    112:115:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap) -> onPageStarted
+    96:98:boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
 com.frame.support.webview.BaseWebView$LoadCompleteClick -> com.frame.support.webview.BaseWebView$a:
     void loadComplete() -> a
 com.frame.support.webview.BaseWebView$OnScrollChangeListener -> com.frame.support.webview.BaseWebView$b:

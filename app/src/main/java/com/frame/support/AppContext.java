@@ -10,6 +10,7 @@ import com.frame.FrameApplication;
 import com.frame.config.AppConfig;
 import com.frame.config.BaseConfig;
 import com.frame.support.util.ChannelUtils;
+import com.tencent.bugly.Bugly;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.BufferedReader;
@@ -45,13 +46,11 @@ public class AppContext extends FrameApplication {
      */
     @SuppressLint("MissingPermission")
     private void initFolder() {
-        // 创建app目录
-        File dir = new File(BaseConfig.APP_FOLDER);
+        File dir = new File(BaseConfig.APP_FOLDER);  // 创建app目录
         if (!dir.exists()) {
             dir.mkdir();
         }
-        //创建file目录
-        File fileDir = new File(BaseConfig.FILE_FOLDER);
+        File fileDir = new File(BaseConfig.FILE_FOLDER);  //创建file目录
         if (!fileDir.exists()) {
             fileDir.mkdir();
         }
@@ -68,7 +67,8 @@ public class AppContext extends FrameApplication {
         strategy.setUploadProcess(processName == null || processName.equals(packageName));
         strategy.setAppChannel(ChannelUtils.getChannel());  //设置渠道
         // CrashReport.setUserId("");//设置用户ID(用于定位具体用户)
-        CrashReport.initCrashReport(context, "f2b3e1f187", AppConfig.DEBUG, strategy); // 初始化Bugly
+        //  Bugly.init(context, "8706956f68", AppConfig.DEBUG, strategy);//使用热更新或者升级功能时使用这个
+        CrashReport.initCrashReport(context, "8706956f68", AppConfig.DEBUG, strategy); // 仅使用异常捕获功能时使用这个
     }
 
     /**

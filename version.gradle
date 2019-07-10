@@ -20,7 +20,7 @@ ext {
             rxjava2                  : "2.2.4",
             rxandroid                : "2.1.0",
             okhttp3                  : "3.10.0",
-            utilcode                 : "1.24.4",
+            utilcode                 : "1.24.7",
             autosize                 : "1.1.2",
             retrofit_url             : "1.4.0",
             eventbus                 : "3.1.1",
@@ -37,6 +37,7 @@ ext {
             rxlifecycle              : "2.2.2",
             luban                    : "1.1.8",
             aria                     : "3.6.4",
+            walle                    : "1.1.6",
     ]
 
     // 依赖具体版本
@@ -95,9 +96,10 @@ ext {
             immersionbar : "com.gyf.immersionbar:immersionbar:${depVersion.immersionbar}",
             //retrofit绑定生命周期
             rxlifecycle  : "com.trello.rxlifecycle2:rxlifecycle-components:${depVersion.rxlifecycle}",
+            //walle多渠道打包
+            walle        : "com.meituan.android.walle:library:${depVersion.walle}",
             //微信支付
             wxpay        : "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+",
-
             //luban图片压缩
             luban        : "top.zibin:Luban:${depVersion.luban}",
             eventbus     : "org.greenrobot:eventbus:${depVersion.eventbus}",

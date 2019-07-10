@@ -1,12 +1,9 @@
 apply plugin: 'com.android.application'
-//apply from: 'tinker-support.gradle'(热更新相关)
+//apply from: 'tinker-support.gradle'//(热更新相关)
+apply plugin: 'walle'//walle多渠道打包
 def keystorePropertiesFile = rootProject.file("keystore.properties")//打包文件配置
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
-def releaseTime() {//设置打包时间
-    return new Date().format("MMddhh", TimeZone.getTimeZone("UTC"))
-}
 
 android {
     def version = rootProject.ext.versions
@@ -22,14 +19,11 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "armeabi", "x86_64", "mips", 'mips64'
         }
-        //解决AndroidStudio 3.0的问题
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath = true
-            }
+        javaCompileOptions {   //解决AndroidStudio 3.0的问题
+            annotationProcessorOptions { includeCompileClasspath = true }
         }
-        //版本名后面添加一句话，意思就是flavor dimension 它的维度就是该版本号，这样维度就是都是统一的了
-        flavorDimensions "versionCode"
+        multiDexKeepProguard file('tinker_multidexkeep.pro')
+        manifestPlaceholders = [CHANNEL: "AA000",]//可用于三方sdk使用，例如极光推送的参数，可在AndroidManifest中使用，最后获取到这个参数
     }
     signingConfigs {
         release {
@@ -45,33 +39,13 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
-    productFlavors {//渠道名字
-        develop {
-            manifestPlaceholders = [CHANNEL: "AA000",//AndroidManifest也有这个字段
-            ]
-        }
-        tencent {
-            manifestPlaceholders = [CHANNEL: "AA001",
-            ]
-        }
-        xiaomi {
-            manifestPlaceholders = [CHANNEL: "AA002",
-            ]
-        }
-        huawei {
-            manifestPlaceholders = [CHANNEL: "AA003",
-            ]
-        }
-        meizu {
-            manifestPlaceholders = [CHANNEL: "AA004",
-            ]
-        }
-    }
-    android.applicationVariants.all { variant ->//修改打包后的名字
-        variant.outputs.all {
-            outputFileName = "apk_" + productFlavors[0].name + "_v" + defaultConfig.versionName + "-${releaseTime()}.apk"
-            //    outputFileName = "apk_" + productFlavors[0].name + "_" + buildType.name + "_v" + defaultConfig.versionName + "-${releaseTime()}.apk"
-        }
+    walle {
+        // 渠道&额外信息配置文件，与channelFile互斥
+        configFile = new File("${project.getProjectDir()}/config.json")
+        // 指定渠道包的输出路径
+        apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+        // 定制渠道包的APK的文件名称
+        apkFileNameFormat = '${appName}-${channel}-${buildType}-v${versionName}-${buildTime}.apk';
     }
     buildTypes {
         release {
@@ -95,12 +69,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     lintOptions {
-        //  true--所有正式版构建执行规则生成崩溃的lint检查，如果有崩溃问题将停止构建
-        checkReleaseBuilds false
-        // true--错误发生后停止gradle构建
-        abortOnError false
-        // 关闭指定问题检查
-        disable 'MissingTranslation'
+        checkReleaseBuilds false //true--所有正式版构建执行规则生成崩溃的lint检查，如果有崩溃问题将停止构建
+        abortOnError false  //true--错误发生后停止gradle构建
+        disable 'MissingTranslation' //关闭指定问题检查
     }
     sourceSets {
         main {
@@ -111,7 +82,7 @@ android {
     dexOptions {//解决编译内存溢出问题
         dexInProcess true
         preDexLibraries true
-        javaMaxHeapSize "8g"//越大越好
+        javaMaxHeapSize "8g"
     }
 }
 
@@ -119,6 +90,8 @@ dependencies {
     def dependencies = rootProject.ext.deps
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation fileTree(include: ['*.aar'], dir: 'libs')
+    //walle多渠道打包
+    implementation dependencies.walle
     annotationProcessor dependencies.glide.compiler
     annotationProcessor dependencies.butterknife.compiler
     //下载上传工具类

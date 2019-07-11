@@ -1,27 +1,18 @@
 package com.frame.util;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.frame.R;
 
 import java.io.File;
 import java.math.BigDecimal;
-
-import jp.wasabeef.glide.transformations.ColorFilterTransformation;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
-import jp.wasabeef.glide.transformations.CropSquareTransformation;
-import jp.wasabeef.glide.transformations.MaskTransformation;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * 图片处理类
@@ -40,71 +31,71 @@ public class GlideImageUtil {
     }
 
 
-    /**
-     * 将图片显示在指定的图片形状中
-     *
-     * @param drawable 要显示的图片形状
-     */
-    public static void showMaskImage(final Context context, String url, int drawable, ImageView view) {
-        Glide.with(context)
-                .load(url)
-                .apply(RequestOptions.bitmapTransform(new MultiTransformation<Bitmap>(new CenterCrop(), new MaskTransformation(drawable)))
-                        .placeholder(R.drawable.img_showing)
-                        .error(R.drawable.img_show_error))
-                .into(view);
-    }
-
-    /**
-     * 圆形、圆圈
-     */
-    public static void showCircleImage(final Context context, String url, ImageView view) {
-        Glide.with(context)
-                .load(url)
-                .apply(RequestOptions.bitmapTransform(new CropCircleTransformation())
-                        .placeholder(R.drawable.img_showing)
-                        .error(R.drawable.img_show_error))
-                .into(view);
-    }
-
-    /**
-     * 圆角
-     *
-     * @param radius     圆角大小
-     * @param cornerType 显示的方式，例如 RoundedCornersTransformation.CornerType.ALL
-     */
-    public static void showRoundedCornersImage(final Context context, String url, ImageView view, int radius, RoundedCornersTransformation.CornerType cornerType) {
-        Glide.with(context)
-                .load(url)
-                .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(radius, 0,
-                        cornerType))
-                        .placeholder(R.drawable.img_showing)
-                        .error(R.drawable.img_show_error))
-                .into(view);
-    }
-
-    /**
-     * 方形
-     */
-    public static void showSquareImage(final Context context, String url, ImageView view) {
-        Glide.with(context)
-                .load(url)
-                .apply(RequestOptions.bitmapTransform(new CropSquareTransformation())
-                        .placeholder(R.drawable.img_showing)
-                        .error(R.drawable.img_show_error))
-                .into(view);
-    }
-
-    /**
-     * 加遮罩颜色
-     */
-    public static void showGrayImage(final Context context, String url, int color, ImageView view) {
-        Glide.with(context)
-                .load(url)
-                .apply(RequestOptions.bitmapTransform(new ColorFilterTransformation(color))
-                        .placeholder(R.drawable.img_showing)
-                        .error(R.drawable.img_show_error))
-                .into(view);
-    }
+//    /**
+//     * 将图片显示在指定的图片形状中
+//     *
+//     * @param drawable 要显示的图片形状
+//     */
+//    public static void showMaskImage(final Context context, String url, int drawable, ImageView view) {
+//        Glide.with(context)
+//                .load(url)
+//                .apply(RequestOptions.bitmapTransform(new MultiTransformation<Bitmap>(new CenterCrop(), new MaskTransformation(drawable)))
+//                        .placeholder(R.drawable.img_showing)
+//                        .error(R.drawable.img_show_error))
+//                .into(view);
+//    }
+//
+//    /**
+//     * 圆形、圆圈
+//     */
+//    public static void showCircleImage(final Context context, String url, ImageView view) {
+//        Glide.with(context)
+//                .load(url)
+//                .apply(RequestOptions.bitmapTransform(new CropCircleTransformation())
+//                        .placeholder(R.drawable.img_showing)
+//                        .error(R.drawable.img_show_error))
+//                .into(view);
+//    }
+//
+//    /**
+//     * 圆角
+//     *
+//     * @param radius     圆角大小
+//     * @param cornerType 显示的方式，例如 RoundedCornersTransformation.CornerType.ALL
+//     */
+//    public static void showRoundedCornersImage(final Context context, String url, ImageView view, int radius, RoundedCornersTransformation.CornerType cornerType) {
+//        Glide.with(context)
+//                .load(url)
+//                .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(radius, 0,
+//                        cornerType))
+//                        .placeholder(R.drawable.img_showing)
+//                        .error(R.drawable.img_show_error))
+//                .into(view);
+//    }
+//
+//    /**
+//     * 方形
+//     */
+//    public static void showSquareImage(final Context context, String url, ImageView view) {
+//        Glide.with(context)
+//                .load(url)
+//                .apply(RequestOptions.bitmapTransform(new CropSquareTransformation())
+//                        .placeholder(R.drawable.img_showing)
+//                        .error(R.drawable.img_show_error))
+//                .into(view);
+//    }
+//
+//    /**
+//     * 加遮罩颜色
+//     */
+//    public static void showGrayImage(final Context context, String url, int color, ImageView view) {
+//        Glide.with(context)
+//                .load(url)
+//                .apply(RequestOptions.bitmapTransform(new ColorFilterTransformation(color))
+//                        .placeholder(R.drawable.img_showing)
+//                        .error(R.drawable.img_show_error))
+//                .into(view);
+//    }
 
     /**
      * 加载GIF图片

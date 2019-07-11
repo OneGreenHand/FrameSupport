@@ -12,15 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.MultiTransformation;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.frame.R;
 import com.frame.adapter.BaseViewHolder;
 import com.frame.widget.RecycleViewDivider;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class BaseQuickHolder extends BaseViewHolder {
 
@@ -70,22 +66,22 @@ public class BaseQuickHolder extends BaseViewHolder {
         return this;
     }
 
-    /**
-     * 设置圆角图片
-     */
-    public BaseQuickHolder setFilletImageByUrl(int viewId, String url, int radius, int margin, RoundedCornersTransformation.CornerType cornerType, Context mContext) {
-        ImageView iv = getView(viewId);
-        Glide.with(mContext)
-                .load(url)//加载地址
-                .apply(RequestOptions.bitmapTransform(new MultiTransformation(
-                        new CenterCrop(),
-                        new RoundedCornersTransformation(radius, margin, cornerType))).placeholder(R.drawable.img_showing).error(R.drawable.img_show_error))
-                .into(iv);
-        return this;
-    }
+//    /**
+//     * 设置圆角图片(并不兼容)
+//     */
+//    public BaseQuickHolder setFilletImageByUrl(int viewId, String url, int radius, int margin, RoundedCornersTransformation.CornerType cornerType, Context mContext) {
+//        ImageView iv = getView(viewId);
+//        Glide.with(mContext)
+//                .load(url)//加载地址
+//                .apply(RequestOptions.bitmapTransform(new MultiTransformation(
+//                        new CenterCrop(),
+//                        new RoundedCornersTransformation(radius, margin, cornerType))).placeholder(R.drawable.img_showing).error(R.drawable.img_show_error))
+//                .into(iv);
+//        return this;
+//    }
 
     /**
-     * 设置圆形图片
+     * 设置圆形图片(并不兼容)
      */
     public BaseQuickHolder setRoundImageByUrl(int viewId, String url, final Context mContext) {
         final ImageView iv = getView(viewId);

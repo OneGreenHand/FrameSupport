@@ -113,14 +113,17 @@ void *(**On*Event);
     <methods>;
 }
 #---------------------------------业务组件实体类---------------------------------
-#实体类不混淆
+#主体部分
 -keep class com.frame.support.bean.** {*;}
-#自定义控件不混淆
+-keep class com.frame.support.service.** {*;}
+-keep class com.frame.support.receiver.** {*;}
+-keep class com.frame.support.util.** {*;}
 -keep class com.frame.support.widget.** {*;}
 #Frame框架部分
 -keep class com.frame.bean.** {*;}
 -keep class com.frame.adapter.** {*;}
 -keep class com.frame.widget.** {*;}
+-keep class com.frame.widget.RoundedImageView.** {*;}
 -keep class com.frame.base.** {*;}
 -keep class com.frame.adapter.** {
 *;
@@ -189,9 +192,6 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
 -keep class com.qiancheng.carsmangersystem.**{*;}
-#ProgressManager进度监听
--keep class me.jessyan.progressmanager.** { *; }
--keep interface me.jessyan.progressmanager.** { *; }
 # RxPermissions权限库
 -keep class com.tbruyelle.rxpermissions2.** { *; }
 -keep interface com.tbruyelle.rxpermissions2.** { *; }
@@ -299,6 +299,3 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -dontwarn org.xmlpull.v1.XmlPullParser
 -dontwarn org.xmlpull.v1.XmlSerializer
 -keep class org.xmlpull.v1.* {*;}
--keep class com.frame.support.service.** {*;}
--keep class com.frame.support.receiver.** {*;}
--keep class com.frame.support.util.** {*;}

@@ -8,8 +8,7 @@ import java.io.File;
 
 /**
  * date：2018/8/15 19:07
- * author: wenxy
- * description: 打开第三方地图工具类
+ * description: 跳转三方地图工具类
  */
 public class OpenMapUtil {
 
@@ -55,6 +54,7 @@ public class OpenMapUtil {
     /**
      * 打开腾讯地图
      * 参考http://lbs.qq.com/uri_v1/guide-mobile-navAndRoute.html
+     *
      * @param context
      * @param type      路线规划方式参数：bus 或 drive 或 walk 或 bike
      * @param from      起点名称：鼓楼

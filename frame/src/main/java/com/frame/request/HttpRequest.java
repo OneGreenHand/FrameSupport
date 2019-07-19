@@ -21,12 +21,8 @@ import okhttp3.ResponseBody;
 
 /**
  * date：2018/4/21 16:09
- * author: wenxy
- * description:
  */
-
 public class HttpRequest {
-
     private APIService apiService = null;
 
     public HttpRequest() {

@@ -8,7 +8,6 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * date：2018/7/5 18:14
- * author: wenxy
  * description: 用于取消网络请求(rxlifecycle已替代)
  */
 public class RxAPIManager {

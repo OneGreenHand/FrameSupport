@@ -19,7 +19,6 @@ import retrofit2.http.Url;
 
 /**
  * date：2018/4/2 13:29
- * author: wenxy
  * description: API接口
  */
 public interface APIService {

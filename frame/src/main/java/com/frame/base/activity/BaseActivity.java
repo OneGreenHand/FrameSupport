@@ -67,14 +67,14 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
         setContentView(getLayoutID());
         ButterKnife.bind(this);
         initCommon();
-        init(savedInstanceState);//初始化
-        //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
-        if (isImmersionBarEnabled())
-            initImmersionBar();
         if (isUserRxPermissions()) {
             if (rxPermissions == null)
                 rxPermissions = new RxPermissions(this);
         }
+        init(savedInstanceState);//初始化
+        //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
+        if (isImmersionBarEnabled())
+            initImmersionBar();
         if (isRegisterEventBus())
             EventBus.getDefault().register(this);
         if (isUserAria())

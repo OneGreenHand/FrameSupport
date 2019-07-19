@@ -5,12 +5,12 @@ import android.app.ActivityManager;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Stack;
 
 /**
- * @author 罗道华
  * @date 2016年07月28日09:45:00
- * @description: 应用程序Activity管理类：用于Activity管理和应用程序退出
+ * @description: Activity管理类
  */
 public class AppManager {
 
@@ -121,6 +121,20 @@ public class AppManager {
                 return true;
         }
         return false;
+    }
+
+    /**
+     * 清空除某个类外的所有类(一般用于保留mainactivity)
+     */
+    public void clearAllActivityExceptMain(Class<?> cls) {
+        Iterator<Activity> iterator = activityStack.iterator();
+        while (iterator.hasNext()) {
+            Activity activity = iterator.next();
+            if (!activity.getClass().equals(cls)) {
+                iterator.remove();
+                activity.finish();
+            }
+        }
     }
 
     /**

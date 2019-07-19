@@ -14,8 +14,7 @@ import java.util.StringTokenizer;
 
 /**
  * date：2018/5/21 16:09
- * author: wenxy
- * description:
+ * 价格相关转换工具
  */
 public class PriceUtil {
 

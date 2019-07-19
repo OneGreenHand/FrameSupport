@@ -1,8 +1,6 @@
 package com.frame.base;
 
 /**
- * @author lucas
- * @package com.goume.heyding.base.mvp
  * @date 2018/7/6
  * @dessribe 通用P层
  */

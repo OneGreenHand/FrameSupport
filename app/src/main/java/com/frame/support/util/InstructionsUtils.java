@@ -16,12 +16,9 @@ import com.frame.util.ToastUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 /**
- * @author luo
- * @package com.frame.support.util
- * @fileName IntentUtil
  * @data on 2019/5/30 18:56
  */
-public class IntentUtils {
+public class InstructionsUtils {
 
     /**
      * @param type     0、跳转本地 1、打开外部浏览器 2、通知栏下载APK 3、打开指定QQ
@@ -34,9 +31,9 @@ public class IntentUtils {
         switch (type) {
             case 0:
                 if (context == null)
-                    goLocationActivity(activity, url);
+                    CommonUtil.goLocationActivity(activity, url);
                 else
-                    goLocationActivity(context, url);
+                    CommonUtil.goLocationActivity(context, url);
                 break;
             case 1:
                 if (context == null)
@@ -60,10 +57,7 @@ public class IntentUtils {
      * 用service下载apk
      *
      * @param context        非activity中下载时需要传，否者就传null，因为涉及到了检查权限的不同
-     * @param activity
-     * @param title
-     * @param url
-     * @param isShowProgress 是否通知栏显示下载进度(必须要有通知栏权限)，默认为true
+     * @param isShowProgress 是否通知栏显示下载进度(必须要有通知栏权限,不然不会显示进度)，默认为true
      */
     @SuppressLint("CheckResult")
     public static void downloadApk(Context context, Activity activity, String title, String url, boolean isShowProgress) {
@@ -115,35 +109,4 @@ public class IntentUtils {
         return permission_readStorage && permission_writeStorage;
     }
 
-    /**
-     * 隐式跳转本地的activity(主要是处理服务器返回一个string，例如：TaskDetailActivity?TASK_ID=1&b=2)
-     */
-    private static void goLocationActivity(Context context, String intentUrl) {
-        if (TextUtils.isEmpty(intentUrl)) {
-            ToastUtil.showShortToast("未找到跳转对象");
-            return;
-        }
-        try {
-            Intent intent = new Intent(context, getActivityClassName(intentUrl.contains("?") ? intentUrl.split("\\?")[0] : intentUrl));
-            if (intentUrl.contains("?")) {//说明带参数
-                for (String kv : intentUrl.split("\\?")[1].split("\\&")) {//拿到？后面的，然后对&分割处理
-                    String k = kv.split("=")[0];//拿到参数名
-                    String v = kv.split("=")[1];//拿到参数
-                    intent.putExtra(k, v);
-                }
-            }
-            context.startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static Class getActivityClassName(String className) {
-        try {
-            return Class.forName("com.frame.support.view.activity." + className);
-        } catch (Exception e) {
-            ToastUtil.showShortToast("未找到跳转对象");
-            return null;
-        }
-    }
 }

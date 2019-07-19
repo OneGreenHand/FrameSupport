@@ -6,9 +6,6 @@ import android.view.View;
 import android.widget.PopupWindow;
 
 /**
- * @author OneGreenHand
- * @package com.goudiw.www.goudiwapp.widget
- * @fileName Solve7PopupWindow
  * @data on 2018/9/25 17:00
  * @describe 解决部分手机showAsDropDown位置不对问题
  */

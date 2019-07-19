@@ -8,7 +8,6 @@ import java.io.File;
 
 /**
  * date：2018/7/27 11:41
- * author: wenxy
  * description: 基础配置类
  */
 public class BaseConfig {

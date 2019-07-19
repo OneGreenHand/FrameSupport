@@ -8,8 +8,6 @@ import android.view.View;
 
 
 /**
- * @author lucas
- * @package com.goume.heyding.warpper
  * @date 2018/7/9
  * 主要用于dialog统一点击事件
  */

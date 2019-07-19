@@ -6,9 +6,6 @@ import android.text.TextUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 
 /**
- * @author OneGreenHand
- * @package com.ogh.module.common.util
- * @fileName UserUtils
  * @data on 2019/2/28 15:35
  * @describe 用户操作工具类
  */

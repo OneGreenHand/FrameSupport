@@ -8,7 +8,7 @@ import com.frame.FrameApplication;
 public class ToastUtil {
 
     /**
-     * 系统短吐司(因为用别人的有时候会不出现toash)
+     * 系统短吐司(别人的有时候会不出现吐司)
      */
     public static void showShortToast(String content) {
         if (TextUtils.isEmpty(content))

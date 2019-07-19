@@ -33,9 +33,6 @@ import com.frame.R;
 
 
 /**
- * @author OneGreenHand
- * @package com.goume.heyding.widget
- * @fileName CircleImageView
  * @data on 2018/7/28 16:23
  * @describe 圆形头像 https://github.com/hdodenhof/CircleImageView
  */

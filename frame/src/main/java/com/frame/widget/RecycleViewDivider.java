@@ -13,9 +13,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 /**
- * @author luo
- * @package com.goudiw.www.goudiwapp.widget
- * @fileName RecycleViewDivider
  * @data on 2018/5/12 15:58
  * @describe recycleview添加Divider
  */

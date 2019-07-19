@@ -17,9 +17,6 @@ import okhttp3.Response;
 import okio.Buffer;
 
 /**
- * @author OneGreenHand
- * @package com.frame.request
- * @fileName ParamInterceptor
  * @data on 2018/8/18 10:40
  * @describe 添加公共请求参数(拦截器)
  */

@@ -68,8 +68,10 @@ dependencies {
     annotationProcessor dependencies.butterknife.compiler
     //权限管理库
     api dependencies.rxpermissions
-    //沉浸式状态栏
+    //沉浸式状态栏(activity)
     api dependencies.immersionbar
+    //沉浸式状态栏(fragment)
+    api dependencies.immersionbar_components
     //bugly升级库
     //  api dependencies.bugly.crashreport_upgrade
     // bugly 热更新tinker插件库

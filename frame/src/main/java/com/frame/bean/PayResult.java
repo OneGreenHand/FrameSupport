@@ -5,9 +5,6 @@ import android.text.TextUtils;
 import java.util.Map;
 
 /**
- * @author OneGreenHand
- * @package com.frame.bean
- * @fileName PayResult
  * @data on 2019/3/15 9:25
  * @describe 支付宝支付结果
  */

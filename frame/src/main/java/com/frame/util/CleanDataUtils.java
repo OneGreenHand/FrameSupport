@@ -10,6 +10,9 @@ import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import java.io.File;
 import java.math.BigDecimal;
 
+/**
+ * 缓存工具类
+ */
 public class CleanDataUtils {
     /**
      * 获取缓存大小

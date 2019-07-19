@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 
 /**
- * 工具类
+ * 通用工具类
  */
 public class CommonUtil {
 
@@ -342,7 +342,8 @@ public class CommonUtil {
     }
 
     /**
-     * 隐式跳转本地的activity(主要是处理服务器返回一个string，例如：TaskDetailActivity?TASK_ID=1&b=2)
+     * 主要用于后台控制跳转本地
+     * intentUrl举例：TaskActivity?ID=1&NAME=小明  意思就是跳转到TaskDetailActivity，然后带了ID和NAME，两个参数
      */
     public static void goLocationActivity(Context context, String intentUrl) {
         if (TextUtils.isEmpty(intentUrl)) {
@@ -364,9 +365,12 @@ public class CommonUtil {
         }
     }
 
+    /**
+     * 查找本地是否有这个class
+     */
     public static Class getActivityClassName(String className) {
         try {
-            return Class.forName("com.frame.support.view.activity." + className);
+            return Class.forName("com.frame.support.view.activity." + className);//TODO 这里需要改成自己项目的包名
         } catch (Exception e) {
             ToastUtil.showShortToast("未找到跳转对象");
             return null;

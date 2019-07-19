@@ -42,8 +42,22 @@ public abstract class BaseSwipeListLazyLoadFragment<P extends BasePresenter, B e
         mEmptyView = LayoutInflater.from(mActivity).inflate(getEmptyView() == -1 ? R.layout.frame_view_pager_no_data : getEmptyView(), (ViewGroup) mRecyclerView.getParent(), false);
     }
 
+    /**
+     * 手动设置数据
+     * 如果数据为空会设置空布局
+     * 无需关注切换布局问题
+     */
+    public void setEmptyData(List<AB> data) {
+        if (data == null || data.isEmpty()) {
+            mBaseAdapter.setNewData(new ArrayList<>());
+            mBaseAdapter.setEmptyView(mEmptyView);
+        } else {
+            mBaseAdapter.setNewData(data);
+        }
+    }
+
     //自动更新adapter状态
-    public void notifyAdapterStatus(List<AB> data, BaseModel.LoadMode loadMode,int pageCount) {
+    public void notifyAdapterStatus(List<AB> data, BaseModel.LoadMode loadMode, int pageCount) {
         if (loadMode == BaseModel.LoadMode.LOAD_MODE) {
             if (data == null) {
                 mBaseAdapter.loadMoreEnd(false);

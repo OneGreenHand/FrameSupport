@@ -18,9 +18,6 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import java.util.Map;
 
 /**
- * @author OneGreenHand
- * @package com.frame.util
- * @fileName PayHelper
  * @data on 2019/3/15 9:09
  * @describe 支付工具类
  */

@@ -13,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * date：2018/4/2 13:29
- * author: wenxy
  * description: Retofit网络请求工具类
  */
 public class RetrofitWrapper {
@@ -24,19 +23,28 @@ public class RetrofitWrapper {
     private Retrofit retrofit = null;
 
     private RetrofitWrapper() {
-        // OkHttpClient okHttpClient = new OkHttpClient.Builder()
-        //  构建 OkHttpClient 时,将 OkHttpClient.Builder() 传入 with() 方法,进行初始化配置( 用于Okhttp/Retofit Glide上传下载进度监听,还有动态切换baseUrl)
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                // RetrofitUrlManager.getInstance().with(new OkHttpClient.Builder())//动态切换URL
-                //ProgressManager.getInstance().with(new OkHttpClient.Builder())//监听下载
-                // ProgressManager.getInstance().with(RetrofitUrlManager.getInstance().with(new OkHttpClient.Builder()))(组合写法)
-                .connectTimeout(CONN_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                .protocols(Collections.singletonList(Protocol.HTTP_1_1))//解决协议错误问题
-                .addInterceptor(new HttpLoggingInterceptor())//此处设置的拦截器用来添加统一的请求头
-                //          .addInterceptor(new ParamInterceptor())//添加公共请求参数
-                .addInterceptor(new okhttp3.logging.HttpLoggingInterceptor().setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY))//此处设置的拦截器用来查看请求日志
-                .build();
+        OkHttpClient okHttpClient;
+        if (AppConfig.DEBUG) {
+            //  构建 OkHttpClient 时,将 OkHttpClient.Builder() 传入 with() 方法,进行初始化配置( 用于Okhttp/Retofit Glide上传下载进度监听,还有动态切换baseUrl)
+            okHttpClient = new OkHttpClient.Builder()
+                    // RetrofitUrlManager.getInstance().with(new OkHttpClient.Builder())//动态切换URL
+                    //ProgressManager.getInstance().with(new OkHttpClient.Builder())//监听下载
+                    // ProgressManager.getInstance().with(RetrofitUrlManager.getInstance().with(new OkHttpClient.Builder()))(组合写法)
+                    .connectTimeout(CONN_TIMEOUT, TimeUnit.SECONDS)
+                    .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+                    .protocols(Collections.singletonList(Protocol.HTTP_1_1))//解决协议错误问题
+                    .addInterceptor(new HttpLoggingInterceptor())//此处设置的拦截器用来添加统一的请求头
+                    //.addInterceptor(new ParamInterceptor())//添加公共请求参数
+                    .addInterceptor(new okhttp3.logging.HttpLoggingInterceptor().setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY))//此处设置的拦截器用来查看请求日志
+                    .build();
+        } else {
+            okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(CONN_TIMEOUT, TimeUnit.SECONDS)
+                    .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+                    .protocols(Collections.singletonList(Protocol.HTTP_1_1))//解决协议错误问题
+                    .addInterceptor(new HttpLoggingInterceptor())//此处设置的拦截器用来添加统一的请求头
+                    .build();
+        }
         retrofit = new Retrofit.Builder()
                 .baseUrl(AppConfig.getUrl())
                 .client(okHttpClient)

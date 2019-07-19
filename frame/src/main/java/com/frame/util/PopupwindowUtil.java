@@ -10,7 +10,9 @@ import android.widget.PopupWindow;
 import com.frame.R;
 import com.frame.widget.Solve7PopupWindow;
 
-
+/**
+ * Popupwindow工具类，直接传入view然后调用显示即可
+ */
 public class PopupwindowUtil {
 
     /**
@@ -20,7 +22,7 @@ public class PopupwindowUtil {
      * @param cancel   是否可以点击取消
      * @param isAlpha  是否背景半透明
      */
-    public static Solve7PopupWindow getPopupwindow( Context context, View layout, boolean isMathch, boolean cancel, boolean isAlpha) {
+    public static Solve7PopupWindow getPopupwindow(Context context, View layout, boolean isMathch, boolean cancel, boolean isAlpha) {
         Solve7PopupWindow popupWindow = new Solve7PopupWindow();
         //设置PopupWindow的View
         popupWindow.setContentView(layout);
@@ -58,5 +60,4 @@ public class PopupwindowUtil {
         }
         return popupWindow;
     }
-
 }

@@ -8,6 +8,9 @@ import com.frame.R;
 import com.frame.wrapper.WrapperDialog;
 
 
+/**
+ * Dialog工具类，直接传入view,然后调用show方法即可
+ */
 public class DialogUtil {
 
     public static WrapperDialog getDialog(Context context, int view) {

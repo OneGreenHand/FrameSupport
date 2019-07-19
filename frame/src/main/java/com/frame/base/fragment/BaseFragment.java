@@ -2,6 +2,7 @@ package com.frame.base.fragment;
 
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,8 @@ import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
 import com.frame.view.LoadingDialog;
 import com.frame.widget.RecycleViewDivider;
+import com.gyf.immersionbar.components.SimpleImmersionOwner;
+import com.gyf.immersionbar.components.SimpleImmersionProxy;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
@@ -30,7 +33,7 @@ import butterknife.ButterKnife;
 /**
  * @Description: Fragment基类
  */
-public abstract class BaseFragment extends RxFragment implements BaseView {
+public abstract class BaseFragment extends RxFragment implements BaseView, SimpleImmersionOwner {
     protected Activity mActivity;
     protected LoadingDialog progressDialog;
     protected View rootView;
@@ -73,6 +76,8 @@ public abstract class BaseFragment extends RxFragment implements BaseView {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (immersionBarEnabled())
+            mSimpleImmersionProxy.onActivityCreated(savedInstanceState);
         init(savedInstanceState);
         initData();
     }
@@ -110,6 +115,19 @@ public abstract class BaseFragment extends RxFragment implements BaseView {
      */
     protected boolean isUserAria() {
         return false;
+    }
+
+    /**
+     * 是否需要开启沉浸式
+     */
+    @Override
+    public boolean immersionBarEnabled() {
+        return false;
+    }
+
+    @Override
+    public void initImmersionBar() {
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -207,7 +225,35 @@ public abstract class BaseFragment extends RxFragment implements BaseView {
         dismissLoadingDialog();
         if (isRegisterEventBus())
             EventBus.getDefault().unregister(this);
+        if (immersionBarEnabled())
+            mSimpleImmersionProxy.onDestroy();
         //取消请求
         //RxAPIManager.get().cancel(this);
+    }
+    /************************************ImmersionBar沉浸式相关***********************************/
+    /**
+     * ImmersionBar代理类
+     */
+    private SimpleImmersionProxy mSimpleImmersionProxy = new SimpleImmersionProxy(this);
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (immersionBarEnabled())
+            mSimpleImmersionProxy.setUserVisibleHint(isVisibleToUser);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (immersionBarEnabled())
+            mSimpleImmersionProxy.onHiddenChanged(hidden);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (immersionBarEnabled())
+            mSimpleImmersionProxy.onConfigurationChanged(newConfig);
     }
 }

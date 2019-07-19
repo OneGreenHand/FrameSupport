@@ -10,7 +10,6 @@ import okhttp3.Response;
 
 /**
  * date：2018/4/2 13:29
- * author: wenxy
  * description: 网络请求日志拦截
  */
 

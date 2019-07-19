@@ -1,31 +1,19 @@
 package com.frame.support.view.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.blankj.utilcode.util.SPStaticUtils;
 import com.frame.base.fragment.BaseFragment;
 import com.frame.config.BaseConfig;
 import com.frame.support.R;
-import com.frame.support.util.IntentUtils;
+import com.frame.support.util.InstructionsUtils;
 import com.frame.support.view.activity.VideoWebActivity;
 import com.frame.util.CommonUtil;
-import com.frame.util.IntentUtil;
 import com.frame.util.ToastUtil;
 
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 public class GameFragment extends BaseFragment {
     private String downloadUrl = "http://sqdd.myapp.com/myapp/qqteam/tim/down/tim.apk";//Tim下载地址,大概51.9Mb
@@ -56,7 +44,7 @@ public class GameFragment extends BaseFragment {
                     ToastUtil.showShortToast("请在wifi状态下下载~");
                 } else {
                     if (CommonUtil.notificationAuthority(mActivity)) {//检测通知栏是否打开
-                        IntentUtils.downloadApk(null, mActivity, "", downloadUrl, true);
+                        InstructionsUtils.downloadApk(null, mActivity, "", downloadUrl, true);
                     }
                 }
                 break;
@@ -64,7 +52,7 @@ public class GameFragment extends BaseFragment {
                 if (!NetworkUtils.isWifiConnected()) {
                     ToastUtil.showShortToast("请在wifi状态下下载~");
                 } else {
-                    IntentUtils.downloadApk(null, mActivity, "", downloadUrl, false);
+                    InstructionsUtils.downloadApk(null, mActivity, "", downloadUrl, false);
                 }
                 break;
             case R.id.clear_download_apk:

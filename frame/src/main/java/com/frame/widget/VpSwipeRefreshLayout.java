@@ -7,9 +7,6 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
 /**
- * @author OneGreenHand
- * @package com.goume.heyding.widget
- * @fileName VpSwipeRefreshLayout
  * @data on 2018/10/17 17:12
  * @describe 解决滑动冲突
  */

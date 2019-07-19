@@ -16,10 +16,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * @author luo
- * @package com.frame.view
- * @fileName TipDialog
  * @data on 2019/5/23 16:30
+ * 通用提示框
  */
 public class TipDialog extends BaseDialog {
     @BindView(R2.id.title)

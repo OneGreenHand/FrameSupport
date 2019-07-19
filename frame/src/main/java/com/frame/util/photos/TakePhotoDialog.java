@@ -42,7 +42,7 @@ import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 
 /**
- * 拍照
+ * 拍照弹框
  */
 public class TakePhotoDialog extends BaseDialog {
 

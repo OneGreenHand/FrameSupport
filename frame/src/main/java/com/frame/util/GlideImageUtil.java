@@ -30,9 +30,8 @@ public class GlideImageUtil {
                 .into(view);
     }
 
-
 //    /**
-//     * 将图片显示在指定的图片形状中
+//     * 将图片显示在指定的图片形状中（以下被注释的几个方法都需要配合使用glide辅助插件）
 //     *
 //     * @param drawable 要显示的图片形状
 //     */

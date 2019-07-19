@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
@@ -14,22 +15,21 @@ import android.text.TextUtils;
 import com.frame.FrameApplication;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.io.Serializable;
+import java.util.Map;
+
 
 /**
- * 跳转工具类
+ * 跳转工具类(使用请放在主module)
  */
 public class IntentUtil {
 
     /**
-     * @param context  上下文
-     * @param activity 目标activity
-     * @param bundle   携带的数据
-     * @param ifLogin  跳转前是否需要登录
-     * @description: Activity跳转
+     * 跳转activity,通过bundle方式传入数据
      */
     public static void goActivity(Context context, Class<?> activity, Bundle bundle, boolean ifLogin, boolean ifAgainCycle) {
         Intent intent = new Intent();
-        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//在Activity上下文之外启动Activity
         if (ifLogin && !UserUtil.isLogin()) {
             if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
                 if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
@@ -55,12 +55,7 @@ public class IntentUtil {
     }
 
     /**
-     * @param context     上下文
-     * @param activity    目标的activity
-     * @param bundle      携带的数据
-     * @param requestCode 请求码
-     * @param ifLogin     跳转前是否需要登录
-     * @description: Activity跳转, 带返回结果
+     * 跳转activity并回调,通过bundle方式传入数据
      */
     public static void goActivityForResult(Activity context, Class<?> activity, Bundle bundle, int requestCode, boolean ifLogin, boolean ifAgainCycle) {
         Intent intent = new Intent();
@@ -89,12 +84,7 @@ public class IntentUtil {
     }
 
     /**
-     * @param fragment    上下文
-     * @param activity    目标的activity
-     * @param bundle      携带的数据
-     * @param requestCode 请求码
-     * @param ifLogin     跳转前是否需要登录
-     * @description: fragment跳转, 带返回结果
+     * fragment跳转activity,通过bundle方式传入数据
      */
     public static void goFragmentForResult(Fragment fragment, Class<?> activity, Bundle bundle, int requestCode, boolean ifLogin, boolean ifAgainCycle) {
         Intent intent = new Intent();
@@ -119,6 +109,166 @@ public class IntentUtil {
             intent.setClass(mContext, activity);
             if (bundle != null)
                 intent.putExtras(bundle);
+            fragment.startActivityForResult(intent, requestCode);
+        }
+    }
+
+    /**
+     * 跳转activity,通过map方式传入数据,主要配合CommonUtil中goLocationActivity方法使用
+     * 携带的数据(目前只支持 String、Boolean、Integer、Double、Long、Float、Bundle、Parcelable、Serializable)
+     */
+    public static void goActivity2(Context context, Class<?> activity, Map<String, Object> param, boolean ifLogin, boolean ifAgainCycle) {
+        Intent intent = new Intent();
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//在Activity上下文之外启动Activity
+        if (ifLogin && !UserUtil.isLogin()) {
+            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
+                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
+                    AppManager.getAppManager().finishActivity(activity);
+                else //就复用该Activity实例(不会重新走生命周期)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            }
+            //   intent.setClass(context, LoginActivity.class);
+            //    context.startActivity(intent);
+        } else {
+            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
+                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
+                    AppManager.getAppManager().finishActivity(activity);
+                else //就复用该Activity实例(不会重新走生命周期)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            }
+            intent.setClass(context, activity);
+            if (param != null && param.size() > 0) {
+                for (Map.Entry<String, Object> me : param.entrySet()) {
+                    Object value = me.getValue();
+                    String key = me.getKey();
+                    if (value instanceof String) {
+                        intent.putExtra(key, (String) value);
+                    } else if (value instanceof Boolean) {
+                        intent.putExtra(key, (boolean) value);
+                    } else if (value instanceof Integer) {
+                        intent.putExtra(key, (int) value);
+                    } else if (value instanceof Double) {
+                        intent.putExtra(key, (double) value);
+                    } else if (value instanceof Long) {
+                        intent.putExtra(key, (long) value);
+                    } else if (value instanceof Float) {
+                        intent.putExtra(key, (float) value);
+                    } else if (value instanceof Bundle) {
+                        intent.putExtra(key, (Bundle) value);
+                    } else if (value instanceof Parcelable) {
+                        intent.putExtra(key, (Parcelable) value);
+                    } else if (value instanceof Serializable) {
+                        intent.putExtra(key, (Serializable) value);
+                    }
+                }
+            }
+            context.startActivity(intent);
+        }
+    }
+
+    /**
+     * 跳转activity并回调,通过map方式传入数据,主要配合CommonUtil中goLocationActivity方法使用
+     * 携带的数据(目前只支持 String、Boolean、Integer、Double、Long、Float、Bundle、Parcelable、Serializable)
+     */
+    public static void goActivityForResult2(Activity context, Class<?> activity, Map<String, Object> param, int requestCode, boolean ifLogin, boolean ifAgainCycle) {
+        Intent intent = new Intent();
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (ifLogin && !UserUtil.isLogin()) {
+            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
+                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
+                    AppManager.getAppManager().finishActivity(activity);
+                else //就复用该Activity实例(不会重新走生命周期)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            }
+            //     intent.setClass(context, LoginActivity.class);
+            //  context.startActivity(intent);
+        } else {
+            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
+                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
+                    AppManager.getAppManager().finishActivity(activity);
+                else //就复用该Activity实例(不会重新走生命周期)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            }
+            intent.setClass(context, activity);
+            if (param != null && param.size() > 0) {
+                for (Map.Entry<String, Object> me : param.entrySet()) {
+                    Object value = me.getValue();
+                    String key = me.getKey();
+                    if (value instanceof String) {
+                        intent.putExtra(key, (String) value);
+                    } else if (value instanceof Boolean) {
+                        intent.putExtra(key, (boolean) value);
+                    } else if (value instanceof Integer) {
+                        intent.putExtra(key, (int) value);
+                    } else if (value instanceof Double) {
+                        intent.putExtra(key, (double) value);
+                    } else if (value instanceof Long) {
+                        intent.putExtra(key, (long) value);
+                    } else if (value instanceof Float) {
+                        intent.putExtra(key, (float) value);
+                    } else if (value instanceof Bundle) {
+                        intent.putExtra(key, (Bundle) value);
+                    } else if (value instanceof Parcelable) {
+                        intent.putExtra(key, (Parcelable) value);
+                    } else if (value instanceof Serializable) {
+                        intent.putExtra(key, (Serializable) value);
+                    }
+                }
+            }
+            context.startActivityForResult(intent, requestCode);
+        }
+    }
+
+    /**
+     * fragment跳转activity,通过map方式传入数据,主要配合CommonUtil中goLocationActivity方法使用
+     * 携带的数据(目前只支持 String、Boolean、Integer、Double、Long、Float、Bundle、Parcelable、Serializable)
+     */
+    public static void goFragmentForResult2(Fragment fragment, Class<?> activity, Map<String, Object> param, int requestCode, boolean ifLogin, boolean ifAgainCycle) {
+        Intent intent = new Intent();
+        Context mContext = FrameApplication.mContext;
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (ifLogin && !UserUtil.isLogin()) {
+            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
+                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
+                    AppManager.getAppManager().finishActivity(activity);
+                else //就复用该Activity实例(不会重新走生命周期)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            }
+            //    intent.setClass(fragment.getActivity(), LoginActivity.class);
+            //    mContext.startActivity(intent);
+        } else {
+            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
+                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
+                    AppManager.getAppManager().finishActivity(activity);
+                else //就复用该Activity实例(不会重新走生命周期)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            }
+            intent.setClass(mContext, activity);
+            if (param != null && param.size() > 0) {
+                for (Map.Entry<String, Object> me : param.entrySet()) {
+                    Object value = me.getValue();
+                    String key = me.getKey();
+                    if (value instanceof String) {
+                        intent.putExtra(key, (String) value);
+                    } else if (value instanceof Boolean) {
+                        intent.putExtra(key, (boolean) value);
+                    } else if (value instanceof Integer) {
+                        intent.putExtra(key, (int) value);
+                    } else if (value instanceof Double) {
+                        intent.putExtra(key, (double) value);
+                    } else if (value instanceof Long) {
+                        intent.putExtra(key, (long) value);
+                    } else if (value instanceof Float) {
+                        intent.putExtra(key, (float) value);
+                    } else if (value instanceof Bundle) {
+                        intent.putExtra(key, (Bundle) value);
+                    } else if (value instanceof Parcelable) {
+                        intent.putExtra(key, (Parcelable) value);
+                    } else if (value instanceof Serializable) {
+                        intent.putExtra(key, (Serializable) value);
+                    }
+                }
+            }
             fragment.startActivityForResult(intent, requestCode);
         }
     }

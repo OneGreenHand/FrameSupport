@@ -11,8 +11,7 @@ import java.io.File;
 
 /**
  * date：2018/4/7 11:17
- * author: wenxy
- * description: 拍照/选取本地图片/裁剪图片工具类
+ * description: 拍照/选取本地图片/裁剪图片工具类(支持单张，内部采用了luban压缩)
  */
 public class PhotoUtil {
     /**

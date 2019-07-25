@@ -4,7 +4,7 @@ import android.support.v4.content.FileProvider;
 
 /**
  * @author luo
- * @package com.mcht.redpacket
+ * @package com.frame.support
  * @fileName MainFileProvider
  * @data on 2019/5/24 10:49
  */

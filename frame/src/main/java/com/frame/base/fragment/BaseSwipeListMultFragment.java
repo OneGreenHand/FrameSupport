@@ -56,6 +56,9 @@ public abstract class BaseSwipeListMultFragment<P extends BasePresenter, B exten
      */
     public void setEmptyData(List data) {
         if (data == null || data.isEmpty()) {
+            ViewGroup parent = (ViewGroup) mEmptyView.getParent();
+            if (parent != null)//切换adapter这里不处理会出问题
+                parent.removeAllViews();
             mBaseAdapter.setNewData(new ArrayList<>());
             mBaseAdapter.setEmptyView(mEmptyView);
         } else {

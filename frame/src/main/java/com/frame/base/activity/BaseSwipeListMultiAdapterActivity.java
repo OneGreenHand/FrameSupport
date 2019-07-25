@@ -55,6 +55,9 @@ public abstract class BaseSwipeListMultiAdapterActivity<P extends BasePresenter,
      */
     public void setEmptyData(List data) {
         if (data == null || data.isEmpty()) {
+            ViewGroup parent = (ViewGroup) mEmptyView.getParent();
+            if (parent != null)//切换adapter这里不处理会出问题
+                parent.removeAllViews();
             mBaseAdapter.setNewData(new ArrayList<>());
             mBaseAdapter.setEmptyView(mEmptyView);
         } else {

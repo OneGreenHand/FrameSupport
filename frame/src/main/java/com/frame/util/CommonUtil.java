@@ -370,7 +370,7 @@ public class CommonUtil {
      */
     public static Class getActivityClassName(String className) {
         try {
-            return Class.forName("com.frame.support.view.activity." + className);//TODO 这里需要改成自己项目的包名
+            return Class.forName(AppUtils.getAppPackageName() + ".view.activity." + className);//TODO 这里需要改成自己项目的包名,对应activity位置
         } catch (Exception e) {
             ToastUtil.showShortToast("未找到跳转对象");
             return null;

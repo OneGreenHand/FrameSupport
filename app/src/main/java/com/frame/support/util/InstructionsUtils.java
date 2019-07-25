@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.frame.support.R;
 import com.frame.support.service.DownloadService;
 import com.frame.util.CommonUtil;
@@ -104,8 +105,8 @@ public class InstructionsUtils {
      */
     private static boolean hasPermission(Context context) {
         PackageManager pm = context.getPackageManager();
-        boolean permission_readStorage = (PackageManager.PERMISSION_GRANTED == pm.checkPermission("android.permission.READ_EXTERNAL_STORAGE", "com.mcht.redpacket"));
-        boolean permission_writeStorage = (PackageManager.PERMISSION_GRANTED == pm.checkPermission("android.permission.WRITE_EXTERNAL_STORAGE", "com.mcht.redpacket"));
+        boolean permission_readStorage = (PackageManager.PERMISSION_GRANTED == pm.checkPermission("android.permission.READ_EXTERNAL_STORAGE", AppUtils.getAppPackageName()));
+        boolean permission_writeStorage = (PackageManager.PERMISSION_GRANTED == pm.checkPermission("android.permission.WRITE_EXTERNAL_STORAGE", AppUtils.getAppPackageName()));
         return permission_readStorage && permission_writeStorage;
     }
 

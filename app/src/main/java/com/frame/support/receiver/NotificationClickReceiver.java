@@ -11,7 +11,7 @@ import com.frame.config.BaseConfig;
 
 /**
  * @author luo
- * @package com.mcht.redpacket.receiver
+ * @package com.frame.support.receiver
  * @fileName NotificationClickReceiver
  * @data on 2019/5/27 16:39
  */

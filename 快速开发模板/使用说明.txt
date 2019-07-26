@@ -1,2 +1,2 @@
-½«OghMvpActivityÎÄ¼ş¼Ğ·ÅÖÃÓÚAS°²×°Ä¿Â¼ÏÂµÄ\plugins\android\lib\templates\activitiesÄ¿Â¼
-È»ºóÖØÆôStuido¼´¿É
+å°†OghMvpActivityæ–‡ä»¶å¤¹æ”¾ç½®äºASå®‰è£…ç›®å½•ä¸‹çš„\plugins\android\lib\templates\activitiesç›®å½•
+é‡å¯Stuido,åˆ›å»ºactivityå°±èƒ½çœ‹åˆ°è¯¥æ¨¡æ¿

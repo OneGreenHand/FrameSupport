@@ -351,6 +351,11 @@ public class CommonUtil {
             return;
         }
         try {
+//            if (needlogin) {//如果需要登录
+//             Intent intent = new Intent();
+//             intent.setClass(context, getActivityClassName("LoginActivity"));
+//             context.startActivity(intent);
+//            } else {
             Intent intent = new Intent(context, getActivityClassName(intentUrl.contains("?") ? intentUrl.split("\\?")[0] : intentUrl));
             if (intentUrl.contains("?")) {//说明带参数
                 for (String kv : intentUrl.split("\\?")[1].split("\\&")) {//拿到？后面的，然后对&分割处理
@@ -360,6 +365,7 @@ public class CommonUtil {
                 }
             }
             context.startActivity(intent);
+            // }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -10,7 +10,9 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.frame.support.util.ChannelUtils;
+import com.frame.support.util.InstructionsUtils;
 import com.frame.support.util.ShareUtils;
+import com.frame.util.CommonUtil;
 import com.frame.util.ToastUtil;
 
 /**
@@ -84,5 +86,17 @@ public class JSInterface {
             ((AppCompatActivity) context).setResult(result);
             ((AppCompatActivity) context).finish();
         }
+    }
+
+    //打开外部浏览器
+    @JavascriptInterface
+    public void Browser(final String url) {
+        CommonUtil.intentToBrowsable(context, url);
+    }
+
+    //下载app
+    @JavascriptInterface
+    public void InstallAPP(final String url) {
+        InstructionsUtils.downloadApk(context, null, "", url, true);
     }
 }

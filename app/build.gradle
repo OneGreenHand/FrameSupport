@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 //apply from: 'tinker-support.gradle'//(热更新相关)
-apply plugin: 'walle'//walle多渠道打包
 def keystorePropertiesFile = rootProject.file("keystore.properties")//打包文件配置
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
@@ -38,14 +37,6 @@ android {
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
         }
-    }
-    walle {
-        // 渠道&额外信息配置文件，与channelFile互斥
-        configFile = new File("${project.getProjectDir()}/config.json")
-        // 指定渠道包的输出路径
-        apkOutputFolder = new File("${project.buildDir}/outputs/channels");
-        // 定制渠道包的APK的文件名称
-        apkFileNameFormat = '${appName}-${channel}-${buildType}-v${versionName}-${buildTime}.apk';
     }
     buildTypes {
         release {
@@ -90,7 +81,7 @@ dependencies {
     def dependencies = rootProject.ext.deps
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation fileTree(include: ['*.aar'], dir: 'libs')
-    //walle多渠道打包
+    //walle读取渠道号
     implementation dependencies.walle
     annotationProcessor dependencies.glide.compiler
     annotationProcessor dependencies.butterknife.compiler

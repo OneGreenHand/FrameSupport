@@ -1,5 +1,5 @@
 package ${packageName}.presenter;
-
+import com.frame.base.BasePresenter;
 <#if selectViewType == 'activity'>
 public class ${activityClass}Pt extends BasePresenter<${activityClass}Activity>  {
 

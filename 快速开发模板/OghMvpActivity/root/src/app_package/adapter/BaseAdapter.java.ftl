@@ -1,11 +1,12 @@
 package ${packageName}.view.adapter;
 
+import com.frame.adapter.BaseQuickAdapter;
+import com.frame.base.BaseQuickHolder;
+
 public class ${activityClass}Adapter extends BaseQuickAdapter<${activityClass}Bean, BaseQuickHolder> {
 
-    private Context mContext;
-    public ${activityClass}Adapter(Context mContext) {
-        super(R.layout.item_${activityClass});
-        this.mContext=mContext;
+    public ${activityClass}Adapter() {
+        super(R.layout.item_${activityClass?lower_case});
     }
 	
     @Override

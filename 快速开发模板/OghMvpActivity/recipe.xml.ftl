@@ -26,7 +26,7 @@
          <instantiate from="root/src/app_package/adapter/BaseAdapter.java.ftl"
                         to="${escapeXmlAttribute(srcOut)}/view/adapter/${activityClass}Adapter.java" />          
          <instantiate from="root/src/app_package/xml/item_adapter.xml.ftl"
-                        to="${escapeXmlAttribute(resOut)}/layout/item_${layoutName}.xml" />
+                        to="${escapeXmlAttribute(resOut)}/layout/item_${activityClass?lower_case}.xml" />
     <#elseif frameSupperActivity == "BaseRequest">
        <instantiate from="root/src/app_package/activity/BaseRequestActivity.java.ftl"
 					  to="${escapeXmlAttribute(srcOut)}/view/activity/${activityClass}Activity.java" />
@@ -43,12 +43,16 @@
 
 <#elseif selectViewType == "fragment">
 
-	<#if generateLayout>   
+	<#if generateLayout&&frameSupperFragment == "BaseSwipeList">   
+	<instantiate from="root/src/app_package/xml/layout_rv_simple.xml.ftl"
+                   to="${escapeXmlAttribute(resOut)}/layout/${layoutFragmentName}.xml" />  
+    <open file="${escapeXmlAttribute(resOut)}/layout/${layoutFragmentName}.xml" />
+	<#elseif generateLayout>
 	<instantiate from="root/src/app_package/xml/layout_simple.xml.ftl"
                    to="${escapeXmlAttribute(resOut)}/layout/${layoutFragmentName}.xml" />  
     <open file="${escapeXmlAttribute(resOut)}/layout/${layoutFragmentName}.xml" />
     </#if>
-
+  
     <#if frameSupperFragment == "Base">   
 		 <instantiate from="root/src/app_package/fragment/BaseFragment.java.ftl"
                         to="${escapeXmlAttribute(srcOut)}/view/fragment/${activityClass}Fragment.java" />
@@ -64,7 +68,7 @@
         <instantiate from="root/src/app_package/adapter/BaseAdapter.java.ftl"
                        to="${escapeXmlAttribute(srcOut)}/view/adapter/${activityClass}Adapter.java" />      
         <instantiate from="root/src/app_package/xml/item_adapter.xml.ftl"
-                       to="${escapeXmlAttribute(resOut)}/layout/item_${activityClass}.xml" />
+                       to="${escapeXmlAttribute(resOut)}/layout/item_${activityClass?lower_case}.xml" />
     <#elseif frameSupperFragment == "BaseRequest">
         <instantiate from="root/src/app_package/fragment/BaseRequestFragment.java.ftl"
                        to="${escapeXmlAttribute(srcOut)}/view/fragment/${activityClass}Fragment.java" />

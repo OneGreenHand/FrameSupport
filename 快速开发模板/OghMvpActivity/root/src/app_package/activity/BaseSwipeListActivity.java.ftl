@@ -1,12 +1,17 @@
 package ${packageName}.view.activity;
 
 import android.os.Bundle;
+import com.frame.adapter.BaseQuickAdapter;
+import com.frame.base.BaseModel;
+import com.frame.base.BaseQuickHolder;
+import com.frame.base.activity.BaseSwipeListActivity;
+import com.frame.bean.BaseBean;
 
 public class ${activityClass}Activity extends BaseSwipeListActivity<${activityClass}Pt,BaseBean,${activityClass}Bean> {
 
     @Override
     public BaseQuickAdapter<${activityClass}Bean,BaseQuickHolder> setAdapter() {
-        return new ${activityClass}Adapter(this);
+        return new ${activityClass}Adapter();
     }
 
     @Override

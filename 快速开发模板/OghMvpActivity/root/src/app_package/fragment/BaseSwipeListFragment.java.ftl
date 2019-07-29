@@ -6,7 +6,7 @@ public class ${activityClass}Fragment extends BaseSwipeListFragment<${activityCl
 
     @Override
     public BaseQuickAdapter<${activityClass}Bean,BaseQuickHolder> setAdapter() {
-        return new ${activityClass}Adapter(this);
+        return new ${activityClass}Adapter();
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ${activityClass}Fragment extends BaseSwipeListFragment<${activityCl
 
     @Override
     protected ${activityClass}Pt setPresenter() {
-        return  new ${activityClass}Pt(mActivity);
+        return  new ${activityClass}Pt(this);
     }
 
     @Override

@@ -100,8 +100,8 @@ ext {
             rxlifecycle            : "com.trello.rxlifecycle2:rxlifecycle-components:${depVersion.rxlifecycle}",
             //walle读取渠道号
             walle                  : "com.meituan.android.walle:library:${depVersion.walle}",
-            //微信支付
-            wxpay                  : "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+",
+            //微信支付(不包含统计)
+            wxpay                  : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+",
             //luban图片压缩
             luban                  : "top.zibin:Luban:${depVersion.luban}",
             eventbus               : "org.greenrobot:eventbus:${depVersion.eventbus}",

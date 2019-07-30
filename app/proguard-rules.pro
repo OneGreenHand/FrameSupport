@@ -121,6 +121,7 @@ void *(**On*Event);
 -keep class com.frame.support.widget.** {*;}
 #Frame框架部分
 -keep class com.frame.bean.** {*;}
+-keep class com.frame.util.** {*;}
 -keep class com.frame.adapter.** {*;}
 -keep class com.frame.widget.** {*;}
 -keep class com.frame.widget.RoundedImageView.** {*;}

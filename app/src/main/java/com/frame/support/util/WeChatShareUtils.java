@@ -3,10 +3,10 @@ package com.frame.support.util;
 import android.graphics.Bitmap;
 
 import com.blankj.utilcode.util.ImageUtils;
-import com.blankj.utilcode.util.Utils;
+import com.frame.FrameApplication;
 import com.frame.config.BaseConfig;
-import com.frame.support.AppContext;
 import com.frame.support.R;
+import com.frame.util.ToastUtil;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXTextObject;
@@ -15,13 +15,9 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 /**
- * Description:
- * -
- * Author：chasen
- * Date： 2018/11/28 9:10
- * 微信分享
+ * 微信分享工具类
  */
-public class ShareUtils {
+public class WeChatShareUtils {
 
     /**
      * 分享微信文本
@@ -40,7 +36,11 @@ public class ShareUtils {
         req.message = mediaMessage;
         req.scene = type == 1 ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
         String appId = BaseConfig.WEIXIN_APP_ID;
-        IWXAPI iwxapi = WXAPIFactory.createWXAPI(AppContext.mContext, appId);
+        IWXAPI iwxapi = WXAPIFactory.createWXAPI(FrameApplication.mContext, appId);
+        if (!iwxapi.isWXAppInstalled()) {
+            ToastUtil.showShortToast("您手机尚未安装微信，请安装后再登录");
+            return;
+        }
         iwxapi.registerApp(appId);
         iwxapi.sendReq(req);
     }
@@ -70,7 +70,11 @@ public class ShareUtils {
         req.message = mediaMessage;
         req.scene = type == 1 ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
         String appId = BaseConfig.WEIXIN_APP_ID;
-        IWXAPI iwxapi = WXAPIFactory.createWXAPI(AppContext.mContext, appId);
+        IWXAPI iwxapi = WXAPIFactory.createWXAPI(FrameApplication.mContext, appId);
+        if (!iwxapi.isWXAppInstalled()) {
+            ToastUtil.showShortToast("您手机尚未安装微信，请安装后再登录");
+            return;
+        }
         iwxapi.registerApp(appId);
         iwxapi.sendReq(req);
     }

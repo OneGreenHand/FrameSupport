@@ -75,12 +75,15 @@ android {
         preDexLibraries true
         javaMaxHeapSize "8g"
     }
+    repositories {
+        flatDir {
+            dirs 'libs','../frame/libs'
+        }
+    }
 }
 
 dependencies {
     def dependencies = rootProject.ext.deps
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation fileTree(include: ['*.aar'], dir: 'libs')
     //walle读取渠道号
     implementation dependencies.walle
     annotationProcessor dependencies.glide.compiler

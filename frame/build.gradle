@@ -24,12 +24,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
 dependencies {
     def dependencies = rootProject.ext.deps
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation fileTree(include: ['*.aar'], dir: 'libs')
     // Support libraries
     api dependencies.suport.support
     api dependencies.suport.recyclerview
@@ -83,7 +86,7 @@ dependencies {
     //微信支付
     api dependencies.wxpay
     // 支付宝支付
-    api files('libs/alipaySdk-20180601.jar')
+    api(name: 'alipaySdk-15.6.5-20190718211148', ext: 'aar')
     //鲁班图片压缩
     api dependencies.luban
     //下载工具类

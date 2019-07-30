@@ -42,14 +42,14 @@ public class PayHelper {
 
     public void WexPay(WXResult result) {
         if (wxapi == null) {
-            wxapi = WXAPIFactory.createWXAPI(FrameApplication.mContext, null);
+            wxapi = WXAPIFactory.createWXAPI(FrameApplication.mContext, BaseConfig.WEIXIN_APP_ID);
+            if (!wxapi.isWXAppInstalled()) {
+                ToastUtil.showShortToast("未安装微信客户端!");
+                return;
+            }
             wxapi.registerApp(BaseConfig.WEIXIN_APP_ID);// 将该app注册到微信
         }
         PayReq req = new PayReq();
-        if (!wxapi.isWXAppInstalled()) {
-            ToastUtil.showShortToast("未安装微信客户端!");
-            return;
-        }
         if (result != null) {
             req.appId = result.data.appId;
             req.partnerId = result.data.partnerId;

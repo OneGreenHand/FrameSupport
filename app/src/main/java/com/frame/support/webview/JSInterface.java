@@ -11,7 +11,7 @@ import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.frame.support.util.ChannelUtils;
 import com.frame.support.util.InstructionsUtils;
-import com.frame.support.util.ShareUtils;
+import com.frame.support.util.WeChatShareUtils;
 import com.frame.util.CommonUtil;
 import com.frame.util.ToastUtil;
 
@@ -53,12 +53,12 @@ public class JSInterface {
 
     @JavascriptInterface
     public void shareWeChatUrl(String title, String desc, String url, int type, String callBack) {
-        ShareUtils.shareWeChatUrl(title, desc, url, type, callBack);
+        WeChatShareUtils.shareWeChatUrl(title, desc, url, type, callBack);
     }
 
     @JavascriptInterface
     public void shareWeChatTxt(String content, int type, String callBack) {
-        ShareUtils.shareWeChatTxt(content, type, callBack);
+        WeChatShareUtils.shareWeChatTxt(content, type, callBack);
     }
 
     //1.1.8版本方法

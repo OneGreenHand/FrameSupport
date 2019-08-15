@@ -32,6 +32,7 @@ public class BaseWebView extends WebView {
     private float screenDensity = 1f;//屏幕密度
     private boolean isShowLoading = true;//是否显示加载框
     protected LoadingDialog progressDialog;
+    // private TextView titleView;
 
     @SuppressLint("SetJavaScriptEnabled")
     public BaseWebView(Context context, AttributeSet attrs) {
@@ -81,6 +82,14 @@ public class BaseWebView extends WebView {
                 return false;
             }
         });
+        //        setWebChromeClient(new WebChromeClient() {
+//            @Override
+//            public void onReceivedTitle(WebView view, String title) {
+//                if (titleView != null && !TextUtils.isEmpty(title))
+//                    titleView.setText(title);
+//                super.onReceivedTitle(view, title);
+//            }
+//        });
         setDownloadListener(new DownloadListener() {//下载事件
             @Override
             public void onDownloadStart(String paramAnonymousString1, String paramAnonymousString2, String paramAnonymousString3, String paramAnonymousString4, long paramAnonymousLong) {
@@ -133,6 +142,10 @@ public class BaseWebView extends WebView {
     public void destroy() {
         super.destroy();
     }
+
+    //    public void setTitleView(TextView title) {
+//        titleView = title;
+//    }
 
     /**
      * 是否显示加载框

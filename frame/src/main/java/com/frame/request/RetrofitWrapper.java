@@ -16,8 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * description: Retofit网络请求工具类
  */
 public class RetrofitWrapper {
-    private static final int READ_TIMEOUT = 30;//读取超时时间,单位  秒
-    private static final int CONN_TIMEOUT = 30;//连接超时时间,单位  秒
+    private static final int READ_TIMEOUT = 15;//读取超时时间,单位  秒
+    private static final int CONN_TIMEOUT = 15;//连接超时时间,单位  秒
 
     private static volatile RetrofitWrapper instance = null;
     private Retrofit retrofit = null;

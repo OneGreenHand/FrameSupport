@@ -22,8 +22,14 @@ public class PriceUtil {
      * 千位分隔符
      * digit 小数点后保留几位（价格相关慎用，会被四舍五入）
      */
-    public static String qianWeiFenGe(float num, int digit) {
-        DecimalFormat df = new DecimalFormat(digit == 1 ? "#,##0.0" : "#,##0.00");
+    public static String qianWeiFenGe(double num, int digit) {
+        if (digit < 0)
+            return "小数位不能为空";
+        StringBuffer sb = new StringBuffer();
+        sb.append("#,##0.");
+        for (int i = 0; i < digit; i++)
+            sb.append("0");
+        DecimalFormat df = new DecimalFormat(sb.toString());
         return df.format(num);
     }
 
@@ -101,24 +107,21 @@ public class PriceUtil {
         return new BigDecimal(String.valueOf(aFloat)).setScale(digit, BigDecimal.ROUND_HALF_UP);
     }
 
-    public static Spannable getPriceSpDouble(double allpriceCart, int font1, int font2, int font3) {
-        String[] prices = getPriceDouble(allpriceCart);
-        int index = prices[0].length();
-        Spannable sp = new SpannableString("￥" + prices[0] + "." + prices[1]);
-        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(font2, true), 1, index + 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(font3, true), index + 1, index + 3, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+    public static Spannable getPriceSp(String allpriceCart, int font1, int font2, String color1, String color2, String text) {
+        Spannable sp = new SpannableString(allpriceCart + text);
+        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, allpriceCart.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(font2, true), allpriceCart.length(), allpriceCart.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color1)), 0, allpriceCart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color2)), allpriceCart.length(), allpriceCart.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sp;
     }
 
-    public static Spannable getPriceSp(String allpriceCart, int font1, int font2, int font3, String color1, String color2) {
-        Spannable sp = new SpannableString("￥" + allpriceCart + "起");
-        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(font2, true), 1, allpriceCart.length() + 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(font3, true), allpriceCart.length() + 1, allpriceCart.length() + 2, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color1)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color1)), 1, allpriceCart.length() + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color2)), allpriceCart.length() + 1, allpriceCart.length() + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    public static Spannable getPriceSp(String allpriceCart, int font1, int font2, String color1, String text) {
+        Spannable sp = new SpannableString(allpriceCart + text);
+        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, allpriceCart.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(font2, true), allpriceCart.length(), allpriceCart.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color1)), 0, allpriceCart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color1)), allpriceCart.length(), allpriceCart.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sp;
     }
 

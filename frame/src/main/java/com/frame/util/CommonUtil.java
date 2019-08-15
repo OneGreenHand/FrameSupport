@@ -98,6 +98,7 @@ public class CommonUtil {
 
     /**
      * 设置文本大小及颜色
+     * String s = "<font color='#999999'>温馨提示: </font>" + "<font color='#FF8727'>本商品无质量问题不能退换</font>";
      */
     public static Spanned setHtmlColor(String string) {
         Spanned spanned;

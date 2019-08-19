@@ -174,9 +174,9 @@ public class InstructionsUtils {
                     public void accept(Boolean s) throws Exception {
                         if (isOpen) {//需要打开app
                             if (!s) //未安装
-                                AppUtils.launchApp(packageName);
-                            else
                                 ToastUtil.showShortToast("应用未安装！");
+                            else
+                                AppUtils.launchApp(packageName);
                         } else {//下载
                             if (!s) //未安装
                                 download(context, title, url, isShowProgress);

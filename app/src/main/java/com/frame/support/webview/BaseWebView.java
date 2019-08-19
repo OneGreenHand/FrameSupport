@@ -28,8 +28,8 @@ public class BaseWebView extends WebView {
 
     private ValueCallback<Uri[]> filePathCallback;
     public static int FILECHOOSER_RESULTCODE = 1;
-    private LoadCompleteClick loadCompleteClick;
-    private float screenDensity = 1f;//屏幕密度
+    //   private LoadCompleteClick loadCompleteClick;
+    //  private float screenDensity = 1f;//屏幕密度
     private boolean isShowLoading = true;//是否显示加载框
     protected LoadingDialog progressDialog;
     // private TextView titleView;
@@ -82,7 +82,7 @@ public class BaseWebView extends WebView {
                 return false;
             }
         });
-        //        setWebChromeClient(new WebChromeClient() {
+//        setWebChromeClient(new WebChromeClient() {
 //            @Override
 //            public void onReceivedTitle(WebView view, String title) {
 //                if (titleView != null && !TextUtils.isEmpty(title))
@@ -106,8 +106,7 @@ public class BaseWebView extends WebView {
                     view.loadUrl(url);
                     return false;
                 }
-                // Otherwise allow the OS to handle things like tel, mailto, etc.
-                try {
+                try {  // Otherwise allow the OS to handle things like tel, mailto, etc.
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     getContext().startActivity(intent);
                 } catch (Exception e) {
@@ -130,12 +129,12 @@ public class BaseWebView extends WebView {
                     getSettings().setLoadsImagesAutomatically(true);
                 if (isShowLoading)
                     dismissProgressDialog();
-                if (loadCompleteClick != null)
-                    loadCompleteClick.loadComplete();
+                //   if (loadCompleteClick != null)
+                //       loadCompleteClick.loadComplete();
             }
         });
         addJavascriptInterface(new JSInterface(getContext()), "JSInterface");
-        screenDensity = ScreenUtils.getScreenDensity();
+        //   screenDensity = ScreenUtils.getScreenDensity();
     }
 
     @Override
@@ -143,7 +142,7 @@ public class BaseWebView extends WebView {
         super.destroy();
     }
 
-    //    public void setTitleView(TextView title) {
+//    public void setTitleView(TextView title) {
 //        titleView = title;
 //    }
 
@@ -209,42 +208,42 @@ public class BaseWebView extends WebView {
     }
 
     /***************************下面都是一些监听********************************/
-    private OnScrollChangeListener mOnScrollChangeListener;
-
-    @Override
-    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        super.onScrollChanged(l, t, oldl, oldt);
-        if (mOnScrollChangeListener != null) {
-            float webcontent = getContentHeight() * getScale(); // webview的高度
-            float webnow = getHeight() / screenDensity + getScrollY() / screenDensity;  // 当前webview的高度
-            if (Math.abs(webcontent - webnow) < 1) {  //处于底端
-                mOnScrollChangeListener.onPageEnd(l, t, oldl, oldt);
-            } else if (getScrollY() == 0) {   //处于顶端
-                mOnScrollChangeListener.onPageTop(l, t, oldl, oldt);
-            } else {
-                mOnScrollChangeListener.onScrollChanged(l, t, oldl, oldt);
-            }
-        }
-    }
-
-    public void setOnScrollChangeListener(OnScrollChangeListener listener) {
-        this.mOnScrollChangeListener = listener;
-    }
-
-    public interface OnScrollChangeListener {//webview滚动监听
-
-        void onPageEnd(int l, int t, int oldl, int oldt);
-
-        void onPageTop(int l, int t, int oldl, int oldt);
-
-        void onScrollChanged(int l, int t, int oldl, int oldt);
-    }
-
-    public interface LoadCompleteClick {
-        void loadComplete();
-    }
-
-    public void getWebLoadState(LoadCompleteClick loadCompleteClick) {//是否加载结束监听
-        this.loadCompleteClick = loadCompleteClick;
-    }
+//    private OnScrollChangeListener mOnScrollChangeListener;
+//
+//    @Override
+//    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+//        super.onScrollChanged(l, t, oldl, oldt);
+//        if (mOnScrollChangeListener != null) {
+//            float webcontent = getContentHeight() * getScale(); // webview的高度
+//            float webnow = getHeight() / screenDensity + getScrollY() / screenDensity;  // 当前webview的高度
+//            if (Math.abs(webcontent - webnow) < 1) {  //处于底端
+//                mOnScrollChangeListener.onPageEnd(l, t, oldl, oldt);
+//            } else if (getScrollY() == 0) {   //处于顶端
+//                mOnScrollChangeListener.onPageTop(l, t, oldl, oldt);
+//            } else {
+//                mOnScrollChangeListener.onScrollChanged(l, t, oldl, oldt);
+//            }
+//        }
+//    }
+//
+//    public void setOnScrollChangeListener(OnScrollChangeListener listener) {
+//        this.mOnScrollChangeListener = listener;
+//    }
+//
+//    public interface OnScrollChangeListener {//webview滚动监听
+//
+//        void onPageEnd(int l, int t, int oldl, int oldt);
+//
+//        void onPageTop(int l, int t, int oldl, int oldt);
+//
+//        void onScrollChanged(int l, int t, int oldl, int oldt);
+//    }
+//
+//    public interface LoadCompleteClick {
+//        void loadComplete();
+//    }
+//
+//    public void getWebLoadState(LoadCompleteClick loadCompleteClick) {//是否加载结束监听
+//        this.loadCompleteClick = loadCompleteClick;
+//    }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--Appbar背景色-->
         <item name="colorPrimary">@color/frame_colorPrimary</item>
@@ -12,6 +13,17 @@
         <item name="android:listDivider">@drawable/divider_default</item>
         <!--页面背景色-->
         <item name="android:windowBackground">@color/frame_white</item>
+    </style>
+    <!--透明主题，解决启动白屏问题-->
+    <style name="StartPage" parent="AppTheme">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <!-- 适配android手机系统8.0(api26)，Only fullscreen opaque activities can randroid:windowIsTranslucentequest orientation -->
+        <!--用背景图消除启动白屏-->
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/frame_colorAccent</item>
     </style>
     <!-- loading dialog(加载动画) -->
     <style name="DialogStyle">

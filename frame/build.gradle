@@ -75,7 +75,7 @@ dependencies {
     api dependencies.immersionbar
     //沉浸式状态栏(fragment)
     api dependencies.immersionbar_components
-    //bugly升级库
+    //bugly升级库(热更新相关)
     //  api dependencies.bugly.crashreport_upgrade
     // bugly 热更新tinker插件库
     // api dependencies.bugly.tinker

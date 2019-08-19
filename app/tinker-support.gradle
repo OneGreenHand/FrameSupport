@@ -37,13 +37,13 @@ tinkerSupport {
     baseApkResourceMapping = "${bakPath}/${baseApkDir}/app-release-R.txt"
 
     // 构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性(示例：1.0.1-base 和1.0.1-patch)
-    tinkerId = "2.1.7-patch"
+    tinkerId = "1.0.1-base"
 
     // 构建多渠道补丁时使用
     //buildAllFlavorsDir = "${bakPath}/${baseApkDir}"
 
     // 是否启用加固模式，默认为false.(tinker-spport 1.0.7起支持）
-    // isProtectedApp = true
+     isProtectedApp = true
 
     // 是否开启反射Application模式
     enableProxyApplication = true

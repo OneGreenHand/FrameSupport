@@ -67,7 +67,7 @@ public class AppContext extends FrameApplication {
         strategy.setUploadProcess(processName == null || processName.equals(packageName));
         strategy.setAppChannel(ChannelUtils.getChannel());  //设置渠道
         // CrashReport.setUserId("");//设置用户ID(用于定位具体用户)
-        //  Bugly.init(context, "8706956f68", AppConfig.DEBUG, strategy);//使用热更新或者升级功能时使用这个
+        //  Bugly.init(context, "8706956f68", AppConfig.DEBUG, strategy);//使用热更新或者升级功能时使用这个(热更新相关)
         CrashReport.initCrashReport(context, "8706956f68", AppConfig.DEBUG, strategy); // 仅使用异常捕获功能时使用这个
     }
 

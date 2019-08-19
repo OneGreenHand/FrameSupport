@@ -27,15 +27,6 @@ public class JSInterface {
         this.context = context;
     }
 
-    // 某种操作
-    @JavascriptInterface
-    public void openModule(int type, String url) {
-        if (context instanceof AppCompatActivity)
-            InstructionsUtils.JumpIntention(((AppCompatActivity) context), type, "", url);
-        else
-            InstructionsUtils.JumpIntention(context, type, "", url);
-    }
-
     // 获取 App 版本号
     @JavascriptInterface
     public String getVersion() {

@@ -1,9 +1,0 @@
-问题：使用walle打包后，加固后失去渠道信息
-解决方法：
-1、首先打一个正式包
-2、使用三方加固工具对这个正式包进行加固(可签名可不签名)
-3、对加固后的包进行重新签名。1：使用apksigner进行签名  2：使用加固工具的签名功能(乐固可以、其他不清楚)
-4、使用walle注入渠道信息。注入方式：命令行工具，使用walle-cli-all.jar文件
-其他：
-额外信息配置文件：config.json
-注入渠道命令：https://github.com/Meituan-Dianping/walle/blob/master/walle-cli/README.md

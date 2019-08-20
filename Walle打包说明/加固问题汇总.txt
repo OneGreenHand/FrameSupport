@@ -1,0 +1,24 @@
+1、首先打一个正式包
+2、使用三方加固工具对这个正式包进行加固(选择不签名)
+3、对加固后的包进行重新签名。
+4、使用walle注入渠道。注入方式：命令行工具，使用walle-cli-all.jar文件
+
+Android P 9.0无法安装问题
+方案一：
+使用apksigner进行签名,请务必使用build-tools 28以下的版本，因为walle现在未兼容v3签名,具体可参考以下链接
+https://blog.csdn.net/soulboy1111/article/details/89208461
+https://blog.csdn.net/as36331233/article/details/88911551
+https://github.com/Meituan-Dianping/walle/issues/264
+https://blog.csdn.net/byongchen/article/details/83381036
+方案二：(亲测可用)
+使用经过处理的walle-cli-all.jar架包,可从上面链接中找到
+本路径下的架包已经处理过
+
+本地签名流程：
+1、通过开始 cmd 打开命令行
+2、进入Android SDK/build-tools/SDK版本 (务必使用28版本以下的)
+3、执行签名命令：apksigner sign --ks <本地签名文件路径> <丢失签名信息apk路径>
+3、查看签名信息结果：apksigner verify -v <丢失签名信息apk路径>
+
+注入渠道：
+https://github.com/Meituan-Dianping/walle/blob/master/walle-cli/README.md

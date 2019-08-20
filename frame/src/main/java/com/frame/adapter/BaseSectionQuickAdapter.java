@@ -1,6 +1,8 @@
 package com.frame.adapter;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
+
 
 import com.frame.adapter.entity.SectionEntity;
 
@@ -47,7 +49,7 @@ public abstract class BaseSectionQuickAdapter<T extends SectionEntity, K extends
     }
 
     @Override
-    public void onBindViewHolder(K holder, int position) {
+    public void onBindViewHolder(@NonNull K holder, int position) {
         switch (holder.getItemViewType()) {
             case SECTION_HEADER_VIEW:
                 setFullSpan(holder);

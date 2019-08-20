@@ -3,8 +3,8 @@ package com.frame.adapter.loadmore;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 
-import com.frame.adapter.BaseQuickAdapter;
 import com.frame.adapter.BaseViewHolder;
+
 
 /**
  * Created by BlingBling on 2016/11/11.
@@ -49,6 +49,8 @@ public abstract class LoadMoreView {
                 visibleLoading(holder, false);
                 visibleLoadFail(holder, false);
                 visibleLoadEnd(holder, false);
+                break;
+            default:
                 break;
         }
     }

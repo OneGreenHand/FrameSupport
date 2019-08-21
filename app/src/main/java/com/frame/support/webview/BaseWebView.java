@@ -37,9 +37,9 @@ public class BaseWebView extends WebView {
     @SuppressLint("SetJavaScriptEnabled")
     public BaseWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //  getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        if (Build.VERSION.SDK_INT >= 19)
-            getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//加载缓存否则网络
+        getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        //   if (Build.VERSION.SDK_INT >= 19)
+        //       getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//加载缓存否则网络
         if (Build.VERSION.SDK_INT >= 19)
             getSettings().setLoadsImagesAutomatically(true);//图片自动缩放 打开
         else

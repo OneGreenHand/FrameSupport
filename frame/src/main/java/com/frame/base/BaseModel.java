@@ -199,7 +199,6 @@ public class BaseModel {
                 } else {
                     mBuilder.mBaseRequestView.showLoadingDialog(mBuilder.mMsgType, mBuilder.isDialogCancel);
                 }
-                // RxAPIManager.get().add(mBuilder.mBaseRequestView.getClass().getName(), d);//添加请求到订阅队列，以便于取消请求
             }
 
             @SuppressLint("CheckResult")

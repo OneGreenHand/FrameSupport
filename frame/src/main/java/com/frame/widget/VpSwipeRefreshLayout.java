@@ -42,7 +42,6 @@ public class VpSwipeRefreshLayout extends SwipeRefreshLayout {
                 if(mIsVpDragger) {
                     return false;
                 }
-
                 // 获取当前手指位置
                 float endY = ev.getY();
                 float endX = ev.getX();

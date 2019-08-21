@@ -25,14 +25,14 @@ public class WeChatShareUtils {
      * @param content 内容
      * @param type    1：朋友圈  2：好友对话
      */
-    public static void shareWeChatTxt(String content, int type, String transaction) {
+    public static void shareWeChatTxt(String content, int type) {
         WXTextObject textObject = new WXTextObject();
         textObject.text = content;
         WXMediaMessage mediaMessage = new WXMediaMessage();
         mediaMessage.mediaObject = textObject;
         mediaMessage.description = content;
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = transaction;
+        req.transaction = "";
         req.message = mediaMessage;
         req.scene = type == 1 ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
         String appId = BaseConfig.WEIXIN_APP_ID;
@@ -53,7 +53,7 @@ public class WeChatShareUtils {
      * @param url
      * @param type  1：朋友圈  2：好友对话
      */
-    public static void shareWeChatUrl(String title, String desc, String url, int type, String transaction) {
+    public static void shareWeChatUrl(String title, String desc, String url, int type ) {
         //初始化一个WXWebpageObject，填写url
         WXWebpageObject object = new WXWebpageObject();
         object.webpageUrl = url;
@@ -66,7 +66,7 @@ public class WeChatShareUtils {
         mediaMessage.thumbData = ImageUtils.bitmap2Bytes(bitmap, Bitmap.CompressFormat.PNG);
         //构造一个Req
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = transaction;
+        req.transaction = "";
         req.message = mediaMessage;
         req.scene = type == 1 ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
         String appId = BaseConfig.WEIXIN_APP_ID;

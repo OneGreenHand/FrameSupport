@@ -83,14 +83,14 @@ public class JSInterface {
 
     //分享微信链接
     @JavascriptInterface
-    public void shareWeChatUrl(String title, String desc, String url, int type, String callBack) {
-        WeChatShareUtils.shareWeChatUrl(title, desc, url, type, callBack);
+    public void shareWeChatUrl(String title, String desc, String url, int type ) {
+        WeChatShareUtils.shareWeChatUrl(title, desc, url, type);
     }
 
     //分享微信文本
     @JavascriptInterface
-    public void shareWeChatTxt(String content, int type, String callBack) {
-        WeChatShareUtils.shareWeChatTxt(content, type, callBack);
+    public void shareWeChatTxt(String content, int type) {
+        WeChatShareUtils.shareWeChatTxt(content, type);
     }
 
     //吐司

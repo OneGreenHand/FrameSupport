@@ -1,11 +1,8 @@
 package com.frame.base.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -15,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -26,7 +22,6 @@ import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
 import com.frame.util.AppManager;
 import com.frame.view.LoadingDialog;
-import com.frame.widget.RecycleViewDivider;
 import com.gyf.immersionbar.ImmersionBar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -46,7 +41,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     protected LoadingDialog progressDialog;
     protected RxPermissions rxPermissions;
     private boolean isDestroyed = false;//是否真的被finish
-    private InputMethodManager mInputMethodManager;
 
     @Override
     public void startActivity(Intent intent) {
@@ -81,22 +75,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
         if (isUserAria())
             Aria.download(this).register();
         initData();
-    }
-
-    /**
-     * 方便之类重写方法，确定是否finsh操作
-     */
-    public boolean needFinsh() {
-        return true;
-    }
-
-    @Override
-    public void onClick(View view) {
-        int i = view.getId();
-        if (i == R.id.img_finish) {
-            if (needFinsh())
-                finish();
-        }
     }
 
     protected void initCommon() {
@@ -234,34 +212,33 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     }
 
     /**
-     * RecyclerView加载线性布局配置
+     * 方便子类重写方法，确定是否finsh操作
      */
-    public void initLlManager(RecyclerView rv, int orientation, String color, int height, int width, int headerCount, int footerCount) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false);
-        rv.setLayoutManager(layoutManager);
-        rv.addItemDecoration(RecycleViewDivider.builder()
-                .color(Color.parseColor(color))// 设颜色
-                .height(height)// 设线高px，用于画水平线
-                .width(width)
-                .headerCount(headerCount)
-                .footerCount(footerCount)
-                .build());
+    public boolean needFinsh() {
+        return true;
+    }
 
+    @Override
+    public void onClick(View view) {
+        int i = view.getId();
+        if (i == R.id.img_finish) {
+            if (needFinsh())
+                finish();
+        }
     }
 
     /**
-     * RecyclerView加载表格布局配置
+     * 水平布局
      */
-    public void initGlManager(RecyclerView rv, int spanCount, int orientation, String color, int height, int width, int headerCount, int footerCount) {
-        GridLayoutManager layoutManager = new GridLayoutManager(mContext, spanCount, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false);
-        rv.setLayoutManager(layoutManager);
-        rv.addItemDecoration(RecycleViewDivider.builder()
-                .color(Color.parseColor(color))// 设颜色
-                .height(height)// 设线高px，用于画水平线
-                .width(width)
-                .headerCount(headerCount)
-                .footerCount(footerCount)
-                .build());
+    public void setLayoutManager(RecyclerView rv, int orientation) {
+        rv.setLayoutManager(new LinearLayoutManager(mContext, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false));
+    }
+
+    /**
+     * 表格布局
+     */
+    public void setLayoutManager(RecyclerView rv, int spanCount, int orientation) {
+        rv.setLayoutManager(new GridLayoutManager(mContext, spanCount, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false));
     }
 
     @Override
@@ -348,14 +325,12 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
         if (isDestroyed) {
             return;
         } else {
-            mInputMethodManager = null;
             // 回收资源
             isDestroyed = true;
             if (isRegisterEventBus())
                 EventBus.getDefault().unregister(this);
             // 结束Activity&从堆栈中移除
             AppManager.getAppManager().finishActivity(this);
-            //RxAPIManager.get().cancel(this.getClass().getName());//取消网络请求
         }
     }
 }

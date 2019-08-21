@@ -66,7 +66,6 @@ public abstract class BaseRequestActivity<P extends BasePresenter, B extends Bas
         }
     }
 
-
     @Override
     public void showNetErrorView() {
         if (mVaryViewHelperController != null)

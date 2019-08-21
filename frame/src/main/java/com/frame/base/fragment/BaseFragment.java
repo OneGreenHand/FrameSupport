@@ -3,7 +3,6 @@ package com.frame.base.fragment;
 
 import android.app.Activity;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,7 +17,6 @@ import com.arialyy.aria.core.Aria;
 import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
 import com.frame.view.LoadingDialog;
-import com.frame.widget.RecycleViewDivider;
 import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.gyf.immersionbar.components.SimpleImmersionProxy;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -189,33 +187,17 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
     }
 
     /**
-     * RecyclerView加载线性布局配置
+     * 水平布局
      */
-    public void initLlManager(RecyclerView rv, int orientation, String color, int height, int width, int headerCount, int footerCount) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false);
-        rv.setLayoutManager(layoutManager);
-        rv.addItemDecoration(RecycleViewDivider.builder()
-                .color(Color.parseColor(color))// 设颜色
-                .height(height)// 设线高px，用于画水平线
-                .width(width)
-                .headerCount(headerCount)
-                .footerCount(footerCount)
-                .build());
+    public void setLayoutManager(RecyclerView rv, int orientation) {
+        rv.setLayoutManager(new LinearLayoutManager(mActivity, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false));
     }
 
     /**
-     * RecyclerView加载表格布局配置
+     * 表格布局
      */
-    public void initGlManager(RecyclerView rv, int spanCount, int orientation, String color, int height, int width, int headerCount, int footerCount) {
-        GridLayoutManager layoutManager = new GridLayoutManager(mActivity, spanCount, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false);
-        rv.setLayoutManager(layoutManager);
-        rv.addItemDecoration(RecycleViewDivider.builder()
-                .color(Color.parseColor(color))// 设颜色
-                .height(height)// 设线高px，用于画水平线
-                .width(width)
-                .headerCount(headerCount)
-                .footerCount(footerCount)
-                .build());
+    public void setLayoutManager(RecyclerView rv, int spanCount, int orientation) {
+        rv.setLayoutManager(new GridLayoutManager(mActivity, spanCount, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false));
     }
 
     @Override
@@ -227,8 +209,6 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
             EventBus.getDefault().unregister(this);
         if (immersionBarEnabled())
             mSimpleImmersionProxy.onDestroy();
-        //取消请求
-        //RxAPIManager.get().cancel(this);
     }
     /************************************ImmersionBar沉浸式相关***********************************/
     /**

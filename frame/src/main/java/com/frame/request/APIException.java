@@ -22,22 +22,6 @@ public class APIException {
      * 接口返回码
      */
     public static final int SUCCESS = 200;
-    /**
-     * 由于服务器传递过来的错误信息直接给用户看的话，用户未必能够理解
-     * 需要根据接口返回的错误码对错误信息进行一个转换，再显示给用户
-     *
-     * @param code
-     * @return
-     */
-    public static String getApiExceptionMessage(int code) {
-        String message = "";
-        switch (code) {
-            case SUCCESS:
-                message = "请求成功";
-                break;
-        }
-        return message;
-    }
 
     /**
      * 网络请求直接抛出的异常信息

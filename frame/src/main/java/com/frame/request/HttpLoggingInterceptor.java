@@ -22,9 +22,7 @@ public class HttpLoggingInterceptor implements Interceptor {
         //添加统一通用header，不会覆盖前面的header
         Request.Builder requestBuilder = original.newBuilder()
                 .addHeader("Accept", "application/json")
-                //.addHeader("token", InfoUtil.getTOKEN() == null ? "" : InfoUtil.getTOKEN())
-              //  .addHeader("token", "5be19f81f24f7480e263ba7917d4abb1")
-             //   .addHeader("Role", "Android")
+                //   .addHeader("Role", "Android")
                 .url(url);
         Request request = requestBuilder.build();
         Response response = chain.proceed(request);

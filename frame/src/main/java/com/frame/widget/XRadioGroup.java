@@ -67,7 +67,6 @@ public class XRadioGroup extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-
         // checks the appropriate radio button as requested in the XML file
         if (mCheckedId != -1) {
             mProtectFromCheckedChange = true;
@@ -116,15 +115,12 @@ public class XRadioGroup extends LinearLayout {
         if (id != -1 && (id == mCheckedId)) {
             return;
         }
-
         if (mCheckedId != -1) {
             setCheckedStateForView(mCheckedId, false);
         }
-
         if (id != -1) {
             setCheckedStateForView(id, true);
         }
-
         setCheckedId(id);
     }
 
@@ -275,7 +271,6 @@ public class XRadioGroup extends LinearLayout {
             } else {
                 width = WRAP_CONTENT;
             }
-
             if (a.hasValue(heightAttr)) {
                 height = a.getLayoutDimension(heightAttr, "layout_height");
             } else {
@@ -305,13 +300,11 @@ public class XRadioGroup extends LinearLayout {
             if (mProtectFromCheckedChange) {
                 return;
             }
-
             mProtectFromCheckedChange = true;
             if (mCheckedId != -1) {
                 setCheckedStateForView(mCheckedId, false);
             }
             mProtectFromCheckedChange = false;
-
             int id = buttonView.getId();
             setCheckedId(id);
         }
@@ -322,8 +315,7 @@ public class XRadioGroup extends LinearLayout {
      * to another listener. This allows the table layout to set its own internal
      * hierarchy change listener without preventing the user to setup his.</p>
      */
-    private class PassThroughHierarchyChangeListener implements
-            ViewGroup.OnHierarchyChangeListener {
+    private class PassThroughHierarchyChangeListener implements ViewGroup.OnHierarchyChangeListener {
         private ViewGroup.OnHierarchyChangeListener mOnHierarchyChangeListener;
 
         /**
@@ -331,7 +323,6 @@ public class XRadioGroup extends LinearLayout {
          */
         public void onChildViewAdded(View parent, View child) {
             setListener(child);
-
             if (mOnHierarchyChangeListener != null) {
                 mOnHierarchyChangeListener.onChildViewAdded(parent, child);
             }

@@ -11,7 +11,6 @@ import android.widget.PopupWindow;
  */
 public class Solve7PopupWindow extends PopupWindow {
 
-
     public Solve7PopupWindow(View mMenuView, int matchParent, int matchParent1) {
         super(mMenuView, matchParent, matchParent1);
     }

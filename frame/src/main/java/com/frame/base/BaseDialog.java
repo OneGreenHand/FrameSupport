@@ -119,8 +119,8 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     @SuppressLint("NewApi")
     @Override
     public void show() {
-        if (bContext instanceof Activity){
-            Activity activity  = (Activity) bContext;
+        if (bContext instanceof AppCompatActivity){
+            AppCompatActivity activity  = (AppCompatActivity) bContext;
             if (activity.isDestroyed()){//如果activity已经被销毁就不显示
                 return;
             }

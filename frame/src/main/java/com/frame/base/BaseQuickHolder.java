@@ -2,11 +2,11 @@ package com.frame.base;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.support.annotation.IdRes;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +16,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.frame.R;
 import com.frame.adapter.BaseViewHolder;
-import com.frame.widget.RecycleViewDivider;
 
 public class BaseQuickHolder extends BaseViewHolder {
 
@@ -104,23 +103,9 @@ public class BaseQuickHolder extends BaseViewHolder {
      * 设置布局管理器
      * direction （0 水平 1 垂直）
      */
-    public BaseQuickHolder setLayoutManager(int viewId, RecyclerView.Adapter adapter, Context mContext, int direction, String color, int height, int width, int hdCount, int ftCount) {
+    public BaseQuickHolder setLayoutManager(int viewId, RecyclerView.Adapter adapter, Context mContext, int direction) {
         RecyclerView rv = getView(viewId);
-        //设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
-        if (direction == 0)
-            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        else
-            linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        linearLayoutManager.setReverseLayout(false);
-        rv.setLayoutManager(linearLayoutManager);
-        rv.addItemDecoration(RecycleViewDivider.builder()
-                .color(Color.parseColor(color))// 设颜色
-                .height(height)// 设线高px，用于画水平线
-                .width(width)
-                .headerCount(hdCount)
-                .footerCount(ftCount)
-                .build());
+        rv.setLayoutManager(new LinearLayoutManager(mContext, direction == 1 ? OrientationHelper.HORIZONTAL : OrientationHelper.VERTICAL, false));
         rv.setAdapter(adapter);
         return this;
     }

@@ -13,6 +13,7 @@ import com.frame.config.AppConfig;
 import com.frame.request.APIException;
 import com.frame.request.HttpRequest;
 import com.frame.util.GsonUtil;
+import com.frame.util.LogUtil;
 import com.frame.util.ToastUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -215,7 +216,6 @@ public class BaseModel {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    CrashReport.postCatchedException(e);//手动上报异常到bugly
                     //如果数据异常，判断是否是网络不可用
 //                    Observable.create((ObservableOnSubscribe<Boolean>) emitter ->
 //                            emitter.onNext(NetworkUtils.isAvailableByPing()))
@@ -225,9 +225,13 @@ public class BaseModel {
 //                                if (!b && (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW))
 //                                    mBuilder.mBaseRequestView.showNetErrorView();
 //                            });
-                    //json解析异常
-                    throw new RuntimeException("数据解析异常");
-                    //  mBuilder.mBaseRequestView.requestError(e, mBuilder.requestTag == null ? tag : mBuilder.requestTag);
+                    if (AppConfig.DEBUG) {
+                        LogUtil.e("数据解析异常", e.getMessage() + "");
+                        throw new RuntimeException("数据解析异常");
+                    } else {
+                        CrashReport.postCatchedException(e);//手动上报异常到bugly
+                        mBuilder.mBaseRequestView.requestError(e, mBuilder.requestTag == null ? tag : mBuilder.requestTag);
+                    }
                 }
             }
         };

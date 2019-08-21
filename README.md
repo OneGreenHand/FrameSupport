@@ -13,7 +13,7 @@ retrofit+rxjava+mvp示例(快速开发框架、项目自用)
 
 **聚赚红包** | **今日球讯**  
 :-------------------------------------------------------------------:|:----------:|:---------------:|:--------:|:--------------:|
-[<img src="https://pp.myapp.com/ma_icon/0/icon_53800104_1563159294/96" width="80" height="80">](https://sj.qq.com/myapp/detail.htm?apkName=com.mcht.redpacket) | [<img src="https://appicon.pgyer.com/image/view/app_icons/c7b0d372a512d43cc4e19aafc4b4ab7d/120" width="80" height="80">](https://ffcwap.com/upload/biapp/)
+[<img src="https://pp.myapp.com/ma_icon/0/icon_53800104_1563159294/96" width="80" height="80">](https://sj.qq.com/myapp/detail.htm?apkName=com.mcht.redpacket) | [<img src="https://appicon.pgyer.com/image/view/app_icons/c7b0d372a512d43cc4e19aafc4b4ab7d/120" width="80" height="80">](https://ffcwap.com/upload/biapp/) |
 ## About Me  
 * **Email**: <blue-hair@foxmail.com>
 * **CSDN**: <https://blog.csdn.net/a295268305>

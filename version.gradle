@@ -9,7 +9,7 @@ ext {
             compileSdkVersion: 28,//使用 Android SDK 28版本编译你的应用
             buildToolsVersion: "28.0.3",//android构建工具的版本
 
-            versionCode      : 1,
+            versionCode      : 100010,
             versionName      : "1.0.1"
     ]
 

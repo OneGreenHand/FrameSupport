@@ -7,6 +7,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -116,13 +117,16 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         setContentView(mRootView, new LinearLayout.LayoutParams(getWidth(), LinearLayout.LayoutParams.WRAP_CONTENT));
     }
 
-    @SuppressLint("NewApi")
     @Override
     public void show() {
-        if (bContext instanceof AppCompatActivity){
-            AppCompatActivity activity  = (AppCompatActivity) bContext;
-            if (activity.isDestroyed()){//如果activity已经被销毁就不显示
-                return;
+        if (bContext instanceof Activity) {
+            Activity activity = (Activity) bContext;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                if (activity.isDestroyed())//如果activity已经被销毁就不显示
+                    return;
+            } else {
+                if (activity.isFinishing())
+                    return;
             }
         }
         super.show();

@@ -24,8 +24,8 @@ public class GlideImageUtil {
      */
     public static void showImage(Context context, String url, ImageView view) {
         Glide.with(context).load(url)//图片地址
-                .apply(new RequestOptions().placeholder(R.drawable.img_showing)
-                        .error(R.drawable.img_show_error))
+                .apply(new RequestOptions().placeholder(R.mipmap.img_showing)
+                        .error(R.mipmap.img_show_error))
                 //  .override(600,600)//指定尺寸(图片大小在xml中不能写死,是wrap_content才可以指定尺寸)
                 .into(view);
     }
@@ -39,8 +39,8 @@ public class GlideImageUtil {
 //        Glide.with(context)
 //                .load(url)
 //                .apply(RequestOptions.bitmapTransform(new MultiTransformation<Bitmap>(new CenterCrop(), new MaskTransformation(drawable)))
-//                        .placeholder(R.drawable.img_showing)
-//                        .error(R.drawable.img_show_error))
+//                        .placeholder(R.mipmap.img_showing)
+//                        .error(R.mipmap.img_show_error))
 //                .into(view);
 //    }
 //
@@ -51,8 +51,8 @@ public class GlideImageUtil {
 //        Glide.with(context)
 //                .load(url)
 //                .apply(RequestOptions.bitmapTransform(new CropCircleTransformation())
-//                        .placeholder(R.drawable.img_showing)
-//                        .error(R.drawable.img_show_error))
+//                        .placeholder(R.mipmap.img_showing)
+//                        .error(R.mipmap.img_show_error))
 //                .into(view);
 //    }
 //
@@ -67,8 +67,8 @@ public class GlideImageUtil {
 //                .load(url)
 //                .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(radius, 0,
 //                        cornerType))
-//                        .placeholder(R.drawable.img_showing)
-//                        .error(R.drawable.img_show_error))
+//                        .placeholder(R.mipmap.img_showing)
+//                        .error(R.mipmap.img_show_error))
 //                .into(view);
 //    }
 //
@@ -79,8 +79,8 @@ public class GlideImageUtil {
 //        Glide.with(context)
 //                .load(url)
 //                .apply(RequestOptions.bitmapTransform(new CropSquareTransformation())
-//                        .placeholder(R.drawable.img_showing)
-//                        .error(R.drawable.img_show_error))
+//                        .placeholder(R.mipmap.img_showing)
+//                        .error(R.mipmap.img_show_error))
 //                .into(view);
 //    }
 //
@@ -91,8 +91,8 @@ public class GlideImageUtil {
 //        Glide.with(context)
 //                .load(url)
 //                .apply(RequestOptions.bitmapTransform(new ColorFilterTransformation(color))
-//                        .placeholder(R.drawable.img_showing)
-//                        .error(R.drawable.img_show_error))
+//                        .placeholder(R.mipmap.img_showing)
+//                        .error(R.mipmap.img_show_error))
 //                .into(view);
 //    }
 
@@ -104,8 +104,8 @@ public class GlideImageUtil {
                 .asGif()
                 .load(url)
                 .apply(new RequestOptions()
-                        .placeholder(R.drawable.img_showing)
-                        .error(R.drawable.img_show_error))
+                        .placeholder(R.mipmap.img_showing)
+                        .error(R.mipmap.img_show_error))
                 .into(view);
     }
 
@@ -118,15 +118,15 @@ public class GlideImageUtil {
                     .asGif()
                     .load(url)
                     .apply(new RequestOptions()
-                            .placeholder(R.drawable.img_showing)
-                            .error(R.drawable.img_show_error))
+                            .placeholder(R.mipmap.img_showing)
+                            .error(R.mipmap.img_show_error))
                     .into(view);
         } else {
             Glide.with(context)
                     .load(url)
                     .apply(new RequestOptions()
-                            .placeholder(R.drawable.img_showing)
-                            .error(R.drawable.img_show_error))
+                            .placeholder(R.mipmap.img_showing)
+                            .error(R.mipmap.img_show_error))
                     .into(view);
         }
     }

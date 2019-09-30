@@ -132,9 +132,9 @@ public class TakePhotoDialog extends BaseDialog {
                         if (FileUtils.createOrExistsDir(imagePath))  //创建photo目录
                             show();
                         else
-                            ToastUtil.showShortToast("出现未知错误，请稍候重试~");
+                            ToastUtil.showShortToast("出现未知错误,请稍候重试");
                     } else if (permission.shouldShowRequestPermissionRationale) {//拒绝申请权限
-                        ToastUtil.showShortToast("您拒绝了应用权限，该功能暂时无法使用~");
+                        ToastUtil.showShortToast("您拒绝了应用权限,该功能暂时无法使用");
                     } else {//不在提醒申请权限
                         if (mActivity != null)
                             CommonUtil.getPermissions(mActivity, null);

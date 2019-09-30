@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="160dp"
         android:layout_height="147dp"
-        android:src="@drawable/frame_pager_error" />
+        android:src="@mipmap/frame_pager_error" />
 
     <TextView
         android:id="@+id/v_tips"

@@ -7,6 +7,7 @@ import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -61,7 +62,6 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     }
 
 
-    @SuppressLint("NewApi")
     /**
      * 开始倒计时
      */
@@ -72,8 +72,13 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
         }
         if (context instanceof Activity) {
             Activity activity = (Activity) context;
-            if (activity.isDestroyed()) //如果activity已经被销毁就不显示
-                return;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                if (activity.isDestroyed())//如果activity已经被销毁就不显示
+                    return;
+            } else {
+                if (activity.isFinishing())
+                    return;
+            }
         }
         new BaseModel.Builder(this)
                 .putParam("Mobile", phone)
@@ -165,7 +170,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
         if (countDownTimer == null)
             countDownTimer = new VerificationCountDownTimer(durationTime, intervalTime);
-        ToastUtil.showShortToast("验证码发送成功~");
+        ToastUtil.showShortToast("验证码发送成功");
         countDownTimer.start();//开始倒计时
     }
 

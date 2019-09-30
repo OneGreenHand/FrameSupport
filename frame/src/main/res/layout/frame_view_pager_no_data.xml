@@ -9,7 +9,7 @@
         android:layout_width="160dp"
         android:layout_height="147dp"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/frame_pager_error" />
+        android:src="@mipmap/frame_pager_error" />
 
     <TextView
         android:id="@+id/tv_view_pager_no_data_content"

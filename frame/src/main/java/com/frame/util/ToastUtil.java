@@ -12,14 +12,14 @@ public class ToastUtil {
      */
     public static void showShortToast(String content) {
         if (TextUtils.isEmpty(content))
-            Toast.makeText(FrameApplication.mContext, "额，好像什么也没有说~", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FrameApplication.mContext, "额,好像什么也没有说", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(FrameApplication.mContext, content, Toast.LENGTH_SHORT).show();
     }
 
     public static void showLongToast(String content) {
         if (TextUtils.isEmpty(content))
-            Toast.makeText(FrameApplication.mContext, "额，好像什么也没有说~", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FrameApplication.mContext, "额,好像什么也没有说", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(FrameApplication.mContext, content, Toast.LENGTH_LONG).show();
     }

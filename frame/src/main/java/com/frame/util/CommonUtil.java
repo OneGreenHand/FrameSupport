@@ -257,7 +257,7 @@ public class CommonUtil {
             intent.setData(Uri.parse(url));
             mContext.startActivity(intent);
         } catch (Exception e) {
-            ToastUtil.showShortToast("打开浏览器失败~");
+            ToastUtil.showShortToast("打开浏览器失败");
         }
     }
 

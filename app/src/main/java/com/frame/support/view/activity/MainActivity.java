@@ -36,10 +36,6 @@ public class MainActivity extends BaseActivity {
     ViewPager viewPager;
     @BindView(R.id.navigation_view)
     BottomNavigationView navigationView;
-    private HomeFragment homeFragment;
-    private GameFragment gameFragment;
-    private OnlineFragment onlineFragment;
-    private MineFragment mineFragment;
     private List<Fragment> mDatas = new ArrayList<>();
     //记录用户首次点击返回键的时间
     private long firstTime = 0;
@@ -51,14 +47,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        homeFragment = new HomeFragment();
-        gameFragment = new GameFragment();
-        onlineFragment = new OnlineFragment();
-        mineFragment = new MineFragment();
-        mDatas.add(homeFragment);
-        mDatas.add(gameFragment);
-        mDatas.add(onlineFragment);
-        mDatas.add(mineFragment);
+        mDatas.add(new HomeFragment());
+        mDatas.add(new GameFragment());
+        mDatas.add(new OnlineFragment());
+        mDatas.add(new MineFragment());
         viewPager.setOffscreenPageLimit(mDatas.size());
         initAdapter();
         initViewPagerChangeListener();
@@ -142,12 +134,10 @@ public class MainActivity extends BaseActivity {
                 return true;
             } else {
                 AppUtils.exitApp();
-                finish();
             }
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

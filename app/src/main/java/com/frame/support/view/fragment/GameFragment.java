@@ -41,7 +41,7 @@ public class GameFragment extends BaseFragment {
                 break;
             case R.id.download_apk:
                 if (!NetworkUtils.isWifiConnected()) {
-                    ToastUtil.showShortToast("请在wifi状态下下载~");
+                    ToastUtil.showShortToast("请在wifi状态下下载");
                 } else {
                     if (CommonUtil.notificationAuthority(mActivity)) {//检测通知栏是否打开
                         InstructionsUtils.downloadApk(mActivity, "", downloadUrl, "", true);
@@ -50,7 +50,7 @@ public class GameFragment extends BaseFragment {
                 break;
             case R.id.no_notice_download:
                 if (!NetworkUtils.isWifiConnected()) {
-                    ToastUtil.showShortToast("请在wifi状态下下载~");
+                    ToastUtil.showShortToast("请在wifi状态下下载");
                 } else {
                     InstructionsUtils.downloadApk(mActivity, "", downloadUrl, "", false);
                 }
@@ -58,12 +58,12 @@ public class GameFragment extends BaseFragment {
             case R.id.clear_download_apk:
                 if (FileUtils.isFileExists(BaseConfig.FILE_FOLDER + "tim.apk")) {
                     if (FileUtils.deleteFile(BaseConfig.FILE_FOLDER + "tim.apk")) {
-                        ToastUtil.showShortToast("删除文件成功，现在可以重新下载了~");
+                        ToastUtil.showShortToast("删除文件成功，现在可以重新下载了");
                     } else {
-                        ToastUtil.showShortToast("文件删除失败~");
+                        ToastUtil.showShortToast("文件删除失败");
                     }
                 } else {
-                    ToastUtil.showShortToast("无需清除~");
+                    ToastUtil.showShortToast("无需清除");
                 }
                 break;
         }

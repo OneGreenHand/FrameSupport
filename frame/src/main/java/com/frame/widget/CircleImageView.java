@@ -37,7 +37,6 @@ import com.frame.R;
  * @describe 圆形头像 https://github.com/hdodenhof/CircleImageView
  */
 public class CircleImageView extends ImageView {
-
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
     private static final Bitmap.Config BITMAP_CONFIG = Bitmap.Config.ARGB_8888;
     private static final int COLORDRAWABLE_DIMENSION = 2;
@@ -271,7 +270,6 @@ public class CircleImageView extends ImageView {
         }
         try {
             Bitmap bitmap;
-
             if (drawable instanceof ColorDrawable) {
                 bitmap = Bitmap.createBitmap(COLORDRAWABLE_DIMENSION, COLORDRAWABLE_DIMENSION, BITMAP_CONFIG);
             } else {
@@ -361,22 +359,26 @@ public class CircleImageView extends ImageView {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (mDisableCircularTransformation) {
+            return super.onTouchEvent(event);
+        }
         return inTouchableArea(event.getX(), event.getY()) && super.onTouchEvent(event);
     }
 
     private boolean inTouchableArea(float x, float y) {
+        if (mBorderRect.isEmpty()) {
+            return true;
+        }
         return Math.pow(x - mBorderRect.centerX(), 2) + Math.pow(y - mBorderRect.centerY(), 2) <= Math.pow(mBorderRadius, 2);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private class OutlineProvider extends ViewOutlineProvider {
-
         @Override
         public void getOutline(View view, Outline outline) {
             Rect bounds = new Rect();
             mBorderRect.roundOut(bounds);
             outline.setRoundRect(bounds, bounds.width() / 2.0f);
         }
-
     }
 }

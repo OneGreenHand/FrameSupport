@@ -151,7 +151,7 @@ public class BaseModel {
             }
             if (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW)
                 mBuilder.mBaseRequestView.showNetErrorView();
-            ToastUtil.showShortToast("请检查您的网络~");
+            ToastUtil.showShortToast("请检查您的网络");
             return null;
         }
         Observer<ResponseBody> subscriber = new Observer<ResponseBody>() {

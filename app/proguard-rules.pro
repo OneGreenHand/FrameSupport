@@ -135,6 +135,7 @@ void *(**On*Event);
 -keepclassmembers  class **$** extends com.frame.adapter.BaseViewHolder {
      <init>(...);
 }
+-keepattributes InnerClasses
 #---------------------------------第三方库及jar包-------------------------------
 #第三方不混淆
 # support-v4

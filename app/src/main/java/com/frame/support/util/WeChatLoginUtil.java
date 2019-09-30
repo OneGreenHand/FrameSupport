@@ -15,7 +15,7 @@ public class WeChatLoginUtil {
     public static void WeChatLogin(Context context) {
         IWXAPI iwxapi = WXAPIFactory.createWXAPI(context, BaseConfig.WEIXIN_APP_ID);
         if (!iwxapi.isWXAppInstalled()) {
-            ToastUtil.showShortToast("您手机尚未安装微信，请安装后再登录");
+            ToastUtil.showShortToast("您手机尚未安装微信,请安装后再登录");
             return;
         }
         iwxapi.registerApp(BaseConfig.WEIXIN_APP_ID);

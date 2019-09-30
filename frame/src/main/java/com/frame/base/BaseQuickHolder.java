@@ -27,7 +27,7 @@ public class BaseQuickHolder extends BaseViewHolder {
         ImageView view = getView(id);
         Glide.with(view.getContext())
                 .load(url)
-                .apply(new RequestOptions().placeholder(R.drawable.img_showing).error(R.drawable.img_show_error))
+                .apply(new RequestOptions().placeholder(R.mipmap.img_showing).error(R.mipmap.img_show_error))
                 .into(view);
         return this;
     }
@@ -48,7 +48,7 @@ public class BaseQuickHolder extends BaseViewHolder {
         ImageView iv = getView(viewId);
         Glide.with(mContext)
                 .load(url)//加载地址
-                .apply(new RequestOptions().override(width, height).placeholder(R.drawable.img_showing).error(R.drawable.img_show_error))
+                .apply(new RequestOptions().override(width, height).placeholder(R.mipmap.img_showing).error(R.mipmap.img_show_error))
                 .into(iv);
         return this;
     }
@@ -60,7 +60,7 @@ public class BaseQuickHolder extends BaseViewHolder {
         ImageView iv = getView(viewId);
         Glide.with(mContext)
                 .load(url)//加载地址
-                .apply(new RequestOptions().placeholder(R.drawable.img_showing).error(R.drawable.img_show_error))
+                .apply(new RequestOptions().placeholder(R.mipmap.img_showing).error(R.mipmap.img_show_error))
                 .into(iv);
         return this;
     }
@@ -87,7 +87,7 @@ public class BaseQuickHolder extends BaseViewHolder {
         Glide.with(mContext)
                 .asBitmap()
                 .load(url)
-                .apply(new RequestOptions().error(R.drawable.img_show_error))
+                .apply(new RequestOptions().error(R.mipmap.img_show_error))
                 .into(new BitmapImageViewTarget(iv) {
                     @Override
                     protected void setResource(Bitmap resource) {

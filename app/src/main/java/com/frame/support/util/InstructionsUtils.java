@@ -90,13 +90,13 @@ public class InstructionsUtils {
     public static void downloadApk(Context context, String packNmae, String title, String url, boolean isShowProgress) {
         if (TextUtils.isEmpty(packNmae)) {
             if (TextUtils.isEmpty(url)) {
-                ToastUtil.showShortToast("下载地址不能为空，请稍后重试~");
+                ToastUtil.showShortToast("下载地址不能为空,请稍后重试");
                 return;
             }
             if (hasPermission(context))
                 download(context, title, url, isShowProgress);
             else
-                ToastUtil.showShortToast("暂无相关储存权限，无法下载该应用！");
+                ToastUtil.showShortToast("暂无相关储存权限,无法下载该应用");
         } else {//检查是否安装
             checkInstall(context, false, packNmae, title, url, isShowProgress);
         }
@@ -114,7 +114,7 @@ public class InstructionsUtils {
     public static void downloadApk(Activity activity, String packNmae, String title, String url, boolean isShowProgress) {
         if (TextUtils.isEmpty(packNmae)) {
             if (TextUtils.isEmpty(url)) {
-                ToastUtil.showShortToast("下载地址不能为空，请稍后重试~");
+                ToastUtil.showShortToast("下载地址不能为空,请稍后重试");
                 return;
             }
             if (activity instanceof FragmentActivity) {
@@ -124,13 +124,13 @@ public class InstructionsUtils {
                             if (permission.granted) {//权限申请成功
                                 download(activity, title, url, isShowProgress);
                             } else if (permission.shouldShowRequestPermissionRationale) {//拒绝申请权限
-                                ToastUtil.showShortToast("由于您拒绝了存储权限申请，该功能无法使用！");
+                                ToastUtil.showShortToast("由于您拒绝了存储权限申请,该功能无法使用");
                             } else {//不在提醒申请权限
-                                ToastUtil.showShortToast("由于您拒绝了存储权限申请，该功能无法使用！");
+                                ToastUtil.showShortToast("由于您拒绝了存储权限申请,该功能无法使用");
                             }
                         });
             } else {
-                ToastUtil.showShortToast("暂无相关储存权限，无法下载该应用！");
+                ToastUtil.showShortToast("暂无相关储存权限,无法下载该应用");
             }
         } else {//检查是否安装
             checkInstall(activity, false, packNmae, title, url, isShowProgress);
@@ -174,7 +174,7 @@ public class InstructionsUtils {
                     public void accept(Boolean s) throws Exception {
                         if (isOpen) {//需要打开app
                             if (!s) //未安装
-                                ToastUtil.showShortToast("应用未安装！");
+                                ToastUtil.showShortToast("应用未安装");
                             else
                                 AppUtils.launchApp(packageName);
                         } else {//下载
@@ -185,7 +185,7 @@ public class InstructionsUtils {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        ToastUtil.showShortToast("出现异常，请稍后重试！");
+                        ToastUtil.showShortToast("出现异常,请稍后重试");
                     }
                 });
     }

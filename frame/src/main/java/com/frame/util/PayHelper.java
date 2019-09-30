@@ -44,7 +44,7 @@ public class PayHelper {
         if (wxapi == null) {
             wxapi = WXAPIFactory.createWXAPI(FrameApplication.mContext, BaseConfig.WEIXIN_APP_ID);
             if (!wxapi.isWXAppInstalled()) {
-                ToastUtil.showShortToast("未安装微信客户端!");
+                ToastUtil.showShortToast("未安装微信客户端");
                 return;
             }
             wxapi.registerApp(BaseConfig.WEIXIN_APP_ID);// 将该app注册到微信

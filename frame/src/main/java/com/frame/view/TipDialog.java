@@ -92,8 +92,6 @@ public class TipDialog extends BaseDialog {
 
     /**
      * 设置带颜色的问题(html)
-     *
-     * @param msg
      */
     public void setSureColorText(String msg) {
         sure.setText(CommonUtil.setHtmlColor(msg));
@@ -122,14 +120,12 @@ public class TipDialog extends BaseDialog {
         if (v == R.id.cancel) {
             if (cancelCalk != null)
                 cancelCalk.OnClick(view);
-            dismiss();
         } else if (v == R.id.sure) {
             if (sureCalk != null)
                 sureCalk.OnClick(view);
-            dismiss();
         }
+        dismiss();
     }
-
 
     public TipDialog(@NonNull Context context) {
         super(context);

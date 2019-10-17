@@ -327,7 +327,7 @@ public class BaseModel {
             return this;
         }
 
-        //设置加载文字(默认：请求中)
+        //设置加载文字(默认：拼命加载中...)
         public Builder setMsgType(Object msgType) {
             mMsgType = msgType;
             return this;

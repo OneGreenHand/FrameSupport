@@ -142,17 +142,13 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
     }
 
     /**
-     * 接收到分发到事件
-     *
-     * @param event 事件
+     * 接收到分发的普通事件
      */
     protected void receiveEvent(EventBean event) {
     }
 
     /**
      * 接受到分发的粘性事件
-     *
-     * @param event 粘性事件
      */
     protected void receiveStickyEvent(EventBean event) {
     }
@@ -162,9 +158,9 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
      */
     @Override
     public void showLoadingDialog(Object msgType, boolean isCancel) {
-        String message = "玩命加载中...";
+        String message = "";
         if (msgType == null || (msgType instanceof String && ((String) msgType).isEmpty())) {
-            message = "请求中...";
+            message = "拼命加载中...";
         } else if (msgType instanceof String) {
             message = (String) msgType;
         } else if (msgType instanceof Integer) {

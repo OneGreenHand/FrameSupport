@@ -10,8 +10,10 @@ import com.frame.FrameApplication;
 import com.frame.config.AppConfig;
 import com.frame.config.BaseConfig;
 import com.frame.support.util.ChannelUtils;
+import com.frame.util.LogUtil;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.smtt.sdk.QbSdk;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,6 +28,7 @@ public class AppContext extends FrameApplication {
         super.onCreate();
         Utils.init(this);//初始化工具类
         //initBugly();
+        initX5();
         initFolder();
     }
 
@@ -40,6 +43,25 @@ public class AppContext extends FrameApplication {
         // Beta.installTinker();
     }
 
+    /**
+     * 初始化X5
+     * 搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。
+     */
+    private void initX5() {
+        QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
+            @Override
+            public void onViewInitFinished(boolean arg0) {
+                //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
+                LogUtil.e("X5", " onViewInitFinished is " + arg0);
+            }
+
+            @Override
+            public void onCoreInitFinished() {
+            }
+        };
+        //x5内核初始化接口
+        QbSdk.initX5Environment(getApplicationContext(), cb);
+    }
 
     /**
      * 创建APP文件

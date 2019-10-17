@@ -2,14 +2,14 @@ package com.frame.support.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 
 import com.frame.base.activity.BaseActivity;
 import com.frame.support.R;
-import com.frame.support.webview.BaseWebView;
+import com.frame.support.webview.X5WebView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 可以播放视频的webview
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 public class VideoWebActivity extends BaseActivity {
 
     @BindView(R.id.web_view)
-    BaseWebView webView;
+    X5WebView webView;
 
     public static void openActivity(Context context) {
         context.startActivity(new Intent(context, VideoWebActivity.class));
@@ -26,6 +26,7 @@ public class VideoWebActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         initTitleBar("可播放视频的WebView");
+        getWindow().setFormat(PixelFormat.TRANSLUCENT);//为了避免视频闪屏和透明问题
         webView.isShowLoading(false);//不显示加载框(默认为显示)
         webView.loadUrl("https://www.baidu.com/");
     }

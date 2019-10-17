@@ -235,9 +235,9 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
 
     @Override
     public void showLoadingDialog(Object msgType, boolean isCancel) {
-        String message = "玩命加载中...";
+        String message = "";
         if (msgType == null) {
-            message = "请求中...";
+            message = "拼命加载中...";
         } else if (msgType instanceof String) {
             message = (String) msgType;
         } else if (msgType instanceof Integer) {

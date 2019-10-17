@@ -46,6 +46,17 @@ public class PriceUtil {
         return s;
     }
 
+    public static String subZeroAndDot(double s) {
+        String money = String.valueOf(s);
+        if (TextUtils.isEmpty(money) || money.trim().isEmpty()) {
+            return "0";
+        } else if (money.indexOf(".") > 0) {
+            money = money.replaceAll("0+?$", "");//去掉多余的0
+            money = money.replaceAll("[.]$", "");//如最后一位是.则去掉
+        }
+        return money;
+    }
+
     /**
      * 比例转换，例如100:1
      */
@@ -107,21 +118,37 @@ public class PriceUtil {
         return new BigDecimal(String.valueOf(aFloat)).setScale(digit, BigDecimal.ROUND_HALF_UP);
     }
 
-    public static Spannable getPriceSp(String allpriceCart, int font1, int font2, String color1, String color2, String text) {
-        Spannable sp = new SpannableString(allpriceCart + text);
-        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, allpriceCart.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(font2, true), allpriceCart.length(), allpriceCart.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color1)), 0, allpriceCart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color2)), allpriceCart.length(), allpriceCart.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    public static Spannable setLeftPriceSp(String company, int font1, int font2, int color, String text) {//￥99(单色)
+        Spannable sp = new SpannableString(company + text);
+        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, company.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(font2, true), company.length(), company.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color), 0, company.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sp;
     }
 
-    public static Spannable getPriceSp(String allpriceCart, int font1, int font2, String color1, String text) {
-        Spannable sp = new SpannableString(allpriceCart + text);
-        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, allpriceCart.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(font2, true), allpriceCart.length(), allpriceCart.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color1)), 0, allpriceCart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(Color.parseColor(color1)), allpriceCart.length(), allpriceCart.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    public static Spannable setLeftPriceSp(String company, int font1, int font2, int color1, int color2, String text) {//￥99(双色)
+        Spannable sp = new SpannableString(company + text);
+        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, company.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(font2, true), company.length(), company.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color1), 0, company.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color2), company.length(), company.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return sp;
+    }
+
+    public static Spannable setRightPriceSp(String text, String company, int font1, int font2, int color) {//99金币(单色)
+        Spannable sp = new SpannableString(text + company);
+        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(font2, true), text.length(), company.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color), 0, company.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return sp;
+    }
+
+    public static Spannable setRightPriceSp(String text, int font1, int font2, int color1, int color2, String company) {//99金币(双色)
+        Spannable sp = new SpannableString(text + company);
+        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(font2, true), text.length(), company.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color1), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color2), text.length(), company.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sp;
     }
 

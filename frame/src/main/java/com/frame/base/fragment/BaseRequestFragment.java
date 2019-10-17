@@ -40,7 +40,7 @@ public abstract class BaseRequestFragment<P extends BasePresenter, B extends Bas
     @Override
     public void requestError(Throwable e, Object tag) {
         //网络请求错误
-        LogUtil.e("net_error", e.getMessage());
+        LogUtil.e("okhttp", e.getMessage());
     }
 
     @Override

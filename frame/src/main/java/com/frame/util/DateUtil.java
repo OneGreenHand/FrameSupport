@@ -14,10 +14,8 @@ public class DateUtil {
      * 获取当前系统时间
      */
     public static String getDate(int type) {
-        // 使用默认时区和语言环境获得一个日历
-        Calendar cale = Calendar.getInstance();
-        // 将Calendar类型转换成Date类型
-        Date tasktime = cale.getTime();
+        Calendar cale = Calendar.getInstance(); // 使用默认时区和语言环境获得一个日历
+        Date tasktime = cale.getTime();   // 将Calendar类型转换成Date类型
         String pattern = "";
         switch (type) {
             case 1:
@@ -60,9 +58,7 @@ public class DateUtil {
                 pattern = "ss";
                 break;
         }
-        // 设置日期输出的格式
-        SimpleDateFormat df = new SimpleDateFormat(pattern);
-        // 格式化输出
+        SimpleDateFormat df = new SimpleDateFormat(pattern); // 设置日期输出的格式
         return df.format(tasktime);
     }
 
@@ -80,10 +76,8 @@ public class DateUtil {
      * 获取当前时间的前一天时间
      */
     public static Calendar getBeforeDay(Calendar cl) {
-        //使用roll方法进行向前回滚
-        //cl.roll(Calendar.DATE, -1);
-        //使用set方法直接进行设置
-        int day = cl.get(Calendar.DATE);
+        //cl.roll(Calendar.DATE, -1); //使用roll方法进行向前回滚
+        int day = cl.get(Calendar.DATE);  //使用set方法直接进行设置
         cl.set(Calendar.DATE, day - 1);
         return cl;
     }
@@ -92,10 +86,8 @@ public class DateUtil {
      * 获取当前时间的后一天时间
      */
     public static Calendar getAfterDay(Calendar cl) {
-        //使用roll方法进行回滚到后一天的时间
-        //cl.roll(Calendar.DATE, 1);
-        //使用set方法直接设置时间值
-        int day = cl.get(Calendar.DATE);
+        //cl.roll(Calendar.DATE, 1); //使用roll方法进行回滚到后一天的时间
+        int day = cl.get(Calendar.DATE);  //使用set方法直接设置时间值
         cl.set(Calendar.DATE, day + 1);
         return cl;
     }
@@ -104,20 +96,14 @@ public class DateUtil {
      * 获取当前时间的后30天时间
      */
     public static Calendar getAfter30Day(Calendar cl) {
-        //使用roll方法进行回滚到后30天的时间
-        //cl.roll(Calendar.DATE, 30);
-        //使用set方法直接设置时间值
-        int day = cl.get(Calendar.DATE);
+        //cl.roll(Calendar.DATE, 30);//使用roll方法进行回滚到后30天的时间
+        int day = cl.get(Calendar.DATE);  //使用set方法直接设置时间值
         cl.set(Calendar.DATE, day + 30);
         return cl;
     }
 
     /**
      * 得到几天前的时间
-     *
-     * @param d
-     * @param day
-     * @return
      */
     public static Date getDateBefore(Date d, int day) {
         Calendar now = Calendar.getInstance();
@@ -128,10 +114,6 @@ public class DateUtil {
 
     /**
      * 得到几天后的时间
-     *
-     * @param d
-     * @param day
-     * @return
      */
     public static Date getDateAfter(Date d, int day) {
         Calendar now = Calendar.getInstance();

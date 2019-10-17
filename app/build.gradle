@@ -16,7 +16,9 @@ android {
         versionName version.versionName
         multiDexEnabled true
         ndk {
-            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "armeabi", "x86_64", "mips", 'mips64'
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'//用得很少
         }
         javaCompileOptions {   //解决AndroidStudio 3.0的问题
             annotationProcessorOptions { includeCompileClasspath = true }
@@ -64,11 +66,12 @@ android {
         abortOnError false  //true--错误发生后停止gradle构建
         disable 'MissingTranslation' //关闭指定问题检查
     }
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['src/main/jniLibs']
-        }
-    }
+
+//    sourceSets {
+//        main {//自定义了so文件加载目录,默认so文件加载目录为:src/main/jniLibs
+//            jniLibs.srcDirs = ['src/main/jniLibs']
+//        }
+//    }
 
     dexOptions {//解决编译内存溢出问题
         dexInProcess true
@@ -76,7 +79,7 @@ android {
         javaMaxHeapSize "8g"
     }
     repositories {
-        flatDir {
+        flatDir {//引用frame中的aar架包,名字、路径保持一致
             dirs 'libs','../frame/libs'
         }
     }
@@ -91,4 +94,6 @@ dependencies {
     //下载上传工具类
     annotationProcessor dependencies.aria.aria_compiler
     implementation project(':frame')
+    //腾讯x5
+    implementation files('libs\\Tencent_X5_20190805_175505.jar')
 }

@@ -50,7 +50,7 @@ public class PayHelper {
             wxapi.registerApp(BaseConfig.WEIXIN_APP_ID);// 将该app注册到微信
         }
         PayReq req = new PayReq();
-        if (result != null) {
+        if (result != null) {//TODO  这里要根据后台返回的字段名和返回体，进行修改
             req.appId = result.data.appId;
             req.partnerId = result.data.partnerId;
             req.prepayId = result.data.prepayId;

@@ -27,25 +27,13 @@ public class IntentUtil {
     /**
      * 跳转activity,通过bundle方式传入数据
      */
-    public static void goActivity(Context context, Class<?> activity, Bundle bundle, boolean ifLogin, boolean ifAgainCycle) {
+    public static void goActivity(Context context, Class<?> activity, Bundle bundle, boolean ifLogin) {
         Intent intent = new Intent();
-        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//在Activity上下文之外启动Activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//在Activity上下文之外启动Activity
         if (ifLogin && !UserUtil.isLogin()) {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             //intent.setClass(context, LoginActivity.class);
             //  context.startActivity(intent);
         } else {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             intent.setClass(context, activity);
             if (bundle == null)
                 bundle = new Bundle();
@@ -57,25 +45,12 @@ public class IntentUtil {
     /**
      * 跳转activity并回调,通过bundle方式传入数据
      */
-    public static void goActivityForResult(Activity context, Class<?> activity, Bundle bundle, int requestCode, boolean ifLogin, boolean ifAgainCycle) {
+    public static void goActivityForResult(Activity context, Class<?> activity, Bundle bundle, int requestCode, boolean ifLogin) {
         Intent intent = new Intent();
-        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (ifLogin && !UserUtil.isLogin()) {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             //intent.setClass(context, LoginActivity.class);
             //  context.startActivity(intent);
         } else {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             intent.setClass(context, activity);
             if (bundle != null)
                 intent.putExtras(bundle);
@@ -86,26 +61,14 @@ public class IntentUtil {
     /**
      * fragment跳转activity,通过bundle方式传入数据
      */
-    public static void goFragmentForResult(Fragment fragment, Class<?> activity, Bundle bundle, int requestCode, boolean ifLogin, boolean ifAgainCycle) {
+    public static void goFragmentForResult(Fragment fragment, Class<?> activity, Bundle bundle, int requestCode, boolean ifLogin) {
         Intent intent = new Intent();
         Context mContext = FrameApplication.mContext;
-        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (ifLogin && !UserUtil.isLogin()) {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             //intent.setClass(fragment.getActivity(), LoginActivity.class);
             //  mContext.startActivity(intent);
         } else {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             intent.setClass(mContext, activity);
             if (bundle != null)
                 intent.putExtras(bundle);
@@ -117,25 +80,13 @@ public class IntentUtil {
      * 跳转activity,通过map方式传入数据,主要配合CommonUtil中goLocationActivity方法使用
      * 携带的数据(目前只支持 String、Boolean、Integer、Double、Long、Float、Bundle、Parcelable、Serializable)
      */
-    public static void goActivity2(Context context, Class<?> activity, Map<String, Object> param, boolean ifLogin, boolean ifAgainCycle) {
+    public static void goActivity2(Context context, Class<?> activity, Map<String, Object> param, boolean ifLogin) {
         Intent intent = new Intent();
-        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//在Activity上下文之外启动Activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (ifLogin && !UserUtil.isLogin()) {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             //   intent.setClass(context, LoginActivity.class);
             //    context.startActivity(intent);
         } else {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             intent.setClass(context, activity);
             if (param != null && param.size() > 0) {
                 for (Map.Entry<String, Object> me : param.entrySet()) {
@@ -170,25 +121,12 @@ public class IntentUtil {
      * 跳转activity并回调,通过map方式传入数据,主要配合CommonUtil中goLocationActivity方法使用
      * 携带的数据(目前只支持 String、Boolean、Integer、Double、Long、Float、Bundle、Parcelable、Serializable)
      */
-    public static void goActivityForResult2(Activity context, Class<?> activity, Map<String, Object> param, int requestCode, boolean ifLogin, boolean ifAgainCycle) {
+    public static void goActivityForResult2(Activity context, Class<?> activity, Map<String, Object> param, int requestCode, boolean ifLogin) {
         Intent intent = new Intent();
-        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (ifLogin && !UserUtil.isLogin()) {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             //     intent.setClass(context, LoginActivity.class);
             //  context.startActivity(intent);
         } else {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             intent.setClass(context, activity);
             if (param != null && param.size() > 0) {
                 for (Map.Entry<String, Object> me : param.entrySet()) {
@@ -223,26 +161,14 @@ public class IntentUtil {
      * fragment跳转activity,通过map方式传入数据,主要配合CommonUtil中goLocationActivity方法使用
      * 携带的数据(目前只支持 String、Boolean、Integer、Double、Long、Float、Bundle、Parcelable、Serializable)
      */
-    public static void goFragmentForResult2(Fragment fragment, Class<?> activity, Map<String, Object> param, int requestCode, boolean ifLogin, boolean ifAgainCycle) {
+    public static void goFragmentForResult2(Fragment fragment, Class<?> activity, Map<String, Object> param, int requestCode, boolean ifLogin) {
         Intent intent = new Intent();
         Context mContext = FrameApplication.mContext;
-        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (ifLogin && !UserUtil.isLogin()) {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             //    intent.setClass(fragment.getActivity(), LoginActivity.class);
             //    mContext.startActivity(intent);
         } else {
-            if (AppManager.getAppManager().contains(activity)) {//如果该Activity实例存在于任务栈中
-                if (ifAgainCycle) //就结束该Activity实例(重新走生命周期)
-                    AppManager.getAppManager().finishActivity(activity);
-                else //就复用该Activity实例(不会重新走生命周期)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            }
             intent.setClass(mContext, activity);
             if (param != null && param.size() > 0) {
                 for (Map.Entry<String, Object> me : param.entrySet()) {

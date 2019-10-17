@@ -40,7 +40,7 @@ public class CommonUtil {
     public static void getPermissions(Context context, String tips) {
         TipDialog dialog = new TipDialog(context);
         if (TextUtils.isEmpty(tips))
-            dialog.setContent("为了给您提供更好的服务，请设置相应权限哦！如若需要，请单击【确定】按钮前往设置中心进行权限授权。");
+            dialog.setContent("为了给您提供更好的服务,请授权APP必要的权限！请单击【确定】按钮前往设置中心授权权限。");
         else
             dialog.setContent(tips);
         dialog.setCancel(false);
@@ -61,7 +61,7 @@ public class CommonUtil {
         boolean isOpened = manager.areNotificationsEnabled();//API 19以上也可以用这个判断
         if (!isOpened) {//没有授予通知权限
             TipDialog dialog = new TipDialog(context);
-            dialog.setContent("检测到你未开启系统通知栏权限，将影响部分功能正常使用，是否前往开启？");
+            dialog.setContent("你未开启系统通知栏权限,将影响部分功能正常使用,是否前往开启?");
             dialog.setOnSureClick(view -> {
                 Intent intent = new Intent();
                 if (Build.VERSION.SDK_INT >= 26) { // android 8.0引导
@@ -278,7 +278,7 @@ public class CommonUtil {
         if (TextUtils.isEmpty(edInput)) {
             ToastUtil.showShortToast("密码输入不能为空");
             return false;
-        } else if (edInput.length() < 8) {
+        } else if (edInput.length() < 8 || edInput.length() > 20) {
             ToastUtil.showShortToast("密码长度为8-20位");
             return false;
         } else {
@@ -318,27 +318,23 @@ public class CommonUtil {
     }
 
     //设置消息小图标
-    public static void setMsgCountIcon(String count, TextView tv) {
+    public static void setMsgCountIcon(int count, TextView tv) {
         if (tv == null)
             return;
-        if (!TextUtils.isEmpty(count)) {
-            if (Integer.parseInt(count) == 0) {
-                tv.setVisibility(View.INVISIBLE);
-            } else if (Integer.parseInt(count) < 10) {
-                tv.setVisibility(View.VISIBLE);
-                tv.setText(count);
-                tv.setBackgroundResource(R.drawable.shape_msg_circular);
-            } else if (Integer.parseInt(count) >= 10) {
-                tv.setVisibility(View.VISIBLE);
-                tv.setText(count);
-                tv.setBackgroundResource(R.drawable.shape_msg_square);
-            } else if (Integer.parseInt(count) > 99) {
-                tv.setVisibility(View.VISIBLE);
-                tv.setText("99+");
-                tv.setBackgroundResource(R.drawable.shape_msg_square);
-            }
-        } else {
+        if (count == 0) {
             tv.setVisibility(View.INVISIBLE);
+        } else if (count < 10) {
+            tv.setVisibility(View.VISIBLE);
+            tv.setText(count);
+            tv.setBackgroundResource(R.drawable.shape_msg_circular);
+        } else if (count >= 10) {
+            tv.setVisibility(View.VISIBLE);
+            tv.setText(count);
+            tv.setBackgroundResource(R.drawable.shape_msg_square);
+        } else if (count > 99) {
+            tv.setVisibility(View.VISIBLE);
+            tv.setText("99+");
+            tv.setBackgroundResource(R.drawable.shape_msg_square);
         }
     }
 
@@ -354,6 +350,7 @@ public class CommonUtil {
         try {
 //            if (needlogin) {//如果需要登录
 //             Intent intent = new Intent();
+//             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//在Activity上下文之外启动Activity
 //             intent.setClass(context, getActivityClassName("LoginActivity"));
 //             context.startActivity(intent);
 //            } else {

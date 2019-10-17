@@ -18,23 +18,17 @@ public class DialogUtil {
     }
 
     public static WrapperDialog getDialog(Context context, int view, int location) {
-        return getDialog(context, view, location, true, true);
+        return getDialog(context, view, location, true);
     }
 
-    public static WrapperDialog getDialog(Context context, int view, int location, boolean cancel) {
-        return getDialog(context, view, location, cancel, true);
-    }
 
     /**
      * @param cancel   是否可以取消
      * @param location 位置(0 TOP 1 BOTTOM  2 LEFT 3 RIGHT 4 CENTER 5 CENTER_VERTICAL 6 CENTER_HORIZONTAL)
      */
-    public static WrapperDialog getDialog(Context context, int view, int location, boolean cancel, boolean needBG) {
+    public static WrapperDialog getDialog(Context context, int view, int location, boolean cancel) {
         WrapperDialog dialog;
-        if (needBG) //是否需要黑色背景
-            dialog = new WrapperDialog(context, R.style.ActionSheetDialogStyle);
-        else
-            dialog = new WrapperDialog(context, R.style.ActionSheetDialogStyle2);
+        dialog = new WrapperDialog(context, R.style.ActionSheetDialogStyle);
         dialog.setCancelable(cancel);//弹出后会点击屏幕或物理返回键，dialog不消失
         dialog.setCanceledOnTouchOutside(cancel);// 弹出后会点击屏幕，dialog不消失；点击物理返回键dialog消失
         dialog.getWindow().setContentView(view);

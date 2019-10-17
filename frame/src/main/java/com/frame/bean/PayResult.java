@@ -29,8 +29,7 @@ public class PayResult {
 
     @Override
     public String toString() {
-        return "resultStatus={" + resultStatus + "};memo={" + memo
-                + "};result={" + result + "}";
+        return "resultStatus={" + resultStatus + "};memo={" + memo + "};result={" + result + "}";
     }
 
     /**

@@ -61,25 +61,6 @@
         <!-- Dialog以外的区域模糊效果 -->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
-    <!-- Dialog底部弹出样式 无黑色背景 -->
-    <style name="ActionSheetDialogStyle2" parent="android:style/Theme.Dialog">
-        <!-- Dialog进入及退出动画 -->
-        <item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item>
-        <!-- 是否有覆盖 -->
-        <item name="android:windowContentOverlay">@null</item>
-        <!-- 边框 -->
-        <item name="android:windowFrame">@null</item>
-        <!-- 浮于Activity之上 -->
-        <item name="android:windowIsFloating">true</item>
-        <!-- 半透明 -->
-        <item name="android:windowIsTranslucent">true</item>
-        <!-- 无标题 -->
-        <item name="android:windowNoTitle">true</item>
-        <!-- 背景透明 -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <!-- Dialog以外的区域模糊效果 -->
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
     <!-- Dialog底部弹出动画 -->
     <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/dialog_enter</item>

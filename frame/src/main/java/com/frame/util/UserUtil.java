@@ -31,11 +31,10 @@ public class UserUtil {
      * 目前是根据token来判断
      */
     public static boolean isLogin() {
-        if (TextUtils.isEmpty(getToken()) || getToken().trim().equals("")) {
+        if (TextUtils.isEmpty(getToken()) || getToken().trim().equals(""))
             return false;
-        } else {
+        else
             return true;
-        }
     }
 
     /**

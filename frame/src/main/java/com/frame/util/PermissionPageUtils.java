@@ -24,22 +24,20 @@ public class PermissionPageUtils {
     public static void start(Context context, boolean newTask) {
 
         Intent intent;
-        if (MARK.contains("huawei")) {
+        if (MARK.contains("huawei"))
             intent = huawei(context);
-        } else if (MARK.contains("xiaomi")) {
+        else if (MARK.contains("xiaomi"))
             intent = xiaomi(context);
-        } else if (MARK.contains("oppo")) {
+        else if (MARK.contains("oppo"))
             intent = oppo(context);
-        } else if (MARK.contains("vivo")) {
+        else if (MARK.contains("vivo"))
             intent = vivo(context);
-        } else if (MARK.contains("meizu")) {
+        else if (MARK.contains("meizu"))
             intent = meizu(context);
-        } else {
+        else
             intent = google(context);
-        }
-        if (newTask) {
+        if (newTask)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
         try {
             context.startActivity(intent);
         } catch (Exception e) {
@@ -68,13 +66,10 @@ public class PermissionPageUtils {
         Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
         intent.putExtra("extra_pkgname", context.getPackageName());
         if (hasIntent(context, intent)) return intent;
-
         intent.setPackage("com.miui.securitycenter");
         if (hasIntent(context, intent)) return intent;
-
         intent.setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.AppPermissionsEditorActivity");
         if (hasIntent(context, intent)) return intent;
-
         intent.setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity");
         return intent;
     }
@@ -84,10 +79,8 @@ public class PermissionPageUtils {
         intent.putExtra("packageName", context.getPackageName());
         intent.setClassName("com.color.safecenter", "com.color.safecenter.permission.floatwindow.FloatWindowListActivity");
         if (hasIntent(context, intent)) return intent;
-
         intent.setClassName("com.coloros.safecenter", "com.coloros.safecenter.sysfloatwindow.FloatWindowListActivity");
         if (hasIntent(context, intent)) return intent;
-
         intent.setClassName("com.oppo.safe", "com.oppo.safe.permission.PermissionAppListActivity");
         return intent;
     }
@@ -97,7 +90,6 @@ public class PermissionPageUtils {
         intent.setClassName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.FloatWindowManager");
         intent.putExtra("packagename", context.getPackageName());
         if (hasIntent(context, intent)) return intent;
-
         intent.setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.safeguard.SoftPermissionDetailActivity"));
         return intent;
     }

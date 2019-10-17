@@ -174,9 +174,8 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventBusCome(EventBean event) {
-        if (event != null) {
+        if (event != null)
             receiveEvent(event);
-        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -188,17 +187,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     }
 
     /**
-     * 接收到分发到事件
-     *
-     * @param event 事件
+     * 接收到分发的普通事件
      */
     protected void receiveEvent(EventBean event) {
     }
 
     /**
      * 接受到分发的粘性事件
-     *
-     * @param event 粘性事件
      */
     protected void receiveStickyEvent(EventBean event) {
     }
@@ -280,9 +275,9 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      */
     @Override
     public void showLoadingDialog(Object msgType, boolean isCancel) {
-        String message = "玩命加载中...";
+        String message = "";
         if (msgType == null || (msgType instanceof String && ((String) msgType).isEmpty())) {
-            message = "请求中...";
+            message = "拼命加载中...";
         } else if (msgType instanceof String) {
             message = (String) msgType;
         } else if (msgType instanceof Integer) {

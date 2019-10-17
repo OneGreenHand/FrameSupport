@@ -1,7 +1,5 @@
 package com.frame.config;
 
-import com.blankj.utilcode.util.AppUtils;
-
 /**
  * 应用程序配置类：用于保存用户相关信息及设置
  */
@@ -26,6 +24,6 @@ public class AppConfig {
         //起始页下标
         public static final int START_INDEX = 1;
         //每页的数据量
-        public static final int PAGE_COUNT = 20;
+        public static final int PAGE_COUNT = 15;
     }
 }

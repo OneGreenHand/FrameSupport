@@ -26,7 +26,7 @@ import com.frame.R;
 import butterknife.ButterKnife;
 
 /**
- *  通用dialog
+ * 通用dialog
  */
 public abstract class BaseDialog extends Dialog implements LifecycleObserver {
 
@@ -38,46 +38,52 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     private int[] mIds;
 
     protected int marginLeftAndRightDp = 0;
-    public   Context bContext;
+    public Context bContext;
 
     public BaseDialog(@NonNull Context context) {
         super(context, R.style.ActionSheetDialogStyle);//默认为dialog样式
-        this.bContext=context;
+        this.bContext = context;
         initCommon(context);
     }
 
     public BaseDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
-        this.bContext=context;
+        this.bContext = context;
         initCommon(context);
     }
 
-    public BaseDialog(@NonNull Context context, int themeResId, int animResId) {
+    public BaseDialog(@NonNull Context context, int themeResId, int gravity) {
         super(context, themeResId);
-        this.animResId = animResId;
-        this.bContext=context;
+        this.gravity = gravity;
+        this.bContext = context;
         initCommon(context);
-
     }
 
     public BaseDialog(@NonNull Context context, int themeResId, int animResId, int gravity) {
         super(context, themeResId);
         this.gravity = gravity;
         this.animResId = animResId;
-        this.bContext=context;
+        this.bContext = context;
         initCommon(context);
     }
 
-    public BaseDialog(@NonNull Context context, int themeResId, int gravity, boolean isCancelable, boolean isCanceledOnTouchOutside) {
+    public BaseDialog(@NonNull Context context, int themeResId, int gravity, boolean isCancelable) {
         super(context, themeResId);
         this.gravity = gravity;
         this.isCancelable = isCancelable;
-        this.bContext=context;
+        this.bContext = context;
         initCommon(context);
     }
 
+    /**
+     * 在initCommon（）方法前调用
+     */
+    public void setGravity(int gravity) {
+        this.gravity = gravity;
+    }
+
     protected void initCommon(Context context) {
-        if (context instanceof AppCompatActivity){
+        if (context instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) context;
             activity.getLifecycle().addObserver(this);
         }
@@ -154,7 +160,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    public void onDestroy(){
+    public void onDestroy() {
         if (isShowing())
             dismiss();
     }

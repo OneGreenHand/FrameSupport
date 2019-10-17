@@ -62,8 +62,6 @@ dependencies {
         exclude group: 'com.android.support'
     }
     annotationProcessor dependencies.glide.compiler
-    //图片处理库(并不是很兼容特别是圆角)
-    //  api dependencies.glide.transformations
     //分Dex
     api dependencies.multidex
     //butterknife

@@ -42,18 +42,6 @@ public class BaseQuickHolder extends BaseViewHolder {
     }
 
     /**
-     * 设置本地图片
-     */
-    public BaseQuickHolder setLocalImage(int viewId, int url, int width, int height, Context mContext) {
-        ImageView iv = getView(viewId);
-        Glide.with(mContext)
-                .load(url)//加载地址
-                .apply(new RequestOptions().override(width, height).placeholder(R.mipmap.img_showing).error(R.mipmap.img_show_error))
-                .into(iv);
-        return this;
-    }
-
-    /**
      * 设置图片
      */
     public BaseQuickHolder setImageByUrl(int viewId, String url, Context mContext) {
@@ -64,20 +52,6 @@ public class BaseQuickHolder extends BaseViewHolder {
                 .into(iv);
         return this;
     }
-
-//    /**
-//     * 设置圆角图片(并不兼容)
-//     */
-//    public BaseQuickHolder setFilletImageByUrl(int viewId, String url, int radius, int margin, RoundedCornersTransformation.CornerType cornerType, Context mContext) {
-//        ImageView iv = getView(viewId);
-//        Glide.with(mContext)
-//                .load(url)//加载地址
-//                .apply(RequestOptions.bitmapTransform(new MultiTransformation(
-//                        new CenterCrop(),
-//                        new RoundedCornersTransformation(radius, margin, cornerType))).placeholder(R.drawable.img_showing).error(R.drawable.img_show_error))
-//                .into(iv);
-//        return this;
-//    }
 
     /**
      * 设置圆形图片(并不兼容)

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.frame.R;
+import com.frame.util.LogUtil;
 
 public class VaryViewHelperController {
 
@@ -36,7 +37,7 @@ public class VaryViewHelperController {
     public void showNetworkError(View.OnClickListener onClickListener, String tips) {
         View layout = helper.inflate(R.layout.frame_view_pager_error);
         ((TextView) layout.findViewById(R.id.v_tips)).setText(tips);
-        Log.d("VaryViewHelperControlle", tips);
+        LogUtil.d("VaryViewHelperControlle", tips);
         TextView againBtn = layout.findViewById(R.id.tv_view_pager_error_load);
         if (null != onClickListener) {
             againBtn.setOnClickListener(onClickListener);

@@ -151,14 +151,14 @@ public class BaseModel {
             }
             if (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW)
                 mBuilder.mBaseRequestView.showNetErrorView();
-            ToastUtil.showShortToast("请检查您的网络");
+            ToastUtil.showShortToast("请检查网络");
             return null;
         }
         Observer<ResponseBody> subscriber = new Observer<ResponseBody>() {
 
             @Override
             public void onError(Throwable e) {
-                Log.e(log_tag, " 请求错误。");
+                LogUtil.e(log_tag, "请求错误");
                 refreshStatusView(e, mBuilder.requestTag == null ? tag : mBuilder.requestTag);
             }
 
@@ -197,7 +197,7 @@ public class BaseModel {
                 } else if (mBuilder.mLoadStyle == LoadStyle.VIEW) {
                     mBuilder.mBaseRequestView.showLoadingView();
                 } else {
-                    mBuilder.mBaseRequestView.showLoadingDialog(mBuilder.mMsgType, mBuilder.isDialogCancel);
+                    mBuilder.mBaseRequestView.showLoadingDialog(mBuilder.mMsg, mBuilder.isDialogCancel);
                 }
             }
 
@@ -266,7 +266,7 @@ public class BaseModel {
         //默认参数
         private LoadStyle mLoadStyle = LoadStyle.NONE;
         private LoadMode mLoadMode = LoadMode.FIRST;
-        private Object mMsgType = null;
+        private String mMsg = null;
         private Object requestTag;
         private boolean isDialogCancel = true;//请求时dialog是否可以取消隐藏
         private boolean isSyncLifeCycle = true;//是否同步生命周期
@@ -328,8 +328,8 @@ public class BaseModel {
         }
 
         //设置加载文字(默认：拼命加载中...)
-        public Builder setMsgType(Object msgType) {
-            mMsgType = msgType;
+        public Builder setMsgType(String msg) {
+            mMsg = msg;
             return this;
         }
 

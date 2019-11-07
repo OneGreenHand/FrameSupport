@@ -38,9 +38,6 @@ public class CleanDataUtils {
      */
     public static String getFormatSize(double size) {
         double kiloByte = size / 1024;
-//        if (kiloByte < 1) {
-//            return size + "Byte";
-//        }
         double megaByte = kiloByte / 1024;
         if (megaByte < 1) {
             BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));

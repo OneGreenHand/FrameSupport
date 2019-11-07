@@ -21,8 +21,6 @@ public class WeChatShareUtils {
 
     /**
      * 分享微信文本
-     *
-     * @param content 内容
      * @param type    1：朋友圈  2：好友对话
      */
     public static void shareWeChatTxt(String content, int type) {
@@ -38,7 +36,7 @@ public class WeChatShareUtils {
         String appId = BaseConfig.WEIXIN_APP_ID;
         IWXAPI iwxapi = WXAPIFactory.createWXAPI(FrameApplication.mContext, appId);
         if (!iwxapi.isWXAppInstalled()) {
-            ToastUtil.showShortToast("您手机尚未安装微信,请安装后再登录");
+            ToastUtil.showShortToast("未安装微信,请安装后再尝试分享");
             return;
         }
         iwxapi.registerApp(appId);
@@ -47,10 +45,6 @@ public class WeChatShareUtils {
 
     /**
      * 发起app网页分享
-     *
-     * @param title
-     * @param desc
-     * @param url
      * @param type  1：朋友圈  2：好友对话
      */
     public static void shareWeChatUrl(String title, String desc, String url, int type ) {
@@ -72,7 +66,7 @@ public class WeChatShareUtils {
         String appId = BaseConfig.WEIXIN_APP_ID;
         IWXAPI iwxapi = WXAPIFactory.createWXAPI(FrameApplication.mContext, appId);
         if (!iwxapi.isWXAppInstalled()) {
-            ToastUtil.showShortToast("您手机尚未安装微信,请安装后再登录");
+            ToastUtil.showShortToast("未安装微信,请安装后再尝试分享");
             return;
         }
         iwxapi.registerApp(appId);

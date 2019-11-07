@@ -473,8 +473,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
      * Do not need to care about the number of headview, only need to pass in the position of the final view
      *
      * @param position Position other than the number of head layouts. {@link #getHeaderLayoutCount()}
-     * @param payload Optional parameter, use null to identify a "full" update
-     *
+     * @param payload  Optional parameter, use null to identify a "full" update
      * @see RecyclerView.Adapter#notifyItemChanged(int, Object)
      */
     public final void refreshNotifyItemChanged(int position, @Nullable Object payload) {
@@ -534,7 +533,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
      * this is sync, if you need use async, see {@link #setNewDiffData(DiffUtil.DiffResult, List)}.
      *
      * @param baseQuickDiffCallback implementation {@link BaseQuickDiffCallback}.
-     * @param detectMoves Whether to detect the movement of the Item
+     * @param detectMoves           Whether to detect the movement of the Item
      */
     public void setNewDiffData(@NonNull BaseQuickDiffCallback<T> baseQuickDiffCallback, boolean detectMoves) {
         if (getEmptyViewCount() == 1) {
@@ -550,13 +549,13 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
 
     /**
      * use DiffResult setting up a new instance to data
-     *
+     * <p>
      * If you need to use async computing Diff, please use this method.
      * You only need to tell the calculation result,
      * this adapter does not care about the calculation process.
      *
      * @param diffResult DiffResult
-     * @param newData New Data
+     * @param newData    New Data
      */
     public void setNewDiffData(@NonNull DiffUtil.DiffResult diffResult, @NonNull List<T> newData) {
         if (getEmptyViewCount() == 1) {
@@ -601,6 +600,14 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
     }
 
     /**
+     * only add one new data
+     * you need manual notify
+     */
+    public void addDataOnly(@NonNull T data) {
+        mData.add(data);
+    }
+
+    /**
      * remove the item associated with the specified position of adapter
      *
      * @param position
@@ -611,6 +618,14 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
         notifyItemRemoved(internalPosition);
         compatibilityDataSizeChanged(0);
         notifyItemRangeChanged(internalPosition, mData.size() - internalPosition);
+    }
+
+    /**
+     * only remove all data
+     * you need manual notify
+     */
+    public void removeAllOnly() {
+        mData.clear();
     }
 
     /**
@@ -1035,12 +1050,12 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
 
     /**
      * To bind different types of holder and solve different the bind events
-     *
+     * <p>
      * the ViewHolder is currently bound to old data and Adapter may run an efficient partial
      * update using the payload info.  If the payload is empty,  Adapter run a full bind.
      *
-     * @param holder The ViewHolder which should be updated to represent the contents of the
-     *               item at the given position in the data set.
+     * @param holder   The ViewHolder which should be updated to represent the contents of the
+     *                 item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      * @param payloads A non-null list of merged payloads. Can be empty list if requires full
      *                 update.
@@ -1268,7 +1283,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
      * @param index
      * @param orientation
      */
-    public int addHeaderView(View header,final int index, int orientation) {
+    public int addHeaderView(View header, final int index, int orientation) {
         if (mHeaderLayout == null) {
             mHeaderLayout = new LinearLayout(header.getContext());
             if (orientation == LinearLayout.VERTICAL) {
@@ -1280,7 +1295,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
             }
         }
         final int childCount = mHeaderLayout.getChildCount();
-        int mIndex =index;
+        int mIndex = index;
         if (index < 0 || index > childCount) {
             mIndex = childCount;
         }
@@ -1720,20 +1735,20 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
 
     /**
      * Optional implementation this method and use the helper to adapt the view to the given item.
-     *
+     * <p>
      * If {@link DiffUtil.Callback#getChangePayload(int, int)} is implemented,
      * then {@link BaseQuickAdapter#convert(BaseViewHolder, Object)} will not execute, and will
      * perform this method, Please implement this method for partial refresh.
-     *
+     * <p>
      * If use {@link RecyclerView.Adapter#notifyItemChanged(int, Object)} with payload,
      * Will execute this method.
-     *
      *
      * @param helper   A fully initialized helper.
      * @param item     The item that needs to be displayed.
      * @param payloads payload info.
      */
-    protected void convertPayloads(@NonNull K helper, T item, @NonNull List<Object> payloads) {}
+    protected void convertPayloads(@NonNull K helper, T item, @NonNull List<Object> payloads) {
+    }
 
     /**
      * get the specific view by position,e.g. getViewByPosition(2, R.id.textView)
@@ -2059,6 +2074,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
     public interface OnItemChildClickListener {
         /**
          * callback method to be invoked when an itemchild in this view has been click
+         *
          * @param adapter
          * @param view     The view whihin the ItemView that was clicked
          * @param position The position of the view int the adapter
@@ -2075,6 +2091,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
         /**
          * callback method to be invoked when an item in this view has been
          * click and held
+         *
          * @param adapter  this BaseQuickAdapter adapter
          * @param view     The childView whihin the itemView that was clicked and held.
          * @param position The position of the view int the adapter

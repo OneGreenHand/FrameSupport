@@ -16,16 +16,16 @@ import com.frame.widget.Solve7PopupWindow;
 public class PopupwindowUtil {
 
     /**
-     * @param context  上下文
-     * @param layout   布局
-     * @param isMathch 宽度是否MATCH_PARENT
-     * @param cancel   是否可以点击取消
-     * @param isAlpha  是否背景半透明
+     * @param context 上下文
+     * @param layout  布局
+     * @param isMatch 宽度是否MATCH_PARENT
+     * @param cancel  是否可以点击取消
+     * @param isAlpha 是否背景半透明
      */
-    public static Solve7PopupWindow getPopupwindow(Context context, View layout, boolean isMathch, boolean cancel, boolean isAlpha) {
+    public static Solve7PopupWindow getPopupWindow(Context context, View layout, boolean isMatch, boolean cancel, boolean isAlpha) {
         Solve7PopupWindow popupWindow = new Solve7PopupWindow();
         popupWindow.setContentView(layout); //设置PopupWindow的填充View
-        if (isMathch)
+        if (isMatch)
             popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
         else
             popupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);

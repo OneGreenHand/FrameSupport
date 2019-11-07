@@ -29,32 +29,29 @@ public class APIException {
      * @param e
      * @return
      */
-    public static String getRequestExceptionMessage(Throwable e){
-        String message = "";
+    public static String getRequestExceptionMessage(Throwable e) {
+        String message;
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
-            //httpException.response().errorBody().string()
             int code = httpException.code();
-            if (code == 500 || code == 404) {
+            if (code == 500 || code == 404)
                 message = "服务器出错";
-            }else if (code == 502){
+            else if (code == 502)
                 message = "无效网关";
-            }else{
-                message = "未知错误:"+code;
-            }
-        } else if (e instanceof ConnectException) {
+            else
+                message = "未知错误:" + code;
+        } else if (e instanceof ConnectException)
             message = "服务器连接失败";
-        } else if (e instanceof SocketTimeoutException) {
+        else if (e instanceof SocketTimeoutException)
             message = "网络连接超时";
-        } else if (e instanceof JsonParseException || e instanceof JSONException || e instanceof ParseException){
+        else if (e instanceof JsonParseException || e instanceof JSONException || e instanceof ParseException)
             message = "数据解析错误";
-        }else if (e instanceof javax.net.ssl.SSLHandshakeException) {
+        else if (e instanceof javax.net.ssl.SSLHandshakeException)
             message = "证书验证失败";
-        }else if (e instanceof UnknownHostException){
+        else if (e instanceof UnknownHostException)
             message = "网络连接断开";
-        }else {
-            message = "未知错误:"+e.getMessage();
-        }
+        else
+            message = "未知错误:" + e.getMessage();
         return message;
     }
 }

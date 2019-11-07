@@ -23,15 +23,6 @@ public class BaseQuickHolder extends BaseViewHolder {
         super(view);
     }
 
-    public BaseQuickHolder setGlideImg(@IdRes int id, String url) {
-        ImageView view = getView(id);
-        Glide.with(view.getContext())
-                .load(url)
-                .apply(new RequestOptions().placeholder(R.mipmap.img_showing).error(R.mipmap.img_show_error))
-                .into(view);
-        return this;
-    }
-
     /**
      * 设置能不能点击
      */
@@ -47,29 +38,9 @@ public class BaseQuickHolder extends BaseViewHolder {
     public BaseQuickHolder setImageByUrl(int viewId, String url, Context mContext) {
         ImageView iv = getView(viewId);
         Glide.with(mContext)
-                .load(url)//加载地址
+                .load(url)
                 .apply(new RequestOptions().placeholder(R.mipmap.img_showing).error(R.mipmap.img_show_error))
                 .into(iv);
-        return this;
-    }
-
-    /**
-     * 设置圆形图片(并不兼容)
-     */
-    public BaseQuickHolder setRoundImageByUrl(int viewId, String url, final Context mContext) {
-        final ImageView iv = getView(viewId);
-        Glide.with(mContext)
-                .asBitmap()
-                .load(url)
-                .apply(new RequestOptions().error(R.mipmap.img_show_error))
-                .into(new BitmapImageViewTarget(iv) {
-                    @Override
-                    protected void setResource(Bitmap resource) {
-                        RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(mContext.getResources(), resource);
-                        circularBitmapDrawable.setCircular(true);
-                        iv.setImageDrawable(circularBitmapDrawable);
-                    }
-                });
         return this;
     }
 
@@ -83,5 +54,4 @@ public class BaseQuickHolder extends BaseViewHolder {
         rv.setAdapter(adapter);
         return this;
     }
-
 }

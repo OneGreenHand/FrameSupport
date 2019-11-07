@@ -3,22 +3,24 @@ package com.frame.support.webview;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.JavascriptInterface;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.PhoneUtils;
-import com.frame.FrameApplication;
 import com.frame.support.util.ChannelUtils;
-import com.frame.support.util.InstructionsUtils;
-import com.frame.support.util.WeChatShareUtils;
-import com.frame.util.CommonUtil;
 import com.frame.util.ToastUtil;
 import com.frame.view.TipDialog;
 
-@SuppressLint("MissingPermission")
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+
+/**
+ * 备注：在这里面的方法都是子线程
+ */
+@SuppressLint({"MissingPermission", "CheckResult"})
 public class JSInterface {
 
     Context context;
@@ -48,31 +50,19 @@ public class JSInterface {
     //获取IMSI码(需要权限)
     @JavascriptInterface
     public String getIMSI() {
-        if (!hasPhonePermission(FrameApplication.mContext)) {
-            return "";
-        } else {
-            return PhoneUtils.getIMSI();
-        }
+        return hasPhonePermission(context) ? PhoneUtils.getIMSI() : "";
     }
 
     //获取设备码(需要权限)
     @JavascriptInterface
     public String getDeviceId() {
-        if (!hasPhonePermission(FrameApplication.mContext)) {
-            return "";
-        } else {
-            return PhoneUtils.getDeviceId();
-        }
+        return hasPhonePermission(context) ? PhoneUtils.getDeviceId() : "";
     }
 
     //获取IMEI码(需要权限)
     @JavascriptInterface
     public String getIMEI() {
-        if (!hasPhonePermission(FrameApplication.mContext)) {
-            return "";
-        } else {
-            return PhoneUtils.getIMEI();
-        }
+        return hasPhonePermission(context) ? PhoneUtils.getIMEI() : "";
     }
 
     //获取设备厂商
@@ -81,59 +71,51 @@ public class JSInterface {
         return DeviceUtils.getManufacturer();
     }
 
-    //分享微信链接
-    @JavascriptInterface
-    public void shareWeChatUrl(String title, String desc, String url, int type ) {
-        WeChatShareUtils.shareWeChatUrl(title, desc, url, type);
-    }
-
-    //分享微信文本
-    @JavascriptInterface
-    public void shareWeChatTxt(String content, int type) {
-        WeChatShareUtils.shareWeChatTxt(content, type);
-    }
-
     //吐司
     @JavascriptInterface
     public void showToast(String msg) {
-        ToastUtil.showShortToast(msg);
+        Observable.just(1).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        ToastUtil.showShortToast(msg);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        ToastUtil.showShortToast(msg);
+                    }
+                });
     }
 
     //弹框
     @JavascriptInterface
     public void showDialog(String title, String msg) {
-        TipDialog dialog = new TipDialog(context);
-        dialog.setTitle(title);
-        dialog.setContent(msg);
-        dialog.show();
+        Observable.just(1).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        TipDialog dialog = new TipDialog(context);
+                        dialog.setTitle(title);
+                        dialog.setContent(msg);
+                        dialog.show();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        TipDialog dialog = new TipDialog(context);
+                        dialog.setTitle(title);
+                        dialog.setContent(msg);
+                        dialog.show();
+                    }
+                });
     }
 
     //结束当前页面
     @JavascriptInterface
-    public void doFinsih() {
+    public void doFinish() {
         if (context instanceof AppCompatActivity)
             ((AppCompatActivity) context).finish();
-    }
-
-    //打开app
-    @JavascriptInterface
-    public void openAPP(String packageName) {
-        InstructionsUtils.checkInstall(null, true, packageName, "", "", false);
-    }
-
-    //下载app
-    @JavascriptInterface
-    public void installAPP(String url, String packNmae) {
-        if (context instanceof AppCompatActivity)
-            InstructionsUtils.downloadApk((AppCompatActivity) context, packNmae, "", url, true);
-        else
-            InstructionsUtils.downloadApk(context, packNmae, "", url, true);
-    }
-
-    //打开外部浏览器
-    @JavascriptInterface
-    public void openBrowser(String url) {
-        CommonUtil.intentToBrowsable(context, url);
     }
 
     /**

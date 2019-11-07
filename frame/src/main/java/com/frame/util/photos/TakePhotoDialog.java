@@ -2,8 +2,6 @@ package com.frame.util.photos;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,7 +10,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -26,20 +23,14 @@ import com.frame.base.BaseDialog;
 import com.frame.config.BaseConfig;
 import com.frame.util.CommonUtil;
 import com.frame.util.ToastUtil;
+import com.frame.util.compress.Compressor;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
-import top.zibin.luban.CompressionPredicate;
-import top.zibin.luban.Luban;
 
 /**
  * 拍照弹框
@@ -132,9 +123,9 @@ public class TakePhotoDialog extends BaseDialog {
                         if (FileUtils.createOrExistsDir(imagePath))  //创建photo目录
                             show();
                         else
-                            ToastUtil.showShortToast("出现未知错误,请稍候重试");
+                            ToastUtil.showShortToast("出现错误,请稍候重试");
                     } else if (permission.shouldShowRequestPermissionRationale) {//拒绝申请权限
-                        ToastUtil.showShortToast("您拒绝了应用权限,该功能暂时无法使用");
+                        ToastUtil.showShortToast("未获取权限,该功能暂时无法使用");
                     } else {//不在提醒申请权限
                         if (mActivity != null)
                             CommonUtil.getPermissions(mActivity, null);
@@ -221,51 +212,51 @@ public class TakePhotoDialog extends BaseDialog {
      */
     @SuppressLint("CheckResult")
     private void compressTheImg(String path, IPhotoResult iPhotoResult) {
-        Flowable.just(path)
-                .subscribeOn(Schedulers.io())
-                .map(new Function<String, File>() {
-                    @Override
-                    public File apply(@NonNull String str) throws Exception {
-                        return Luban.with(mActivity == null ? mFragment.getActivity() : mActivity)
-                                .load(str)
-                                .ignoreBy(100)//设置忽略的图片大小，这里为100KB时不压缩
-                                .setTargetDir(imagePath)//设置压缩后存放的地址
-                                .filter(new CompressionPredicate() {
-                                    @Override
-                                    public boolean apply(String path) {
-                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                                    }
-                                }).get(str);
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<File>() {
-                    @Override
-                    public void accept(File files) throws Exception {
-                        if (files.exists()) {//压缩成功返回压缩后的文件和文件路径
-                            if (iPhotoResult != null) {
-                                iPhotoResult.onResult(files, files.getPath());
-                                FileUtils.deleteFile(path);//删除压缩前的文件
-                            }
-                        } else {//压缩失败直接返回源文件和路径
-                            if (iPhotoResult != null)
-                                iPhotoResult.onResult(new File(path), path);
-                        }
-                    }
-                });
-//        try {
-//            File file2 = new Compressor(mContext).compressToFile(file, "cp" + System.currentTimeMillis() + ".png");
-//            if (file2.exists()) {//如果压缩成功
-//                if (iPhotoResult != null)
-//                    iPhotoResult.onResult(file2, path);
-//            } else {
-//                if (iPhotoResult != null)
-//                    iPhotoResult.onResult(file2, path);
-//            }
-//        } catch (IOException e) {
-//            if (iPhotoResult != null)
-//                iPhotoResult.onResult(file, path);
-//        }
+//        Flowable.just(path)
+//                .subscribeOn(Schedulers.io())
+//                .map(new Function<String, File>() {
+//                    @Override
+//                    public File apply(@NonNull String str) throws Exception {
+//                        return Luban.with(mActivity == null ? mFragment.getActivity() : mActivity)
+//                                .load(str)
+//                                .ignoreBy(100)//设置忽略的图片大小，这里为100KB时不压缩
+//                                .setTargetDir(imagePath)//设置压缩后存放的地址
+//                                .filter(new CompressionPredicate() {
+//                                    @Override
+//                                    public boolean apply(String path) {
+//                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+//                                    }
+//                                }).get(str);
+//                    }
+//                })
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<File>() {
+//                    @Override
+//                    public void accept(File files) throws Exception {
+//                        if (files.exists()) {//压缩成功返回压缩后的文件和文件路径
+//                            if (iPhotoResult != null) {
+//                                iPhotoResult.onResult(files, files.getPath());
+//                                FileUtils.deleteFile(path);//删除压缩前的文件
+//                            }
+//                        } else {//压缩失败直接返回源文件和路径
+//                            if (iPhotoResult != null)
+//                                iPhotoResult.onResult(new File(path), path);
+//                        }
+//                    }
+//                });
+        try {
+            File file2 = new Compressor(mActivity == null ? mFragment.getActivity() : mActivity).compressToFile(new File(path), "cp" + System.currentTimeMillis() + ".png");
+            if (file2.exists()) {//如果压缩成功
+                if (iPhotoResult != null)
+                    iPhotoResult.onResult(file2, path);
+            } else {
+                if (iPhotoResult != null)
+                    iPhotoResult.onResult(file2, path);
+            }
+        } catch (IOException e) {
+            if (iPhotoResult != null)
+                iPhotoResult.onResult(new File(path), path);
+        }
     }
 
     /**
@@ -285,7 +276,6 @@ public class TakePhotoDialog extends BaseDialog {
             return cursor.getString(columnIndex);
         } catch (Exception e) {
             e.printStackTrace();
-            CrashReport.postCatchedException(e);//手动上报异常到bugly
             return "";
         } finally {
             if (cursor != null)

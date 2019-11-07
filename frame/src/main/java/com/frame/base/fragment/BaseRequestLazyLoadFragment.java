@@ -29,7 +29,7 @@ public abstract class BaseRequestLazyLoadFragment<P extends BasePresenter, B ext
 
     @Override
     public void requestFail(B data, Object tag) {
-        ToastUtil.showShortToast(  data.msg);
+        ToastUtil.showShortToast(data.msg);
     }
 
     //重新请求数据

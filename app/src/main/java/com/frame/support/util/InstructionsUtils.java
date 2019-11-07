@@ -82,23 +82,23 @@ public class InstructionsUtils {
     /**
      * 通过service下载apk
      *
-     * @param packNmae       包名，如果不为空就检查是否安装了
+     * @param packName       包名，如果不为空就检查是否安装了
      * @param title          下载时显示的标题
      * @param url            下载地址
      * @param isShowProgress 是否通知栏显示下载进度(必须要打开了通知栏)，默认为true
      */
-    public static void downloadApk(Context context, String packNmae, String title, String url, boolean isShowProgress) {
-        if (TextUtils.isEmpty(packNmae)) {
+    public static void downloadApk(Context context, String packName, String title, String url, boolean isShowProgress) {
+        if (TextUtils.isEmpty(packName)) {
             if (TextUtils.isEmpty(url)) {
-                ToastUtil.showShortToast("下载地址不能为空,请稍后重试");
+                ToastUtil.showShortToast("下载地址错误");
                 return;
             }
             if (hasPermission(context))
                 download(context, title, url, isShowProgress);
             else
-                ToastUtil.showShortToast("暂无相关储存权限,无法下载该应用");
+                ToastUtil.showShortToast("未获取权限,下载失败");
         } else {//检查是否安装
-            checkInstall(context, false, packNmae, title, url, isShowProgress);
+            checkInstall(context, false, packName, title, url, isShowProgress);
         }
     }
 
@@ -114,7 +114,7 @@ public class InstructionsUtils {
     public static void downloadApk(Activity activity, String packNmae, String title, String url, boolean isShowProgress) {
         if (TextUtils.isEmpty(packNmae)) {
             if (TextUtils.isEmpty(url)) {
-                ToastUtil.showShortToast("下载地址不能为空,请稍后重试");
+                ToastUtil.showShortToast("下载地址错误");
                 return;
             }
             if (activity instanceof FragmentActivity) {
@@ -124,13 +124,13 @@ public class InstructionsUtils {
                             if (permission.granted) {//权限申请成功
                                 download(activity, title, url, isShowProgress);
                             } else if (permission.shouldShowRequestPermissionRationale) {//拒绝申请权限
-                                ToastUtil.showShortToast("由于您拒绝了存储权限申请,该功能无法使用");
+                                ToastUtil.showShortToast("权限被拒绝,下载失败");
                             } else {//不在提醒申请权限
-                                ToastUtil.showShortToast("由于您拒绝了存储权限申请,该功能无法使用");
+                                ToastUtil.showShortToast("权限被拒绝,下载失败");
                             }
                         });
             } else {
-                ToastUtil.showShortToast("暂无相关储存权限,无法下载该应用");
+                ToastUtil.showShortToast("未获取权限,下载失败");
             }
         } else {//检查是否安装
             checkInstall(activity, false, packNmae, title, url, isShowProgress);
@@ -141,11 +141,9 @@ public class InstructionsUtils {
      * 是否已经安装了这款APP
      */
     private static boolean isInstall(String packageName) {
-        boolean isExistence = false;
         if (TextUtils.isEmpty(packageName))
-            return isExistence;
-        isExistence = AppUtils.isAppInstalled(packageName);
-        return isExistence;
+            return false;
+        return AppUtils.isAppInstalled(packageName);
     }
 
     /**
@@ -185,7 +183,7 @@ public class InstructionsUtils {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        ToastUtil.showShortToast("出现异常,请稍后重试");
+                        ToastUtil.showShortToast("出现未知错误");
                     }
                 });
     }

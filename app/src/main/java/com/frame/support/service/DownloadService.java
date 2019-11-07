@@ -77,7 +77,7 @@ public class DownloadService extends Service {
                 }
             } else {
                 if (isShowProgress)
-                    ToastUtil.showShortToast("后台下载应用中");
+                    ToastUtil.showShortToast("后台下载中");
                 Aria.download(this)
                         .load(fileUrl)
                         .setFilePath(BaseConfig.FILE_FOLDER + fileName, true)

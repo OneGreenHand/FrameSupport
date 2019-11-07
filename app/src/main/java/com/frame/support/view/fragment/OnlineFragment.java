@@ -12,6 +12,7 @@ import com.frame.support.presenter.OnlinePt;
 import com.frame.base.BaseModel;
 import com.frame.base.fragment.BaseRequestFragment;
 import com.frame.bean.BaseBean;
+import com.frame.util.LogUtil;
 import com.frame.util.photos.IPhotoResult;
 import com.frame.util.photos.TakePhotoDialog;
 
@@ -68,7 +69,7 @@ public class OnlineFragment extends BaseRequestFragment<OnlinePt, BaseBean> {
         photoDialog.onPhotoResult(requestCode, resultCode, data, new IPhotoResult() {
             @Override
             public void onResult(File file, String path) {
-                Log.e("路径", file.getPath());
+                LogUtil.e("路径", file.getPath());
                 requestMsg.setText("图片路径(压缩后)："
                         + "\nPath：" + file.getPath()
                         + "\nAbsolutePath：" + file.getAbsolutePath()

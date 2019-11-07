@@ -1,6 +1,5 @@
 package com.frame.support.widget;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
@@ -61,11 +60,10 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
         initView(attrs);
     }
 
-
     /**
      * 开始倒计时
      */
-    public void start(String phone) {
+    public void start(String phone, CodeType codeType) {
         if (TextUtils.isEmpty(phone)) {
             ToastUtil.showShortToast("手机号不能为空");
             return;
@@ -82,6 +80,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
         }
         new BaseModel.Builder(this)
                 .putParam("Mobile", phone)
+                .putParam("VCType", codeType.getValue())
                 .setLoadStyle(BaseModel.LoadStyle.DIALOG)
                 .create().post(API.CITY_WEATHER);//这里填写真实请求地址
     }
@@ -89,13 +88,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     public enum CodeType {
         LOGIN(1),//登录
         REGISTER(2),//注册
-        UPDATE_PWD(3),//修改密码验证码
-        INFO_CHANGE(4),//信息变更验证码
-        UPDATE_PAY_PWD(5),//修改支付密码
-        REAL_NAME_AUTHENTICATION(6),//实名认证
-        UPDATE_INVITER(7),//修改邀请人
-        REGISTER_SALESMAN(8),//注册业务员
-        SMS_GROUP_SENDING(9);//短信群发通知
+        UPDATE_PWD(3);//修改密码
         private int mValue;
 
         CodeType(int value) {
@@ -170,32 +163,13 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
         if (countDownTimer == null)
             countDownTimer = new VerificationCountDownTimer(durationTime, intervalTime);
-        ToastUtil.showShortToast("验证码发送成功");
+        ToastUtil.showShortToast("验证码已发送");
         countDownTimer.start();//开始倒计时
     }
 
     @Override
     public void requestFail(BaseBean data, Object tag) {
         ToastUtil.showShortToast(data.msg);
-//        if (data.code == 1003) {//需要前往H5注册页面
-//            TipsDialog dialog = new TipsDialog(context);
-//            dialog.setLayoutType(1);
-//            dialog.setCancelTitle("残忍拒绝");
-//            dialog.setSureTitle("前往注册");
-//            dialog.setContent("该手机号暂未注册，是否前往注册页面？");
-//            dialog.setOnClickListener(new int[]{R.id.cancel_tv, R.id.sure_tv}, new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (v.getId() == R.id.cancel_tv) {
-//                        dialog.dismiss();
-//                    } else if (v.getId() == R.id.sure_tv) {
-//                        AgreementWebActivity.openWebActivity(context, "", AppConfig.Web.REGISTER);
-//                        dialog.dismiss();
-//                    }
-//                }
-//            });
-//            dialog.show();
-//        }
     }
 
     @Override
@@ -233,30 +207,23 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
 
     }
 
+    /**
+     * 显示加载对话框
+     */
     @Override
-    public void showLoadingDialog(Object msgType, boolean isCancel) {
-        String message = "";
-        if (msgType == null) {
-            message = "拼命加载中...";
-        } else if (msgType instanceof String) {
-            message = (String) msgType;
-        } else if (msgType instanceof Integer) {
-            getContext().getResources().getString(((int) msgType));
-        }
-        if (progressDialog == null) {
-            progressDialog = new LoadingDialog(getContext());
-        }
+    public void showLoadingDialog(String msg, boolean isCancel) {
+        String message = TextUtils.isEmpty(msg) ? "拼命加载中..." : msg;
+        if (progressDialog == null)
+            progressDialog = new LoadingDialog(context);
         progressDialog.setCancle(isCancel);
         progressDialog.setMsg(message);
-        if (!progressDialog.isShowing()) {
+        if (!progressDialog.isShowing())
             progressDialog.show();
-        }
     }
 
     @Override
     public void dismissLoadingDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
+        if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
-        }
     }
 }

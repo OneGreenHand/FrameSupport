@@ -33,13 +33,13 @@ public class MineFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.example_one:
-                IntentUtil.goActivity(mActivity, NoDataExampleActivity.class, null, false, true);
+                IntentUtil.goActivity(mActivity, NoDataExampleActivity.class, null, false);
                 break;
             case R.id.example_two:
-                IntentUtil.goActivity(mActivity, HeadFootExampleActivity.class, null, false, true);
+                IntentUtil.goActivity(mActivity, HeadFootExampleActivity.class, null, false);
                 break;
             case R.id.example_three:
-                IntentUtil.goActivity(mActivity, RefreshRequestActivity.class, null, false, true);
+                IntentUtil.goActivity(mActivity, RefreshRequestActivity.class, null, false);
                 break;
         }
     }

@@ -37,6 +37,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.ImageView.ScaleType;
 
+import com.frame.util.LogUtil;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -96,7 +98,8 @@ public class RoundedDrawable extends Drawable {
         // just return if it's already a RoundedDrawable
         return drawable;
       } else if (drawable instanceof LayerDrawable) {
-        LayerDrawable ld = (LayerDrawable) drawable;
+        ConstantState cs = drawable.mutate().getConstantState();
+        LayerDrawable ld = (LayerDrawable) (cs != null ? cs.newDrawable() : drawable);
         int num = ld.getNumberOfLayers();
         // loop through layers to and change to RoundedDrawables if possible
         for (int i = 0; i < num; i++) {
@@ -128,7 +131,7 @@ public class RoundedDrawable extends Drawable {
       drawable.draw(canvas);
     } catch (Throwable e) {
       e.printStackTrace();
-      Log.w(TAG, "Failed to create bitmap from drawable!");
+      LogUtil.w(TAG, "Failed to create bitmap from drawable!");
       bitmap = null;
     }
     return bitmap;

@@ -1,6 +1,5 @@
 package com.frame.util;
 
-import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -9,7 +8,6 @@ import android.text.style.ForegroundColorSpan;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.StringTokenizer;
 
 
 /**
@@ -150,29 +148,5 @@ public class PriceUtil {
         sp.setSpan(new ForegroundColorSpan(color1), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         sp.setSpan(new ForegroundColorSpan(color2), text.length(), company.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sp;
-    }
-
-    public static String[] getPriceDouble(double allpriceCart) {
-        int scale = 1;//设置位数
-        int roundingMode = 4;//表示四舍五入，可以选择其他舍值方式，例如去尾，等等.
-        BigDecimal bd = new BigDecimal(allpriceCart);
-        bd = bd.setScale(scale, roundingMode);
-        allpriceCart = bd.doubleValue();
-        String[] prices = new String[2];
-        //以.分割价格字符串
-        StringTokenizer priceSt = new StringTokenizer(String.valueOf(allpriceCart), ".");
-        if (priceSt.hasMoreTokens()) {
-            prices[0] = priceSt.nextToken();
-        } else {
-            prices[0] = "0";
-        }
-        if (priceSt.hasMoreTokens()) {
-            String s = priceSt.nextToken();
-            prices[1] = s;
-            s = null;
-        } else {
-            prices[1] = "0";
-        }
-        return prices;
     }
 }

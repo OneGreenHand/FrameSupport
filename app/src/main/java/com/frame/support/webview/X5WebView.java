@@ -1,7 +1,8 @@
 package com.frame.support.webview;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -10,9 +11,10 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.frame.view.LoadingDialog;
-import com.tencent.smtt.sdk.ValueCallback;
+import com.tencent.smtt.export.external.interfaces.JsResult;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
 /**
@@ -21,8 +23,6 @@ import com.tencent.smtt.sdk.WebViewClient;
  */
 public class X5WebView extends com.tencent.smtt.sdk.WebView {
 
-    private ValueCallback<Uri[]> filePathCallback;
-    public static int FILECHOOSER_RESULTCODE = 1;
     private boolean isShowLoading = true;//是否显示加载框
     protected LoadingDialog progressDialog;
     //private LoadCompleteClick loadCompleteClick;
@@ -48,21 +48,6 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
         getSettings().setDatabaseEnabled(true);//数据库存储API是否可用，默认值false
         getSettings().setSavePassword(true);//保存密码
         getSettings().setDomStorageEnabled(true);//是否开启本地DOM存储  鉴于它的安全特性（任何人都能读取到它，尽管有相应的限制，将敏感数据存储在这里依然不是明智之举），Android 默认是关闭该功能的。
-        //其他设置
-        setWebChromeClient(new WebChromeClient() {
-            @Override
-            public boolean onShowFileChooser(com.tencent.smtt.sdk.WebView webView, com.tencent.smtt.sdk.ValueCallback<Uri[]> valueCallback, FileChooserParams fileChooserParams) {
-                X5WebView.this.filePathCallback = filePathCallback;
-                if (getContext() instanceof Activity) {
-                    Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                    i.addCategory(Intent.CATEGORY_OPENABLE);
-                    i.setType("image/*");
-                    ((Activity) getContext()).startActivityForResult(Intent.createChooser(i, "File Browser"), FILECHOOSER_RESULTCODE);
-                    return true;
-                }
-                return false;
-            }
-        });
         setDownloadListener(new com.tencent.smtt.sdk.DownloadListener() {//下载事件
             @Override
             public void onDownloadStart(String s, String s1, String s2, String s3, long l) {
@@ -70,6 +55,23 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
                 intent.setAction("android.intent.action.VIEW");
                 intent.setData(Uri.parse(s));
                 getContext().startActivity(intent);
+            }
+        });
+        setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
+                AlertDialog.Builder b = new AlertDialog.Builder(context);
+                b.setTitle("提示");
+                b.setMessage(message);
+                b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        result.confirm();
+                    }
+                });
+                b.setCancelable(false);
+                b.create().show();
+                return true;
             }
         });
         setWebViewClient(new WebViewClient() {
@@ -91,7 +93,7 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
             @Override
             public void onPageStarted(com.tencent.smtt.sdk.WebView webView, String url, Bitmap favicon) {
                 if (isShowLoading)
-                    showProgressDialog("", true);
+                    showProgressDialog();
                 super.onPageStarted(webView, url, favicon);
             }
 
@@ -119,16 +121,10 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
     /**
      * 显示加载对话框
      */
-    public void showProgressDialog(String msg, boolean isCancel) {
-        String message;
-        if (TextUtils.isEmpty(msg))
-            message = "玩命加载中...";
-        else
-            message = msg;
+    public void showProgressDialog() {
         if (progressDialog == null)
             progressDialog = new LoadingDialog(getContext());
-        progressDialog.setCancle(isCancel);
-        progressDialog.setMsg(message);
+        progressDialog.setMsg("玩命加载中...");
         if (!progressDialog.isShowing())
             progressDialog.show();
     }

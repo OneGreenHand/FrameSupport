@@ -20,6 +20,11 @@ public class LogUtil {
             Log.w(tag, message+"");
     }
 
+    public static void w(String tag, String message,Exception e) {
+        if (AppConfig.DEBUG)
+            Log.w(tag, message+"",e);
+    }
+
     public static void d(String tag, String message) {
         if (AppConfig.DEBUG)
             Log.d(tag, message+"");

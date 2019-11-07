@@ -39,10 +39,7 @@ public class CommonUtil {
      */
     public static void getPermissions(Context context, String tips) {
         TipDialog dialog = new TipDialog(context);
-        if (TextUtils.isEmpty(tips))
-            dialog.setContent("为了给您提供更好的服务,请授权APP必要的权限！请单击【确定】按钮前往设置中心授权权限。");
-        else
-            dialog.setContent(tips);
+        dialog.setContent(TextUtils.isEmpty(tips) ? "为了提供更好的服务,请授权APP必要的权限!单击【确定】按钮前往设置中心授权权限" : tips);
         dialog.setCancel(false);
         dialog.setOnSureClick(new TipDialog.SureCalk() {
             @Override
@@ -61,7 +58,7 @@ public class CommonUtil {
         boolean isOpened = manager.areNotificationsEnabled();//API 19以上也可以用这个判断
         if (!isOpened) {//没有授予通知权限
             TipDialog dialog = new TipDialog(context);
-            dialog.setContent("你未开启系统通知栏权限,将影响部分功能正常使用,是否前往开启?");
+            dialog.setContent("未开启系统通知栏权限,将影响部分功能的正常使用,请前往开启");
             dialog.setOnSureClick(view -> {
                 Intent intent = new Intent();
                 if (Build.VERSION.SDK_INT >= 26) { // android 8.0引导
@@ -182,15 +179,14 @@ public class CommonUtil {
         try {
             if (TextUtils.isEmpty(bankCardNum)) return "未绑定银行卡";
             int length = bankCardNum.length();
-            if (length < 8) {//如果小于9位直接返回
+            if (length < 8) //如果小于9位直接返回
                 return bankCardNum;
-            } else {
+            else {
                 String startNum = bankCardNum.substring(0, 4);
                 String endNum = bankCardNum.substring(length - 4, length);
                 String str = "";
-                for (int i = 0; i < bankCardNum.substring(4, bankCardNum.length() - 4).length(); i++) {
+                for (int i = 0; i < bankCardNum.substring(4, bankCardNum.length() - 4).length(); i++)
                     str = str + "*";
-                }
                 bankCardNum = startNum + str + endNum;
             }
         } catch (Exception e) {
@@ -257,7 +253,7 @@ public class CommonUtil {
             intent.setData(Uri.parse(url));
             mContext.startActivity(intent);
         } catch (Exception e) {
-            ToastUtil.showShortToast("打开浏览器失败");
+            ToastUtil.showShortToast("浏览器打开失败");
         }
     }
 
@@ -265,7 +261,7 @@ public class CommonUtil {
      * 跳转QQ
      */
     public static void ContactQQ(Context context, String qq) {
-        String url = "40012345";
+        String url;
         if (AppUtils.isAppInstalled("com.tencent.mobileqq") || AppUtils.isAppInstalled("com.tencent.tim") || AppUtils.isAppInstalled("com.tencent.qqlite"))
             url = "mqqwpa://im/chat?chat_type=wpa&uin=" + qq + "";
         else
@@ -276,7 +272,7 @@ public class CommonUtil {
     //密码8-20，不能为中文且必须包含字符，不能为纯数字
     public static boolean checkPassword(String edInput) {
         if (TextUtils.isEmpty(edInput)) {
-            ToastUtil.showShortToast("密码输入不能为空");
+            ToastUtil.showShortToast("密码不能为空");
             return false;
         } else if (edInput.length() < 8 || edInput.length() > 20) {
             ToastUtil.showShortToast("密码长度为8-20位");
@@ -301,18 +297,18 @@ public class CommonUtil {
     }
 
     //检测GPS是否打开
-    public static boolean checkGPSIsOpen(Context mContext) {
+    public static boolean checkGpsIsOpen(Context mContext) {
         LocationManager locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     //跳转GPS设置界面
-    public static void IntentToOpenGPS(Activity activity, int requestCode) {
+    public static void IntentToOpenGps(Activity activity, int requestCode) {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         activity.startActivityForResult(intent, requestCode);
     }
 
-    public static void IntentToOpenGPS(Fragment fragment, int requestCode) {
+    public static void IntentToOpenGps(Fragment fragment, int requestCode) {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         fragment.startActivityForResult(intent, requestCode);
     }
@@ -343,18 +339,17 @@ public class CommonUtil {
      * intentUrl举例：TaskActivity?ID=1&NAME=小明  意思就是跳转到TaskDetailActivity，然后带了ID和NAME，两个参数
      */
     public static void goLocationActivity(Context context, String intentUrl) {
-        if (TextUtils.isEmpty(intentUrl)) {
-            ToastUtil.showShortToast("未找到跳转对象");
+        if (TextUtils.isEmpty(intentUrl))
             return;
-        }
         try {
 //            if (needlogin) {//如果需要登录
 //             Intent intent = new Intent();
-//             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//在Activity上下文之外启动Activity
+//             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //             intent.setClass(context, getActivityClassName("LoginActivity"));
 //             context.startActivity(intent);
 //            } else {
             Intent intent = new Intent(context, getActivityClassName(intentUrl.contains("?") ? intentUrl.split("\\?")[0] : intentUrl));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (intentUrl.contains("?")) {//说明带参数
                 for (String kv : intentUrl.split("\\?")[1].split("\\&")) {//拿到？后面的，然后对&分割处理
                     String k = kv.split("=")[0];//拿到参数名
@@ -376,7 +371,6 @@ public class CommonUtil {
         try {
             return Class.forName(AppUtils.getAppPackageName() + ".view.activity." + className);//TODO 这里需要改成自己对应activity位置
         } catch (Exception e) {
-            ToastUtil.showShortToast("未找到跳转对象");
             return null;
         }
     }

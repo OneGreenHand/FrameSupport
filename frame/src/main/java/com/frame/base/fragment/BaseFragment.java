@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -157,15 +158,12 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
      * 显示加载对话框
      */
     @Override
-    public void showLoadingDialog(Object msgType, boolean isCancel) {
+    public void showLoadingDialog(String msg, boolean isCancel) {
         String message = "";
-        if (msgType == null || (msgType instanceof String && ((String) msgType).isEmpty())) {
+        if (TextUtils.isEmpty(msg))
             message = "拼命加载中...";
-        } else if (msgType instanceof String) {
-            message = (String) msgType;
-        } else if (msgType instanceof Integer) {
-            message = getResString((int) msgType);
-        }
+        else
+            message = msg;
         if (progressDialog == null)
             progressDialog = new LoadingDialog(mActivity);
         progressDialog.setCancle(isCancel);

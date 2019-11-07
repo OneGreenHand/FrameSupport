@@ -20,61 +20,40 @@ import java.math.BigDecimal;
 public class GlideImageUtil {
 
     /**
-     * 显示图片
+     * 加载图片
      */
     public static void showImage(Context context, String url, ImageView view) {
-        Glide.with(context).load(url)//图片地址
-                .apply(new RequestOptions().placeholder(R.mipmap.img_showing)
-                        .error(R.mipmap.img_show_error))
-                //  .override(600,600)//指定尺寸(图片大小在xml中不能写死,是wrap_content才可以指定尺寸)
+        Glide.with(context)
+                .load(url)
+                .apply(getRequestOptions())
                 .into(view);
     }
 
     /**
-     * 加载GIF图片
+     * 加载GIF动图
      */
-    public static void showGisImage(Context context, String url, ImageView view) {
+    public static void showGifImage(Context context, String url, ImageView view) {
         Glide.with(context)
                 .asGif()
                 .load(url)
-                .apply(new RequestOptions()
-                        .placeholder(R.mipmap.img_showing)
-                        .error(R.mipmap.img_show_error))
+                .apply(getRequestOptions())
                 .into(view);
     }
 
     /**
-     * 加载本地资源
+     * 加载本地图片资源
      */
-    public static void showLocalImage(Context context, boolean isGif, int url, ImageView view) {
-        if (isGif) {
-            Glide.with(context)
-                    .asGif()
-                    .load(url)
-                    .apply(new RequestOptions()
-                            .placeholder(R.mipmap.img_showing)
-                            .error(R.mipmap.img_show_error))
-                    .into(view);
-        } else {
-            Glide.with(context)
-                    .load(url)
-                    .apply(new RequestOptions()
-                            .placeholder(R.mipmap.img_showing)
-                            .error(R.mipmap.img_show_error))
-                    .into(view);
-        }
+    public static void showLocalImage(Context context, int url, ImageView view) {
+        Glide.with(context)
+                .load(url)
+                .apply(getRequestOptions())
+                .into(view);
     }
 
-    /**
-     * 取消和恢复请求(一般用于listview高速滑动中)
-     * 0:滑动中1:停止滑动
-     * 当列表在滑动的时候，调用pauseRequests()取消请求，滑动停止时，调用resumeRequests()恢复请求。
-     */
-    public static void suspendImage(Context context, int type) {
-        if (type == 0)
-            Glide.with(context).pauseRequests();
-        else
-            Glide.with(context).resumeRequests();
+    private static RequestOptions getRequestOptions() {
+        return new RequestOptions()
+                .placeholder(R.mipmap.img_showing)
+                .error(R.mipmap.img_show_error);
     }
 
     /**

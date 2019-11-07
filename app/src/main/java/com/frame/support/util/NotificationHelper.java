@@ -20,7 +20,7 @@ public class NotificationHelper {
 
     private NotificationManager manager;
     private Context mContext;
-    private static String CHANNEL_ID = "redpacket";
+    private static String CHANNEL_ID = "FrameSupport";
     private static String CHANNEL_NAME = "下载更新";
     private static final int NOTIFICATION_ID = 1;
     private static String NotificationTitle = "应用下载";//通知栏要显示的标题
@@ -29,8 +29,7 @@ public class NotificationHelper {
         this.mContext = context.getApplicationContext();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
-            mChannel.setDescription("应用有新版本");
-            //   mChannel.enableLights(true); //是否在桌面icon右上角展示小红点(默认为true)
+            mChannel.setDescription("发现新版本");
             mChannel.setShowBadge(true);
             getManager().createNotificationChannel(mChannel);
         }

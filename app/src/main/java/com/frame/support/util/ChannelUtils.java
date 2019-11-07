@@ -1,6 +1,5 @@
 package com.frame.support.util;
 
-import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
@@ -9,11 +8,6 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.Utils;
 import com.frame.FrameApplication;
 import com.meituan.android.walle.WalleChannelReader;
-
-import java.io.IOException;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 /**
  * Description:
@@ -26,11 +20,7 @@ public class ChannelUtils {
 
     public static String getChannel() {
         String channerl = WalleChannelReader.get(FrameApplication.mContext, "CHANNEL");//通过walle获取到的渠道号，需要手动注入渠道信息
-        if (TextUtils.isEmpty(channerl)) {
-            return "AA000";
-        } else {
-            return channerl;
-        }
+        return TextUtils.isEmpty(channerl) ? "AA000" : channerl;
         //  return getMate("channel");
     }
 

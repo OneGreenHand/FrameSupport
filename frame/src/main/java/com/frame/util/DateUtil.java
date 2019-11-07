@@ -1,5 +1,7 @@
 package com.frame.util;
 
+import android.text.TextUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,55 +15,9 @@ public class DateUtil {
     /**
      * 获取当前系统时间
      */
-    public static String getDate(int type) {
-        Calendar cale = Calendar.getInstance(); // 使用默认时区和语言环境获得一个日历
-        Date tasktime = cale.getTime();   // 将Calendar类型转换成Date类型
-        String pattern = "";
-        switch (type) {
-            case 1:
-                pattern = "yyyy-MM-dd HH:mm:ss";
-                break;
-            case 2:
-                pattern = "yyyy-MM-dd HH:mm";
-                break;
-            case 3:
-                pattern = "yyyy-MM-dd HH";
-                break;
-            case 4:
-                pattern = "yyyy-MM-dd";
-                break;
-            case 5:
-                pattern = "yyyy-MM";
-                break;
-            case 6:
-                pattern = "yyyy";
-                break;
-            case 7:
-                pattern = "MM";
-                break;
-            case 8:
-                pattern = "dd";
-                break;
-            case 9:
-                pattern = "HH:mm:ss";
-                break;
-            case 10:
-                pattern = "HH:mm";
-                break;
-            case 11:
-                pattern = "HH";
-                break;
-            case 12:
-                pattern = "mm";
-                break;
-            case 13:
-                pattern = "ss";
-                break;
-        }
-        SimpleDateFormat df = new SimpleDateFormat(pattern); // 设置日期输出的格式
-        return df.format(tasktime);
+    public static String getDate(String pattern) {
+        return new SimpleDateFormat(TextUtils.isEmpty(pattern) ? "yyyy-MM-dd HH:mm:ss" : pattern).format(Calendar.getInstance().getTime());
     }
-
 
     /**
      * 设置时间
@@ -76,7 +32,6 @@ public class DateUtil {
      * 获取当前时间的前一天时间
      */
     public static Calendar getBeforeDay(Calendar cl) {
-        //cl.roll(Calendar.DATE, -1); //使用roll方法进行向前回滚
         int day = cl.get(Calendar.DATE);  //使用set方法直接进行设置
         cl.set(Calendar.DATE, day - 1);
         return cl;
@@ -86,7 +41,6 @@ public class DateUtil {
      * 获取当前时间的后一天时间
      */
     public static Calendar getAfterDay(Calendar cl) {
-        //cl.roll(Calendar.DATE, 1); //使用roll方法进行回滚到后一天的时间
         int day = cl.get(Calendar.DATE);  //使用set方法直接设置时间值
         cl.set(Calendar.DATE, day + 1);
         return cl;
@@ -96,7 +50,6 @@ public class DateUtil {
      * 获取当前时间的后30天时间
      */
     public static Calendar getAfter30Day(Calendar cl) {
-        //cl.roll(Calendar.DATE, 30);//使用roll方法进行回滚到后30天的时间
         int day = cl.get(Calendar.DATE);  //使用set方法直接设置时间值
         cl.set(Calendar.DATE, day + 30);
         return cl;
@@ -131,7 +84,7 @@ public class DateUtil {
         mycalendar.setTimeInMillis(milliseconds);
         mWay = String.valueOf(mycalendar.get(Calendar.DAY_OF_WEEK));
         if ("1".equals(mWay)) {
-            mWay = "星期天";
+            mWay = "星期日";
         } else if ("2".equals(mWay)) {
             mWay = "星期一";
         } else if ("3".equals(mWay)) {

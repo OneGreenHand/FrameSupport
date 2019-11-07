@@ -1,12 +1,12 @@
 package com.frame.base.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -41,18 +41,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     protected LoadingDialog progressDialog;
     protected RxPermissions rxPermissions;
     private boolean isDestroyed = false;//是否真的被finish
-
-    @Override
-    public void startActivity(Intent intent) {
-        super.startActivity(intent);
-        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -274,15 +262,12 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      * 显示加载对话框
      */
     @Override
-    public void showLoadingDialog(Object msgType, boolean isCancel) {
+    public void showLoadingDialog(String msg, boolean isCancel) {
         String message = "";
-        if (msgType == null || (msgType instanceof String && ((String) msgType).isEmpty())) {
+        if (TextUtils.isEmpty(msg))
             message = "拼命加载中...";
-        } else if (msgType instanceof String) {
-            message = (String) msgType;
-        } else if (msgType instanceof Integer) {
-            message = getResString((int) msgType);
-        }
+        else
+            message = msg;
         if (progressDialog == null)
             progressDialog = new LoadingDialog(mContext);
         progressDialog.setCancle(isCancel);

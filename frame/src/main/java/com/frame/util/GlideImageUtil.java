@@ -1,14 +1,21 @@
 package com.frame.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.frame.R;
 
 import java.io.File;
@@ -27,6 +34,30 @@ public class GlideImageUtil {
                 .load(url)
                 .apply(getRequestOptions())
                 .into(view);
+    }
+
+    /**
+     * 加载自适应的图片,返回的多大就显示多大
+     */
+    public static void showWrapImage(Context context, String url, ImageView view) {
+        Glide.with(context)
+                .asBitmap()
+                .load(url)
+                .apply(getRequestOptions())
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        view.setImageBitmap(resource);
+                        float width = ScreenUtils.getScreenWidth();
+                        float scale = width / resource.getWidth();
+                        int afterWidth = (int) (resource.getWidth() * scale);
+                        int afterHeight = (int) (resource.getHeight() * scale);
+                        ViewGroup.LayoutParams lp = view.getLayoutParams();
+                        lp.width = afterWidth;
+                        lp.height = afterHeight;
+                        view.setLayoutParams(lp);
+                    }
+                });
     }
 
     /**

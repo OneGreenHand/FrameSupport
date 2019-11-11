@@ -4,15 +4,15 @@ package com.frame.base.fragment;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.arialyy.aria.core.Aria;
 import com.frame.base.BaseView;
@@ -21,7 +21,7 @@ import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.gyf.immersionbar.components.SimpleImmersionProxy;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.trello.rxlifecycle3.components.support.RxFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -184,14 +184,14 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
      * 水平布局
      */
     public void setLayoutManager(RecyclerView rv, int orientation) {
-        rv.setLayoutManager(new LinearLayoutManager(mActivity, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false));
+        rv.setLayoutManager(new LinearLayoutManager(mActivity, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
     }
 
     /**
      * 表格布局
      */
     public void setLayoutManager(RecyclerView rv, int spanCount, int orientation) {
-        rv.setLayoutManager(new GridLayoutManager(mActivity, spanCount, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false));
+        rv.setLayoutManager(new GridLayoutManager(mActivity, spanCount, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
     }
 
     @Override

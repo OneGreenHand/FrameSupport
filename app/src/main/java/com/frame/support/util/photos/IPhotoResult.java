@@ -1,4 +1,4 @@
-package com.frame.util.photos;
+package com.frame.support.util.photos;
 
 import java.io.File;
 

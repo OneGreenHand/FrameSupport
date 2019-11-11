@@ -1,7 +1,6 @@
 package com.frame.support.view.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 
 import com.frame.adapter.BaseQuickAdapter;
 import com.frame.support.R;
@@ -11,8 +10,6 @@ import com.frame.base.BaseModel;
 import com.frame.base.BaseQuickHolder;
 import com.frame.base.activity.BaseSwipeListActivity;
 import com.frame.support.view.adapter.ExampleAdapter;
-
-import butterknife.BindView;
 
 /**
  * @describe 上拉刷新和下拉加载

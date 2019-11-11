@@ -1,19 +1,11 @@
 package com.frame.util;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.text.TextUtils;
-
-import com.frame.FrameApplication;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import androidx.fragment.app.Fragment;
 
 import java.io.Serializable;
 import java.util.Map;

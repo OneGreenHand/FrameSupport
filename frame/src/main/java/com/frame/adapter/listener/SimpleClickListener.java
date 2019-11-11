@@ -1,12 +1,13 @@
 package com.frame.adapter.listener;
 
 import android.os.Build;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.core.view.GestureDetectorCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.frame.adapter.BaseQuickAdapter;
 import com.frame.adapter.BaseViewHolder;
@@ -17,6 +18,7 @@ import static com.frame.adapter.BaseQuickAdapter.EMPTY_VIEW;
 import static com.frame.adapter.BaseQuickAdapter.FOOTER_VIEW;
 import static com.frame.adapter.BaseQuickAdapter.HEADER_VIEW;
 import static com.frame.adapter.BaseQuickAdapter.LOADING_VIEW;
+
 
 /**
  * Created by AllenCoder on 2016/8/03.

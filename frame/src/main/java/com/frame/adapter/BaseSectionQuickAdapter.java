@@ -1,8 +1,8 @@
 package com.frame.adapter;
 
-import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 
 import com.frame.adapter.entity.SectionEntity;
 

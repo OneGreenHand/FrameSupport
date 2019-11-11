@@ -1,12 +1,13 @@
 package com.frame.adapter;
 
 import android.graphics.Canvas;
-import android.support.annotation.NonNull;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.MotionEventCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.frame.R;
 import com.frame.adapter.listener.OnItemDragListener;
@@ -58,7 +59,7 @@ public abstract class BaseItemDraggableAdapter<T, K extends BaseViewHolder> exte
 
         if (mItemTouchHelper != null && itemDragEnabled && viewType != LOADING_VIEW && viewType != HEADER_VIEW
                 && viewType != EMPTY_VIEW && viewType != FOOTER_VIEW) {
-            if (hasToggleView()) {
+            if (mToggleViewId != NO_TOGGLE_VIEW) {
                 View toggleView = holder.getView(mToggleViewId);
                 if (toggleView != null) {
                     toggleView.setTag(R.id.BaseQuickAdapter_viewholder_support, holder);
@@ -68,6 +69,9 @@ public abstract class BaseItemDraggableAdapter<T, K extends BaseViewHolder> exte
                         toggleView.setOnTouchListener(mOnToggleViewTouchListener);
                     }
                 }
+            } else {
+                holder.itemView.setTag(R.id.BaseQuickAdapter_viewholder_support, holder);
+                holder.itemView.setOnLongClickListener(mOnToggleViewLongClickListener);
             }
         }
     }
@@ -81,13 +85,6 @@ public abstract class BaseItemDraggableAdapter<T, K extends BaseViewHolder> exte
      */
     public void setToggleViewId(int toggleViewId) {
         mToggleViewId = toggleViewId;
-    }
-
-    /**
-     * Is there a toggle view which will trigger drag event.
-     */
-    public boolean hasToggleView() {
-        return mToggleViewId != NO_TOGGLE_VIEW;
     }
 
     /**
@@ -136,16 +133,6 @@ public abstract class BaseItemDraggableAdapter<T, K extends BaseViewHolder> exte
      */
     public void enableDragItem(@NonNull ItemTouchHelper itemTouchHelper) {
         enableDragItem(itemTouchHelper, NO_TOGGLE_VIEW, true);
-    }
-
-    /**
-     * Enable drag items. Use the specified view as toggle.
-     *
-     * @param itemTouchHelper {@link ItemTouchHelper}
-     * @param toggleViewId    The toggle view's id.
-     */
-    public void enableDragItem(@NonNull ItemTouchHelper itemTouchHelper, int toggleViewId) {
-        enableDragItem(itemTouchHelper, toggleViewId, true);
     }
 
     /**

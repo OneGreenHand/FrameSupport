@@ -1,4 +1,5 @@
-package com.frame.util.photos;
+package com.frame.support.util.photos;
+
 
 import android.content.Intent;
 import android.graphics.Bitmap;

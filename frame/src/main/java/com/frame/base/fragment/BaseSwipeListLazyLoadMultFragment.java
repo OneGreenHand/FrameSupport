@@ -1,7 +1,7 @@
 package com.frame.base.fragment;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +10,6 @@ import com.frame.R;
 import com.frame.adapter.BaseQuickAdapter;
 import com.frame.base.BaseModel;
 import com.frame.base.BasePresenter;
-import com.frame.base.BaseQuickHolder;
 import com.frame.bean.BaseBean;
 import com.frame.config.AppConfig;
 

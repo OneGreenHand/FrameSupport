@@ -10,7 +10,7 @@ android {
         targetSdkVersion version.targetSdkVersion
         versionCode version.versionCode
         versionName version.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
 
@@ -59,7 +59,7 @@ dependencies {
     api dependencies.eventbus
     //glide图片加载
     api(dependencies.glide.glide) {
-        exclude group: 'com.android.support'
+        exclude group: 'androidx.appcompat.app'
     }
     annotationProcessor dependencies.glide.compiler
     //分Dex
@@ -89,7 +89,6 @@ dependencies {
     //api dependencies.luban
     //下载工具类
     api(dependencies.aria.aria_core) {
-        exclude group: 'com.android.support'
+        exclude group: 'androidx.appcompat.app'
     }
-    // annotationProcessor dependencies.aria.aria_compiler(基类库暂时不用下载)
 }

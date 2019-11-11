@@ -44,7 +44,7 @@ public class GameFragment extends BaseFragment {
                     ToastUtil.showShortToast("请在wifi状态下下载");
                 } else {
                     if (CommonUtil.notificationAuthority(mActivity)) {//检测通知栏是否打开
-                        InstructionsUtils.downloadApk(mActivity, "", downloadUrl, "", true);
+                        InstructionsUtils.downloadApk(mActivity, "", downloadUrl, true);
                     }
                 }
                 break;
@@ -52,7 +52,7 @@ public class GameFragment extends BaseFragment {
                 if (!NetworkUtils.isWifiConnected()) {
                     ToastUtil.showShortToast("请在wifi状态下下载");
                 } else {
-                    InstructionsUtils.downloadApk(mActivity, "", downloadUrl, "", false);
+                    InstructionsUtils.downloadApk(mActivity, "", downloadUrl, false);
                 }
                 break;
             case R.id.clear_download_apk:

@@ -1,10 +1,11 @@
 package com.frame.adapter;
 
-import android.support.annotation.IntRange;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.util.SparseIntArray;
 import android.view.ViewGroup;
+
+import androidx.annotation.IntRange;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 
 import com.frame.adapter.entity.IExpandable;
 import com.frame.adapter.entity.MultiItemEntity;

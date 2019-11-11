@@ -2,19 +2,18 @@ package com.frame.support.view.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.frame.support.R;
-import com.frame.support.bean.CityWeatherBean;
-import com.frame.support.presenter.OnlinePt;
 import com.frame.base.BaseModel;
 import com.frame.base.fragment.BaseRequestFragment;
 import com.frame.bean.BaseBean;
+import com.frame.support.R;
+import com.frame.support.bean.CityWeatherBean;
+import com.frame.support.presenter.OnlinePt;
+import com.frame.support.util.photos.IPhotoResult;
+import com.frame.support.util.photos.TakePhotoDialog;
 import com.frame.util.LogUtil;
-import com.frame.util.photos.IPhotoResult;
-import com.frame.util.photos.TakePhotoDialog;
 
 import java.io.File;
 

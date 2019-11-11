@@ -1,10 +1,10 @@
 package com.frame.adapter;
 
-import android.support.annotation.IntRange;
-import android.support.annotation.LayoutRes;
 import android.util.SparseIntArray;
 import android.view.ViewGroup;
 
+import androidx.annotation.IntRange;
+import androidx.annotation.LayoutRes;
 
 import com.frame.adapter.entity.IExpandable;
 import com.frame.adapter.entity.MultiItemEntity;
@@ -123,10 +123,10 @@ public abstract class BaseMultiItemQuickAdapter<T extends MultiItemEntity, K ext
         MultiItemEntity multiItemEntity = getItem(position);
 
         if (isExpandable(multiItemEntity)) {
-            IExpandable IExpandable = (IExpandable) multiItemEntity;
+            IExpandable IExpandable = (com.frame.adapter.entity.IExpandable) multiItemEntity;
             for (int i = position - 1; i >= 0; i--) {
                 MultiItemEntity entity = data.get(i);
-                if (isExpandable(entity) && IExpandable.getLevel() > ((IExpandable) entity).getLevel()) {
+                if (isExpandable(entity) && IExpandable.getLevel() > ((com.frame.adapter.entity.IExpandable) entity).getLevel()) {
                     return i;
                 }
             }

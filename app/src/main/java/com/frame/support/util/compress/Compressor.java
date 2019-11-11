@@ -1,4 +1,4 @@
-package com.frame.util.compress;
+package com.frame.support.util.compress;
 
 import android.content.Context;
 import android.graphics.Bitmap;

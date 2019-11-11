@@ -1,7 +1,7 @@
 package com.frame.view;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -49,16 +49,6 @@ public class TipDialog extends BaseDialog {
         void OnClick(View view);
     }
 
-    @Override
-    public void show() {
-//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) dialogLayout.getLayoutParams();
-//        params.width = (int) (ScreenUtils.getScreenWidth() * 0.8);//设置为屏幕的一半
-//        dialogLayout.setLayoutParams(params);
-        content.getViewTreeObserver().addOnGlobalLayoutListener(listener);
-        super.show();
-    }
-
-
     /**
      * 是否可以点击取消
      */
@@ -92,6 +82,8 @@ public class TipDialog extends BaseDialog {
 
     /**
      * 设置带颜色的问题(html)
+     *
+     * @param msg
      */
     public void setSureColorText(String msg) {
         sure.setText(CommonUtil.setHtmlColor(msg));
@@ -101,18 +93,6 @@ public class TipDialog extends BaseDialog {
         cancel.setText(msg);
     }
 
-    private ViewTreeObserver.OnGlobalLayoutListener listener = new ViewTreeObserver.OnGlobalLayoutListener() {
-        @Override
-        public void onGlobalLayout() {
-            if (content.getLineCount() > 1) {
-                content.setGravity(Gravity.LEFT);
-            } else {
-                content.setGravity(Gravity.CENTER);
-            }
-            content.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
-        }
-    };
-
 
     @OnClick({R2.id.cancel, R2.id.sure})
     public void onViewClicked(View view) {
@@ -120,12 +100,14 @@ public class TipDialog extends BaseDialog {
         if (v == R.id.cancel) {
             if (cancelCalk != null)
                 cancelCalk.OnClick(view);
+            dismiss();
         } else if (v == R.id.sure) {
             if (sureCalk != null)
                 sureCalk.OnClick(view);
+            dismiss();
         }
-        dismiss();
     }
+
 
     public TipDialog(@NonNull Context context) {
         super(context);

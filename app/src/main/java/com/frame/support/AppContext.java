@@ -2,16 +2,16 @@ package com.frame.support;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 import android.text.TextUtils;
 
+import com.arialyy.aria.core.Aria;
 import com.blankj.utilcode.util.Utils;
 import com.frame.FrameApplication;
 import com.frame.config.AppConfig;
 import com.frame.config.BaseConfig;
 import com.frame.support.util.ChannelUtils;
 import com.frame.util.LogUtil;
-import com.tencent.bugly.Bugly;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
@@ -28,6 +28,7 @@ public class AppContext extends FrameApplication {
         super.onCreate();
         Utils.init(this);//初始化工具类
         //initBugly();
+        Aria.init(this);
         initX5();
         initFolder();
     }

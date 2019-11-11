@@ -2,10 +2,6 @@ package com.frame.base.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -14,6 +10,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.arialyy.aria.core.Aria;
 import com.blankj.utilcode.util.KeyboardUtils;
@@ -24,7 +24,7 @@ import com.frame.util.AppManager;
 import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.ImmersionBar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -214,14 +214,14 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      * 水平布局
      */
     public void setLayoutManager(RecyclerView rv, int orientation) {
-        rv.setLayoutManager(new LinearLayoutManager(mContext, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false));
+        rv.setLayoutManager(new LinearLayoutManager(mContext, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
     }
 
     /**
      * 表格布局
      */
     public void setLayoutManager(RecyclerView rv, int spanCount, int orientation) {
-        rv.setLayoutManager(new GridLayoutManager(mContext, spanCount, orientation == 1 ? OrientationHelper.VERTICAL : OrientationHelper.HORIZONTAL, false));
+        rv.setLayoutManager(new GridLayoutManager(mContext, spanCount, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
     }
 
     @Override

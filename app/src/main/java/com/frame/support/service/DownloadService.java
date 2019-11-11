@@ -9,7 +9,7 @@ import android.text.TextUtils;
 
 import com.arialyy.annotations.Download;
 import com.arialyy.aria.core.Aria;
-import com.arialyy.aria.core.download.DownloadTask;
+import com.arialyy.aria.core.task.DownloadTask;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.FileUtils;
 import com.frame.config.BaseConfig;
@@ -81,7 +81,7 @@ public class DownloadService extends Service {
                 Aria.download(this)
                         .load(fileUrl)
                         .setFilePath(BaseConfig.FILE_FOLDER + fileName, true)
-                        .start();
+                        .create();
             }
         } else {
             if (isShowProgress)

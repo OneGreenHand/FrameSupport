@@ -3,7 +3,7 @@ package com.frame.support.webview;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.webkit.JavascriptInterface;
 
 import com.blankj.utilcode.util.AppUtils;

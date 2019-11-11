@@ -2,11 +2,10 @@ package com.frame.base;
 
 
 import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.frame.FrameApplication;
 import com.frame.bean.BaseBean;
 import com.frame.bean.FileInfoBean;
 import com.frame.config.AppConfig;
@@ -16,21 +15,17 @@ import com.frame.util.GsonUtil;
 import com.frame.util.LogUtil;
 import com.frame.util.ToastUtil;
 import com.tencent.bugly.crashreport.CrashReport;
-import com.trello.rxlifecycle2.android.ActivityEvent;
-import com.trello.rxlifecycle2.android.FragmentEvent;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.trello.rxlifecycle3.android.ActivityEvent;
+import com.trello.rxlifecycle3.android.FragmentEvent;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle3.components.support.RxFragment;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
 /**

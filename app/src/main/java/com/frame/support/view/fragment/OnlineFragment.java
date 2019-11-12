@@ -9,7 +9,6 @@ import com.frame.base.BaseModel;
 import com.frame.base.fragment.BaseRequestFragment;
 import com.frame.bean.BaseBean;
 import com.frame.support.R;
-import com.frame.support.bean.CityWeatherBean;
 import com.frame.support.presenter.OnlinePt;
 import com.frame.support.util.photos.IPhotoResult;
 import com.frame.support.util.photos.TakePhotoDialog;
@@ -40,12 +39,9 @@ public class OnlineFragment extends BaseRequestFragment<OnlinePt, BaseBean> {
     }
 
 
-    @OnClick({R.id.get_weather, R.id.select_photo, R.id.crop_photo})
+    @OnClick({R.id.select_photo, R.id.crop_photo})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.get_weather:
-                mPresenter.getCityWeather();
-                break;
             case R.id.select_photo:
                 takePhoto(false);
                 break;
@@ -91,7 +87,5 @@ public class OnlineFragment extends BaseRequestFragment<OnlinePt, BaseBean> {
 
     @Override
     public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
-        CityWeatherBean cityWeatherBean = (CityWeatherBean) data;
-        requestMsg.setText("深圳部分天气信息如下：" + "\n当前城市：" + cityWeatherBean.data.city + "\n今日温度：" + cityWeatherBean.data.wendu + "℃" + "\n感冒情况：" + cityWeatherBean.data.ganmao + "\n\n天气日期(昨日)：" + cityWeatherBean.data.yesterday.date + "\n昨日最低温度：" + cityWeatherBean.data.yesterday.low + "\n昨日最高温度：" + cityWeatherBean.data.yesterday.high);
     }
 }

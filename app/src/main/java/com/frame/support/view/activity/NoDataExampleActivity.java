@@ -2,11 +2,12 @@ package com.frame.support.view.activity;
 
 import android.os.Bundle;
 
-import com.frame.support.R;
-import com.frame.support.presenter.RequestErrorExamplePt;
 import com.frame.base.BaseModel;
 import com.frame.base.activity.BaseSwipeActivity;
 import com.frame.bean.BaseBean;
+import com.frame.support.R;
+import com.frame.support.bean.DuanZiBean;
+import com.frame.support.presenter.RequestErrorExamplePt;
 import com.frame.util.ToastUtil;
 
 /**
@@ -15,7 +16,7 @@ import com.frame.util.ToastUtil;
 public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExamplePt, BaseBean> {
     @Override
     protected void onRefreshRequest() {
-        ToastUtil.showShortToast("下拉刷新");
+        ToastUtil.showShortToast("刷新了");
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
@@ -35,6 +36,11 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
     }
 
     @Override
+    public Object getEmptyViewMsg() {
+        return "为了看出效果,这里请求了第999页数据,所以返回的数据为空";
+    }
+
+    @Override
     protected void initData() {
         mPresenter.getPersonalizedSignature();
     }
@@ -47,6 +53,7 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
     @Override
     public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
         //请求完成后返回的数据是空的，在实体bean中isEmpty()为true，basemodel会自动处理切换为空布局显示
-        ToastUtil.showShortToast(data.msg);
+        DuanZiBean duanZiBean = (DuanZiBean) data;
+        ToastUtil.showShortToast(duanZiBean.message);
     }
 }

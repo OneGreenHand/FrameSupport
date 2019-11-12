@@ -55,12 +55,11 @@ public class IntentUtil {
      */
     public static void goFragmentForResult(Fragment fragment, Class<?> activity, Bundle bundle, int requestCode, boolean ifLogin) {
         Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //   if (ifLogin && !UserUtil.isLogin()) {
         //intent.setClass(fragment.getActivity(), LoginActivity.class);
         //  mContext.startActivity(intent);
         //   } else {
-        intent.setClass(fragment.getContext(), activity);
+        intent.setClass(fragment.getActivity(), activity);
         if (bundle != null)
             intent.putExtras(bundle);
         fragment.startActivityForResult(intent, requestCode);
@@ -106,12 +105,11 @@ public class IntentUtil {
      */
     public static void goFragmentForResult2(Fragment fragment, Class<?> activity, Map<String, Object> param, int requestCode, boolean ifLogin) {
         Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //  if (ifLogin && !UserUtil.isLogin()) {
         //    intent.setClass(fragment.getActivity(), LoginActivity.class);
         //    mContext.startActivity(intent);
         //  } else {
-        intent.setClass(fragment.getContext(), activity);
+        intent.setClass(fragment.getActivity(), activity);
         putIntent(param, intent);
         fragment.startActivityForResult(intent, requestCode);
         //  }

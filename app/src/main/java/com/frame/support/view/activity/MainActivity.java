@@ -3,25 +3,26 @@ package com.frame.support.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
 import com.blankj.utilcode.util.AppUtils;
 import com.frame.base.activity.BaseActivity;
 import com.frame.support.R;
+import com.frame.support.util.ChannelUtils;
+import com.frame.support.view.adapter.FragmentAdapter;
 import com.frame.support.view.fragment.GameFragment;
 import com.frame.support.view.fragment.HomeFragment;
 import com.frame.support.view.fragment.MineFragment;
 import com.frame.support.view.fragment.OnlineFragment;
 import com.frame.util.ToastUtil;
-import com.meituan.android.walle.WalleChannelReader;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ public class MainActivity extends BaseActivity {
         mDatas.add(new OnlineFragment());
         mDatas.add(new MineFragment());
         viewPager.setOffscreenPageLimit(mDatas.size());
-        initAdapter();
+        viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), mDatas));
         initViewPagerChangeListener();
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -72,21 +73,6 @@ public class MainActivity extends BaseActivity {
                 return true;
             }
         });
-    }
-
-    private void initAdapter() {
-        FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public int getCount() {
-                return mDatas.size();
-            }
-
-            @Override
-            public Fragment getItem(int arg0) {
-                return mDatas.get(arg0);
-            }
-        };
-        viewPager.setAdapter(adapter);
     }
 
     private void initViewPagerChangeListener() {
@@ -117,7 +103,6 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-
     @Override
     protected int getLayoutID() {
         return R.layout.activity_main;
@@ -128,7 +113,7 @@ public class MainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 2000) {
-                Toast.makeText(MainActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "再按一次退出", Toast.LENGTH_SHORT).show();
                 firstTime = secondTime;
                 return true;
             } else {
@@ -145,8 +130,8 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.floating_action)
     public void onViewClicked() {
-        ToastUtil.showShortToast("渠道号为：" + WalleChannelReader.get(this, "CHANNEL"));//需要通过walle手动注入渠道信息，不然获取不到
-        //WalleChannelReader.get(this, "CHANNEL");//使用walle获取到的渠道号
+        ToastUtil.showShortToast("当前渠道号为：" + ChannelUtils.getChannel());
+        //WalleChannelReader.get(this, "CHANNEL");//使用walle获取到的渠道号(需要通过walle手动注入渠道信息，不然获取不到)
         // ChannelUtils.getChannel();//这里获取到的信息是build中manifestPlaceholders对应的CHANNEL信息
     }
 }

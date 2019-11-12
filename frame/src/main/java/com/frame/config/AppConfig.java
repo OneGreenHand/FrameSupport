@@ -8,10 +8,10 @@ public class AppConfig {
     //  debug为true打开调试信息，false则关闭调试信息
     public static boolean DEBUG = true;
     //通用请求地址
-    private static String Url = "https://www.apiopen.top/";
+    private static String Url = "https://api.apiopen.top/";
 
     public static String getUrl() {
-        return DEBUG ? "https://www.apiopen.top/" : Url;
+        return DEBUG ? "https://api.apiopen.top/" : Url;
     }
 
     public static void setUrl(String url) {

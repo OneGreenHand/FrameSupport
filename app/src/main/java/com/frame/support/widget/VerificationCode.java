@@ -1,19 +1,20 @@
 package com.frame.support.widget;
 
 import android.app.Activity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.CountDownTimer;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.frame.base.BaseModel;
@@ -82,7 +83,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
                 .putParam("Mobile", phone)
                 .putParam("VCType", codeType.getValue())
                 .setLoadStyle(BaseModel.LoadStyle.DIALOG)
-                .create().post(API.CITY_WEATHER);//这里填写真实请求地址
+                .create().post(API.GET_DUAN_ZI);//这里填写真实请求地址
     }
 
     public enum CodeType {

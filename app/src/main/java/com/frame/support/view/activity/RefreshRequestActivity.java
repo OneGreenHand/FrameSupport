@@ -3,32 +3,33 @@ package com.frame.support.view.activity;
 import android.os.Bundle;
 
 import com.frame.adapter.BaseQuickAdapter;
-import com.frame.support.R;
-import com.frame.support.bean.PersonalizedSignatureBean;
-import com.frame.support.presenter.RefreshRequestPt;
 import com.frame.base.BaseModel;
 import com.frame.base.BaseQuickHolder;
 import com.frame.base.activity.BaseSwipeListActivity;
+import com.frame.bean.BaseBean;
+import com.frame.support.R;
+import com.frame.support.bean.DuanZiBean;
+import com.frame.support.presenter.RefreshRequestPt;
 import com.frame.support.view.adapter.ExampleAdapter;
 
 /**
  * @describe 上拉刷新和下拉加载
  */
-public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequestPt, PersonalizedSignatureBean, PersonalizedSignatureBean.DataBean> {
+public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequestPt, BaseBean, DuanZiBean.ResultBean> {
 
     @Override
-    public BaseQuickAdapter<PersonalizedSignatureBean.DataBean, BaseQuickHolder> setAdapter() {
+    public BaseQuickAdapter<DuanZiBean.ResultBean, BaseQuickHolder> setAdapter() {
         return new ExampleAdapter();
     }
 
     @Override
     public void loadMoreListRequest(int page) {
-        mPresenter.getPersonalizedSignature(page);
+        mPresenter.getDuanZiList(page);
     }
 
     @Override
     protected void onRefreshRequest() {
-        mPresenter.getPersonalizedSignature(1);
+        mPresenter.getDuanZiList(1);
     }
 
     @Override
@@ -38,7 +39,7 @@ public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequest
 
     @Override
     protected void reRequest() {
-        mPresenter.getPersonalizedSignature(1);
+        mPresenter.getDuanZiList(1);
     }
 
     @Override
@@ -48,7 +49,7 @@ public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequest
 
     @Override
     protected void initData() {
-        mPresenter.getPersonalizedSignature(1);
+        mPresenter.getDuanZiList(1);
     }
 
     @Override
@@ -57,8 +58,11 @@ public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequest
     }
 
     @Override
-    public void requestSuccess(PersonalizedSignatureBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
-        notifyAdapterStatus(data.data, loadMode, pageCount);
+    public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
+        DuanZiBean duanZiBean = (DuanZiBean) data;
+        if (duanZiBean == null || duanZiBean.result == null || duanZiBean.result.isEmpty())
+            return;
+        notifyAdapterStatus(duanZiBean.result, loadMode, pageCount);
     }
 
 }

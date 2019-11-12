@@ -2,6 +2,8 @@ package com.frame.view;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
+
+import android.view.Gravity;
 import android.widget.TextView;
 
 import com.frame.R;
@@ -19,7 +21,7 @@ public class LoadingDialog extends BaseDialog {
     TextView loadingText;
 
     public LoadingDialog(@NonNull Context context) {
-        super(context, R.style.DialogStyle, R.style.PopWindowAnimStyle);
+        super(context, R.style.DialogStyle, R.style.PopWindowAnimStyle, Gravity.CENTER);
     }
 
     @Override

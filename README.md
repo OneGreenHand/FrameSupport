@@ -7,7 +7,7 @@ retrofit+rxjava+mvp示例(快速开发框架、项目自用)
 1、因方便使用,框架内容可能会经常变动,如使用过程中遇到问题请提issues,看到会及时回复  
 2、示例中使用到的接口为网络公开接口,接口可能随时失效  
 3、如若需要可直接下载并引入 frame Library库,具体使用方法可参照Demo  
-4、[应用体验](https://github.com/OneGreenHand/FrameSupport/blob/master/%E5%AE%89%E8%A3%85%E5%8C%85/app-release.apk)  
+4、[应用体验](https://github.com/OneGreenHand/FrameSupport/tree/master/apk/app-release.apk)  
 
 ##  Using FrameSupport  
 

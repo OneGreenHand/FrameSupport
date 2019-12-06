@@ -57,6 +57,7 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
     public void setEmptyData(List<AB> data) {
         if (data == null || data.isEmpty()) {
             mBaseAdapter.setNewData(new ArrayList<>());
+            mBaseAdapter.setHeaderAndEmpty(isHeaderAndEmpty());
             mBaseAdapter.setEmptyView(mEmptyView);
         } else {
             mBaseAdapter.setNewData(data);
@@ -79,6 +80,7 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
         } else {
             if (data == null || data.isEmpty()) {
                 mBaseAdapter.setNewData(new ArrayList<>());
+                mBaseAdapter.setHeaderAndEmpty(isHeaderAndEmpty());
                 mBaseAdapter.setEmptyView(mEmptyView);
                 return;
             }

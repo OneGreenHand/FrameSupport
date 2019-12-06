@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 
 import com.frame.view.LoadingDialog;
 import com.tencent.smtt.export.external.interfaces.JsResult;
@@ -30,10 +31,7 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
     public X5WebView(Context context, AttributeSet attrs) {
         super(context, attrs);
         getSettings().setCacheMode(com.tencent.smtt.sdk.WebSettings.LOAD_NO_CACHE);//不缓存
-        if (Build.VERSION.SDK_INT >= 19)
-            getSettings().setLoadsImagesAutomatically(true);//图片自动缩放 打开
-        else
-            getSettings().setLoadsImagesAutomatically(false);//图片自动缩放 关闭
+        getSettings().setLoadsImagesAutomatically(Build.VERSION.SDK_INT >= 19);//图片自动缩放 打开
         //   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
         //       getSettings().setMixedContentMode(0);
         getSettings().setJavaScriptEnabled(true); // 设置支持javascript脚本

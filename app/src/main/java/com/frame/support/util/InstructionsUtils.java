@@ -44,7 +44,7 @@ public class InstructionsUtils {
                 CommonUtil.intentToBrowsable(context, url);
                 break;
             case 2:
-                downloadApk(context, packName,url, true);
+                downloadApk(context, packName, url, true);
                 break;
             case 3:
                 CommonUtil.ContactQQ(context, url);
@@ -105,13 +105,13 @@ public class InstructionsUtils {
     /**
      * 通过service下载apk
      *
-     * @param packNmae       包名，如果不为空就检查是否安装了
+     * @param packName       包名，如果不为空就检查是否安装了
      * @param url            下载地址
      * @param isShowProgress 是否通知栏显示下载进度(必须要打开了通知栏)，默认为true
      */
     @SuppressLint("CheckResult")
-    public static void downloadApk(Activity activity, String packNmae, String url, boolean isShowProgress) {
-        if (TextUtils.isEmpty(packNmae)) {
+    public static void downloadApk(Activity activity, String packName, String url, boolean isShowProgress) {
+        if (TextUtils.isEmpty(packName)) {
             if (TextUtils.isEmpty(url)) {
                 ToastUtil.showShortToast("下载地址错误");
                 return;
@@ -132,7 +132,7 @@ public class InstructionsUtils {
                 ToastUtil.showShortToast("未获取权限,下载失败");
             }
         } else {//检查是否安装
-            checkInstall(activity, false, packNmae, url, isShowProgress);
+            checkInstall(activity, false, packName, url, isShowProgress);
         }
     }
 
@@ -193,7 +193,7 @@ public class InstructionsUtils {
      * @param isShowProgress 是否通知栏显示进度
      */
     private static void download(Context context, String url, boolean isShowProgress) {
-        String fileName = "";
+        String fileName;
         if (url.contains("/"))
             fileName = url.substring(url.lastIndexOf("/")).replace("/", "");
         else

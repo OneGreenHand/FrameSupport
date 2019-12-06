@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.frame.widget.RoundedImageView;
+package com.frame.widget.roundedimageview;
 
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;

@@ -48,6 +48,7 @@ public abstract class BaseSwipeListLazyLoadFragment<P extends BasePresenter, B e
     public void setEmptyData(List<AB> data) {
         if (data == null || data.isEmpty()) {
             mBaseAdapter.setNewData(new ArrayList<>());
+            mBaseAdapter.setHeaderAndEmpty(isHeaderAndEmpty());
             mBaseAdapter.setEmptyView(mEmptyView);
         } else {
             mBaseAdapter.setNewData(data);
@@ -70,6 +71,7 @@ public abstract class BaseSwipeListLazyLoadFragment<P extends BasePresenter, B e
         } else {
             if (data == null || data.isEmpty()) {
                 mBaseAdapter.setNewData(new ArrayList<>());
+                mBaseAdapter.setHeaderAndEmpty(isHeaderAndEmpty());
                 mBaseAdapter.setEmptyView(mEmptyView);
                 return;
             }

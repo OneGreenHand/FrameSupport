@@ -110,6 +110,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     }
 
     /**
+     * 是否设置,当空布局显示时,头部不被一起切换(不能和frame_root_view一起使用)
+     */
+    protected boolean isHeaderAndEmpty() {
+        return false;
+    }
+
+    /**
      * 默认设置的沉浸式状态栏配置(状态栏为粉红色，并且状态栏字体和导航栏图标变色，同时解决状态栏和布局重叠问题)
      */
     protected void initImmersionBar() {
@@ -263,11 +270,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      */
     @Override
     public void showLoadingDialog(String msg, boolean isCancel) {
-        String message = "";
-        if (TextUtils.isEmpty(msg))
-            message = "拼命加载中...";
-        else
-            message = msg;
+        String message = TextUtils.isEmpty(msg) ? "拼命加载中..." : msg;
         if (progressDialog == null)
             progressDialog = new LoadingDialog(mContext);
         progressDialog.setCancle(isCancel);

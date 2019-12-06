@@ -1,6 +1,7 @@
 package com.frame.view;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import android.view.Gravity;
@@ -26,11 +27,6 @@ public class LoadingDialog extends BaseDialog {
 
     @Override
     protected void initView(Context context) {
-//        setOnDismissListener(new OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialogInterface) {
-//            }
-//        });
     }
 
     @Override

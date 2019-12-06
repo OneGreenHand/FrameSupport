@@ -59,6 +59,7 @@ public abstract class BaseSwipeListMultiAdapterActivity<P extends BasePresenter,
             if (parent != null)//切换adapter这里不处理会出问题
                 parent.removeAllViews();
             mBaseAdapter.setNewData(new ArrayList<>());
+            mBaseAdapter.setHeaderAndEmpty(isHeaderAndEmpty());
             mBaseAdapter.setEmptyView(mEmptyView);
         } else {
             mBaseAdapter.setNewData(data);
@@ -81,6 +82,7 @@ public abstract class BaseSwipeListMultiAdapterActivity<P extends BasePresenter,
         } else {
             if (data == null || data.isEmpty()) {
                 mBaseAdapter.setNewData(new ArrayList<>());
+                mBaseAdapter.setHeaderAndEmpty(isHeaderAndEmpty());
                 mBaseAdapter.setEmptyView(mEmptyView);
                 return;
             }

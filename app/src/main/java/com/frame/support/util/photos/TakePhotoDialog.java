@@ -194,9 +194,9 @@ public class TakePhotoDialog extends BaseDialog {
          */
         private void cropPhotoResult (IPhotoResult iPhotoResult){
             if (TextUtils.isEmpty(deleteImagePath)) {//删除拍照相关创建的文件
-                FileUtils.deleteFile(imagePath + imageName);//删除拍照后的源文件
+                FileUtils.delete(imagePath + imageName);//删除拍照后的源文件
             } else {//删除选择的图片相关创建的文件
-                FileUtils.deleteFile(deleteImagePath);//删除图库选择的源文件
+                FileUtils.delete(deleteImagePath);//删除图库选择的源文件
             }
             deleteImagePath = "";
             compressTheImg(imagePath + cropImageName, iPhotoResult);

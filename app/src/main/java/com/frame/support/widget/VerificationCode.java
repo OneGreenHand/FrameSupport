@@ -1,9 +1,7 @@
 package com.frame.support.widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -69,16 +67,6 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
             ToastUtil.showShortToast("手机号不能为空");
             return;
         }
-        if (context instanceof Activity) {
-            Activity activity = (Activity) context;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                if (activity.isDestroyed())//如果activity已经被销毁就不显示
-                    return;
-            } else {
-                if (activity.isFinishing())
-                    return;
-            }
-        }
         new BaseModel.Builder(this)
                 .putParam("Mobile", phone)
                 .putParam("VCType", codeType.getValue())
@@ -129,7 +117,8 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     private void initView(AttributeSet attrs) {
         if (context instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) context;
-            activity.getLifecycle().addObserver(this);
+            if (activity != null)
+                activity.getLifecycle().addObserver(this);
         }
         setMinWidth(SizeUtils.dp2px(91));
         setMinHeight(SizeUtils.dp2px(27));

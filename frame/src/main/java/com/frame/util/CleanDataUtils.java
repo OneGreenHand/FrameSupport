@@ -18,10 +18,10 @@ public class CleanDataUtils {
      * 获取缓存大小
      */
     public static String getTotalCacheSize(Context context) throws Exception {
-        long cacheSize = FileUtils.getDirLength(context.getCacheDir());//获取内部缓存大小
+        long cacheSize = FileUtils.getLength(context.getCacheDir());//获取内部缓存大小
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) //sd卡正常挂载
-            cacheSize += FileUtils.getDirLength(context.getExternalCacheDir());//获取外部缓存大小
-        cacheSize += FileUtils.getDirLength(new File(context.getCacheDir() + "/" + InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR));//获取glide的图片缓存大小
+            cacheSize += FileUtils.getLength(context.getExternalCacheDir());//获取外部缓存大小
+        cacheSize += FileUtils.getLength(new File(context.getCacheDir() + "/" + InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR));//获取glide的图片缓存大小
         return getFormatSize(cacheSize);
     }
 

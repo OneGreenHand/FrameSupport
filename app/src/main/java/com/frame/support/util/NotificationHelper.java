@@ -6,7 +6,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+
 import androidx.core.app.NotificationCompat;
+
 import android.text.TextUtils;
 
 import com.frame.support.R;
@@ -62,9 +64,7 @@ public class NotificationHelper {
     /**
      * 显示通知栏
      */
-    public void showNotification(String title) {
-        if (!TextUtils.isEmpty(title))
-            NotificationTitle = title;
+    public void showNotification() {
         NotificationCompat.Builder builder = getNofity(NotificationTitle, "");
         getManager().notify(NOTIFICATION_ID, builder.build());
     }
@@ -73,7 +73,7 @@ public class NotificationHelper {
      * 不断调用次方法通知通知栏更新进度条
      */
     public void updateProgress(int progress) {
-        String text = "";
+        String text;
         if (progress == -1)
             text = "下载失败";
         else

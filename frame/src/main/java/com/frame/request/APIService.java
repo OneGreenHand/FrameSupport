@@ -22,9 +22,8 @@ import retrofit2.http.Url;
  * description: API接口
  */
 public interface APIService {
-
     //下载文件
-    @Streaming
+    @Streaming//防止写入内存
     @GET
     Observable<ResponseBody> downloadFile(@Url String fileUrl);
 
@@ -36,19 +35,4 @@ public interface APIService {
 
     @POST
     Observable<ResponseBody> upload(@Url() String url, @Body RequestBody Body);
-
-    @Streaming//防止写入内存
-    @GET
-    Observable<ResponseBody> download(@Header("Range") String range, @Url() String url);
-
-    @Headers("Content-Type:application/x-www-form-urlencoded")
-    @FormUrlEncoded
-    @PATCH
-    Observable<ResponseBody> patch(@Url() String url, @FieldMap Map<String, Object> fieldMap);
-
-    @Headers("Content-Type:application/x-www-form-urlencoded")
-    @FormUrlEncoded
-    @HTTP(method = "DELETE", hasBody = true)
-    Observable<ResponseBody> delete(@Url() String url, @FieldMap Map<String, Object> fieldMap);
-
 }

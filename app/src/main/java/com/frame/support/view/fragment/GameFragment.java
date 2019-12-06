@@ -57,7 +57,7 @@ public class GameFragment extends BaseFragment {
                 break;
             case R.id.clear_download_apk:
                 if (FileUtils.isFileExists(BaseConfig.FILE_FOLDER + "tim.apk")) {
-                    if (FileUtils.deleteFile(BaseConfig.FILE_FOLDER + "tim.apk")) {
+                    if (FileUtils.delete(BaseConfig.FILE_FOLDER + "tim.apk")) {
                         ToastUtil.showShortToast("文件已删除,可以重新下载了");
                     } else {
                         ToastUtil.showShortToast("文件删除失败");

@@ -25,9 +25,6 @@ public class APIException {
 
     /**
      * 网络请求直接抛出的异常信息
-     *
-     * @param e
-     * @return
      */
     public static String getRequestExceptionMessage(Throwable e) {
         String message;

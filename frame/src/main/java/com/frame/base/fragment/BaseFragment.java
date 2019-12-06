@@ -123,7 +123,12 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
     public boolean immersionBarEnabled() {
         return false;
     }
-
+    /**
+     * 是否设置,当空布局显示时,头部不被一起切换(不能和frame_root_view一起使用)
+     */
+    protected boolean isHeaderAndEmpty() {
+        return false;
+    }
     @Override
     public void initImmersionBar() {
 
@@ -159,11 +164,7 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
      */
     @Override
     public void showLoadingDialog(String msg, boolean isCancel) {
-        String message = "";
-        if (TextUtils.isEmpty(msg))
-            message = "拼命加载中...";
-        else
-            message = msg;
+        String message = TextUtils.isEmpty(msg) ? "拼命加载中..." : msg;
         if (progressDialog == null)
             progressDialog = new LoadingDialog(mActivity);
         progressDialog.setCancle(isCancel);

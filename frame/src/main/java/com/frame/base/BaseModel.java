@@ -87,38 +87,6 @@ public class BaseModel {
         }
     }
 
-    public <B extends BaseBean> void delete(String api, final Class<B> clazz) {
-        Observer<ResponseBody> responseBodySubscriber = getResponseBodySubscriber(api, clazz);
-        if (responseBodySubscriber == null) return;
-        if (mBuilder.isSyncLifeCycle) {//是否需要同步生命周期
-            if (mBuilder.mBaseRequestView instanceof RxAppCompatActivity) {
-                mHttpRequest.delete(api, mBuilder.mParam, ((RxAppCompatActivity) mBuilder.mBaseRequestView).bindUntilEvent(ActivityEvent.DESTROY)).subscribe(responseBodySubscriber);
-            } else if (mBuilder.mBaseRequestView instanceof RxFragment) {
-                mHttpRequest.delete(api, mBuilder.mParam, ((RxFragment) mBuilder.mBaseRequestView).bindUntilEvent(FragmentEvent.DESTROY)).subscribe(responseBodySubscriber);
-            } else {
-                mHttpRequest.delete(api, mBuilder.mParam, null).subscribe(responseBodySubscriber);
-            }
-        } else {
-            mHttpRequest.delete(api, mBuilder.mParam, null).subscribe(responseBodySubscriber);
-        }
-    }
-
-    public <B extends BaseBean> void patch(String api, final Class<B> clazz) {
-        Observer<ResponseBody> responseBodySubscriber = getResponseBodySubscriber(api, clazz);
-        if (responseBodySubscriber == null) return;
-        if (mBuilder.isSyncLifeCycle) {//是否需要同步生命周期
-            if (mBuilder.mBaseRequestView instanceof RxAppCompatActivity) {
-                mHttpRequest.patch(api, mBuilder.mParam, ((RxAppCompatActivity) mBuilder.mBaseRequestView).bindUntilEvent(ActivityEvent.DESTROY)).subscribe(responseBodySubscriber);
-            } else if (mBuilder.mBaseRequestView instanceof RxFragment) {
-                mHttpRequest.patch(api, mBuilder.mParam, ((RxFragment) mBuilder.mBaseRequestView).bindUntilEvent(FragmentEvent.DESTROY)).subscribe(responseBodySubscriber);
-            } else {
-                mHttpRequest.patch(api, mBuilder.mParam, null).subscribe(responseBodySubscriber);
-            }
-        } else {
-            mHttpRequest.patch(api, mBuilder.mParam, null).subscribe(responseBodySubscriber);
-        }
-    }
-
     public <B extends BaseBean> void upload(String api, final Class<B> clazz) {
         Observer<ResponseBody> responseBodySubscriber = getResponseBodySubscriber(api, clazz);
         if (responseBodySubscriber == null) return;

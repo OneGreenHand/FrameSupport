@@ -23,7 +23,7 @@ import okhttp3.ResponseBody;
  * date：2018/4/21 16:09
  */
 public class HttpRequest {
-    private APIService apiService = null;
+    private APIService apiService;
 
     public HttpRequest() {
         apiService = RetrofitWrapper.getInstance().createApi(APIService.class);
@@ -40,22 +40,6 @@ public class HttpRequest {
     public Observable<ResponseBody> post(String url, Object object, ObservableTransformer observer) {
         Observable<ResponseBody> observable = apiService
                 .post(url, object == null ? "" : object)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        return observer == null ? observable : observable.compose(observer);
-    }
-
-    public Observable<ResponseBody> delete(String url, Map<String, Object> fieldMap, ObservableTransformer observer) {
-        Observable<ResponseBody> observable = apiService
-                .delete(url, fieldMap)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        return observer == null ? observable : observable.compose(observer);
-    }
-
-    public Observable<ResponseBody> patch(String url, Map<String, Object> fieldMap, ObservableTransformer observer) {
-        Observable<ResponseBody> observable = apiService
-                .patch(url, fieldMap)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         return observer == null ? observable : observable.compose(observer);
@@ -87,17 +71,6 @@ public class HttpRequest {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         return observer == null ? observable : observable.compose(observer);
-    }
-
-    public void download(long range, String url, String fileFolder, String fileName, Observer<ResponseBody> observer) {
-        //断点续传时请求的总长度
-        File file = new File(fileFolder, fileName);
-        String totalLength = "-";
-        if (file.exists())
-            totalLength += file.length();
-        apiService.download("bytes=" + Long.toString(range) + totalLength, url)
-                .subscribeOn(Schedulers.io())
-                .subscribe(observer);
     }
 
     /**

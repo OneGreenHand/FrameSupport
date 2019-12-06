@@ -9,7 +9,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.0'
         //tinkersupport插件,bugly热更新(热更新相关)
-        //    classpath "com.tencent.bugly:tinker-support:1.1.5"
+        //    classpath "com.tencent.bugly:tinker-support:1.2.0"
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.0'
     }
 }

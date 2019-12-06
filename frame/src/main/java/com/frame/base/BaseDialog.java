@@ -2,15 +2,8 @@ package com.frame.base;
 
 import android.app.Activity;
 import android.app.Dialog;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.os.Build;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +11,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.frame.R;
@@ -84,7 +85,8 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     protected void initCommon(Context context) {
         if (context instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) context;
-            activity.getLifecycle().addObserver(this);
+            if (activity != null)
+                activity.getLifecycle().addObserver(this);
         }
         setCancelable(isCancelable);
         setCanceledOnTouchOutside(isCancelable);
@@ -126,6 +128,8 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     public void show() {
         if (bContext instanceof Activity) {
             Activity activity = (Activity) bContext;
+            if (activity == null)
+                return;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 if (activity.isDestroyed())//如果activity已经被销毁就不显示
                     return;

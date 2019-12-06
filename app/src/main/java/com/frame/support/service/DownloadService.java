@@ -26,7 +26,6 @@ import com.frame.util.ToastUtil;
 public class DownloadService extends Service {
     private String fileUrl;//下载的文件地址
     private String fileName;//文件名
-    private String title;
     private NotificationHelper notificationHelper;
     private boolean isDownloading = false;//是否在下载中
     private boolean isShowProgress = true;//是否显示下载进度
@@ -57,7 +56,6 @@ public class DownloadService extends Service {
             return;
         fileUrl = intent.getStringExtra("fileUrl");
         fileName = intent.getStringExtra("fileName");
-        title = intent.getStringExtra("title");
         isShowProgress = intent.getBooleanExtra("isShowProgress", true);
         if (TextUtils.isEmpty(fileUrl) || TextUtils.isEmpty(fileName))
             return;
@@ -103,7 +101,7 @@ public class DownloadService extends Service {
     @Download.onTaskStart
     public void onTaskStart(DownloadTask task) {
         if (isShowProgress) {
-            getNotification().showNotification(title);
+            getNotification().showNotification();
         }
         isDownloading = true;
     }

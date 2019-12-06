@@ -7,8 +7,10 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+
 import androidx.fragment.app.Fragment;
 import androidx.core.app.NotificationManagerCompat;
+
 import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -247,6 +249,8 @@ public class CommonUtil {
 
     //跳转到浏览器
     public static void intentToBrowsable(Context mContext, String url) {
+        if (TextUtils.isEmpty(url))
+            return;
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -262,10 +266,11 @@ public class CommonUtil {
      */
     public static void ContactQQ(Context context, String qq) {
         String url;
+        String q = TextUtils.isEmpty(qq) ? "40012345" : qq;
         if (AppUtils.isAppInstalled("com.tencent.mobileqq") || AppUtils.isAppInstalled("com.tencent.tim") || AppUtils.isAppInstalled("com.tencent.qqlite"))
-            url = "mqqwpa://im/chat?chat_type=wpa&uin=" + qq + "";
+            url = "mqqwpa://im/chat?chat_type=wpa&uin=" + q + "";
         else
-            url = "http://wpa.qq.com/msgrd?v=3&uin=" + qq + "&site=qq&menu=yes";
+            url = "http://wpa.qq.com/msgrd?v=3&uin=" + q + "&site=qq&menu=yes";
         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 

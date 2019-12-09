@@ -37,7 +37,6 @@ public abstract class BaseRequestLazyLoadFragment<P extends BasePresenter, B ext
 
     @Override
     public void requestError(Throwable e, Object tag) {
-        //网络请求错误
         LogUtil.e("okhttp", e.getMessage());
     }
 
@@ -51,22 +50,12 @@ public abstract class BaseRequestLazyLoadFragment<P extends BasePresenter, B ext
     @Override
     public void showEmptyView() {
         if (mVaryViewHelperController != null) {
-            Object emptyViewMsg = getEmptyViewMsg();
-            if (emptyViewMsg instanceof String)
-                mVaryViewHelperController.showEmpty((String) emptyViewMsg);
-            if (emptyViewMsg instanceof Integer)
-                mVaryViewHelperController.showEmpty(getResString((int) emptyViewMsg));
+            mVaryViewHelperController.showEmpty(getEmptyViewMsg());
         }
     }
 
     @Override
-    public void showNetErrorView() {
-        if (mVaryViewHelperController != null)
-            mVaryViewHelperController.showNetworkError(view -> reRequest());
-    }
-
-    @Override
-    public void showServerErrorView(String tips) {
+    public void showNetErrorView(String tips) {
         if (mVaryViewHelperController != null)
             mVaryViewHelperController.showNetworkError(view -> reRequest(), tips);
     }
@@ -83,13 +72,13 @@ public abstract class BaseRequestLazyLoadFragment<P extends BasePresenter, B ext
         //登录过期，清除用户重新登录
     }
 
-    //重写更换空数据布局
-    public int getEmptyView() {
-        return -1;
+    //设置空数据提示文本
+    public String getEmptyViewMsg() {
+        return getResString(R.string.frame_no_data);
     }
 
-    //重写更换空数据布局的提示文本
-    public Object getEmptyViewMsg() {
-        return R.string.frame_no_data;
+    //设置空数据布局(重写即为替换)
+    public int getEmptyView() {
+        return R.layout.frame_view_pager_no_data;
     }
 }

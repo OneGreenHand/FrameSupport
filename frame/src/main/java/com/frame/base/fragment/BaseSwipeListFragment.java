@@ -2,6 +2,8 @@ package com.frame.base.fragment;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +26,10 @@ import java.util.List;
  */
 public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends BaseBean, AB> extends BaseSwipeFragment<P, B> {
 
-    public RecyclerView mRecyclerView;
-    private BaseQuickAdapter<AB, BaseQuickHolder> mBaseAdapter;
-    protected int page = AppConfig.ViewPage.START_INDEX;
-    private View mEmptyView;
+    protected RecyclerView mRecyclerView;
+    protected BaseQuickAdapter<AB, BaseQuickHolder> mBaseAdapter;
+    private int page = AppConfig.ViewPage.START_INDEX;
+    protected View mEmptyView;
 
     @Override
     protected void initCommon() {
@@ -38,15 +40,8 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
         mRecyclerView.setLayoutManager(setLayoutManager());
         mBaseAdapter = setAdapter();
         mRecyclerView.setAdapter(mBaseAdapter);
-        mEmptyView = LayoutInflater.from(mActivity).inflate(getEmptyView() == -1 ? R.layout.frame_view_pager_no_data : getEmptyView(), (ViewGroup) mRecyclerView.getParent(), false);
-        //设置空数据提示文本
-        Object emptyViewMsg = getEmptyViewMsg();
-        if (emptyViewMsg != null && emptyViewMsg instanceof String)
-            ((TextView) mEmptyView.findViewById(R.id.tv_view_pager_no_data_content)).setText((String) emptyViewMsg);
-        else if (emptyViewMsg != null && emptyViewMsg instanceof Integer)
-            ((TextView) mEmptyView.findViewById(R.id.tv_view_pager_no_data_content)).setText(getResString((Integer) emptyViewMsg));
-        //设置空数据背景颜色
-        mEmptyView.setBackgroundColor(getResources().getColor(getEmptyViewBg()));
+        mEmptyView = LayoutInflater.from(mActivity).inflate(getEmptyView(), (ViewGroup) mRecyclerView.getParent(), false);
+        ((TextView) mEmptyView.findViewById(R.id.tv_view_pager_no_data_content)).setText(getEmptyViewMsg());
     }
 
     /**
@@ -93,11 +88,6 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
             }
             mBaseAdapter.setNewData(data);
         }
-    }
-
-    //移除adapter中的数据
-    public void notifyAdapterRemove(int position) {
-        mBaseAdapter.remove(position);
     }
 
     private BaseQuickAdapter.RequestLoadMoreListener mRequestLoadMoreListener = new BaseQuickAdapter.RequestLoadMoreListener() {

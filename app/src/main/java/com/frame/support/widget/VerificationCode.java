@@ -76,8 +76,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
 
     public enum CodeType {
         LOGIN(1),//登录
-        REGISTER(2),//注册
-        UPDATE_PWD(3);//修改密码
+        REGISTER(2);//注册
         private int mValue;
 
         CodeType(int value) {
@@ -178,12 +177,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     }
 
     @Override
-    public void showNetErrorView() {
-
-    }
-
-    @Override
-    public void showServerErrorView(String tips) {
+    public void showNetErrorView(String tips) {
 
     }
 

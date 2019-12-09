@@ -13,9 +13,7 @@ public interface BaseRequestView<B extends BaseBean> extends BaseView {
 
     void showEmptyView();
 
-    void showNetErrorView();
-
-    void showServerErrorView(String tips);
+    void showNetErrorView(String tips);
 
     void refreshView();
 

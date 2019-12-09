@@ -10,8 +10,6 @@ import com.frame.loadingView.VaryViewHelperController;
 import com.frame.util.LogUtil;
 import com.frame.util.ToastUtil;
 
-import butterknife.ButterKnife;
-
 /**
  * @des 通用请求fragment
  */
@@ -39,7 +37,6 @@ public abstract class BaseRequestFragment<P extends BasePresenter, B extends Bas
 
     @Override
     public void requestError(Throwable e, Object tag) {
-        //网络请求错误
         LogUtil.e("okhttp", e.getMessage());
     }
 
@@ -53,24 +50,12 @@ public abstract class BaseRequestFragment<P extends BasePresenter, B extends Bas
     @Override
     public void showEmptyView() {
         if (mVaryViewHelperController != null) {
-            Object emptyViewMsg = getEmptyViewMsg();
-            if (emptyViewMsg != null && emptyViewMsg instanceof String)
-                mVaryViewHelperController.showEmpty((String) emptyViewMsg);
-            else if (emptyViewMsg != null && emptyViewMsg instanceof Integer)
-                mVaryViewHelperController.showEmpty(getResString((Integer) emptyViewMsg));
-            else
-                mVaryViewHelperController.showEmpty(getResString(R.string.frame_no_data));
+            mVaryViewHelperController.showEmpty(getEmptyViewMsg());
         }
     }
 
     @Override
-    public void showNetErrorView() {
-        if (mVaryViewHelperController != null)
-            mVaryViewHelperController.showNetworkError(view -> reRequest());
-    }
-
-    @Override
-    public void showServerErrorView(String tips) {
+    public void showNetErrorView(String tips) {
         if (mVaryViewHelperController != null)
             mVaryViewHelperController.showNetworkError(view -> reRequest(), tips);
     }
@@ -87,18 +72,13 @@ public abstract class BaseRequestFragment<P extends BasePresenter, B extends Bas
         //登录过期，清除用户重新登录
     }
 
-    //重写更换空数据布局
-    public int getEmptyView() {
-        return -1;
-    }
-
-    //设置空数据提示文本颜色
-    public int getEmptyViewBg() {
-        return R.color.frame_transparent;
-    }
-
     //设置空数据提示文本
-    public Object getEmptyViewMsg() {
-        return null;
+    public String getEmptyViewMsg() {
+        return getResString(R.string.frame_no_data);
+    }
+
+    //设置空数据布局(重写即为替换)
+    public int getEmptyView() {
+        return R.layout.frame_view_pager_no_data;
     }
 }

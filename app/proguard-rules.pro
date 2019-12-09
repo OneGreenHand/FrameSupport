@@ -265,8 +265,6 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keep class com.tencent.wxop.** {
    *;
 }
-#鲁班图片压缩
--keep class top.zibin.luban.** {*;}
 #Aria下载上传
 -dontwarn com.arialyy.aria.**
 -keep class com.arialyy.aria.**{*;}

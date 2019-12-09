@@ -51,8 +51,6 @@ dependencies {
     api dependencies.utilcode
     //今日头条屏幕适配方案
     api dependencies.autosize
-    //动态切换baseurl
-    //  api dependencies.retrofiturl
     //litepal数据库
     // api dependencies.litepal
     //eventbus
@@ -85,8 +83,6 @@ dependencies {
     api dependencies.wxpay
     // 支付宝支付
     api(name: 'alipaySdk-15.6.5-20190718211148', ext: 'aar')
-    //鲁班图片压缩
-    //api dependencies.luban
     //下载工具类
     api(dependencies.aria.aria_core) {
         exclude group: 'androidx.appcompat.app'

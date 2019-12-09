@@ -46,7 +46,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppManager.getAppManager().addActivity(this);// 添加Activity到堆栈
-        requestWindowFeature(Window.FEATURE_NO_TITLE);// 去除标题
         setContentView(getLayoutID());
         ButterKnife.bind(this);
         initCommon();
@@ -133,7 +132,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      * 指定高度为25dp（20~25dp最佳，根据需求定）
      */
     public void resetImmersionBar() {
-        ImmersionBar.with(this).reset().init();
+        ImmersionBar.with(this).init();
     }
 
     /**
@@ -148,7 +147,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      * @param view 标题栏上方的view，如上述代码示例
      */
     public void resetImmersionBar(View view) {
-        ImmersionBar.with(this).reset().statusBarView(view).init();
+        ImmersionBar.with(this).statusBarView(view).init();
     }
 
     /**
@@ -157,7 +156,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      * @param color 状态栏的颜色
      */
     public void resetImmersionBar(int color) {
-        ImmersionBar.with(this).reset().statusBarColor(color).fitsSystemWindows(true).init();
+        ImmersionBar.with(this).statusBarColor(color).fitsSystemWindows(true).init();
     }
 
     /**

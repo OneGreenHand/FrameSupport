@@ -16,7 +16,7 @@ import com.frame.bean.BaseBean;
  * @des 通用请求fragment(懒加载, 带下拉)
  */
 public abstract class BaseSwipeLazyLoadFragment<P extends BasePresenter, B extends BaseBean> extends BaseRequestLazyLoadFragment<P, B> implements VpSwipeRefreshLayout.OnRefreshListener, BaseSwipeView<B> {
-    public VpSwipeRefreshLayout mSwipeRefreshLayout;
+    protected VpSwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -10,6 +10,7 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.frame.support.util.ChannelUtils;
+import com.frame.util.LogUtil;
 import com.frame.util.ToastUtil;
 import com.frame.view.TipDialog;
 
@@ -103,10 +104,7 @@ public class JSInterface {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        TipDialog dialog = new TipDialog(context);
-                        dialog.setTitle(title);
-                        dialog.setContent(msg);
-                        dialog.show();
+                        LogUtil.e("Observable","发生错误");
                     }
                 });
     }

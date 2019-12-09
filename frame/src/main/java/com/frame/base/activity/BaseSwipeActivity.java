@@ -14,7 +14,7 @@ import com.frame.widget.VpSwipeRefreshLayout;
  */
 public abstract class BaseSwipeActivity<P extends BasePresenter, B extends BaseBean> extends BaseRequestActivity<P, B> implements VpSwipeRefreshLayout.OnRefreshListener, BaseSwipeView<B> {
 
-    public VpSwipeRefreshLayout mSwipeRefreshLayout;
+    protected VpSwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public void setContentView(int layoutResID) {

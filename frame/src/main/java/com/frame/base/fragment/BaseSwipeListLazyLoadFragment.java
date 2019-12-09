@@ -1,17 +1,19 @@
 package com.frame.base.fragment;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.frame.R;
+import com.frame.adapter.BaseQuickAdapter;
 import com.frame.base.BaseModel;
 import com.frame.base.BasePresenter;
 import com.frame.base.BaseQuickHolder;
 import com.frame.bean.BaseBean;
-import com.frame.adapter.BaseQuickAdapter;
 import com.frame.config.AppConfig;
 
 import java.util.ArrayList;
@@ -23,10 +25,10 @@ import java.util.List;
  */
 public abstract class BaseSwipeListLazyLoadFragment<P extends BasePresenter, B extends BaseBean, AB> extends BaseSwipeLazyLoadFragment<P, B> {
 
-    public RecyclerView mRecyclerView;
-    private BaseQuickAdapter<AB, BaseQuickHolder> mBaseAdapter;
-    protected int page = AppConfig.ViewPage.START_INDEX;
-    private View mEmptyView;
+    protected RecyclerView mRecyclerView;
+    protected BaseQuickAdapter<AB, BaseQuickHolder> mBaseAdapter;
+    private int page = AppConfig.ViewPage.START_INDEX;
+    protected View mEmptyView;
 
     @Override
     protected void initCommon() {
@@ -37,7 +39,8 @@ public abstract class BaseSwipeListLazyLoadFragment<P extends BasePresenter, B e
         mRecyclerView.setLayoutManager(setLayoutManager());
         mBaseAdapter = setAdapter();
         mRecyclerView.setAdapter(mBaseAdapter);
-        mEmptyView = LayoutInflater.from(mActivity).inflate(getEmptyView() == -1 ? R.layout.frame_view_pager_no_data : getEmptyView(), (ViewGroup) mRecyclerView.getParent(), false);
+        mEmptyView = LayoutInflater.from(mActivity).inflate(getEmptyView(), (ViewGroup) mRecyclerView.getParent(), false);
+        ((TextView) mEmptyView.findViewById(R.id.tv_view_pager_no_data_content)).setText(getEmptyViewMsg());
     }
 
     /**
@@ -84,11 +87,6 @@ public abstract class BaseSwipeListLazyLoadFragment<P extends BasePresenter, B e
             }
             mBaseAdapter.setNewData(data);
         }
-    }
-
-    //移除adapter中的数据
-    public void notifyAdapterRemove(int position) {
-        mBaseAdapter.remove(position);
     }
 
     private BaseQuickAdapter.RequestLoadMoreListener mRequestLoadMoreListener = new BaseQuickAdapter.RequestLoadMoreListener() {

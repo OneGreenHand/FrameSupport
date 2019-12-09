@@ -113,7 +113,7 @@ public class BaseModel {
                 }
             }
             if (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW)
-                mBuilder.mBaseRequestView.showNetErrorView();
+                mBuilder.mBaseRequestView.showNetErrorView("");
             ToastUtil.showShortToast("请检查网络");
             return null;
         }
@@ -129,7 +129,6 @@ public class BaseModel {
             public void onComplete() {
                 switch (mBuilder.mLoadStyle) {
                     case NONE:
-
                         break;
                     case VIEW:
                         if (mIsEmpty)
@@ -185,7 +184,7 @@ public class BaseModel {
 //                            .observeOn(AndroidSchedulers.mainThread())
 //                            .subscribe(b -> {
 //                                if (!b && (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW))
-//                                    mBuilder.mBaseRequestView.showNetErrorView();
+//                                    mBuilder.mBaseRequestView.showNetErrorView("");
 //                            });
                     if (AppConfig.DEBUG) {
                         LogUtil.e("数据解析异常", e.getMessage() + "");
@@ -205,14 +204,14 @@ public class BaseModel {
             case NONE:
                 break;
             case VIEW:
-                mBuilder.mBaseRequestView.showServerErrorView("服务器错误: " + e.getMessage());
+                mBuilder.mBaseRequestView.showNetErrorView("服务器错误: " + e.getMessage());
                 break;
             case DIALOG:
                 mBuilder.mBaseRequestView.dismissLoadingDialog();
                 break;
             case DIALOG_VIEW:
                 mBuilder.mBaseRequestView.dismissLoadingDialog();
-                mBuilder.mBaseRequestView.showServerErrorView("服务器错误: " + e.getMessage());
+                mBuilder.mBaseRequestView.showNetErrorView("服务器错误: " + e.getMessage());
                 break;
         }
         mBuilder.mBaseRequestView.requestError(e, tag);

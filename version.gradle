@@ -15,13 +15,13 @@ ext {
 
     // 依赖相关版本控制
     depVersion = [
+            suport                   : "1.0.0",
             retrofit2                : "2.6.2",
             rxjava2                  : "2.2.14",
             rxandroid                : "2.1.1",
             okhttp3                  : "3.10.0",
             utilcode                 : "1.26.0",
             autosize                 : "1.1.2",
-            retrofit_url             : "1.4.0",
             eventbus                 : "3.1.1",
             litepal                  : "3.0.0",
             glide                    : "4.10.0",
@@ -33,7 +33,6 @@ ext {
             bugly_crashreport_upgrade: "1.4.2",
             bugly_tinker             : "1.9.14",
             rxlifecycle              : "3.1.0",
-            luban                    : "1.1.8",
             aria                     : "3.7.10",
             walle                    : "1.1.6",
     ]
@@ -41,10 +40,10 @@ ext {
     // 依赖具体版本
     deps = [
             suport                 : [
-                    appcompat   : 'androidx.appcompat:appcompat:1.1.0',
+                    appcompat   : "androidx.appcompat:appcompat:${depVersion.suport}",
                     recyclerview: 'androidx.recyclerview:recyclerview:1.1.0-rc01',
-                    support     : 'androidx.legacy:legacy-support-v4:1.0.0',
-                    design      : 'com.google.android.material:material:1.0.0',
+                    support     : "androidx.legacy:legacy-support-v4:${depVersion.suport}",
+                    design      : "com.google.android.material:material:${depVersion.suport}",
             ],
             retrofit2              : [
                     retrofit       : "com.squareup.retrofit2:retrofit:${depVersion.retrofit2}",
@@ -80,8 +79,6 @@ ext {
             utilcode               : "com.blankj:utilcodex:${depVersion.utilcode}",
             //屏幕适配
             autosize               : "me.jessyan:autosize:${depVersion.autosize}",
-            //动态切换baseurl
-            retrofiturl            : "me.jessyan:retrofit-url-manager:${depVersion.retrofit_url}",
             //数据库
             litepal                : "org.litepal.android:java:${depVersion.litepal}",
             //分Dex
@@ -98,8 +95,6 @@ ext {
             walle                  : "com.meituan.android.walle:library:${depVersion.walle}",
             //微信支付(不包含统计)
             wxpay                  : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+",
-            //luban图片压缩
-            luban                  : "top.zibin:Luban:${depVersion.luban}",
             eventbus               : "org.greenrobot:eventbus:${depVersion.eventbus}",
             okhttp3                : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp3}",
     ]

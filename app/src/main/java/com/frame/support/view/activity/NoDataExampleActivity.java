@@ -36,7 +36,7 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
     }
 
     @Override
-    public Object getEmptyViewMsg() {
+    public String getEmptyViewMsg() {
         return "为了看出效果,这里请求了第999页数据,所以返回的数据为空";
     }
 

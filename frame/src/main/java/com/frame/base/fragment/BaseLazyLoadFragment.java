@@ -10,9 +10,8 @@ public abstract class BaseLazyLoadFragment extends BaseFragment {
     /**
      * 视图是否已经初初始化
      */
-    protected boolean isInit = false;
-    protected boolean isLoad = false;
-
+    private boolean isInit = false;
+    private boolean isLoad = false;
 
     public BaseLazyLoadFragment() {
         super();

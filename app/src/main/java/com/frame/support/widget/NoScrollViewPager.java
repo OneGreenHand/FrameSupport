@@ -1,16 +1,14 @@
 package com.frame.support.widget;
 
 import android.content.Context;
+
 import androidx.viewpager.widget.ViewPager;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * @author luo
- * @package com.hljl.bntoday.widget
- * @fileName NoScrollViewPager
- * @data on 2019/7/15 11:45
- * @describe 禁止左右滑动viewpage
+ *  禁止左右滑动ViewPage
  */
 public class NoScrollViewPager extends ViewPager {
     private boolean isScroll = false;

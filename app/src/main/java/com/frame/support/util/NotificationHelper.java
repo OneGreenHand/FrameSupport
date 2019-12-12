@@ -9,8 +9,6 @@ import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 
-import android.text.TextUtils;
-
 import com.frame.support.R;
 import com.frame.support.receiver.NotificationClickReceiver;
 

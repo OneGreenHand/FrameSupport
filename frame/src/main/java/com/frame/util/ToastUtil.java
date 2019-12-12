@@ -1,26 +1,25 @@
 package com.frame.util;
 
 import android.text.TextUtils;
-import android.widget.Toast;
 
-import com.frame.FrameApplication;
+import com.blankj.utilcode.util.ToastUtils;
 
+/**
+ * 吐司工具类(便于后期更换)
+ */
 public class ToastUtil {
 
-    /**
-     * 系统短吐司(别人的有时候会不出现吐司)
-     */
     public static void showShortToast(String content) {
         if (TextUtils.isEmpty(content))
-            Toast.makeText(FrameApplication.mContext, "额,好像什么也没有说", Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort("额,好像什么也没有说");
         else
-            Toast.makeText(FrameApplication.mContext, content, Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(content);
     }
 
     public static void showLongToast(String content) {
         if (TextUtils.isEmpty(content))
-            Toast.makeText(FrameApplication.mContext, "额,好像什么也没有说", Toast.LENGTH_SHORT).show();
+            ToastUtils.showLong("额,好像什么也没有说");
         else
-            Toast.makeText(FrameApplication.mContext, content, Toast.LENGTH_LONG).show();
+            ToastUtils.showLong(content);
     }
 }

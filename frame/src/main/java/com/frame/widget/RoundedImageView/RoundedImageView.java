@@ -33,8 +33,8 @@ import androidx.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.frame.R;
-import com.frame.util.LogUtil;
 
 /**
  * 圆角圆形imageview
@@ -248,7 +248,7 @@ public class RoundedImageView extends ImageView {
             try {
                 d = rsrc.getDrawable(mResource);
             } catch (Exception e) {
-                LogUtil.w(TAG, "Unable to find resource: " + mResource, e);
+                LogUtils.w(TAG, "Unable to find resource: " + mResource, e);
                 // Don't try again.
                 mResource = 0;
             }
@@ -286,7 +286,7 @@ public class RoundedImageView extends ImageView {
             try {
                 d = rsrc.getDrawable(mBackgroundResource);
             } catch (Exception e) {
-                LogUtil.w(TAG, "Unable to find resource: " + mBackgroundResource, e);
+                LogUtils.w(TAG, "Unable to find resource: " + mBackgroundResource, e);
                 // Don't try again.
                 mBackgroundResource = 0;
             }

@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--ios风格按钮-->
     <declare-styleable name="SwitchButton">
-        <attr name="sb_shadow_radius" format="reference|dimension"/>
-        <attr name="sb_shadow_offset" format="reference|dimension"/>
-        <attr name="sb_shadow_color" format="reference|color"/>
-        <attr name="sb_uncheck_color" format="reference|color"/>
-        <attr name="sb_checked_color" format="reference|color"/>
-        <attr name="sb_border_width" format="reference|dimension"/>
-        <attr name="sb_checkline_color" format="reference|color"/>
-        <attr name="sb_checkline_width" format="reference|dimension"/>
-        <attr name="sb_uncheckcircle_color" format="reference|color"/>
-        <attr name="sb_uncheckcircle_width" format="reference|dimension"/>
-        <attr name="sb_uncheckcircle_radius" format="reference|dimension"/>
-        <attr name="sb_checked" format="reference|boolean"/>
-        <attr name="sb_shadow_effect" format="reference|boolean"/>
-        <attr name="sb_effect_duration" format="reference|integer"/>
-        <attr name="sb_button_color" format="reference|color"/>
-        <attr name="sb_show_indicator" format="reference|boolean"/>
-        <attr name="sb_background" format="reference|color"/>
-        <attr name="sb_enable_effect" format="reference|boolean"/>
+        <attr name="sb_shadow_radius" format="reference|dimension" />
+        <attr name="sb_shadow_offset" format="reference|dimension" />
+        <attr name="sb_shadow_color" format="reference|color" />
+        <attr name="sb_uncheck_color" format="reference|color" />
+        <attr name="sb_checked_color" format="reference|color" />
+        <attr name="sb_border_width" format="reference|dimension" />
+        <attr name="sb_checkline_color" format="reference|color" />
+        <attr name="sb_checkline_width" format="reference|dimension" />
+        <attr name="sb_uncheckcircle_color" format="reference|color" />
+        <attr name="sb_uncheckcircle_width" format="reference|dimension" />
+        <attr name="sb_uncheckcircle_radius" format="reference|dimension" />
+        <attr name="sb_checked" format="reference|boolean" />
+        <attr name="sb_shadow_effect" format="reference|boolean" />
+        <attr name="sb_effect_duration" format="reference|integer" />
+        <attr name="sb_button_color" format="reference|color" />
+        <attr name="sb_show_indicator" format="reference|boolean" />
+        <attr name="sb_background" format="reference|color" />
+        <attr name="sb_enable_effect" format="reference|boolean" />
+    </declare-styleable>
+    <!--下载进度条-->
+    <declare-styleable name="AnimDownloadProgressButton">
+        <attr name="progressbtn_radius" format="float" />
+        <attr name="progressbtn_background_color" format="color" />
+        <attr name="progressbtn_background_second_color" format="color" />
+        <attr name="progressbtn_text" format="string" />
+        <attr name="progressbtn_text_size" format="float" />
+        <attr name="progressbtn_text_color" format="color" />
+        <attr name="progressbtn_text_covercolor" format="color" />
+    </declare-styleable>
+    <!--验证码倒计时-->
+    <declare-styleable name="VerificationCode">
+        <attr name="VcConductColor" format="reference|color" />
+        <attr name="VcEndColor" format="reference|color" />
+        <attr name="VcEndText" format="string" />
+        <attr name="VcCompany" format="string" />
+        <attr name="VcDuration" format="integer" />
+        <attr name="VcIntervalTime" format="integer" />
     </declare-styleable>
 </resources>

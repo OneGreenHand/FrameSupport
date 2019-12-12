@@ -58,10 +58,8 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
         rootView = inflater.inflate(getLayoutID(), container, false);
         ButterKnife.bind(this, rootView);//绑定framgent
         initCommon();
-        if (isUserRxPermissions()) {
-            if (rxPermissions == null)
-                rxPermissions = new RxPermissions(this);
-        }
+        if (isUserRxPermissions())
+            rxPermissions = new RxPermissions(this);
         if (isRegisterEventBus())
             EventBus.getDefault().register(this);
         if (isUserAria())
@@ -123,12 +121,14 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
     public boolean immersionBarEnabled() {
         return false;
     }
+
     /**
      * 是否设置,当空布局显示时,头部不被一起切换(不能和frame_root_view一起使用)
      */
     protected boolean isHeaderAndEmpty() {
         return false;
     }
+
     @Override
     public void initImmersionBar() {
 

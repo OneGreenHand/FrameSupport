@@ -10,5 +10,4 @@
     <string name="frame_view_net_error">当前网络环境较差,请重新加载</string>
     <string name="frame_load_again">重新加载</string>
     <string name="frame_view_no_data">亲,暂时没有相关数据</string>
-    <string name="update_download_progress">已下载:%1$d%%</string>
 </resources>

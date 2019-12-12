@@ -21,10 +21,7 @@ import com.frame.support.R;
 
 
 /**
- * @author luo
- * @package com.hljl.bntoday.widget
- * @fileName SwitchButton
- * @data on 2019/8/12 17:05
+ * ios风格开关
  */
 public class SwitchButton extends View implements Checkable {
     private static final int DEFAULT_WIDTH = dp2pxInt(58);

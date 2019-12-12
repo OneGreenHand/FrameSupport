@@ -2,12 +2,12 @@ package com.frame.base.activity;
 
 import android.view.View;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.frame.R;
 import com.frame.base.BasePresenter;
 import com.frame.base.BaseRequestView;
 import com.frame.bean.BaseBean;
 import com.frame.loadingView.VaryViewHelperController;
-import com.frame.util.LogUtil;
 import com.frame.util.ToastUtil;
 
 /**
@@ -39,7 +39,7 @@ public abstract class BaseRequestActivity<P extends BasePresenter, B extends Bas
 
     @Override
     public void requestError(Throwable e, Object tag) {
-        LogUtil.e("okhttp", e.getMessage());
+        LogUtils.e("okhttp", e.getMessage());
     }
 
     @Override

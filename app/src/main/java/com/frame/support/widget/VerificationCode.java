@@ -24,11 +24,7 @@ import com.frame.util.ToastUtil;
 import com.frame.view.LoadingDialog;
 
 /**
- * @author OneGreenHand
- * @package com.goume.fzk.main.widget
- * @fileName VerificationCodeLayout
- * @data on 2019/4/10 18:55
- * @describe 验证码倒计时工具类
+ * 验证码倒计时工具类
  */
 public class VerificationCode extends TextView implements LifecycleObserver, BaseRequestView<BaseBean> {
     private int conductColor;//倒计时显示的颜色

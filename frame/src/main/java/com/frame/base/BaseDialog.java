@@ -38,24 +38,24 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     private int[] mIds;
 
     protected int marginLeftAndRightDp = 0;
-    public Context bContext;
+    public Context mContext;
 
     public BaseDialog(@NonNull Context context) {
         super(context, R.style.ActionSheetDialogStyle);//默认为dialog样式
-        this.bContext = context;
+        this.mContext = context;
         initCommon(context);
     }
 
     public BaseDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
-        this.bContext = context;
+        this.mContext = context;
         initCommon(context);
     }
 
     public BaseDialog(@NonNull Context context, int themeResId, int gravity) {
         super(context, themeResId);
         this.gravity = gravity;
-        this.bContext = context;
+        this.mContext = context;
         initCommon(context);
     }
 
@@ -63,7 +63,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         super(context, themeResId);
         this.gravity = gravity;
         this.animResId = animResId;
-        this.bContext = context;
+        this.mContext = context;
         initCommon(context);
     }
 
@@ -71,7 +71,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         super(context, themeResId);
         this.gravity = gravity;
         this.isCancelable = isCancelable;
-        this.bContext = context;
+        this.mContext = context;
         initCommon(context);
     }
 
@@ -126,8 +126,8 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
 
     @Override
     public void show() {
-        if (bContext instanceof Activity) {
-            Activity activity = (Activity) bContext;
+        if (mContext instanceof Activity) {
+            Activity activity = (Activity) mContext;
             if (activity == null)
                 return;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {

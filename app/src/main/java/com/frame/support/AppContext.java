@@ -2,16 +2,17 @@ package com.frame.support;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import androidx.multidex.MultiDex;
 import android.text.TextUtils;
 
+import androidx.multidex.MultiDex;
+
 import com.arialyy.aria.core.Aria;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
 import com.frame.FrameApplication;
 import com.frame.config.AppConfig;
 import com.frame.config.BaseConfig;
 import com.frame.support.util.ChannelUtils;
-import com.frame.util.LogUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
@@ -27,6 +28,7 @@ public class AppContext extends FrameApplication {
     public void onCreate() {
         super.onCreate();
         Utils.init(this);//初始化工具类
+        LogUtils.getConfig().setLogSwitch(AppConfig.DEBUG);//设置log开关
         //initBugly();
         Aria.init(this);
         initX5();
@@ -53,7 +55,7 @@ public class AppContext extends FrameApplication {
             @Override
             public void onViewInitFinished(boolean arg0) {
                 //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
-                LogUtil.e("X5", " onViewInitFinished is " + arg0);
+                LogUtils.e("X5", " onViewInitFinished is " + arg0);
             }
 
             @Override

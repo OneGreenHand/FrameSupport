@@ -3,6 +3,7 @@ package com.frame.support.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 
 import com.frame.config.BaseConfig;
@@ -44,22 +45,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
     public void onResp(BaseResp baseResp) {
         String result = "";
-//         if (baseResp.getType() == ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX) {//分享
-//            switch (baseResp.errCode) {//微信调整后现在没办法知道是否分享成功了
-//                case BaseResp.ErrCode.ERR_OK:
-//                    result = "分享成功";
-//                    break;
-//                case BaseResp.ErrCode.ERR_USER_CANCEL:
-//                    result = "分享取消";
-//                    break;
-//                case BaseResp.ErrCode.ERR_AUTH_DENIED:
-//                    result = "分享被拒绝";
-//                    break;
-//                default:
-//                    result = "未知原因";
-//                    break;
-//            }
-//        }
 //        if (baseResp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {//登录
 //            SendAuth.Resp resp = (SendAuth.Resp) baseResp;
 //            resp.code

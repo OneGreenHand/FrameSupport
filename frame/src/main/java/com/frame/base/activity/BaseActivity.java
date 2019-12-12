@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,7 +18,6 @@ import com.blankj.utilcode.util.KeyboardUtils;
 import com.frame.R;
 import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
-import com.frame.util.AppManager;
 import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.ImmersionBar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -45,14 +42,11 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppManager.getAppManager().addActivity(this);// 添加Activity到堆栈
         setContentView(getLayoutID());
         ButterKnife.bind(this);
         initCommon();
-        if (isUserRxPermissions()) {
-            if (rxPermissions == null)
-                rxPermissions = new RxPermissions(this);
-        }
+        if (isUserRxPermissions())
+            rxPermissions = new RxPermissions(this);
         init(savedInstanceState);//初始化
         //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
         if (isImmersionBarEnabled())
@@ -72,12 +66,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     protected abstract void initData();
 
     protected abstract int getLayoutID();
-
-    @Override
-    public void setContentView(int layoutResID) {
-        View view = LayoutInflater.from(mContext).inflate(layoutResID, null);
-        super.setContentView(view);
-    }
 
     protected String getResString(int res) {
         return getResources().getString(res);
@@ -311,8 +299,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
             isDestroyed = true;
             if (isRegisterEventBus())
                 EventBus.getDefault().unregister(this);
-            // 结束Activity&从堆栈中移除
-            AppManager.getAppManager().finishActivity(this);
         }
     }
 }

@@ -130,7 +130,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.floating_action)
     public void onViewClicked() {
-        ToastUtil.showShortToast("当前渠道号为：" + ChannelUtils.getChannel());
+           ToastUtil.showShortToast("当前渠道号为：" + ChannelUtils.getChannel());
         //WalleChannelReader.get(this, "CHANNEL");//使用walle获取到的渠道号(需要通过walle手动注入渠道信息，不然获取不到)
         // ChannelUtils.getChannel();//这里获取到的信息是build中manifestPlaceholders对应的CHANNEL信息
     }

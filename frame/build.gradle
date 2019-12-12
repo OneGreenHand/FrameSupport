@@ -34,8 +34,6 @@ android {
 dependencies {
     def dependencies = rootProject.ext.deps
     // Support libraries
-    api dependencies.suport.support
-    api dependencies.suport.recyclerview
     api dependencies.suport.appcompat
     api dependencies.suport.design
     //retrofit2

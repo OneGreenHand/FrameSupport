@@ -37,7 +37,8 @@ import androidx.annotation.NonNull;
 
 import android.widget.ImageView.ScaleType;
 
-import com.frame.util.LogUtil;
+
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -131,7 +132,7 @@ public class RoundedDrawable extends Drawable {
       drawable.draw(canvas);
     } catch (Throwable e) {
       e.printStackTrace();
-      LogUtil.w(TAG, "Failed to create bitmap from drawable!");
+      LogUtils.w(TAG, "Failed to create bitmap from drawable!");
       bitmap = null;
     }
     return bitmap;

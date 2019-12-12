@@ -203,7 +203,7 @@ public class TakePhotoDialog extends BaseDialog {
         }
 
         /**
-         * 压缩图片(luban)
+         * 压缩图片
          */
         @SuppressLint("CheckResult")
         private void compressTheImg (String path, IPhotoResult iPhotoResult){

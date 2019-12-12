@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.frame.view.LoadingDialog;
 import com.tencent.smtt.export.external.interfaces.JsResult;
@@ -26,10 +26,24 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
 
     private boolean isShowLoading = true;//是否显示加载框
     protected LoadingDialog progressDialog;
+
     //private LoadCompleteClick loadCompleteClick;
+    public X5WebView(Context context) {
+        super(context);
+        init(context);
+    }
 
     public X5WebView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context);
+    }
+
+    public X5WebView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context);
+    }
+
+    public void init(Context context) {
         getSettings().setCacheMode(com.tencent.smtt.sdk.WebSettings.LOAD_NO_CACHE);//不缓存
         getSettings().setLoadsImagesAutomatically(Build.VERSION.SDK_INT >= 19);//图片自动缩放 打开
         //   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)

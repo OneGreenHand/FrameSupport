@@ -8,9 +8,9 @@ import android.webkit.JavascriptInterface;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.frame.support.util.ChannelUtils;
-import com.frame.util.LogUtil;
 import com.frame.util.ToastUtil;
 import com.frame.view.TipDialog;
 
@@ -104,7 +104,7 @@ public class JSInterface {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtil.e("Observable","发生错误");
+                        LogUtils.e("Observable","发生错误");
                     }
                 });
     }

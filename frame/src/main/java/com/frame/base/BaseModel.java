@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.frame.bean.BaseBean;
 import com.frame.bean.FileInfoBean;
@@ -12,7 +13,6 @@ import com.frame.config.AppConfig;
 import com.frame.request.APIException;
 import com.frame.request.HttpRequest;
 import com.frame.util.GsonUtil;
-import com.frame.util.LogUtil;
 import com.frame.util.ToastUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.trello.rxlifecycle3.android.ActivityEvent;
@@ -121,7 +121,7 @@ public class BaseModel {
 
             @Override
             public void onError(Throwable e) {
-                LogUtil.e(log_tag, "请求错误");
+                LogUtils.e(log_tag, "请求错误");
                 refreshStatusView(e, mBuilder.requestTag == null ? tag : mBuilder.requestTag);
             }
 
@@ -177,17 +177,8 @@ public class BaseModel {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    //如果数据异常，判断是否是网络不可用
-//                    Observable.create((ObservableOnSubscribe<Boolean>) emitter ->
-//                            emitter.onNext(NetworkUtils.isAvailableByPing()))
-//                            .subscribeOn(Schedulers.io())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .subscribe(b -> {
-//                                if (!b && (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW))
-//                                    mBuilder.mBaseRequestView.showNetErrorView("");
-//                            });
                     if (AppConfig.DEBUG) {
-                        LogUtil.e("数据解析异常", e.getMessage() + "");
+                        LogUtils.e("数据解析异常", e.getMessage() + "");
                         throw new RuntimeException("数据解析异常");
                     } else {
                         CrashReport.postCatchedException(e);//手动上报异常到bugly

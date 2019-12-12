@@ -15,7 +15,6 @@ ext {
 
     // 依赖相关版本控制
     depVersion = [
-            suport                   : "1.0.0",
             retrofit2                : "2.6.2",
             rxjava2                  : "2.2.14",
             rxandroid                : "2.1.1",
@@ -40,10 +39,8 @@ ext {
     // 依赖具体版本
     deps = [
             suport                 : [
-                    appcompat   : "androidx.appcompat:appcompat:${depVersion.suport}",
-                    recyclerview: 'androidx.recyclerview:recyclerview:1.1.0-rc01',
-                    support     : "androidx.legacy:legacy-support-v4:${depVersion.suport}",
-                    design      : "com.google.android.material:material:${depVersion.suport}",
+                    appcompat: 'androidx.appcompat:appcompat:1.1.0',
+                    design   : 'com.google.android.material:material:1.0.0',
             ],
             retrofit2              : [
                     retrofit       : "com.squareup.retrofit2:retrofit:${depVersion.retrofit2}",

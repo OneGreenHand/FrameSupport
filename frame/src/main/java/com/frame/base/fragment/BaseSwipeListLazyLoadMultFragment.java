@@ -20,7 +20,7 @@ public abstract class BaseSwipeListLazyLoadMultFragment<P extends BasePresenter,
      * 如果数据为空会设置空布局
      * 无需关注切换布局问题
      */
-    public void setEmptyData(List data) {
+    protected void setEmptyData(List data) {
         if (data == null || data.isEmpty()) {
             ViewGroup parent = (ViewGroup) mEmptyView.getParent();
             if (parent != null)//切换adapter这里不处理会出问题
@@ -34,7 +34,7 @@ public abstract class BaseSwipeListLazyLoadMultFragment<P extends BasePresenter,
     }
 
     //必须要在notifyAdapterStatus(data, loadMode, pageCount)之前调用
-    public void changeAdapter(BaseQuickAdapter adapter) {
+    protected void changeAdapter(BaseQuickAdapter adapter) {
         mBaseAdapter = adapter;
         mRecyclerView.setAdapter(mBaseAdapter);
     }

@@ -104,53 +104,23 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     }
 
     /**
-     * 默认设置的沉浸式状态栏配置(状态栏为粉红色，并且状态栏字体和导航栏图标变色，同时解决状态栏和布局重叠问题)
+     * 默认设置状态栏配置(状态栏为粉红色、字体自动变色(须指定状态栏颜色),同时解决状态栏和布局重叠问题)
      */
-    protected void initImmersionBar() {
-        ImmersionBar.with(this).statusBarColor(R.color.frame_colorAccent).autoDarkModeEnable(true).fitsSystemWindows(true).init();
+    private void initImmersionBar() {
+        initImmersionBar(R.color.frame_colorAccent);
     }
 
     /**
-     * 解决布局顶部和状态栏重叠问题(方案一)
-     * 在标题栏的上方增加View标签，高度根据android版本来判断，如下述代码。
-     * <View
-     * android:layout_width="match_parent"
-     * android:layout_height="25dp"
-     * android:background="@color/c_F44444" 顶部为图片时无需设置这项/>
-     * 指定高度为25dp（20~25dp最佳，根据需求定）
+     * 设置其他颜色,主要用于和通用标题栏颜色不符的情况
      */
-    public void resetImmersionBar() {
-        ImmersionBar.with(this).init();
-    }
-
-    /**
-     * 解决布局顶部和状态栏重叠问题(方案二)
-     * 在标题栏的上方增加View标签，但是高度指定为0dp。
-     * <View
-     * android:id="@+id/status_bar_view"
-     * android:layout_width="match_parent"
-     * android:layout_height="0dp"
-     * android:background="@color/c_F44444" 顶部为图片时无需设置这项/>
-     *
-     * @param view 标题栏上方的view，如上述代码示例
-     */
-    public void resetImmersionBar(View view) {
-        ImmersionBar.with(this).statusBarView(view).init();
-    }
-
-    /**
-     * 设置其他颜色，主要用于和通用标题栏颜色不符的情况
-     *
-     * @param color 状态栏的颜色
-     */
-    public void resetImmersionBar(int color) {
-        ImmersionBar.with(this).statusBarColor(color).fitsSystemWindows(true).init();
+    protected void initImmersionBar(int color) {
+        ImmersionBar.with(this).statusBarColor(color).autoStatusBarDarkModeEnable(true, 0.2f).fitsSystemWindows(true).init();
     }
 
     /**
      * 是否需要注册EventBus
      */
-    public boolean isRegisterEventBus() {
+    protected boolean isRegisterEventBus() {
         return false;
     }
 
@@ -183,7 +153,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     /**
      * 统一设置标题
      */
-    public void initTitleBar(String title) {
+    protected void initTitleBar(String title) {
         findViewById(R.id.img_finish).setOnClickListener(this);
         ((TextView) findViewById(R.id.app_title)).setText(title);
     }
@@ -191,7 +161,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     /**
      * 方便子类重写方法，确定是否finsh操作
      */
-    public boolean needFinsh() {
+    protected boolean needFinsh() {
         return true;
     }
 
@@ -207,14 +177,14 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     /**
      * 水平布局
      */
-    public void setLayoutManager(RecyclerView rv, int orientation) {
+    protected void setLayoutManager(RecyclerView rv, int orientation) {
         rv.setLayoutManager(new LinearLayoutManager(mContext, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
     }
 
     /**
      * 表格布局
      */
-    public void setLayoutManager(RecyclerView rv, int spanCount, int orientation) {
+    protected void setLayoutManager(RecyclerView rv, int spanCount, int orientation) {
         rv.setLayoutManager(new GridLayoutManager(mContext, spanCount, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
     }
 

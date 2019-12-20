@@ -49,7 +49,7 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
      * 如果数据为空会设置空布局
      * 无需关注切换布局问题
      */
-    public void setEmptyData(List<AB> data) {
+    protected void setEmptyData(List<AB> data) {
         if (data == null || data.isEmpty()) {
             mBaseAdapter.setNewData(new ArrayList<>());
             mBaseAdapter.setHeaderAndEmpty(isHeaderAndEmpty());
@@ -60,7 +60,7 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
     }
 
     //自动更新adapter状态
-    public void notifyAdapterStatus(List<AB> data, BaseModel.LoadMode loadMode, int pageCount) {
+    protected void notifyAdapterStatus(List<AB> data, BaseModel.LoadMode loadMode, int pageCount) {
         if (loadMode == BaseModel.LoadMode.LOAD_MODE) {//加载更多
             if (data == null) {
                 mBaseAdapter.loadMoreEnd(false);//不显示加载更多
@@ -121,12 +121,12 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
         mBaseAdapter.loadMoreFail();
     }
 
-    public RecyclerView.LayoutManager setLayoutManager() {
+    protected RecyclerView.LayoutManager setLayoutManager() {
         return new LinearLayoutManager(mActivity);
     }
 
-    public abstract BaseQuickAdapter<AB, BaseQuickHolder> setAdapter();
+    protected abstract BaseQuickAdapter<AB, BaseQuickHolder> setAdapter();
 
     //加载更多时要发送的请求
-    public abstract void loadMoreListRequest(int page);
+    protected abstract void loadMoreListRequest(int page);
 }

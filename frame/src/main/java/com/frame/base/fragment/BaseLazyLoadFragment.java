@@ -73,7 +73,7 @@ public abstract class BaseLazyLoadFragment extends BaseFragment {
 
     }
 
-    public boolean isNeedLoad() {
+    protected boolean isNeedLoad() {
         return false;
     }
 

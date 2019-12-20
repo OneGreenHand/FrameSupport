@@ -76,10 +76,14 @@ public class DownloadService extends Service {
             } else {
                 if (isShowProgress)
                     ToastUtil.showShortToast("后台下载中");
-                Aria.download(this)
-                        .load(fileUrl)
-                        .setFilePath(BaseConfig.FILE_FOLDER + fileName, true)
-                        .create();
+                try {
+                    Aria.download(this)
+                            .load(fileUrl)
+                            .setFilePath(BaseConfig.FILE_FOLDER + fileName, true)
+                            .create();
+                } catch (Exception e) {//有可能下载地址错误
+                    ToastUtil.showShortToast("下载失败");
+                }
             }
         } else {
             if (isShowProgress)

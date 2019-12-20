@@ -96,7 +96,7 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
     /**
      * 是否需要注册EventBus
      */
-    public boolean isRegisterEventBus() {
+    protected boolean isRegisterEventBus() {
         return false;
     }
 
@@ -114,18 +114,19 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
         return false;
     }
 
-    /**
-     * 是否需要开启沉浸式
-     */
-    @Override
-    public boolean immersionBarEnabled() {
-        return false;
-    }
 
     /**
      * 是否设置,当空布局显示时,头部不被一起切换(不能和frame_root_view一起使用)
      */
     protected boolean isHeaderAndEmpty() {
+        return false;
+    }
+
+    /**
+     * 是否需要开启沉浸式
+     */
+    @Override
+    public boolean immersionBarEnabled() {
         return false;
     }
 
@@ -184,14 +185,14 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
     /**
      * 水平布局
      */
-    public void setLayoutManager(RecyclerView rv, int orientation) {
+    protected void setLayoutManager(RecyclerView rv, int orientation) {
         rv.setLayoutManager(new LinearLayoutManager(mActivity, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
     }
 
     /**
      * 表格布局
      */
-    public void setLayoutManager(RecyclerView rv, int spanCount, int orientation) {
+    protected void setLayoutManager(RecyclerView rv, int spanCount, int orientation) {
         rv.setLayoutManager(new GridLayoutManager(mActivity, spanCount, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
     }
 

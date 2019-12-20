@@ -8,11 +8,14 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.View;
+import android.webkit.JsResult;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.frame.view.LoadingDialog;
-import com.tencent.smtt.export.external.interfaces.JsResult;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
@@ -23,11 +26,10 @@ import com.tencent.smtt.sdk.WebViewClient;
  * 备注：使用的时候不要设置 android:scrollbars="none"，不然部分机型会显示空白
  */
 public class X5WebView extends com.tencent.smtt.sdk.WebView {
-
-    private boolean isShowLoading = true;//是否显示加载框
-    protected LoadingDialog progressDialog;
-
+    private TextView mTextView;
+    private ProgressBar mProgressBar;
     //private LoadCompleteClick loadCompleteClick;
+
     public X5WebView(Context context) {
         super(context);
         init(context);
@@ -71,14 +73,28 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
         });
         setWebChromeClient(new WebChromeClient() {
             @Override
-            public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
+            public void onReceivedTitle(com.tencent.smtt.sdk.WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                if (mTextView != null)
+                    mTextView.setText(title);
+            }
+
+            @Override
+            public void onProgressChanged(com.tencent.smtt.sdk.WebView view, int newProgress) {
+                if (mProgressBar != null)
+                    mProgressBar.setProgress(newProgress);
+                super.onProgressChanged(view, newProgress);
+            }
+
+            @Override
+            public boolean onJsAlert(com.tencent.smtt.sdk.WebView webView, String url, String message, com.tencent.smtt.export.external.interfaces.JsResult jsResult) {
                 AlertDialog.Builder b = new AlertDialog.Builder(context);
                 b.setTitle("提示");
                 b.setMessage(message);
                 b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        result.confirm();
+                        jsResult.confirm();
                     }
                 });
                 b.setCancelable(false);
@@ -104,8 +120,8 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
 
             @Override
             public void onPageStarted(com.tencent.smtt.sdk.WebView webView, String url, Bitmap favicon) {
-                if (isShowLoading)
-                    showProgressDialog();
+                if (mProgressBar != null)
+                    mProgressBar.setVisibility(View.VISIBLE);
                 super.onPageStarted(webView, url, favicon);
             }
 
@@ -114,8 +130,8 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
                 super.onPageFinished(webView, url);
                 if (!getSettings().getLoadsImagesAutomatically())//不设置的话，部分机型不显示图片
                     getSettings().setLoadsImagesAutomatically(true);
-                if (isShowLoading)
-                    dismissProgressDialog();
+                if (mProgressBar != null)
+                    mProgressBar.setVisibility(View.GONE);
                 //   if (loadCompleteClick != null)
                 //       loadCompleteClick.loadComplete();
             }
@@ -123,32 +139,14 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
         addJavascriptInterface(new JSInterface(getContext()), "JSInterface");
     }
 
-    /**
-     * 是否显示加载框(默认为显示)
-     */
-    public void isShowLoading(boolean isShow) {
-        isShowLoading = isShow;
+    public void setTextView(TextView view) {
+        mTextView = view;
     }
 
-    /**
-     * 显示加载对话框
-     */
-    public void showProgressDialog() {
-        if (progressDialog == null)
-            progressDialog = new LoadingDialog(getContext());
-        progressDialog.setMsg("玩命加载中...");
-        if (!progressDialog.isShowing())
-            progressDialog.show();
+    public void setProgressBar(ProgressBar progressBar) {
+        mProgressBar = progressBar;
+        mProgressBar.setMax(100);  //设置加载进度最大值
     }
-
-    /**
-     * 隐藏加载对话框
-     */
-    public void dismissProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing())
-            progressDialog.dismiss();
-    }
-
 /***************************下面都是一些监听********************************/
 //    public interface LoadCompleteClick {
 //        void loadComplete();

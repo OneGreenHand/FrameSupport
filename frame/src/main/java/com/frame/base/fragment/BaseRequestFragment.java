@@ -73,12 +73,12 @@ public abstract class BaseRequestFragment<P extends BasePresenter, B extends Bas
     }
 
     //设置空数据提示文本
-    public String getEmptyViewMsg() {
+    protected String getEmptyViewMsg() {
         return getResString(R.string.frame_no_data);
     }
 
     //设置空数据布局(重写即为替换)
-    public int getEmptyView() {
+    protected int getEmptyView() {
         return R.layout.frame_view_pager_no_data;
     }
 }

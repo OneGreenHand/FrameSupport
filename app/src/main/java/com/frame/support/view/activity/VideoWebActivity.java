@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.frame.base.activity.BaseActivity;
 import com.frame.support.R;
 import com.frame.support.webview.X5WebView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 可以播放视频的webview
@@ -18,6 +21,10 @@ public class VideoWebActivity extends BaseActivity {
 
     @BindView(R.id.web_view)
     X5WebView webView;
+    @BindView(R.id.pb_web_base)
+    ProgressBar mProgressBar;
+    @BindView(R.id.app_title)
+    TextView appTitle;
 
     public static void openActivity(Context context) {
         context.startActivity(new Intent(context, VideoWebActivity.class));
@@ -25,9 +32,9 @@ public class VideoWebActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        initTitleBar("可播放视频的WebView");
         getWindow().setFormat(PixelFormat.TRANSLUCENT);//为了避免视频闪屏和透明问题
-        webView.isShowLoading(false);//不显示加载框(默认为显示)
+        webView.setTextView(appTitle);
+        webView.setProgressBar(mProgressBar);
         webView.loadUrl("https://www.baidu.com/");
     }
 
@@ -38,6 +45,10 @@ public class VideoWebActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        commonFinish();
+    }
+
+    private void commonFinish() {
         if (webView.canGoBack()) {
             webView.goBack();
         } else {
@@ -79,5 +90,11 @@ public class VideoWebActivity extends BaseActivity {
     @Override
     protected int getLayoutID() {
         return R.layout.activity_video_web;
+    }
+
+
+    @OnClick(R.id.img_finish)
+    public void onViewClicked() {
+        commonFinish();
     }
 }

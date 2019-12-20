@@ -24,12 +24,7 @@ public class GsonUtil {
 
     private static Gson buildGson() {
         GsonBuilder gsonBulder = new GsonBuilder();
-        gsonBulder
-                .registerTypeAdapter(String.class, STRING)
-                .registerTypeAdapter(Integer.class, INTEGER)
-                .registerTypeAdapter(Double.class, DOUBLE)
-                .registerTypeAdapter(Long.class, LONG)
-                .registerTypeAdapter(Float.class, FLOAT);
+        gsonBulder.registerTypeAdapter(String.class, STRING);
         gsonBulder.serializeNulls();
         return gsonBulder.create();
     }
@@ -141,123 +136,6 @@ public class GsonUtil {
             try {
                 if (value == null) {
                     writer.value("");
-                    return;
-                }
-                writer.value(value);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-    /**
-     * 自定义TypeAdapter ,null对象将被解析成0
-     */
-    private static final TypeAdapter<Integer> INTEGER = new TypeAdapter<Integer>() {
-        public Integer read(JsonReader reader) {
-            try {
-                if (reader.peek() == JsonToken.NULL) {
-                    reader.nextNull();
-                    return 0; // 原先是返回null，这里改为返回0
-                }
-                return reader.nextInt();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return 0;
-        }
-
-        public void write(JsonWriter writer, Integer value) {
-            try {
-                if (value == null) {
-                    writer.value(0);
-                    return;
-                }
-                writer.value(value);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-    /**
-     * 自定义TypeAdapter ,null对象将被解析成0.0
-     */
-    private static final TypeAdapter<Double> DOUBLE = new TypeAdapter<Double>() {
-        public Double read(JsonReader reader) {
-            try {
-                if (reader.peek() == JsonToken.NULL) {
-                    reader.nextNull();
-                    return 0.0; // 原先是返回null，这里改为返回0
-                }
-                return reader.nextDouble();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return 0.0;
-        }
-
-        public void write(JsonWriter writer, Double value) {
-            try {
-                if (value == null) {
-                    writer.value(0.0);
-                    return;
-                }
-                writer.value(value);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-    /**
-     * 自定义TypeAdapter ,null对象将被解析成0L
-     */
-    private static final TypeAdapter<Long> LONG = new TypeAdapter<Long>() {
-        public Long read(JsonReader reader) {
-            try {
-                if (reader.peek() == JsonToken.NULL) {
-                    reader.nextNull();
-                    return 0L; // 原先是返回null，这里改为返回0
-                }
-                return reader.nextLong();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return 0L;
-        }
-
-        public void write(JsonWriter writer, Long value) {
-            try {
-                if (value == null) {
-                    writer.value(0L);
-                    return;
-                }
-                writer.value(value);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-    /**
-     * 自定义TypeAdapter ,null对象将被解析成0f
-     */
-    private static final TypeAdapter<Float> FLOAT = new TypeAdapter<Float>() {
-        public Float read(JsonReader reader) {
-            try {
-                if (reader.peek() == JsonToken.NULL) {
-                    reader.nextNull();
-                    return 0f; // 原先是返回null，这里改为返回0
-                }
-                return (float) reader.nextDouble();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return 0f;
-        }
-
-        public void write(JsonWriter writer, Float value) {
-            try {
-                if (value == null) {
-                    writer.value(0f);
                     return;
                 }
                 writer.value(value);

@@ -3,7 +3,9 @@ package com.frame.support.webview;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.webkit.JavascriptInterface;
 
 import com.blankj.utilcode.util.AppUtils;
@@ -30,6 +32,12 @@ public class JSInterface {
         this.context = context;
     }
 
+    //获取渠道号
+    @JavascriptInterface
+    public String getChannel() {
+        return ChannelUtils.getChannel();
+    }
+
     // 获取 App 版本号
     @JavascriptInterface
     public String getVersion() {
@@ -42,10 +50,16 @@ public class JSInterface {
         return DeviceUtils.getSDKVersionName();
     }
 
-    //获取渠道号
+    //获取设备厂商
     @JavascriptInterface
-    public String getChannel() {
-        return ChannelUtils.getChannel();
+    public String getManufacturer() {
+        return DeviceUtils.getManufacturer();
+    }
+
+    //获取AndroidID
+    @JavascriptInterface
+    public String getAndroidID() {
+        return DeviceUtils.getAndroidID();
     }
 
     //获取IMSI码(需要权限)
@@ -66,11 +80,6 @@ public class JSInterface {
         return hasPhonePermission(context) ? PhoneUtils.getIMEI() : "";
     }
 
-    //获取设备厂商
-    @JavascriptInterface
-    public String getManufacturer() {
-        return DeviceUtils.getManufacturer();
-    }
 
     //吐司
     @JavascriptInterface
@@ -84,7 +93,7 @@ public class JSInterface {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        ToastUtil.showShortToast(msg);
+                        LogUtils.e("Observable", "Js发生错误");
                     }
                 });
     }
@@ -104,7 +113,7 @@ public class JSInterface {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("Observable","发生错误");
+                        LogUtils.e("Observable", "Js发生错误");
                     }
                 });
     }

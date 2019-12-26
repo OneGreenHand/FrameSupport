@@ -45,6 +45,8 @@ dependencies {
     api dependencies.rxjava2.rxandroid
     //okhttp3
     api dependencies.okhttp3
+    //RecyclerViewAdapter
+    api dependencies.RecyclerViewAdapter
     //工具类
     api dependencies.utilcode
     //今日头条屏幕适配方案
@@ -69,12 +71,6 @@ dependencies {
     api dependencies.immersionbar
     //沉浸式状态栏(fragment)
     api dependencies.immersionbar_components
-    //bugly升级库(热更新相关)
-    //  api dependencies.bugly.crashreport_upgrade
-    // bugly 热更新tinker插件库
-    // api dependencies.bugly.tinker
-    //bugly异常捕获（升级库和异常捕获二选一，因为升级库包含了异常捕获）
-    api dependencies.bugly.crashreport
     //rxlifecycle生命周期绑定
     api dependencies.rxlifecycle
     //微信支付

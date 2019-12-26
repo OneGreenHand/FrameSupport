@@ -28,5 +28,4 @@ public class HttpLoggingInterceptor implements Interceptor {
         return response;
     }
 
-
 }

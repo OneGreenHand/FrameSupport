@@ -10,9 +10,6 @@ import java.util.concurrent.Callable;
 import io.reactivex.Flowable;
 
 /**
- * Created on : June 18, 2016
- * Author     : zetbaitsu
- * Name       : Zetra
  * 这也是压缩工具类
  * GitHub     : https://github.com/zetbaitsu
  */

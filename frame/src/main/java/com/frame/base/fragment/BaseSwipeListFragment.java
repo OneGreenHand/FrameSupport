@@ -3,18 +3,17 @@ package com.frame.base.fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.frame.R;
 import com.frame.base.BaseModel;
 import com.frame.base.BasePresenter;
 import com.frame.base.BaseQuickHolder;
 import com.frame.bean.BaseBean;
-import com.frame.adapter.BaseQuickAdapter;
 import com.frame.config.AppConfig;
 
 import java.util.ArrayList;

@@ -10,9 +10,6 @@ import com.blankj.utilcode.util.FileUtils;
 import com.frame.config.BaseConfig;
 
 /**
- * @author luo
- * @package com.frame.support.receiver
- * @fileName NotificationClickReceiver
  * @data on 2019/5/27 16:39
  */
 public class NotificationClickReceiver extends BroadcastReceiver {

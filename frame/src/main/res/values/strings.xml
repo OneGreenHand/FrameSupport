@@ -1,12 +1,7 @@
 <resources>
     <string name="frame_app_name">FrameSupport</string>
-    <string name="frame_action_settings">Settings</string>
     <string name="frame_no_data">暂无数据</string>
     <string name="frame_load_ing">拼命加载中...</string>
-    <string name="frame_request_loading">正在拼命加载中...</string>
-    <string name="frame_request_error">无法访问网络,请检查您的网络状态</string>
-    <string name="frame_load_failed">加载失败,点我重新加载</string>
-    <string name="frame_load_end">---  我也是有底线的  ---</string>
     <string name="frame_view_net_error">当前网络环境较差,请重新加载</string>
     <string name="frame_load_again">重新加载</string>
     <string name="frame_view_no_data">亲,暂时没有相关数据</string>

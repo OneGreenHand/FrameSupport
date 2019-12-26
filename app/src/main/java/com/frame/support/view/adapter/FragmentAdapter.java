@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author luo
- * @package com.mcht.bnexpress.view.adapter
- * @fileName FragmentAdapter
  * @data on 2019/8/13 17:14
  */
 public class FragmentAdapter extends FragmentPagerAdapter {

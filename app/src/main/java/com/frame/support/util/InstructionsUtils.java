@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import androidx.fragment.app.FragmentActivity;
 
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.frame.support.R;
 import com.frame.support.service.DownloadService;
 import com.frame.util.CommonUtil;
@@ -24,8 +25,6 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * @author luo
- * @fileName IntentUtil
  * @data on 2019/5/30 18:56
  */
 public class InstructionsUtils {
@@ -181,7 +180,7 @@ public class InstructionsUtils {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        ToastUtil.showShortToast("出现未知错误");
+                        LogUtils.e("checkInstall", "发生错误");
                     }
                 });
     }

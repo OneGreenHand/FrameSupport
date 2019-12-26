@@ -61,17 +61,6 @@ public class GlideImageUtil {
     }
 
     /**
-     * 加载GIF动图
-     */
-    public static void showGifImage(Context context, String url, ImageView view) {
-        Glide.with(context)
-                .asGif()
-                .load(url)
-                .apply(getRequestOptions())
-                .into(view);
-    }
-
-    /**
      * 加载本地图片资源
      */
     public static void showLocalImage(Context context, int url, ImageView view) {

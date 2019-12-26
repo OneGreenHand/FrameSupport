@@ -11,8 +11,6 @@ import java.io.IOException;
 
 /**
  * Created on : June 18, 2016
- * Author     : zetbaitsu
- * Name       : Zetra
  * GitHub     : https://github.com/zetbaitsu
  */
 class ImageUtil {

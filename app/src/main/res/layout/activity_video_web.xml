@@ -12,7 +12,8 @@
         android:id="@+id/pb_web_base"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="3dp" />
+        android:layout_height="3dp"
+        android:progressDrawable="@drawable/shape_progress" />
 
     <com.frame.support.webview.X5WebView
         android:id="@+id/web_view"

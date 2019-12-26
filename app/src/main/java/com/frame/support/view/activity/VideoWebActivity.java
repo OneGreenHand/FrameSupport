@@ -45,10 +45,6 @@ public class VideoWebActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        commonFinish();
-    }
-
-    private void commonFinish() {
         if (webView.canGoBack()) {
             webView.goBack();
         } else {
@@ -95,6 +91,6 @@ public class VideoWebActivity extends BaseActivity {
 
     @OnClick(R.id.img_finish)
     public void onViewClicked() {
-        commonFinish();
+        finish();
     }
 }

@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.frame.R;
-import com.frame.adapter.BaseQuickAdapter;
 import com.frame.base.BaseModel;
 import com.frame.base.BasePresenter;
 import com.frame.base.BaseQuickHolder;

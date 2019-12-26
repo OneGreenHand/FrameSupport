@@ -14,7 +14,6 @@ import com.frame.request.APIException;
 import com.frame.request.HttpRequest;
 import com.frame.util.GsonUtil;
 import com.frame.util.ToastUtil;
-import com.tencent.bugly.crashreport.CrashReport;
 import com.trello.rxlifecycle3.android.ActivityEvent;
 import com.trello.rxlifecycle3.android.FragmentEvent;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
@@ -181,7 +180,6 @@ public class BaseModel {
                         LogUtils.e("数据解析异常", e.getMessage() + "");
                         throw new RuntimeException("数据解析异常");
                     } else {
-                        CrashReport.postCatchedException(e);//手动上报异常到bugly
                         mBuilder.mBaseRequestView.requestError(e, mBuilder.requestTag == null ? tag : mBuilder.requestTag);
                     }
                 }

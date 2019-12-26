@@ -9,16 +9,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-import android.webkit.JsResult;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.frame.view.LoadingDialog;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
-import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
 /**
@@ -28,7 +25,6 @@ import com.tencent.smtt.sdk.WebViewClient;
 public class X5WebView extends com.tencent.smtt.sdk.WebView {
     private TextView mTextView;
     private ProgressBar mProgressBar;
-    //private LoadCompleteClick loadCompleteClick;
 
     public X5WebView(Context context) {
         super(context);
@@ -132,8 +128,6 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
                     getSettings().setLoadsImagesAutomatically(true);
                 if (mProgressBar != null)
                     mProgressBar.setVisibility(View.GONE);
-                //   if (loadCompleteClick != null)
-                //       loadCompleteClick.loadComplete();
             }
         });
         addJavascriptInterface(new JSInterface(getContext()), "JSInterface");
@@ -147,12 +141,4 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
         mProgressBar = progressBar;
         mProgressBar.setMax(100);  //设置加载进度最大值
     }
-/***************************下面都是一些监听********************************/
-//    public interface LoadCompleteClick {
-//        void loadComplete();
-//    }
-//
-//    public void getWebLoadState(LoadCompleteClick loadCompleteClick) {//是否加载结束监听
-//        this.loadCompleteClick = loadCompleteClick;
-//    }
 }

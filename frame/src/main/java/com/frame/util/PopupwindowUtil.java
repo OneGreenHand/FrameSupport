@@ -24,15 +24,11 @@ public class PopupwindowUtil {
      */
     public static Solve7PopupWindow getPopupWindow(Context context, View layout, boolean isMatch, boolean cancel, boolean isAlpha) {
         Solve7PopupWindow popupWindow = new Solve7PopupWindow();
-        popupWindow.setContentView(layout); //设置PopupWindow的填充View
-        if (isMatch)
-            popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        else
-            popupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+        popupWindow.setContentView(layout);
+        popupWindow.setWidth(isMatch ? WindowManager.LayoutParams.MATCH_PARENT : WindowManager.LayoutParams.WRAP_CONTENT);
         popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         popupWindow.setAnimationStyle(R.style.ActionSheetDialogStyle);  //设置PopupWindow弹出窗体动画效果
         popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
-        //设置PopupWindow可触摸
         popupWindow.setTouchable(cancel);
         popupWindow.setOutsideTouchable(cancel);
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);

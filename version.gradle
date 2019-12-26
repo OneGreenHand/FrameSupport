@@ -32,8 +32,9 @@ ext {
             bugly_crashreport_upgrade: "1.4.2",
             bugly_tinker             : "1.9.14",
             rxlifecycle              : "3.1.0",
-            aria                     : "3.7.10",
+            aria                     : "3.8.2",
             walle                    : "1.1.6",
+            RecyclerViewAdapter      : "2.9.49-androidx",
     ]
 
     // 依赖具体版本
@@ -72,6 +73,8 @@ ext {
                     aria_core    : "com.arialyy.aria:core:${depVersion.aria}",
                     aria_compiler: "com.arialyy.aria:compiler:${depVersion.aria}",
             ],
+            //RecyclerViewAdapter
+            RecyclerViewAdapter    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depVersion.RecyclerViewAdapter}",
             //工具类
             utilcode               : "com.blankj:utilcodex:${depVersion.utilcode}",
             //屏幕适配

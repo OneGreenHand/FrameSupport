@@ -2,7 +2,6 @@ apply from: 'version.gradle'
 
 buildscript {
     repositories {
-        mavenCentral()
         jcenter()
         google()
     }

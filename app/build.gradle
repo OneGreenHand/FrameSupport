@@ -24,7 +24,8 @@ android {
             annotationProcessorOptions { includeCompileClasspath = true }
         }
         multiDexKeepProguard file('tinker_multidexkeep.pro')
-        manifestPlaceholders = [CHANNEL: "AA000",]//可用于三方sdk使用，例如极光推送的参数，可在AndroidManifest中使用，最后获取到这个参数
+        manifestPlaceholders = [CHANNEL: "AA000",]
+//可用于三方sdk使用，例如极光推送的参数，可在AndroidManifest中使用，最后获取到这个参数
     }
     signingConfigs {
         release {
@@ -85,9 +86,14 @@ dependencies {
     implementation dependencies.walle
     annotationProcessor dependencies.glide.compiler
     annotationProcessor dependencies.butterknife.compiler
-    //下载上传工具类
     annotationProcessor dependencies.aria.aria_compiler
     implementation project(':frame')
     //腾讯x5
     implementation files('libs\\Tencent_X5_20190805_175505.jar')
+    //bugly升级库(热更新相关)
+    //  api dependencies.bugly.crashreport_upgrade
+    // bugly 热更新tinker插件库
+    // api dependencies.bugly.tinker
+    //bugly异常捕获（升级库和异常捕获二选一，因为升级库包含了异常捕获）
+    api dependencies.bugly.crashreport
 }

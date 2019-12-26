@@ -17,9 +17,6 @@ import com.frame.support.util.NotificationHelper;
 import com.frame.util.ToastUtil;
 
 /**
- * @author luo
- * @package com.frame.support.service
- * @fileName DownloadService
  * @data on 2019/5/27 14:01
  * @describe 下载服务
  */

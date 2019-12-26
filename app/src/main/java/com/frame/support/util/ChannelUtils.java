@@ -10,9 +10,6 @@ import com.frame.FrameApplication;
 import com.meituan.android.walle.WalleChannelReader;
 
 /**
- * Description:
- * -
- * Author：chasen
  * Date： 2018/9/25 16:22
  * 获取渠道号(根据AndroidManifest文件中channel字段)
  */

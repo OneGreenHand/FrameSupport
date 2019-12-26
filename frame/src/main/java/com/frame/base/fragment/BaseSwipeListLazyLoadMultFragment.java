@@ -2,7 +2,7 @@ package com.frame.base.fragment;
 
 import android.view.ViewGroup;
 
-import com.frame.adapter.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.frame.base.BasePresenter;
 import com.frame.bean.BaseBean;
 

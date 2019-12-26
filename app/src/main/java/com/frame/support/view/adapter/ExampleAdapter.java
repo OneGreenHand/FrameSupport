@@ -1,6 +1,6 @@
 package com.frame.support.view.adapter;
 
-import com.frame.adapter.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.frame.base.BaseQuickHolder;
 import com.frame.support.R;
 import com.frame.support.bean.DuanZiBean;

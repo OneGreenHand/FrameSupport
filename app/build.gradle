@@ -91,9 +91,9 @@ dependencies {
     //腾讯x5
     implementation files('libs\\Tencent_X5_20190805_175505.jar')
     //bugly升级库(热更新相关)
-    //  api dependencies.bugly.crashreport_upgrade
+    //implementation dependencies.bugly.crashreport_upgrade
     // bugly 热更新tinker插件库
-    // api dependencies.bugly.tinker
+    //implementation dependencies.bugly.tinker
     //bugly异常捕获（升级库和异常捕获二选一，因为升级库包含了异常捕获）
-    api dependencies.bugly.crashreport
+    implementation dependencies.bugly.crashreport
 }

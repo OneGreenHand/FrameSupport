@@ -124,20 +124,8 @@ void *(**On*Event);
 #Frame框架部分
 -keep class com.frame.bean.** {*;}
 -keep class com.frame.util.** {*;}
--keep class com.frame.adapter.** {*;}
 -keep class com.frame.widget.** {*;}
--keep class com.frame.widget.RoundedImageView.** {*;}
 -keep class com.frame.base.** {*;}
--keep class com.frame.adapter.** {
-*;
-}
--keep public class * extends com.frame.base.BaseQuickHolder
--keep public class * extends com.frame.adapter.BaseQuickAdapter
--keep public class * extends com.frame.adapter.BaseViewHolder
--keepclassmembers  class **$** extends com.frame.adapter.BaseViewHolder {
-     <init>(...);
-}
--keepattributes InnerClasses
 #---------------------------------第三方库及jar包-------------------------------
 #第三方不混淆
 # Retrofit

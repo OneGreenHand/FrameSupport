@@ -131,8 +131,6 @@ void *(**On*Event);
 # Retrofit
 -keep class retrofit2.** { *; }
 -dontwarn retrofit2.**
--keepattributes Signature
--keepattributes Exceptions
 -dontwarn okio.**
 -dontwarn javax.annotation.**
 # RxJava RxAndroid
@@ -152,18 +150,15 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 # okhttp
 -dontwarn com.squareup.okhttp.**
 -keep class com.squareup.okhttp.{*;}
--dontwarn javax.annotation.**
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 -dontwarn org.codehaus.mojo.animal_sniffer.*
 -dontwarn okhttp3.internal.platform.ConscryptPlatform
 #com.goole
--keep class com.goole.gson.** { *; }
+-keep class com.goole.gson.** {*;}
 # gson&& protobuf
 -dontwarn com.google.**
 -keep class com.google.protobuf.** {*;}
--keepattributes Signature
 -keepattributes *Annotation*
--keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.** {*;}
 -keep class com.google.**{*;}
 -keep class sun.misc.Unsafe { *; }
@@ -173,7 +168,6 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keep class com.tbruyelle.rxpermissions2.** { *; }
 -keep interface com.tbruyelle.rxpermissions2.** { *; }
 #EventBus
--keepattributes *Annotation*
 -keepclassmembers class * {
     @org.greenrobot.eventbus.Subscribe <methods>;
 }
@@ -273,4 +267,197 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keep class com.trello.rxlifecycle3.components.support.** {*;}
 -dontwarn org.xmlpull.v1.XmlPullParser
 -dontwarn org.xmlpull.v1.XmlSerializer
--keep class org.xmlpull.v1.* {*;} 
+-keep class org.xmlpull.v1.* {*;}
+#腾讯x5
+# Addidional for x5.sdk classes for apps
+-keep class com.tencent.smtt.export.external.**{
+    *;
+}
+-keep class com.tencent.tbs.video.interfaces.IUserStateChangedListener {
+	*;
+}
+-keep class com.tencent.smtt.sdk.CacheManager {
+	public *;
+}
+-keep class com.tencent.smtt.sdk.CookieManager {
+	public *;
+}
+-keep class com.tencent.smtt.sdk.WebHistoryItem {
+	public *;
+}
+-keep class com.tencent.smtt.sdk.WebViewDatabase {
+	public *;
+}
+-keep class com.tencent.smtt.sdk.WebBackForwardList {
+	public *;
+}
+-keep public class com.tencent.smtt.sdk.WebView {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.WebView$HitTestResult {
+	public static final <fields>;
+	public java.lang.String getExtra();
+	public int getType();
+}
+-keep public class com.tencent.smtt.sdk.WebView$WebViewTransport {
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.WebView$PictureListener {
+	public <fields>;
+	public <methods>;
+}
+-keepattributes InnerClasses
+-keep public enum com.tencent.smtt.sdk.WebSettings$** {
+    *;
+}
+-keep public enum com.tencent.smtt.sdk.QbSdk$** {
+    *;
+}
+-keep public class com.tencent.smtt.sdk.WebSettings {
+    public *;
+}
+-keep public class com.tencent.smtt.sdk.ValueCallback {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.WebViewClient {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.DownloadListener {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.WebChromeClient {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.WebChromeClient$FileChooserParams {
+	public <fields>;
+	public <methods>;
+}
+-keep class com.tencent.smtt.sdk.SystemWebChromeClient{
+	public *;
+}
+# 1. extension interfaces should be apparent
+-keep public class com.tencent.smtt.export.external.extension.interfaces.* {
+	public protected *;
+}
+# 2. interfaces should be apparent
+-keep public class com.tencent.smtt.export.external.interfaces.* {
+	public protected *;
+}
+-keep public class com.tencent.smtt.sdk.WebViewCallbackClient {
+	public protected *;
+}
+-keep public class com.tencent.smtt.sdk.WebStorage$QuotaUpdater {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.WebIconDatabase {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.WebStorage {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.DownloadListener {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.QbSdk {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.QbSdk$PreInitCallback {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.CookieSyncManager {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.Tbs* {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.utils.LogFileUtils {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.utils.TbsLog {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.utils.TbsLogClient {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.CookieSyncManager {
+	public <fields>;
+	public <methods>;
+}
+# Added for game demos
+-keep public class com.tencent.smtt.sdk.TBSGamePlayer {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.TBSGamePlayerClient* {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.TBSGamePlayerClientExtension {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.TBSGamePlayerService* {
+	public <fields>;
+	public <methods>;
+}
+-keep public class com.tencent.smtt.utils.Apn {
+	public <fields>;
+	public <methods>;
+}
+-keep class com.tencent.smtt.** {
+	*;
+}
+# end
+-keep public class com.tencent.smtt.export.external.extension.proxy.ProxyWebViewClientExtension {
+	public <fields>;
+	public <methods>;
+}
+-keep class MTT.ThirdAppInfoNew {
+	*;
+}
+-keep class com.tencent.mtt.MttTraceEvent {
+	*;
+}
+# Game related
+-keep public class com.tencent.smtt.gamesdk.* {
+	public protected *;
+}
+-keep public class com.tencent.smtt.sdk.TBSGameBooter {
+        public <fields>;
+        public <methods>;
+}
+-keep public class com.tencent.smtt.sdk.TBSGameBaseActivity {
+	public protected *;
+}
+-keep public class com.tencent.smtt.sdk.TBSGameBaseActivityProxy {
+	public protected *;
+}
+-keep public class com.tencent.smtt.gamesdk.internal.TBSGameServiceClient {
+	public *;
+}
+#------------------  下方是共性的排除项目         ----------------
+# 方法名中含有“JNI”字符的，认定是Java Native Interface方法，自动排除
+# 方法名中含有“JRI”字符的，认定是Java Reflection Interface方法，自动排除
+-keepclasseswithmembers class * {
+    ... *JNI*(...);
+}
+-keepclasseswithmembernames class * {
+	... *JRI*(...);
+}
+-keep class **JNI* {*;}

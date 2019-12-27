@@ -32,7 +32,6 @@ public abstract class BaseSwipeActivity<P extends BasePresenter, B extends BaseB
         onRefreshRequest();
     }
 
-    //当触发刷新时去请求数据
     protected abstract void onRefreshRequest();
 
     @Override

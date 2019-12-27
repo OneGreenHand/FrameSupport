@@ -107,9 +107,8 @@ public class BaseModel {
         if (!NetworkUtils.isWifiConnected() && !NetworkUtils.isConnected()) {
             if (mBuilder.mBaseRequestView instanceof BaseSwipeView) {
                 ((BaseSwipeView) mBuilder.mBaseRequestView).resetRefreshView();
-                if (mBuilder.mLoadMode == LoadMode.LOAD_MODE) {
+                if (mBuilder.mLoadMode == LoadMode.LOAD_MODE)
                     ((BaseSwipeView) mBuilder.mBaseRequestView).loadMoreFailView();
-                }
             }
             if (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW)
                 mBuilder.mBaseRequestView.showNetErrorView("");
@@ -146,9 +145,8 @@ public class BaseModel {
                         mBuilder.mBaseRequestView.dismissLoadingDialog();
                         break;
                 }
-                if (mBuilder.mBaseRequestView instanceof BaseSwipeView) {
+                if (mBuilder.mBaseRequestView instanceof BaseSwipeView)
                     ((BaseSwipeView) mBuilder.mBaseRequestView).resetRefreshView();
-                }
             }
 
             @Override
@@ -206,9 +204,8 @@ public class BaseModel {
         mBuilder.mBaseRequestView.requestError(e, tag);
         if (mBuilder.mBaseRequestView instanceof BaseSwipeView) {
             ((BaseSwipeView) mBuilder.mBaseRequestView).resetRefreshView();
-            if (mBuilder.mLoadMode == LoadMode.LOAD_MODE) {
+            if (mBuilder.mLoadMode == LoadMode.LOAD_MODE)
                 ((BaseSwipeView) mBuilder.mBaseRequestView).loadMoreFailView();
-            }
         }
     }
 
@@ -219,7 +216,7 @@ public class BaseModel {
         private LoadMode mLoadMode = LoadMode.FIRST;
         private String mMsg = null;
         private Object requestTag;
-        private boolean isDialogCancel = true;//请求时dialog是否可以取消隐藏
+        private boolean isDialogCancel = true;//请求时dialog是否可以手动取消
         private boolean isSyncLifeCycle = true;//是否同步生命周期
         //动态参数
         private Map<String, Object> mParam;

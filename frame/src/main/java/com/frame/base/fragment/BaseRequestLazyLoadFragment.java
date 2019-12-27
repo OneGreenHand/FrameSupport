@@ -32,7 +32,6 @@ public abstract class BaseRequestLazyLoadFragment<P extends BasePresenter, B ext
         ToastUtil.showShortToast(data.msg);
     }
 
-    //重新请求数据
     protected abstract void reRequest();
 
     @Override
@@ -68,8 +67,7 @@ public abstract class BaseRequestLazyLoadFragment<P extends BasePresenter, B ext
     }
 
     @Override
-    public void tokenOverdue() {
-        //登录过期，清除用户重新登录
+    public void tokenOverdue() {//登录过期
     }
 
     //设置空数据提示文本

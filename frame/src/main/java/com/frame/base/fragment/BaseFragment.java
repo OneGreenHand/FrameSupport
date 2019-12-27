@@ -14,13 +14,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.arialyy.aria.core.Aria;
+import com.frame.R;
 import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
 import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.gyf.immersionbar.components.SimpleImmersionProxy;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle3.components.support.RxFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,7 +35,6 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
     protected Activity mActivity;
     protected LoadingDialog progressDialog;
     protected View rootView;
-    protected RxPermissions rxPermissions;
 
     public BaseFragment() {
         super();
@@ -58,12 +56,8 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
         rootView = inflater.inflate(getLayoutID(), container, false);
         ButterKnife.bind(this, rootView);//绑定framgent
         initCommon();
-        if (isUserRxPermissions())
-            rxPermissions = new RxPermissions(this);
         if (isRegisterEventBus())
             EventBus.getDefault().register(this);
-        if (isUserAria())
-            Aria.download(this).register();
         return rootView;
     }
 
@@ -101,24 +95,16 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
     }
 
     /**
-     * 是否需要使用RxPermissions类
-     */
-    protected boolean isUserRxPermissions() {
-        return false;
-    }
-
-    /**
-     * 是否需要使用下载工具类
-     */
-    protected boolean isUserAria() {
-        return false;
-    }
-
-
-    /**
-     * 是否设置,当空布局显示时,头部不被一起切换(不能和frame_root_view一起使用)
+     * 空布局时,Rv头部是否显示,结合{@link BaseFragment#UserAdapterEmpty()}使用
      */
     protected boolean isHeaderAndEmpty() {
+        return false;
+    }
+
+    /**
+     * 无数据时,是否使用Adapter设置空布局(不能和frame_root_view一起使用)
+     */
+    protected boolean UserAdapterEmpty() {
         return false;
     }
 
@@ -145,7 +131,7 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
     public void onStickyEventBusCome(EventBean event) {
         if (event != null)
             receiveStickyEvent(event);
-        EventBus.getDefault().removeStickyEvent(event);//手动移除，不然还是会接收到
+        EventBus.getDefault().removeStickyEvent(event);//手动移除,不然还是会接收到
     }
 
     /**
@@ -165,7 +151,7 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
      */
     @Override
     public void showLoadingDialog(String msg, boolean isCancel) {
-        String message = TextUtils.isEmpty(msg) ? "拼命加载中..." : msg;
+        String message = TextUtils.isEmpty(msg) ? getResString(R.string.frame_load_ing) : msg;
         if (progressDialog == null)
             progressDialog = new LoadingDialog(mActivity);
         progressDialog.setCancle(isCancel);

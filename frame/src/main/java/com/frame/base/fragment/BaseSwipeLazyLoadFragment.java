@@ -1,15 +1,16 @@
 package com.frame.base.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+
 import com.frame.base.BasePresenter;
 import com.frame.base.BaseSwipeView;
-import com.frame.widget.VpSwipeRefreshLayout;
 import com.frame.bean.BaseBean;
+import com.frame.widget.VpSwipeRefreshLayout;
 
 
 /**
@@ -34,7 +35,6 @@ public abstract class BaseSwipeLazyLoadFragment<P extends BasePresenter, B exten
         onRefreshRequest();
     }
 
-    //当触发刷新时去请求数据
     protected abstract void onRefreshRequest();
 
     @Override

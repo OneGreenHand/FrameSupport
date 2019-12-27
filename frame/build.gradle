@@ -49,10 +49,6 @@ dependencies {
     api dependencies.RecyclerViewAdapter
     //工具类
     api dependencies.utilcode
-    //今日头条屏幕适配方案
-    api dependencies.autosize
-    //litepal数据库
-    // api dependencies.litepal
     //eventbus
     api dependencies.eventbus
     //glide图片加载
@@ -77,8 +73,4 @@ dependencies {
     api dependencies.wxpay
     // 支付宝支付
     api(name: 'alipaySdk-15.6.5-20190718211148', ext: 'aar')
-    //下载工具类
-    api(dependencies.aria.aria_core) {
-        exclude group: 'androidx.appcompat.app'
-    }
 }

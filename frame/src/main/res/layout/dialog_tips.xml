@@ -16,9 +16,7 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
@@ -37,9 +35,9 @@
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:lineSpacingExtra="3dp"
                 android:text="内容"
-                android:gravity="center"
                 android:textColor="#333333"
                 android:textSize="14dp" />
         </androidx.core.widget.NestedScrollView>
@@ -53,16 +51,11 @@
 
             <TextView
                 android:id="@+id/cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="110dp"
+                android:layout_height="30dp"
                 android:background="@drawable/shape_cancel"
                 android:gravity="center"
-                android:maxLines="1"
-                android:minWidth="100dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="5dp"
+                android:singleLine="true"
                 android:text="取消"
                 android:textColor="#ffffff"
                 android:textSize="16dp" />
@@ -74,15 +67,11 @@
 
             <TextView
                 android:id="@+id/sure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="110dp"
+                android:layout_height="30dp"
                 android:background="@drawable/shape_sure"
                 android:gravity="center"
-                android:minWidth="100dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="5dp"
+                android:singleLine="true"
                 android:text="确定"
                 android:textColor="#ffffff"
                 android:textSize="16dp" />

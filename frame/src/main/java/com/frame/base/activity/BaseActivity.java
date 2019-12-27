@@ -13,14 +13,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.arialyy.aria.core.Aria;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.frame.R;
 import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
 import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.ImmersionBar;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,7 +34,6 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends RxAppCompatActivity implements BaseView, View.OnClickListener {
     protected Activity mContext = this;
     protected LoadingDialog progressDialog;
-    protected RxPermissions rxPermissions;
     private boolean isDestroyed = false;//是否真的被finish
 
     @Override
@@ -45,16 +42,12 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
         setContentView(getLayoutID());
         ButterKnife.bind(this);
         initCommon();
-        if (isUserRxPermissions())
-            rxPermissions = new RxPermissions(this);
         init(savedInstanceState);//初始化
         //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
         if (isImmersionBarEnabled())
             initImmersionBar();
         if (isRegisterEventBus())
             EventBus.getDefault().register(this);
-        if (isUserAria())
-            Aria.download(this).register();
         initData();
     }
 
@@ -76,20 +69,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     }
 
     /**
-     * 是否需要使用下载工具类
-     */
-    protected boolean isUserAria() {
-        return false;
-    }
-
-    /**
-     * 是否需要使用RxPermissions类
-     */
-    protected boolean isUserRxPermissions() {
-        return false;
-    }
-
-    /**
      * 是否需要开启沉浸式
      */
     protected boolean isImmersionBarEnabled() {
@@ -97,9 +76,16 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     }
 
     /**
-     * 是否设置,当空布局显示时,头部不被一起切换(不能和frame_root_view一起使用)
+     * 空布局时,Rv头部是否显示,结合{@link BaseActivity#UserAdapterEmpty()}使用
      */
     protected boolean isHeaderAndEmpty() {
+        return false;
+    }
+
+    /**
+     * 无数据时,是否使用Adapter设置空布局(不能和frame_root_view一起使用)
+     */
+    protected boolean UserAdapterEmpty() {
         return false;
     }
 
@@ -134,7 +120,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     public void onStickyEventBusCome(EventBean event) {
         if (event != null) {
             receiveStickyEvent(event);
-            EventBus.getDefault().removeStickyEvent(event);//手动移除，不然还是会接收到
+            EventBus.getDefault().removeStickyEvent(event);//手动移除,不然还是会接收到
         }
     }
 
@@ -227,7 +213,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      */
     @Override
     public void showLoadingDialog(String msg, boolean isCancel) {
-        String message = TextUtils.isEmpty(msg) ? "拼命加载中..." : msg;
+        String message = TextUtils.isEmpty(msg) ? getResString(R.string.frame_load_ing) : msg;
         if (progressDialog == null)
             progressDialog = new LoadingDialog(mContext);
         progressDialog.setCancle(isCancel);

@@ -14,22 +14,18 @@
         android:id="@+id/v_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="7dp"
         android:text="@string/frame_view_net_error"
         android:textColor="#999999"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tv_view_pager_error_load"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/frame_shape_btn_bg"
-        android:paddingLeft="40dp"
-        android:paddingTop="8dp"
-        android:paddingRight="40dp"
-        android:paddingBottom="8dp"
+        android:gravity="center"
         android:text="@string/frame_load_again"
         android:textColor="@color/frame_white"
         android:textSize="14sp" />

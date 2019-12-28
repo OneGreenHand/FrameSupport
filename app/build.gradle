@@ -16,9 +16,7 @@ android {
         versionName version.versionName
         multiDexEnabled true
         ndk {
-            //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
-            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'//用得很少
+            abiFilters 'armeabi', 'armeabi-v7a'
         }
         javaCompileOptions {   //解决AndroidStudio 3.0的问题
             annotationProcessorOptions { includeCompileClasspath = true }

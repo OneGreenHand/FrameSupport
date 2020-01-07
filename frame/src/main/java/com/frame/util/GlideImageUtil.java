@@ -3,11 +3,12 @@ package com.frame.util;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Looper;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
@@ -30,6 +31,8 @@ public class GlideImageUtil {
      * 加载图片
      */
     public static void showImage(Context context, String url, ImageView view) {
+        if (context == null)
+            return;
         Glide.with(context)
                 .load(url)
                 .apply(getRequestOptions())
@@ -40,6 +43,8 @@ public class GlideImageUtil {
      * 加载自适应的图片,返回的多大就显示多大
      */
     public static void showWrapImage(Context context, String url, ImageView view) {
+        if (context == null)
+            return;
         Glide.with(context)
                 .asBitmap()
                 .load(url)
@@ -64,6 +69,8 @@ public class GlideImageUtil {
      * 加载本地图片资源
      */
     public static void showLocalImage(Context context, int url, ImageView view) {
+        if (context == null)
+            return;
         Glide.with(context)
                 .load(url)
                 .apply(getRequestOptions())
@@ -112,6 +119,8 @@ public class GlideImageUtil {
      * 清除图片所有缓存
      */
     public static void clearImageAllCache(Context context) {
+        if (context == null)
+            return;
         clearImageDiskCache(context);
         clearImageMemoryCache(context);
         String ImageExternalCatchDir = context.getExternalCacheDir() + ExternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR;

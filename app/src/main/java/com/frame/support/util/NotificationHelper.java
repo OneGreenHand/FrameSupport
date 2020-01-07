@@ -1,5 +1,7 @@
 package com.frame.support.util;
 
+
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,36 +16,42 @@ import com.frame.support.receiver.NotificationClickReceiver;
 
 
 /**
- * 下载通知栏适配
+ * 下载通知栏适配(8.0用这个)
  */
 public class NotificationHelper {
 
     private NotificationManager manager;
     private Context mContext;
-    private static String CHANNEL_ID = "FrameSupport";
-    private static String CHANNEL_NAME = "下载更新";
-    private static final int NOTIFICATION_ID = 1;
-    private static String NotificationTitle = "应用下载";//通知栏要显示的标题
+    private static String CHANNEL_ID = "DownloadService";//8.0两者必须一致
+    private static String CHANNEL_NAME = "下载更新";//会出现在(通知-类别）
+    private static final int NOTIFICATION_ID = 1;//不能为0
 
     public NotificationHelper(Context context) {
         this.mContext = context.getApplicationContext();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
-            mChannel.setDescription("发现新版本");
-            mChannel.setShowBadge(true);
+            mChannel.setDescription("下载服务");//设置描述,会出现在(通知-类别-详细描述）
+            //mChannel.enableLights(true);//设置提示灯
+            //mChannel.setLightColor(Color.RED);//设置提示灯颜色
+            //mChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC); //设置锁屏可见 VISIBILITY_PUBLIC=可见
+            mChannel.setShowBadge(true);//显示logo
             getManager().createNotificationChannel(mChannel);
         }
     }
 
-    private NotificationCompat.Builder getNofity(String title, String content) {
-        return new NotificationCompat.Builder(mContext, CHANNEL_ID)
-                .setContentTitle(title)
-                .setContentText(content)
-                .setSmallIcon(R.mipmap.ic_launcher)
+    private Notification.Builder getNofity(String content) {
+        Notification.Builder builder = new Notification.Builder(mContext);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            builder.setChannelId(CHANNEL_ID);
+        builder.setContentTitle("应用下载")//设置标题
+                .setContentText(content)//设置内容
+                .setSmallIcon(R.mipmap.ic_launcher)//设置状态栏图标,一定要设置,否则报错(如果不设置它启动服务前台化不会报错,但是你会发现这个通知不会启动),如果是普通通知,不设置必然报错
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
-                .setWhen(System.currentTimeMillis())
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
+                .setWhen(System.currentTimeMillis())//设置创建时间
+                // .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.ic_launcher))//通知栏图片
+                .setPriority(Notification.PRIORITY_HIGH);
+        return builder;
     }
 
     private NotificationManager getManager() {
@@ -60,11 +68,17 @@ public class NotificationHelper {
     }
 
     /**
-     * 显示通知栏
+     * 显示通知栏(8.0以下调用)
      */
     public void showNotification() {
-        NotificationCompat.Builder builder = getNofity(NotificationTitle, "");
-        getManager().notify(NOTIFICATION_ID, builder.build());
+        getManager().notify(NOTIFICATION_ID, getNofity("").build());
+    }
+
+    /**
+     * 显示通知栏(8.0以上调用)
+     */
+    public Notification getNotification() {
+        return getNofity("").build();
     }
 
     /**
@@ -76,17 +90,13 @@ public class NotificationHelper {
             text = "下载失败";
         else
             text = mContext.getString(R.string.update_download_progress, progress);
-        PendingIntent pendingintent = PendingIntent.getActivity(mContext, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationCompat.Builder builder = getNofity(NotificationTitle, text)
-                .setProgress(100, progress, false)
-                .setContentIntent(pendingintent);
+        Notification.Builder builder = getNofity(text)
+                .setProgress(100, progress, false);
         getManager().notify(NOTIFICATION_ID, builder.build());
     }
 
     /**
      * 下载完成后，设置通知栏可以点击
-     *
-     * @param fileName 需要安装的文件名
      */
     public void downloadComplete(String fileName) {
         String text = mContext.getString(R.string.update_download_progress, 100);
@@ -94,7 +104,9 @@ public class NotificationHelper {
         intentClick.setAction("NOTIFICATION_CLICKED");
         intentClick.putExtra("FILE_NAME", fileName);
         PendingIntent pendingIntentClick = PendingIntent.getBroadcast(mContext, 0, intentClick, PendingIntent.FLAG_ONE_SHOT);
-        NotificationCompat.Builder builder = getNofity(NotificationTitle, text).setProgress(100, 100, false).setContentIntent(pendingIntentClick);
+        Notification.Builder builder = getNofity(text)
+                .setProgress(100, 100, false)
+                .setContentIntent(pendingIntentClick);
         getManager().notify(NOTIFICATION_ID, builder.build());
     }
 }

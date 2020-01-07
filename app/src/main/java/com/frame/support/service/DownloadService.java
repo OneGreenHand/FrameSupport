@@ -3,7 +3,7 @@ package com.frame.support.service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Handler;
+import android.os.Build;
 import android.os.IBinder;
 import android.text.TextUtils;
 
@@ -25,7 +25,6 @@ public class DownloadService extends Service {
     private String fileName;//文件名
     private NotificationHelper notificationHelper;
     private boolean isDownloading = false;//是否在下载中
-    private boolean isShowProgress = true;//是否显示下载进度
 
     public NotificationHelper getNotification() {
         if (notificationHelper == null)
@@ -36,6 +35,10 @@ public class DownloadService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            startForeground(1, getNotification().getNotification());//服务前台化只能用startForeground()方法,不可用notificationManager.notify(1,notification);,不然报错
+        else
+            getNotification().showNotification();//创建通知栏
         Aria.download(this).register();
     }
 
@@ -49,42 +52,31 @@ public class DownloadService extends Service {
      * 初始化下载相关东西
      */
     private void initServer(Intent intent) {
-        if (intent == null)
-            return;
         fileUrl = intent.getStringExtra("fileUrl");
         fileName = intent.getStringExtra("fileName");
-        isShowProgress = intent.getBooleanExtra("isShowProgress", true);
-        if (TextUtils.isEmpty(fileUrl) || TextUtils.isEmpty(fileName))
+        if (TextUtils.isEmpty(fileUrl) || TextUtils.isEmpty(fileName) || !FileUtils.createOrExistsDir(BaseConfig.FILE_FOLDER)) {
+            error();
             return;
-        if (!FileUtils.createOrExistsDir(BaseConfig.FILE_FOLDER)) //判断目录是否存在，不存在则判断是否创建成功(这里不检查权限了，在外面检查)
-            return;
+        }
         if (!isDownloading) {//没有在下载中才可以下载
             if (FileUtils.isFileExists(BaseConfig.FILE_FOLDER + fileName)) {  //如果更新之前存在apk就直接安装
-                if (isShowProgress) {
-                    AppUtils.installApp(BaseConfig.FILE_FOLDER + fileName);
-                } else {//如果是静默下载，并且本地有安装包那就延时三秒安装
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            AppUtils.installApp(BaseConfig.FILE_FOLDER + fileName);
-                        }
-                    }, 3000);
-                }
+                stopSelf();//手动停止服务(8.0同时通知栏会消失)
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)//未没有绑定service,手动取消通知栏
+                    getNotification().cancel();
+                AppUtils.installApp(BaseConfig.FILE_FOLDER + fileName);
             } else {
-                if (isShowProgress)
-                    ToastUtil.showShortToast("后台下载中");
                 try {
                     Aria.download(this)
                             .load(fileUrl)
                             .setFilePath(BaseConfig.FILE_FOLDER + fileName, true)
                             .create();
                 } catch (Exception e) {//有可能下载地址错误
+                    error();
                     ToastUtil.showShortToast("下载失败");
                 }
             }
         } else {
-            if (isShowProgress)
-                ToastUtil.showShortToast("已在下载中");
+            ToastUtil.showShortToast("已在下载中");
         }
     }
 
@@ -99,52 +91,43 @@ public class DownloadService extends Service {
         return null;
     }
 
-    @Download.onTaskStart
-    public void onTaskStart(DownloadTask task) {
-        if (isShowProgress) {
-            getNotification().showNotification();
-        }
+    @Download.onPre
+    protected void onTaskPre(DownloadTask task) {
         isDownloading = true;
     }
 
     @Download.onTaskCancel
     public void onTaskCancel(DownloadTask task) {
-        if (isShowProgress) {
-            getNotification().updateProgress(-1);
-        }
-        isDownloading = false;
-        stopSelf();
+        error();
     }
 
     @Download.onTaskFail
     public void onTaskFail(DownloadTask task) {
-        if (isShowProgress) {
-            getNotification().updateProgress(-1);
-        }
-        isDownloading = false;
-        stopSelf();
+        error();
     }
 
     @Download.onTaskComplete
     public void onTaskComplete(DownloadTask task) {
-        if (isShowProgress) {
-            getNotification().downloadComplete(fileName);//手动设置下载完成，并且设置通知栏点击事件(这里进度显示会有问题)
-        }
+        getNotification().downloadComplete(fileName);//手动设置下载完成,并且设置通知栏点击事件(不然进度显示有问题)
         isDownloading = false;
         if (FileUtils.isFileExists(BaseConfig.FILE_FOLDER + fileName)) //如果本地存在文件，直接调用安装操作
             AppUtils.installApp(BaseConfig.FILE_FOLDER + fileName);
-        stopSelf();//手动停止服务
+        stopSelf();
     }
 
     @Download.onTaskRunning
     public void onTaskRunning(DownloadTask task) {
         long len = task.getFileSize();
-        if (isShowProgress) {
-            if (len == 0) {
-                getNotification().updateProgress(-1);
-            } else {
-                getNotification().updateProgress((int) (task.getCurrentProgress() * 100 / len));
-            }
+        if (len == 0) {
+            getNotification().updateProgress(-1);
+        } else {
+            getNotification().updateProgress((int) (task.getCurrentProgress() * 100 / len));
         }
+    }
+
+    private void error() {
+        getNotification().updateProgress(-1);
+        isDownloading = false;
+        // stopSelf();
     }
 }

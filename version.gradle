@@ -6,8 +6,8 @@ ext {
             minSdkVersion    : 18,//app最低支持的sdk版本号(Android4.3)
             targetSdkVersion : 28,//兼容targetSdkVersion 28(含)以下版本
 
-            compileSdkVersion: 28,//使用 Android SDK 28版本编译你的应用
-            buildToolsVersion: "28.0.3",//android构建工具的版本
+            compileSdkVersion: 29,//使用 Android SDK 28版本编译你的应用
+            buildToolsVersion: "29.0.2",//android构建工具的版本
 
             versionCode      : 100010,
             versionName      : "1.0.1"
@@ -32,7 +32,7 @@ ext {
             bugly_crashreport_upgrade: "1.4.2",
             bugly_tinker             : "1.9.14",
             rxlifecycle              : "3.1.0",
-            aria                     : "3.8.2",
+            aria                     : "3.8.3_beta_1",
             walle                    : "1.1.6",
             RecyclerViewAdapter      : "2.9.49-androidx",
     ]

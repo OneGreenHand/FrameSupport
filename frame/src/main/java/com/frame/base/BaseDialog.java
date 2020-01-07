@@ -36,8 +36,6 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     private boolean isCancelable = true;//点击外部是否可以取消弹框
     private View.OnClickListener mListener;
     private int[] mIds;
-
-    protected int marginLeftAndRightDp = 0;
     public Context mContext;
 
     public BaseDialog(@NonNull Context context) {
@@ -76,7 +74,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     }
 
     /**
-     * 在initCommon（）方法前调用
+     * 在initCommon()方法前调用
      */
     public void setGravity(int gravity) {
         this.gravity = gravity;
@@ -92,15 +90,10 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         setCanceledOnTouchOutside(isCancelable);
         if (isUseShadow()) {//是否周围圆角显示
             setContentView(R.layout.dialog_shadow_bg);
-            CardView viewById = (CardView) findViewById(R.id.v_root);
-            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) viewById.getLayoutParams();
-            int dp2px = SizeUtils.dp2px(marginLeftAndRightDp);
-            layoutParams.leftMargin = dp2px;
-            layoutParams.rightMargin = dp2px;
-            LayoutInflater.from(viewById.getContext()).inflate(getLayoutID(), viewById);
-        } else {
+            CardView cardView = findViewById(R.id.v_root);
+            LayoutInflater.from(mContext).inflate(getLayoutID(), cardView);
+        } else
             setContentView(getLayoutID());
-        }
         ButterKnife.bind(this);
         //居中显示
         Window window = getWindow();
@@ -119,7 +112,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     }
 
     // Tips:调用改方法后 BindView将会失效
-    protected void reSetContentView(Context context, @LayoutRes int res) {
+    protected void resetContentView(Context context, @LayoutRes int res) {
         mRootView = LayoutInflater.from(context).inflate(res, null);
         setContentView(mRootView, new LinearLayout.LayoutParams(getWidth(), LinearLayout.LayoutParams.WRAP_CONTENT));
     }
@@ -128,15 +121,8 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     public void show() {
         if (mContext instanceof Activity) {
             Activity activity = (Activity) mContext;
-            if (activity == null)
+            if (activity == null || activity.isFinishing())
                 return;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                if (activity.isDestroyed())//如果activity已经被销毁就不显示
-                    return;
-            } else {
-                if (activity.isFinishing())
-                    return;
-            }
         }
         super.show();
     }

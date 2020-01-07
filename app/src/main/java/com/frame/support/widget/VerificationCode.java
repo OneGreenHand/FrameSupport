@@ -33,25 +33,25 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     private String companyText;//倒计时后面显示的单位
     private int durationTime;//持续时间
     private int intervalTime;//间隔时间
-    private Context context;
+    private Context mContext;
     private VerificationCountDownTimer countDownTimer;
     protected LoadingDialog progressDialog;
 
     public VerificationCode(Context context) {
         super(context);
-        this.context = context;
+        mContext = context;
         initView(null);
     }
 
     public VerificationCode(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
+       mContext = context;
         initView(attrs);
     }
 
     public VerificationCode(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context = context;
+        mContext = context;
         initView(attrs);
     }
 
@@ -110,16 +110,16 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
      * 初始化
      */
     private void initView(AttributeSet attrs) {
-        if (context instanceof AppCompatActivity) {
-            AppCompatActivity activity = (AppCompatActivity) context;
+        if (mContext instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) mContext;
             if (activity != null)
                 activity.getLifecycle().addObserver(this);
         }
-        setMinWidth(SizeUtils.dp2px(91));
-        setMinHeight(SizeUtils.dp2px(27));
+        setMinWidth(SizeUtils.dp2px(95));
+        setMinHeight(SizeUtils.dp2px(30));
         setGravity(Gravity.CENTER);
         if (attrs != null) {
-            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.VerificationCode);
+            TypedArray array = mContext.obtainStyledAttributes(attrs, R.styleable.VerificationCode);
             conductColor = array.getResourceId(R.styleable.VerificationCode_VcConductColor, R.color.frame_colorAccent);
             endColor = array.getResourceId(R.styleable.VerificationCode_VcEndColor, R.color.frame_colorAccent);
             endText = array.getString(R.styleable.VerificationCode_VcEndText);
@@ -133,7 +133,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
             array.recycle();
         }
         countDownTimer = new VerificationCountDownTimer(durationTime, intervalTime);//初始化倒计时
-        progressDialog = new LoadingDialog(getContext());//初始化加载框
+        progressDialog = new LoadingDialog(mContext);//初始化加载框
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -194,7 +194,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     public void showLoadingDialog(String msg, boolean isCancel) {
         String message = TextUtils.isEmpty(msg) ? "拼命加载中..." : msg;
         if (progressDialog == null)
-            progressDialog = new LoadingDialog(context);
+            progressDialog = new LoadingDialog(mContext);
         progressDialog.setCancle(isCancel);
         progressDialog.setMsg(message);
         if (!progressDialog.isShowing())

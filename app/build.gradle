@@ -88,9 +88,7 @@ dependencies {
     //walle读取渠道号
     implementation dependencies.walle
     //下载工具类
-    implementation(dependencies.aria.aria_core) {
-        exclude group: 'androidx.appcompat.app'
-    }
+    implementation dependencies.aria.aria_core
     annotationProcessor dependencies.aria.aria_compiler
     //litepal数据库
     // implementation dependencies.litepal

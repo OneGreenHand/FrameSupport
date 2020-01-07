@@ -33,7 +33,7 @@ public class GameFragment extends BaseFragment {
         return R.layout.fragment_game;
     }
 
-    @OnClick({R.id.video_web, R.id.download_apk, R.id.no_notice_download, R.id.clear_download_apk})
+    @OnClick({R.id.video_web, R.id.download_apk, R.id.clear_download_apk})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.video_web:
@@ -43,16 +43,9 @@ public class GameFragment extends BaseFragment {
                 if (!NetworkUtils.isWifiConnected()) {
                     ToastUtil.showShortToast("请在wifi状态下下载");
                 } else {
-                    if (CommonUtil.notificationAuthority(mActivity)) {//检测通知栏是否打开
-                        InstructionsUtils.downloadApk(mActivity, "", downloadUrl, true);
-                    }
-                }
-                break;
-            case R.id.no_notice_download:
-                if (!NetworkUtils.isWifiConnected()) {
-                    ToastUtil.showShortToast("请在wifi状态下下载");
-                } else {
-                    InstructionsUtils.downloadApk(mActivity, "", downloadUrl, false);
+                    //   if (CommonUtil.notificationAuthority(mActivity)) {//检测通知栏是否打开,未打开类似于静默下载
+                    InstructionsUtils.downloadApk(mActivity, "", downloadUrl);
+                    //   }
                 }
                 break;
             case R.id.clear_download_apk:

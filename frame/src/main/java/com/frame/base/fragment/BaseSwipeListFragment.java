@@ -136,14 +136,14 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
     /**
      * 手动设置数据,与{@link BaseFragment#UserAdapterEmpty()}配套使用
      */
-    protected void setEmptyData(List<AB> data) {
+    protected void setEmptyData(List data) {
         setChangeEmptyData(data, false);
     }
 
     /**
      * @param removeView 移除父布局,切换Adapter情况下使用
      */
-    protected void setChangeEmptyData(List<AB> data, boolean removeView) {
+    protected void setChangeEmptyData(List data, boolean removeView) {
         if (data == null || data.isEmpty()) {
             if (removeView) {
                 ViewGroup parent = (ViewGroup) mRecyclerView.getParent();

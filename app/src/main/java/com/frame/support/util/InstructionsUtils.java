@@ -43,13 +43,13 @@ public class InstructionsUtils {
                 CommonUtil.intentToBrowsable(context, url);
                 break;
             case 2:
-                downloadApk(context, packName, url, true);
+                downloadApk(context, packName, url);
                 break;
             case 3:
                 CommonUtil.ContactQQ(context, url);
                 break;
             case 4:
-                checkInstall(context, true, packName, "", false);
+                checkInstall(context, true, packName, "");
                 break;
         }
     }
@@ -68,13 +68,13 @@ public class InstructionsUtils {
                 CommonUtil.intentToBrowsable(activity, url);
                 break;
             case 2:
-                downloadApk(activity, packName, url, true);
+                downloadApk(activity, packName, url);
                 break;
             case 3:
                 CommonUtil.ContactQQ(activity, url);
                 break;
             case 4:
-                checkInstall(activity, true, packName, "", false);
+                checkInstall(activity, true, packName, "");
                 break;
         }
     }
@@ -82,34 +82,32 @@ public class InstructionsUtils {
     /**
      * 通过service下载apk
      *
-     * @param packName       包名，如果不为空就检查是否安装了
-     * @param url            下载地址
-     * @param isShowProgress 是否通知栏显示下载进度(必须要打开了通知栏)，默认为true
+     * @param packName 包名，如果不为空就检查是否安装了
+     * @param url      下载地址
      */
-    public static void downloadApk(Context context, String packName, String url, boolean isShowProgress) {
+    public static void downloadApk(Context context, String packName, String url) {
         if (TextUtils.isEmpty(packName)) {
             if (TextUtils.isEmpty(url)) {
                 ToastUtil.showShortToast("下载地址错误");
                 return;
             }
             if (hasPermission(context))
-                download(context, url, isShowProgress);
+                download(context, url);
             else
                 ToastUtil.showShortToast("未获取权限,下载失败");
         } else {//检查是否安装
-            checkInstall(context, false, packName, url, isShowProgress);
+            checkInstall(context, false, packName, url);
         }
     }
 
     /**
      * 通过service下载apk
      *
-     * @param packName       包名，如果不为空就检查是否安装了
-     * @param url            下载地址
-     * @param isShowProgress 是否通知栏显示下载进度(必须要打开了通知栏)，默认为true
+     * @param packName 包名，如果不为空就检查是否安装了
+     * @param url      下载地址
      */
     @SuppressLint("CheckResult")
-    public static void downloadApk(Activity activity, String packName, String url, boolean isShowProgress) {
+    public static void downloadApk(Activity activity, String packName, String url) {
         if (TextUtils.isEmpty(packName)) {
             if (TextUtils.isEmpty(url)) {
                 ToastUtil.showShortToast("下载地址错误");
@@ -120,7 +118,7 @@ public class InstructionsUtils {
                 rxPermissions.requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                         .subscribe(permission -> {
                             if (permission.granted) {//权限申请成功
-                                download(activity, url, isShowProgress);
+                                download(activity, url);
                             } else if (permission.shouldShowRequestPermissionRationale) {//拒绝申请权限
                                 ToastUtil.showShortToast("权限被拒绝,下载失败");
                             } else {//不在提醒申请权限
@@ -131,7 +129,7 @@ public class InstructionsUtils {
                 ToastUtil.showShortToast("未获取权限,下载失败");
             }
         } else {//检查是否安装
-            checkInstall(activity, false, packName, url, isShowProgress);
+            checkInstall(activity, false, packName, url);
         }
     }
 
@@ -148,13 +146,12 @@ public class InstructionsUtils {
      * 是否已经安装了这款APP
      *
      * @param context
-     * @param isOpen         是否为打开app操作，false为下载,true为打开APP
-     * @param packageName    包名
-     * @param url            下载的地址
-     * @param isShowProgress 下载是否显示进度，默认为true
+     * @param isOpen      是否为打开app操作，false为下载,true为打开APP
+     * @param packageName 包名
+     * @param url         下载的地址
      */
     @SuppressLint("CheckResult")
-    public static void checkInstall(Context context, boolean isOpen, String packageName, String url, boolean isShowProgress) {
+    public static void checkInstall(Context context, boolean isOpen, String packageName, String url) {
         Observable.just(1)//判断是否安装了该应用，为耗时操作
                 .subscribeOn(Schedulers.io())
                 .map(new Function<Integer, Boolean>() {
@@ -174,7 +171,7 @@ public class InstructionsUtils {
                                 AppUtils.launchApp(packageName);
                         } else {//下载
                             if (!s) //未安装
-                                download(context, url, isShowProgress);
+                                download(context, url);
                         }
                     }
                 }, new Consumer<Throwable>() {
@@ -188,10 +185,9 @@ public class InstructionsUtils {
     /**
      * 下载
      *
-     * @param url            下载的地址
-     * @param isShowProgress 是否通知栏显示进度
+     * @param url 下载的地址
      */
-    private static void download(Context context, String url, boolean isShowProgress) {
+    private static void download(Context context, String url) {
         String fileName;
         if (url.contains("/"))
             fileName = url.substring(url.lastIndexOf("/")).replace("/", "");
@@ -200,8 +196,11 @@ public class InstructionsUtils {
         Intent intent = new Intent(context, DownloadService.class);
         intent.putExtra("fileUrl", url);
         intent.putExtra("fileName", fileName);
-        intent.putExtra("isShowProgress", isShowProgress);
-        context.startService(intent);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            context.startForegroundService(intent);
+        } else {
+            context.startService(intent);
+        }
     }
 
     /**

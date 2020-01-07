@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.frame.R;
+import com.frame.util.GlideImageUtil;
 
 public class BaseQuickHolder extends BaseViewHolder {
 
@@ -33,10 +31,7 @@ public class BaseQuickHolder extends BaseViewHolder {
      */
     public BaseQuickHolder setImageByUrl(int viewId, String url, Context mContext) {
         ImageView iv = getView(viewId);
-        Glide.with(mContext)
-                .load(url)
-                .apply(new RequestOptions().placeholder(R.mipmap.img_showing).error(R.mipmap.img_show_error))
-                .into(iv);
+        GlideImageUtil.showImage(mContext,url,iv);
         return this;
     }
 

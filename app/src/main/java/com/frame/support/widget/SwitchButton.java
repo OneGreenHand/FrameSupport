@@ -188,9 +188,8 @@ public class SwitchButton extends View implements Checkable {
 
         super.setClickable(true);
         this.setPadding(0, 0, 0, 0);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
             setLayerType(LAYER_TYPE_SOFTWARE, null);
-        }
     }
 
     @Override

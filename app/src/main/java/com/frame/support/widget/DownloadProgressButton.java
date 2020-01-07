@@ -16,14 +16,11 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-
 import com.frame.support.R;
 
-/*
- * 带进度的下载按钮
- */
+
 public class DownloadProgressButton extends TextView {
+
     //背景画笔
     private Paint mBackgroundPaint;
     //按钮文字画笔
@@ -49,8 +46,9 @@ public class DownloadProgressButton extends TextView {
     private LinearGradient mProgressTextGradient;
     //下载平滑动画
     private ValueAnimator mProgressAnimation;
-    //记录当前文字
+    //显示的文字
     private String mCurrentText;
+    private String mNormalText = "下载";//用于重置
     private int mState;//下载状态
     //初始状态
     public static final int NORMAL = 0;
@@ -63,20 +61,17 @@ public class DownloadProgressButton extends TextView {
 
     public DownloadProgressButton(Context context) {
         this(context, null);
+        initAttrs(context, null);
     }
 
     public DownloadProgressButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         initAttrs(context, attrs);
-        init();
-        setProgressAnimations();
     }
 
-    public DownloadProgressButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public DownloadProgressButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttrs(context, attrs);
-        init();
-        setProgressAnimations();
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
@@ -84,7 +79,7 @@ public class DownloadProgressButton extends TextView {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AnimDownloadProgressButton);
             mBackgroundColor = a.getColor(R.styleable.AnimDownloadProgressButton_progressbtn_background_color, Color.parseColor("#6699ff"));
             mBackgroundSecondColor = a.getColor(R.styleable.AnimDownloadProgressButton_progressbtn_background_second_color, Color.LTGRAY);
-            mButtonRadius = a.getFloat(R.styleable.AnimDownloadProgressButton_progressbtn_radius, getMeasuredHeight() / 2);
+            mButtonRadius = a.getFloat(R.styleable.AnimDownloadProgressButton_progressbtn_radius, 60);
             mAboveTextSize = a.getFloat(R.styleable.AnimDownloadProgressButton_progressbtn_text_size, 40);
             mTextColor = a.getColor(R.styleable.AnimDownloadProgressButton_progressbtn_text_color, mBackgroundSecondColor);
             mTextCoverColor = a.getColor(R.styleable.AnimDownloadProgressButton_progressbtn_text_covercolor, Color.WHITE);
@@ -92,7 +87,11 @@ public class DownloadProgressButton extends TextView {
             a.recycle();
         }
         if (TextUtils.isEmpty(mCurrentText))
-            mCurrentText = "立即升级";
+            mCurrentText = mNormalText;
+        else
+            mNormalText = mCurrentText;
+        init();
+        setProgressAnimations();
     }
 
     private void init() {
@@ -107,17 +106,17 @@ public class DownloadProgressButton extends TextView {
         mTextPaint.setTextSize(mAboveTextSize);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
             setLayerType(LAYER_TYPE_SOFTWARE, mTextPaint);  //解决文字有时候画不出问题
-        invalidate();
     }
 
+    /**
+     * ProgressBar的动画
+     */
     private void setProgressAnimations() {
-        //ProgressBar的动画
         mProgressAnimation = ValueAnimator.ofInt(0, 1).setDuration(500);
         mProgressAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                int timepercent = (int) animation.getAnimatedValue();
-                mProgress = ((mToProgress - mProgress) * timepercent + mProgress);
+                mProgress = ((mToProgress - mProgress) * (int) animation.getAnimatedValue() + mProgress);
                 invalidate();
             }
         });
@@ -126,9 +125,8 @@ public class DownloadProgressButton extends TextView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (!isInEditMode()) {
+        if (!isInEditMode())
             drawing(canvas);
-        }
     }
 
     private void drawing(Canvas canvas) {
@@ -138,18 +136,20 @@ public class DownloadProgressButton extends TextView {
 
     private void drawBackground(Canvas canvas) {
         mBackgroundBounds = new RectF();
-        if (mButtonRadius == 0)
-            mButtonRadius = getMeasuredHeight() / 2;
-        mBackgroundBounds.left = 2;
-        mBackgroundBounds.top = 2;
-        mBackgroundBounds.right = getMeasuredWidth() - 2;
-        mBackgroundBounds.bottom = getMeasuredHeight() - 2;
+        if (mButtonRadius != 0) {//有圆角有设置一点距离,防止显示异常
+            mBackgroundBounds.left = 2;
+            mBackgroundBounds.top = 2;
+            mBackgroundBounds.right = getMeasuredWidth() - 2;
+            mBackgroundBounds.bottom = getMeasuredHeight() - 2;
+        } else {
+            mBackgroundBounds.right = getMeasuredWidth();
+            mBackgroundBounds.bottom = getMeasuredHeight();
+        }
         switch (mState) {  //color
             case NORMAL:
             case FINISH:
-                if (mBackgroundPaint.getShader() != null) {
+                if (mBackgroundPaint.getShader() != null)
                     mBackgroundPaint.setShader(null);
-                }
                 mBackgroundPaint.setColor(mBackgroundColor);
                 canvas.drawRoundRect(mBackgroundBounds, mButtonRadius, mButtonRadius, mBackgroundPaint);
                 break;
@@ -171,7 +171,7 @@ public class DownloadProgressButton extends TextView {
     private void drawTextAbove(Canvas canvas) {
         final float y = canvas.getHeight() / 2 - (mTextPaint.descent() / 2 + mTextPaint.ascent() / 2);
         if (TextUtils.isEmpty(mCurrentText))
-            mCurrentText = "立即升级";
+            mCurrentText = mNormalText;
         final float textWidth = mTextPaint.measureText(mCurrentText);
         switch (mState) {  //color
             case NORMAL:
@@ -280,7 +280,7 @@ public class DownloadProgressButton extends TextView {
     }
 
     /**
-     * 获取文字
+     * 获取当前文字
      */
     public String getCurrentText() {
         return mCurrentText;
@@ -290,7 +290,7 @@ public class DownloadProgressButton extends TextView {
      * 重置为默认状态
      */
     public void reset() {
-        mCurrentText = "立即升级";
+        mCurrentText = mNormalText;
         normalState();
         invalidate();
     }
@@ -301,6 +301,8 @@ public class DownloadProgressButton extends TextView {
     public void DownloadFinish() {
         mCurrentText = "打开";
         mState = FINISH;
+        if (mProgressAnimation != null && mProgressAnimation.isRunning())
+            mProgressAnimation.end();
         invalidate();
     }
 
@@ -341,7 +343,8 @@ public class DownloadProgressButton extends TextView {
             else
                 mCurrentText = text + getContext().getResources().getString(R.string.downloaded, progress);
             mToProgress = progress;
-            mProgressAnimation.start();
+            if (mProgressAnimation != null && !mProgressAnimation.isRunning())
+                mProgressAnimation.start();
         } else if (progress < mMinProgress) {
             mProgress = 0;
         } else if (progress >= mMaxProgress) {
@@ -359,11 +362,13 @@ public class DownloadProgressButton extends TextView {
     }
 
     /**
-     * 释放内存(请在结束后调用)
+     * 释放内存,防止内存泄漏(请在结束后调用)
      */
     public void clear() {
-        mProgressAnimation.cancel();
-        mProgressAnimation.removeAllListeners();
+        if (mProgressAnimation != null) {
+            mProgressAnimation.cancel();
+            //   mProgressAnimation.removeAllListeners();
+        }
     }
 
     @Override
@@ -382,6 +387,7 @@ public class DownloadProgressButton extends TextView {
         mMaxProgress = 100;
         mMinProgress = 0;
         mProgress = 0;
-        invalidate();
+        if (mProgressAnimation != null && mProgressAnimation.isRunning())
+            mProgressAnimation.end();
     }
 }

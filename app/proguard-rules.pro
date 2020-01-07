@@ -250,8 +250,6 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 #Aria下载上传
 -dontwarn com.arialyy.aria.**
 -keep class com.arialyy.aria.**{*;}
--keep class aria.apache.commons.new.**{*;}
--keep class com.arialyy.annotations.**{*;}
 -keep class **$$DownloadListenerProxy{ *; }
 -keep class **$$UploadListenerProxy{ *; }
 -keep class **$$DownloadGroupListenerProxy{ *; }

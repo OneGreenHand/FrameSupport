@@ -2,7 +2,6 @@ package com.frame.support;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.text.TextUtils;
 
 import androidx.multidex.MultiDex;
 
@@ -16,10 +15,7 @@ import com.frame.support.util.ChannelUtils;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 
 public class AppContext extends FrameApplication {
@@ -86,41 +82,11 @@ public class AppContext extends FrameApplication {
      */
     private void initBugly() {
         Context context = getApplicationContext();
-        String packageName = context.getPackageName();  // 获取当前包名
-        String processName = getProcessName(android.os.Process.myPid());   // 获取当前进程名
         CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);// 设置是否为上报进程
-        strategy.setUploadProcess(processName == null || processName.equals(packageName));
         strategy.setAppChannel(ChannelUtils.getChannel());  //设置渠道
-        // CrashReport.setUserId("");//设置用户ID(用于定位具体用户)
+        // CrashReport.setUserId("");//设置用户ID
         //  Bugly.init(context, "8706956f68", AppConfig.DEBUG, strategy);//使用热更新或者升级功能时使用这个(热更新相关)
         CrashReport.initCrashReport(context, "8706956f68", AppConfig.DEBUG, strategy); // 仅使用异常捕获功能时使用这个
     }
 
-    /**
-     * 增加上报进程控制（防止多进程情况下进行多次上报，造成不必要的资源浪费）
-     * 获取进程号对应的进程名
-     *
-     * @param pid 进程号
-     * @return 进程名
-     */
-    private static String getProcessName(int pid) {
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader("/proc/" + pid + "/cmdline"));
-            String processName = reader.readLine();
-            if (!TextUtils.isEmpty(processName))
-                processName = processName.trim();
-            return processName;
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        } finally {
-            try {
-                if (reader != null)
-                    reader.close();
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-        }
-        return null;
-    }
 }

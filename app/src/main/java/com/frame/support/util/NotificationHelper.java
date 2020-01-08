@@ -83,7 +83,7 @@ public class NotificationHelper {
      * 不断调用次方法通知通知栏更新进度条
      */
     public void updateProgress(int progress) {
-        Notification.Builder builder = progress == -1 ? getNofity("下载失败") : getNofity(mContext.getString(R.string.update_download_progress)).setProgress(100, progress, false);
+        Notification.Builder builder = progress == -1 ? getNofity("下载失败") : getNofity(mContext.getString(R.string.update_download_progress, progress)).setProgress(100, progress, false);
         getManager().notify(NOTIFICATION_ID, builder.build());
     }
 

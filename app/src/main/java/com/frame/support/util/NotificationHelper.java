@@ -9,8 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import androidx.core.app.NotificationCompat;
-
 import com.frame.support.R;
 import com.frame.support.receiver.NotificationClickReceiver;
 
@@ -71,27 +69,21 @@ public class NotificationHelper {
      * 显示通知栏(8.0以下调用)
      */
     public void showNotification() {
-        getManager().notify(NOTIFICATION_ID, getNofity("").build());
+        getManager().notify(NOTIFICATION_ID, getNofity("准备下载").build());
     }
 
     /**
      * 显示通知栏(8.0以上调用)
      */
     public Notification getNotification() {
-        return getNofity("").build();
+        return getNofity("准备下载").build();
     }
 
     /**
      * 不断调用次方法通知通知栏更新进度条
      */
     public void updateProgress(int progress) {
-        String text;
-        if (progress == -1)
-            text = "下载失败";
-        else
-            text = mContext.getString(R.string.update_download_progress, progress);
-        Notification.Builder builder = getNofity(text)
-                .setProgress(100, progress, false);
+        Notification.Builder builder = progress == -1 ? getNofity("下载失败") : getNofity(mContext.getString(R.string.update_download_progress)).setProgress(100, progress, false);
         getManager().notify(NOTIFICATION_ID, builder.build());
     }
 
@@ -99,14 +91,11 @@ public class NotificationHelper {
      * 下载完成后，设置通知栏可以点击
      */
     public void downloadComplete(String fileName) {
-        String text = mContext.getString(R.string.update_download_progress, 100);
         Intent intentClick = new Intent(mContext, NotificationClickReceiver.class);
         intentClick.setAction("NOTIFICATION_CLICKED");
         intentClick.putExtra("FILE_NAME", fileName);
         PendingIntent pendingIntentClick = PendingIntent.getBroadcast(mContext, 0, intentClick, PendingIntent.FLAG_ONE_SHOT);
-        Notification.Builder builder = getNofity(text)
-                .setProgress(100, 100, false)
-                .setContentIntent(pendingIntentClick);
+        Notification.Builder builder = getNofity("下载已完成").setContentIntent(pendingIntentClick);
         getManager().notify(NOTIFICATION_ID, builder.build());
     }
 }

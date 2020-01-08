@@ -32,11 +32,9 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-
 import android.widget.ImageView.ScaleType;
 
+import androidx.annotation.ColorInt;
 
 import com.blankj.utilcode.util.LogUtils;
 
@@ -239,14 +237,14 @@ public class RoundedDrawable extends Drawable {
   }
 
   @Override
-  protected void onBoundsChange(@NonNull Rect bounds) {
+  protected void onBoundsChange( Rect bounds) {
     super.onBoundsChange(bounds);
     mBounds.set(bounds);
     updateShaderMatrix();
   }
 
   @Override
-  public void draw(@NonNull Canvas canvas) {
+  public void draw( Canvas canvas) {
     if (mRebuildShader) {
       BitmapShader bitmapShader = new BitmapShader(mBitmap, mTileModeX, mTileModeY);
       if (mTileModeX == Shader.TileMode.CLAMP && mTileModeY == Shader.TileMode.CLAMP) {

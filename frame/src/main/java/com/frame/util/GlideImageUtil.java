@@ -7,9 +7,6 @@ import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
@@ -51,7 +48,7 @@ public class GlideImageUtil {
                 .apply(getRequestOptions())
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    public void onResourceReady( Bitmap resource,  Transition<? super Bitmap> transition) {
                         view.setImageBitmap(resource);
                         float width = ScreenUtils.getScreenWidth();
                         float scale = width / resource.getWidth();

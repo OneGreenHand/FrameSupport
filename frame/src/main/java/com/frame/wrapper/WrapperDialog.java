@@ -2,8 +2,6 @@ package com.frame.wrapper;
 
 import android.app.Dialog;
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.View;
 
 
@@ -15,15 +13,15 @@ public class WrapperDialog extends Dialog {
     private int[] mIds;
     private View.OnClickListener mListener;
 
-    public WrapperDialog(@NonNull Context context) {
+    public WrapperDialog( Context context) {
         super(context);
     }
 
-    public WrapperDialog(@NonNull Context context, int themeResId) {
+    public WrapperDialog( Context context, int themeResId) {
         super(context, themeResId);
     }
 
-    protected WrapperDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    protected WrapperDialog( Context context, boolean cancelable,  OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 

@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
-
 import com.frame.base.BasePresenter;
 import com.frame.base.BaseSwipeView;
 import com.frame.bean.BaseBean;
@@ -20,7 +18,7 @@ public abstract class BaseSwipeLazyLoadFragment<P extends BasePresenter, B exten
     protected VpSwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         mSwipeRefreshLayout = new VpSwipeRefreshLayout(mActivity);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_light, android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_red_light);

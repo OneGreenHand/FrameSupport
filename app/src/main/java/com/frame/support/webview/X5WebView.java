@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebViewClient;
@@ -36,7 +34,7 @@ public class X5WebView extends com.tencent.smtt.sdk.WebView {
         init(context);
     }
 
-    public X5WebView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public X5WebView(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }

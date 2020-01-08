@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -43,13 +42,13 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
         initView(null);
     }
 
-    public VerificationCode(Context context, @Nullable AttributeSet attrs) {
+    public VerificationCode(Context context,  AttributeSet attrs) {
         super(context, attrs);
        mContext = context;
         initView(attrs);
     }
 
-    public VerificationCode(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public VerificationCode(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         initView(attrs);

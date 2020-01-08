@@ -1,9 +1,6 @@
 package com.frame.view;
 
 import android.content.Context;
-
-import androidx.annotation.NonNull;
-
 import android.view.Gravity;
 import android.widget.TextView;
 
@@ -21,7 +18,7 @@ public class LoadingDialog extends BaseDialog {
     @BindView(R2.id.loading_text)
     TextView loadingText;
 
-    public LoadingDialog(@NonNull Context context) {
+    public LoadingDialog( Context context) {
         super(context, R.style.DialogStyle, R.style.PopWindowAnimStyle, Gravity.CENTER);
     }
 

@@ -11,7 +11,6 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.content.CursorLoader;
@@ -46,12 +45,12 @@ public class TakePhotoDialog extends BaseDialog {
     private String deleteImagePath = "";//需要删除的图片路径，主要是图库选择的图片
     private RxPermissions rxPermissions = null;//权限请求
 
-    public TakePhotoDialog(@NonNull FragmentActivity activity) {
+    public TakePhotoDialog( FragmentActivity activity) {
         super(activity, R.style.ActionSheetDialogStyle, Gravity.BOTTOM);
         mActivity = activity;
     }
 
-    public TakePhotoDialog(@NonNull FragmentActivity activity, boolean isCrop) {
+    public TakePhotoDialog( FragmentActivity activity, boolean isCrop) {
         super(activity, R.style.ActionSheetDialogStyle, Gravity.BOTTOM);
         mActivity = activity;
         this.isCrop = isCrop;
@@ -60,12 +59,12 @@ public class TakePhotoDialog extends BaseDialog {
     /**
      * 使用fragment方式的话必须要在父Activity中onActivityResult方法回调
      */
-    public TakePhotoDialog(@NonNull Fragment fragment) {
+    public TakePhotoDialog( Fragment fragment) {
         super(fragment.getActivity(), R.style.ActionSheetDialogStyle, Gravity.BOTTOM);
         mFragment = fragment;
     }
 
-    public TakePhotoDialog(@NonNull Fragment fragment, boolean isCrop) {
+    public TakePhotoDialog( Fragment fragment, boolean isCrop) {
         super(fragment.getActivity(), R.style.ActionSheetDialogStyle, Gravity.BOTTOM);
         mFragment = fragment;
         this.isCrop = isCrop;

@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-
 import com.frame.config.BaseConfig;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -21,7 +19,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     IWXAPI iwxapi;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         iwxapi = WXAPIFactory.createWXAPI(this, BaseConfig.WEIXIN_APP_ID);
         boolean handleIntent = iwxapi.handleIntent(getIntent(), this);

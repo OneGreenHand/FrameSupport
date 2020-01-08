@@ -3,24 +3,20 @@ package com.frame.base;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
-import com.blankj.utilcode.util.SizeUtils;
 import com.frame.R;
 
 import butterknife.ButterKnife;
@@ -38,26 +34,26 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     private int[] mIds;
     public Context mContext;
 
-    public BaseDialog(@NonNull Context context) {
+    public BaseDialog( Context context) {
         super(context, R.style.ActionSheetDialogStyle);//默认为dialog样式
         this.mContext = context;
         initCommon(context);
     }
 
-    public BaseDialog(@NonNull Context context, int themeResId) {
+    public BaseDialog( Context context, int themeResId) {
         super(context, themeResId);
         this.mContext = context;
         initCommon(context);
     }
 
-    public BaseDialog(@NonNull Context context, int themeResId, int gravity) {
+    public BaseDialog( Context context, int themeResId, int gravity) {
         super(context, themeResId);
         this.gravity = gravity;
         this.mContext = context;
         initCommon(context);
     }
 
-    public BaseDialog(@NonNull Context context, int themeResId, int animResId, int gravity) {
+    public BaseDialog( Context context, int themeResId, int animResId, int gravity) {
         super(context, themeResId);
         this.gravity = gravity;
         this.animResId = animResId;
@@ -65,7 +61,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         initCommon(context);
     }
 
-    public BaseDialog(@NonNull Context context, int themeResId, int gravity, boolean isCancelable) {
+    public BaseDialog( Context context, int themeResId, int gravity, boolean isCancelable) {
         super(context, themeResId);
         this.gravity = gravity;
         this.isCancelable = isCancelable;

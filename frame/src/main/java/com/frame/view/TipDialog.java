@@ -1,10 +1,7 @@
 package com.frame.view;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.frame.R;
@@ -109,7 +106,7 @@ public class TipDialog extends BaseDialog {
     }
 
 
-    public TipDialog(@NonNull Context context) {
+    public TipDialog( Context context) {
         super(context);
     }
 

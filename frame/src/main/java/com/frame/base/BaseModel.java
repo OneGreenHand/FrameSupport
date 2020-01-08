@@ -3,7 +3,6 @@ package com.frame.base;
 
 import android.annotation.SuppressLint;
 
-import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
@@ -227,31 +226,31 @@ public class BaseModel {
         private int pageCount = AppConfig.ViewPage.PAGE_COUNT;//每页请求的数据量
 
         //绑定界面就用这构造
-        public Builder(@NonNull BaseRequestView baseRequestView) {
+        public Builder( BaseRequestView baseRequestView) {
             mBaseRequestView = baseRequestView;
         }
 
         //设置加载风格(无  ||加载框  ||重新加载)
-        public Builder setLoadStyle(@NonNull LoadStyle loadStyle) {
+        public Builder setLoadStyle( LoadStyle loadStyle) {
             mLoadStyle = loadStyle;
             return this;
         }
 
         //设置上拉加载(第一次 ||加载更多)
-        public Builder setLoadMode(@NonNull LoadMode loadMode) {
+        public Builder setLoadMode( LoadMode loadMode) {
             mLoadMode = loadMode;
             return this;
         }
 
         //添加参数
-        public Builder putParam(@NonNull String key, Object value) {
+        public Builder putParam( String key, Object value) {
             if (mParam == null)
                 mParam = new HashMap<>();
             mParam.put(key, value);
             return this;
         }
 
-        public Builder putAllParam(@NonNull Map<String, Object> map) {
+        public Builder putAllParam( Map<String, Object> map) {
             if (mParam == null) {
                 mParam = new HashMap<>();
             }

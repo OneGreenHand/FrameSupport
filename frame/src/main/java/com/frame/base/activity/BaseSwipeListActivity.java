@@ -133,26 +133,4 @@ public abstract class BaseSwipeListActivity<P extends BasePresenter, B extends B
         getAdapter();
     }
 
-    /**
-     * 手动设置数据,与{@link BaseActivity#UserAdapterEmpty()}配套使用
-     */
-    protected void setEmptyData(List<AB> data) {
-        setChangeEmptyData(data, false);
-    }
-
-    /**
-     * @param removeView 移除父布局,切换Adapter情况下使用
-     */
-    protected void setChangeEmptyData(List<AB> data, boolean removeView) {
-        if (data == null || data.isEmpty()) {
-            if (removeView) {
-                ViewGroup parent = (ViewGroup) mRecyclerView.getParent();
-                if (parent != null)//切换adapter这里不处理会出问题
-                    parent.removeAllViews();
-            }
-            mBaseAdapter.setNewData(null);
-        } else {
-            mBaseAdapter.setNewData(data);
-        }
-    }
 }

@@ -71,15 +71,8 @@ public class JSInterface {
     //获取设备码(需要权限)
     @JavascriptInterface
     public String getDeviceId() {
-        return hasPhonePermission(context) ? PhoneUtils.getDeviceId() : "";
+        return hasPhonePermission(context) ? DeviceUtils.getUniqueDeviceId() : "";
     }
-
-    //获取IMEI码(需要权限)
-    @JavascriptInterface
-    public String getIMEI() {
-        return hasPhonePermission(context) ? PhoneUtils.getIMEI() : "";
-    }
-
 
     //吐司
     @JavascriptInterface

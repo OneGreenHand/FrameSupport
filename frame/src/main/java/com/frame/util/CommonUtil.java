@@ -60,7 +60,7 @@ public class CommonUtil {
         boolean isOpened = manager.areNotificationsEnabled();//API 19以上也可以用这个判断
         if (!isOpened) {//没有授予通知权限
             TipDialog dialog = new TipDialog(context);
-            dialog.setContent("未开启系统通知栏权限,将影响部分功能的正常使用,请前往开启");
+            dialog.setContent("系统通知未开启,将不能及时收到消息通知,请前往开启");
             dialog.setOnSureClick(view -> {
                 Intent intent = new Intent();
                 if (Build.VERSION.SDK_INT >= 26) { // android 8.0引导
@@ -109,21 +109,12 @@ public class CommonUtil {
     }
 
     /**
-     * 验证手机格式
-     */
-    public static boolean isMobileNO(String mobiles) {
-        String telRegex = "[1][34578]\\d{9}";
-        if (TextUtils.isEmpty(mobiles)) return false;
-        else return mobiles.matches(telRegex);
-    }
-
-    /**
      * 版本号比较(versionName对比方式)
      *
      * @return 0代表相等，1代表version1大于version2，-1代表version1小于version2
      */
     public static int compareVersion(String version1, String version2) {
-        if (version1.equals(version2))
+        if (TextUtils.isEmpty(version1) || TextUtils.isEmpty(version2) || version1.equals(version2))
             return 0;
         String[] version1Array = version1.split("\\.");
         String[] version2Array = version2.split("\\.");

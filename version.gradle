@@ -15,24 +15,24 @@ ext {
 
     // 依赖相关版本控制
     depVersion = [
-            retrofit2                : "2.6.2",
-            rxjava2                  : "2.2.14",
-            rxandroid                : "2.1.1",
-            okhttp3                  : "3.10.0",
+            retrofit                 : "2.7.2",
+            rxjava                   : "3.0.0",
+            rxandroid                : "3.0.0",
+            okhttp                   : "4.4.0",
             utilcode                 : "1.26.0",
-            autosize                 : "1.1.2",
-            eventbus                 : "3.1.1",
+            autosize                 : "1.2.0",
+            eventbus                 : "3.2.0",
             litepal                  : "3.0.0",
-            glide                    : "4.10.0",
+            glide                    : "4.11.0",
             multidex                 : "2.0.1",
-            butterknife              : "10.2.0",
+            butterknife              : "10.2.1",
             rxpermissions            : "0.10.2",
             immersionbar             : "3.0.0",
             bugly_crashreport        : "3.1.0",
             bugly_crashreport_upgrade: "1.4.2",
             bugly_tinker             : "1.9.14",
             rxlifecycle              : "3.1.0",
-            aria                     : "3.8.3_beta_1",
+            aria                     : "3.8.6",
             walle                    : "1.1.6",
             RecyclerViewAdapter      : "2.9.49-androidx",
     ]
@@ -44,13 +44,13 @@ ext {
                     design   : 'com.google.android.material:material:1.0.0',
             ],
             retrofit2              : [
-                    retrofit       : "com.squareup.retrofit2:retrofit:${depVersion.retrofit2}",
-                    adapter_rxjava2: "com.squareup.retrofit2:adapter-rxjava2:${depVersion.retrofit2}",
-                    converter_gson : "com.squareup.retrofit2:converter-gson:${depVersion.retrofit2}",
+                    retrofit       : "com.squareup.retrofit2:retrofit:${depVersion.retrofit}",
+                    adapter_rxjava2: "com.squareup.retrofit2:adapter-rxjava2:${depVersion.retrofit}",
+                    converter_gson : "com.squareup.retrofit2:converter-gson:${depVersion.retrofit}",
             ],
             rxjava2                : [
-                    rxjava   : "io.reactivex.rxjava2:rxjava:${depVersion.rxjava2}",
-                    rxandroid: "io.reactivex.rxjava2:rxandroid:${depVersion.rxandroid}",
+                    rxjava   : "io.reactivex.rxjava3:rxjava:${depVersion.rxjava}",
+                    rxandroid: "io.reactivex.rxjava3:rxandroid:${depVersion.rxandroid}",
             ],
             glide                  : [
                     glide   : "com.github.bumptech.glide:glide:${depVersion.glide}",
@@ -96,6 +96,6 @@ ext {
             //微信支付(不包含统计)
             wxpay                  : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+",
             eventbus               : "org.greenrobot:eventbus:${depVersion.eventbus}",
-            okhttp3                : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp3}",
+            okhttp3                : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp}",
     ]
 }

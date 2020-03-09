@@ -34,7 +34,7 @@ ext {
             rxlifecycle              : "3.1.0",
             aria                     : "3.8.6",
             walle                    : "1.1.6",
-            RecyclerViewAdapter      : "2.9.49-androidx",
+            RecyclerViewAdapter      : "3.0.1",
     ]
 
     // 依赖具体版本

@@ -7,11 +7,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.frame.R;
@@ -25,13 +20,16 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.ButterKnife;
 
 
 /**
  * Activity基类，所有的Activity均继承它
  */
-public abstract class BaseActivity extends RxAppCompatActivity implements BaseView, View.OnClickListener {
+public abstract class BaseActivity extends RxAppCompatActivity implements BaseView {
     protected Activity mContext = this;
     protected LoadingDialog progressDialog;
     private boolean isDestroyed = false;//是否真的被finish
@@ -79,6 +77,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      * 空布局时,Rv头部是否显示,结合{@link BaseActivity#UserAdapterEmpty()}使用
      */
     protected boolean isHeaderAndEmpty() {
+        return false;
+    }
+
+    /**
+     * 空布局时,Rv脚部是否显示,结合{@link BaseActivity#UserAdapterEmpty()}使用
+     */
+    protected boolean isFooterAndEmpty() {
         return false;
     }
 
@@ -134,30 +139,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      * 接受到分发的粘性事件
      */
     protected void receiveStickyEvent(EventBean event) {
-    }
-
-    /**
-     * 统一设置标题
-     */
-    protected void initTitleBar(String title) {
-        findViewById(R.id.img_finish).setOnClickListener(this);
-        ((TextView) findViewById(R.id.app_title)).setText(title);
-    }
-
-    /**
-     * 方便子类重写方法，确定是否finsh操作
-     */
-    protected boolean needFinsh() {
-        return true;
-    }
-
-    @Override
-    public void onClick(View view) {
-        int i = view.getId();
-        if (i == R.id.img_finish) {
-            if (needFinsh())
-                finish();
-        }
     }
 
     /**

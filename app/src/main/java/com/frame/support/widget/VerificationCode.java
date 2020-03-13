@@ -8,11 +8,6 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-
 import com.blankj.utilcode.util.SizeUtils;
 import com.frame.base.BaseModel;
 import com.frame.base.BaseRequestView;
@@ -21,6 +16,11 @@ import com.frame.support.R;
 import com.frame.support.api.API;
 import com.frame.util.ToastUtil;
 import com.frame.view.LoadingDialog;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 
 /**
  * 验证码倒计时工具类
@@ -38,20 +38,17 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
 
     public VerificationCode(Context context) {
         super(context);
-        mContext = context;
-        initView(null);
+        initView(context,null);
     }
 
-    public VerificationCode(Context context,  AttributeSet attrs) {
+    public VerificationCode(Context context, AttributeSet attrs) {
         super(context, attrs);
-       mContext = context;
-        initView(attrs);
+        initView(context,attrs);
     }
 
-    public VerificationCode(Context context,  AttributeSet attrs, int defStyleAttr) {
+    public VerificationCode(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
-        initView(attrs);
+        initView(context,attrs);
     }
 
     /**
@@ -93,14 +90,14 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
         public void onTick(long millisUntilFinished) {
             setEnabled(false);
             setText((millisUntilFinished / 1000) + companyText);
-            setTextColor(getResources().getColor(conductColor));
+            setTextColor(conductColor);
         }
 
         @Override
         public void onFinish() {
             setEnabled(true);
             setText(endText);
-            setTextColor(getResources().getColor(endColor));
+            setTextColor(endColor);
         }
 
     }
@@ -108,10 +105,11 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     /**
      * 初始化
      */
-    private void initView(AttributeSet attrs) {
+    private void initView(Context context,AttributeSet attrs) {
+        mContext = context;
         if (mContext instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) mContext;
-            if (activity != null)
+            if (activity != null)//注册绑定生命周期
                 activity.getLifecycle().addObserver(this);
         }
         setMinWidth(SizeUtils.dp2px(95));
@@ -119,8 +117,8 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
         setGravity(Gravity.CENTER);
         if (attrs != null) {
             TypedArray array = mContext.obtainStyledAttributes(attrs, R.styleable.VerificationCode);
-            conductColor = array.getResourceId(R.styleable.VerificationCode_VcConductColor, R.color.frame_colorAccent);
-            endColor = array.getResourceId(R.styleable.VerificationCode_VcEndColor, R.color.frame_colorAccent);
+            conductColor = array.getColor(R.styleable.VerificationCode_VcConductColor, getResources().getColor(R.color.frame_colorAccent));
+            endColor = array.getColor(R.styleable.VerificationCode_VcEndColor, getResources().getColor(R.color.frame_colorAccent));
             endText = array.getString(R.styleable.VerificationCode_VcEndText);
             companyText = array.getString(R.styleable.VerificationCode_VcCompany);
             durationTime = array.getInt(R.styleable.VerificationCode_VcDuration, 60000);

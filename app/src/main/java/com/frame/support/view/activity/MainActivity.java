@@ -37,7 +37,6 @@ public class MainActivity extends BaseActivity {
     private List<Fragment> mDatas = new ArrayList<>();
     //记录用户首次点击返回键的时间
     private long firstTime = 0;
-    private MenuItem menuItem;
 
     @Override
     protected void init(Bundle savedInstanceState) {
@@ -54,8 +53,7 @@ public class MainActivity extends BaseActivity {
         initViewPagerChangeListener();
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected( MenuItem item) {
-                menuItem = item;
+            public boolean onNavigationItemSelected(MenuItem item) {
                 int i = item.getItemId();
                 if (i == R.id.home) {
                     viewPager.setCurrentItem(0);
@@ -82,16 +80,11 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
-                //实现沉浸式有两种，一种是在onPageSelected()根据position处理，另一种是直接在每个fragment实现(本示例未做处理)
                 if (position >= 2)//第三个为悬浮按钮
                     position++;
-                if (menuItem != null) {
-                    menuItem.setChecked(false);
-                } else {
-                    navigationView.getMenu().getItem(0).setChecked(false);
-                }
-                menuItem = navigationView.getMenu().getItem(position);
-                menuItem.setChecked(true);
+                MenuItem menuItem = navigationView.getMenu().getItem(position);
+                if (menuItem != null)
+                    menuItem.setChecked(true);
             }
 
             @Override
@@ -122,7 +115,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
 

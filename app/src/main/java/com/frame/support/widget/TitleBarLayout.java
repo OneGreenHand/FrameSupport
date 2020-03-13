@@ -1,0 +1,126 @@
+package com.frame.support.widget;
+
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.text.TextUtils;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.frame.support.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+/**
+ * @describe 通用标题栏
+ */
+public class TitleBarLayout extends LinearLayout implements View.OnClickListener {
+    private Context mContext;
+    private int backgroundColor;//背景颜色
+    private int backImage;//左侧返回图标
+    private String tText;//标题文字
+    private int tTextColor;//标题文字颜色
+    private boolean rTextIsShow;//右侧文字是否显示
+    private String rText;//右侧文字
+    private int rTextColor;//右侧文字颜色
+    //控件
+    private ImageView imgFinish;
+    private LinearLayout titlebar;
+    private TextView title;
+    private TextView other;
+    //点击事件
+    private OnClickListener clickListener;//返回按钮
+
+    public TitleBarLayout(Context context) {
+        super(context);
+        initView(context, null);
+    }
+
+    public TitleBarLayout(Context context,  AttributeSet attrs) {
+        super(context, attrs);
+        initView(context, attrs);
+    }
+
+    public TitleBarLayout(Context context,  AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initView(context, attrs);
+    }
+
+    private void initView(Context context, AttributeSet attrs) {
+        mContext = context;
+        if (attrs != null) {
+            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TitleBarLayout);
+            backgroundColor = array.getColor(R.styleable.TitleBarLayout_TblBackgroundColor, getResources().getColor(R.color.frame_colorAccent));
+            backImage = array.getResourceId(R.styleable.TitleBarLayout_TblBackImage, R.mipmap.back_white);
+            tText = array.getString(R.styleable.TitleBarLayout_TblText);
+            tTextColor = array.getColor(R.styleable.TitleBarLayout_TblTextColor, Color.WHITE);
+            rTextIsShow = array.getBoolean(R.styleable.TitleBarLayout_TblRTextShow, false);
+            rText = array.getString(R.styleable.TitleBarLayout_TblRText);
+            rTextColor = array.getColor(R.styleable.TitleBarLayout_TblRTextColor, Color.WHITE);
+            array.recycle();
+        }
+        findId();
+    }
+
+    private void findId() {
+        View inflate = LayoutInflater.from(mContext).inflate(R.layout.titlebar, this);
+        titlebar = inflate.findViewById(R.id.titlebar);
+        imgFinish = inflate.findViewById(R.id.img_finish);
+        title = inflate.findViewById(R.id.app_title);
+        other = inflate.findViewById(R.id.other);
+        titlebar.setBackgroundColor(backgroundColor);
+        imgFinish.setImageResource(backImage);
+        title.setText(TextUtils.isEmpty(tText) ? getResources().getString(R.string.app_name) : tText);
+        title.setTextColor(tTextColor);
+        if (rTextIsShow) {
+            other.setVisibility(View.VISIBLE);
+            other.setText(TextUtils.isEmpty(rText) ? "确定" : rText);
+            other.setTextColor(rTextColor);
+        } else
+            other.setVisibility(View.GONE);
+        imgFinish.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (clickListener != null) {
+            clickListener.onClick(v);
+            return;
+        }
+        if (mContext instanceof AppCompatActivity)
+            ((AppCompatActivity) mContext).finish();
+    }
+
+    public interface BackClickListener {
+        void onClick(View view);
+    }
+
+    public void setOnBackListener(OnClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public void setOnRightListener(OnClickListener clickListener) {
+        other.setOnClickListener(clickListener);
+    }
+
+    public void setTitle(String str) {
+        title.setText(str);
+    }
+
+    public void setRightTitle(String str) {
+        other.setVisibility(View.VISIBLE);
+        other.setText(str);
+    }
+
+    public void setRightIsShow(boolean isShow) {
+        other.setVisibility(isShow ? View.VISIBLE : View.GONE);
+    }
+
+    public TextView getTitleText() {
+        return title;
+    }
+}

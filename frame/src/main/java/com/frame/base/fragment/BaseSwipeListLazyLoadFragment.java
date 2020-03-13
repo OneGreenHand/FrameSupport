@@ -118,6 +118,7 @@ public abstract class BaseSwipeListLazyLoadFragment<P extends BasePresenter, B e
             View mEmptyView = LayoutInflater.from(mActivity).inflate(getEmptyView(), (ViewGroup) mRecyclerView.getParent(), false);
             ((TextView) mEmptyView.findViewById(R.id.tv_view_pager_no_data_content)).setText(getEmptyViewMsg());
             mBaseAdapter.setHeaderWithEmptyEnable(isHeaderAndEmpty());
+            mBaseAdapter.setFooterWithEmptyEnable(isFooterAndEmpty());
             mBaseAdapter.setEmptyView(mEmptyView);
         }
         mRecyclerView.setAdapter(mBaseAdapter);

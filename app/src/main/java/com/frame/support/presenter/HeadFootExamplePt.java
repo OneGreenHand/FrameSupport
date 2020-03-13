@@ -14,9 +14,9 @@ public class HeadFootExamplePt extends BasePresenter<HeadFootExampleActivity> {
     /**
      * 获取段子
      */
-    public void getDuanZiList(int page) {
+    public void getDuanZiList() {
         createRequestBuilder()
-                .setLoadStyle(BaseModel.LoadStyle.DIALOG_VIEW)
+                .setLoadStyle(BaseModel.LoadStyle.DIALOG)
                 .create()
                 .get(API.GET_DUAN_ZI + "?page=1&count=15&type=text", DuanZiBean.class);
     }

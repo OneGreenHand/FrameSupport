@@ -24,20 +24,30 @@
     <!--下载进度条-->
     <declare-styleable name="AnimDownloadProgressButton">
         <attr name="progressbtn_radius" format="float" />
-        <attr name="progressbtn_background_color" format="color" />
-        <attr name="progressbtn_background_second_color" format="color" />
-        <attr name="progressbtn_text" format="string" />
+        <attr name="progressbtn_background_color" format="reference|color" />
+        <attr name="progressbtn_background_second_color" format="reference|color" />
+        <attr name="progressbtn_text" format="reference|string" />
         <attr name="progressbtn_text_size" format="float" />
-        <attr name="progressbtn_text_color" format="color" />
-        <attr name="progressbtn_text_covercolor" format="color" />
+        <attr name="progressbtn_text_color" format="reference|color" />
+        <attr name="progressbtn_text_covercolor" format="reference|color" />
     </declare-styleable>
     <!--验证码倒计时-->
     <declare-styleable name="VerificationCode">
         <attr name="VcConductColor" format="reference|color" />
         <attr name="VcEndColor" format="reference|color" />
-        <attr name="VcEndText" format="string" />
-        <attr name="VcCompany" format="string" />
+        <attr name="VcEndText" format="reference|string" />
+        <attr name="VcCompany" format="reference|string" />
         <attr name="VcDuration" format="integer" />
         <attr name="VcIntervalTime" format="integer" />
+    </declare-styleable>
+    <!--通用标题栏-->
+    <declare-styleable name="TitleBarLayout">
+        <attr name="TblBackgroundColor" format="reference|color" />
+        <attr name="TblText" format="reference|string" />
+        <attr name="TblTextColor" format="reference|color" />
+        <attr name="TblRTextShow" format="boolean" />
+        <attr name="TblRText" format="reference|string" />
+        <attr name="TblRTextColor" format="reference|color" />
+        <attr name="TblBackImage" format="reference" />
     </declare-styleable>
 </resources>

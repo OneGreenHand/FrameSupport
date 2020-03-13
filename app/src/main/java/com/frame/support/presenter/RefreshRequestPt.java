@@ -16,11 +16,9 @@ public class RefreshRequestPt extends BasePresenter<RefreshRequestActivity> {
      */
     public void getDuanZiList(int page) {
         createRequestBuilder()
-                .setLoadStyle(page == 1 ? BaseModel.LoadStyle.DIALOG_VIEW : BaseModel.LoadStyle.NONE)
+                .setLoadStyle(page == 1 ? BaseModel.LoadStyle.DIALOG : BaseModel.LoadStyle.NONE)
                 .setLoadMode(page == 1 ? BaseModel.LoadMode.FIRST : BaseModel.LoadMode.LOAD_MODE)
                 .create()
                 .get(API.GET_DUAN_ZI + "?page=" + page + "&count=15&type=text", DuanZiBean.class);
     }
-
-
 }

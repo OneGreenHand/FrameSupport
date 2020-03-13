@@ -8,12 +8,18 @@ import com.frame.bean.BaseBean;
 import com.frame.support.R;
 import com.frame.support.bean.DuanZiBean;
 import com.frame.support.presenter.RequestErrorExamplePt;
+import com.frame.support.widget.TitleBarLayout;
 import com.frame.util.ToastUtil;
+
+import butterknife.BindView;
 
 /**
  * @describe 无数据显示示例
  */
 public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExamplePt, BaseBean> {
+    @BindView(R.id.titlebar)
+    TitleBarLayout titlebar;
+
     @Override
     protected void onRefreshRequest() {
         ToastUtil.showShortToast("刷新了");
@@ -32,7 +38,7 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        initTitleBar("无数据显示示例");
+        titlebar.setTitle("无数据显示示例");
     }
 
     @Override
@@ -56,4 +62,5 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
         DuanZiBean duanZiBean = (DuanZiBean) data;
         ToastUtil.showShortToast(duanZiBean.message);
     }
+
 }

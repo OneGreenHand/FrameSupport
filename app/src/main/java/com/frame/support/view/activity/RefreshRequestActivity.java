@@ -11,15 +11,25 @@ import com.frame.support.R;
 import com.frame.support.bean.DuanZiBean;
 import com.frame.support.presenter.RefreshRequestPt;
 import com.frame.support.view.adapter.ExampleAdapter;
+import com.frame.support.widget.TitleBarLayout;
+
+import butterknife.BindView;
 
 /**
  * @describe 上拉刷新和下拉加载
  */
 public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequestPt, BaseBean, DuanZiBean.ResultBean> {
+    @BindView(R.id.titlebar)
+    TitleBarLayout titlebar;
 
     @Override
     public BaseQuickAdapter<DuanZiBean.ResultBean, BaseQuickHolder> setAdapter() {
         return new ExampleAdapter();
+    }
+
+    @Override
+    protected boolean UserAdapterEmpty() {
+        return true;
     }
 
     @Override
@@ -39,12 +49,11 @@ public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequest
 
     @Override
     protected void reRequest() {
-        mPresenter.getDuanZiList(1);
     }
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        initTitleBar("下拉刷新上拉加载示例");
+        titlebar.setTitle("下拉刷新上拉加载示例");
     }
 
     @Override
@@ -60,7 +69,7 @@ public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequest
     @Override
     public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
         DuanZiBean duanZiBean = (DuanZiBean) data;
-        if (duanZiBean == null || duanZiBean.result == null || duanZiBean.result.isEmpty())
+        if (duanZiBean == null)
             return;
         notifyAdapterStatus(duanZiBean.result, loadMode, pageCount);
     }

@@ -50,7 +50,7 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mActivity = getActivity();
         rootView = inflater.inflate(getLayoutID(), container, false);
         ButterKnife.bind(this, rootView);//绑定framgent
@@ -97,6 +97,13 @@ public abstract class BaseFragment extends RxFragment implements BaseView, Simpl
      * 空布局时,Rv头部是否显示,结合{@link BaseFragment#UserAdapterEmpty()}使用
      */
     protected boolean isHeaderAndEmpty() {
+        return false;
+    }
+
+    /**
+     * 空布局时,Rv脚部是否显示,结合{@link BaseFragment#UserAdapterEmpty()}使用
+     */
+    protected boolean isFooterAndEmpty() {
         return false;
     }
 

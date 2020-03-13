@@ -118,6 +118,7 @@ public abstract class BaseSwipeListActivity<P extends BasePresenter, B extends B
             View mEmptyView = LayoutInflater.from(mContext).inflate(getEmptyView(), (ViewGroup) mRecyclerView.getParent(), false);
             ((TextView) mEmptyView.findViewById(R.id.tv_view_pager_no_data_content)).setText(getEmptyViewMsg());
             mBaseAdapter.setHeaderWithEmptyEnable(isHeaderAndEmpty());
+            mBaseAdapter.setFooterWithEmptyEnable(isFooterAndEmpty());
             mBaseAdapter.setEmptyView(mEmptyView);
         }
         mRecyclerView.setAdapter(mBaseAdapter);

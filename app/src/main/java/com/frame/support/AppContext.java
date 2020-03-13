@@ -26,7 +26,6 @@ public class AppContext extends FrameApplication {
         Utils.init(this);//初始化工具类
         LogUtils.getConfig().setLogSwitch(AppConfig.DEBUG);//设置log开关
         //initBugly();
-        Aria.init(this);
         initX5();
         initFolder();
     }

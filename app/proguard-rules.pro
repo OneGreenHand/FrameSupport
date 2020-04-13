@@ -164,9 +164,6 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
 -keep class com.qiancheng.carsmangersystem.**{*;}
-# RxPermissions权限库
--keep class com.tbruyelle.rxpermissions2.** { *; }
--keep interface com.tbruyelle.rxpermissions2.** { *; }
 #EventBus
 -keepclassmembers class * {
     @org.greenrobot.eventbus.Subscribe <methods>;

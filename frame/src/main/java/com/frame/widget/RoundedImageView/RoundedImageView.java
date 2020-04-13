@@ -21,20 +21,22 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
-import androidx.annotation.ColorInt;
-import androidx.annotation.DimenRes;
-import androidx.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.frame.R;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DimenRes;
+import androidx.annotation.DrawableRes;
 
 /**
  * 圆角圆形imageview
@@ -65,7 +67,7 @@ public class RoundedImageView extends ImageView {
             new float[]{DEFAULT_RADIUS, DEFAULT_RADIUS, DEFAULT_RADIUS, DEFAULT_RADIUS};
     private Drawable mBackgroundDrawable;
     private ColorStateList mBorderColor =
-            ColorStateList.valueOf(RoundedDrawable.DEFAULT_BORDER_COLOR);
+            ColorStateList.valueOf(Color.BLACK);
     private float mBorderWidth = DEFAULT_BORDER_WIDTH;
     private ColorFilter mColorFilter = null;
     private boolean mColorMod = false;
@@ -129,7 +131,7 @@ public class RoundedImageView extends ImageView {
         }
         mBorderColor = a.getColorStateList(R.styleable.RoundedImageView_riv_border_color);
         if (mBorderColor == null) {
-            mBorderColor = ColorStateList.valueOf(RoundedDrawable.DEFAULT_BORDER_COLOR);
+            mBorderColor = ColorStateList.valueOf(Color.BLACK);
         }
         mMutateBackground = a.getBoolean(R.styleable.RoundedImageView_riv_mutate_background, false);
         mIsOval = a.getBoolean(R.styleable.RoundedImageView_riv_oval, false);
@@ -506,7 +508,7 @@ public class RoundedImageView extends ImageView {
             return;
         }
         mBorderColor =
-                (colors != null) ? colors : ColorStateList.valueOf(RoundedDrawable.DEFAULT_BORDER_COLOR);
+                (colors != null) ? colors : ColorStateList.valueOf(Color.BLACK);
         updateDrawableAttrs();
         updateBackgroundDrawableAttrs(false);
         if (mBorderWidth > 0) {

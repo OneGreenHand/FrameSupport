@@ -14,12 +14,12 @@ import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
 import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.ImmersionBar;
-import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
 /**
  * Activity基类，所有的Activity均继承它
  */
-public abstract class BaseActivity extends RxAppCompatActivity implements BaseView {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     protected Activity mContext = this;
     protected LoadingDialog progressDialog;
     private boolean isDestroyed = false;//是否真的被finish
@@ -229,9 +229,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
      * 解决activity被finish后onDestroy()不立即执行问题
      */
     private void destroy() {
-        if (isDestroyed) {
-            return;
-        } else {
+        if (!isDestroyed) {
             // 回收资源
             isDestroyed = true;
             if (isRegisterEventBus())

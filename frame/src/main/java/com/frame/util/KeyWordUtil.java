@@ -45,14 +45,12 @@ public class KeyWordUtil {
                 }
             }
         } catch (Exception e) {
-
         }
         return s;
     }
 
     /**
      * 转义正则特殊字符 （$()*+.[]?\^{},|）
-     * @param keyword
      * @return keyword
      */
     public static String escapeExprSpecialWord(String keyword) {

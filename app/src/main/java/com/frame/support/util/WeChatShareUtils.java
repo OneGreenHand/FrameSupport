@@ -34,7 +34,7 @@ public class WeChatShareUtils {
         req.message = mediaMessage;
         req.scene = type == 1 ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
         String appId = BaseConfig.WEIXIN_APP_ID;
-        IWXAPI iwxapi = WXAPIFactory.createWXAPI(FrameApplication.mContext, appId);
+        IWXAPI iwxapi = WXAPIFactory.createWXAPI(FrameApplication.getContext(), appId);
         if (!iwxapi.isWXAppInstalled()) {
             ToastUtil.showShortToast("未安装微信,请安装后再尝试分享");
             return;
@@ -64,7 +64,7 @@ public class WeChatShareUtils {
         req.message = mediaMessage;
         req.scene = type == 1 ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
         String appId = BaseConfig.WEIXIN_APP_ID;
-        IWXAPI iwxapi = WXAPIFactory.createWXAPI(FrameApplication.mContext, appId);
+        IWXAPI iwxapi = WXAPIFactory.createWXAPI(FrameApplication.getContext(), appId);
         if (!iwxapi.isWXAppInstalled()) {
             ToastUtil.showShortToast("未安装微信,请安装后再尝试分享");
             return;

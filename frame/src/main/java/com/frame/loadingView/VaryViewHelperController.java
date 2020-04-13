@@ -17,7 +17,7 @@ public class VaryViewHelperController {
         this.emptyView = emptyView;
     }
 
-    public VaryViewHelperController(IVaryViewHelper helper) {
+    private VaryViewHelperController(IVaryViewHelper helper) {
         super();
         this.helper = helper;
     }
@@ -29,9 +29,8 @@ public class VaryViewHelperController {
         else
             ((TextView) layout.findViewById(R.id.v_tips)).setText(tips);
         TextView againBtn = layout.findViewById(R.id.tv_view_pager_error_load);
-        if (null != onClickListener) {
+        if (null != onClickListener)
             againBtn.setOnClickListener(onClickListener);
-        }
         helper.showLayout(layout);
     }
 

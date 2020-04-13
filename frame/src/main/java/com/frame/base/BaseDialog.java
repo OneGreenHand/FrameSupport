@@ -34,26 +34,26 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     private int[] mIds;
     public Context mContext;
 
-    public BaseDialog( Context context) {
+    public BaseDialog(Context context) {
         super(context, R.style.ActionSheetDialogStyle);//默认为dialog样式
         this.mContext = context;
         initCommon(context);
     }
 
-    public BaseDialog( Context context, int themeResId) {
+    public BaseDialog(Context context, int themeResId) {
         super(context, themeResId);
         this.mContext = context;
         initCommon(context);
     }
 
-    public BaseDialog( Context context, int themeResId, int gravity) {
+    public BaseDialog(Context context, int themeResId, int gravity) {
         super(context, themeResId);
         this.gravity = gravity;
         this.mContext = context;
         initCommon(context);
     }
 
-    public BaseDialog( Context context, int themeResId, int animResId, int gravity) {
+    public BaseDialog(Context context, int themeResId, int animResId, int gravity) {
         super(context, themeResId);
         this.gravity = gravity;
         this.animResId = animResId;
@@ -61,7 +61,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         initCommon(context);
     }
 
-    public BaseDialog( Context context, int themeResId, int gravity, boolean isCancelable) {
+    public BaseDialog(Context context, int themeResId, int gravity, boolean isCancelable) {
         super(context, themeResId);
         this.gravity = gravity;
         this.isCancelable = isCancelable;
@@ -79,7 +79,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     protected void initCommon(Context context) {
         if (context instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) context;
-            if (activity != null)
+            if (!activity.isFinishing())
                 activity.getLifecycle().addObserver(this);
         }
         setCancelable(isCancelable);
@@ -117,7 +117,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     public void show() {
         if (mContext instanceof Activity) {
             Activity activity = (Activity) mContext;
-            if (activity == null || activity.isFinishing())
+            if (activity.isFinishing())
                 return;
         }
         super.show();
@@ -137,9 +137,8 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         mIds = ids;
         mListener = listener;
         if (mListener != null && mIds != null && mIds.length != 0) {
-            for (int id : mIds) {
+            for (int id : mIds)
                 findViewById(id).setOnClickListener(mListener);
-            }
         }
         return this;
     }

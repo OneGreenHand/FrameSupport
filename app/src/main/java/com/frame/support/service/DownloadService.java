@@ -17,7 +17,6 @@ import com.frame.support.util.NotificationHelper;
 import com.frame.util.ToastUtil;
 
 /**
- * @data on 2019/5/27 14:01
  * @describe 下载服务
  */
 public class DownloadService extends Service {

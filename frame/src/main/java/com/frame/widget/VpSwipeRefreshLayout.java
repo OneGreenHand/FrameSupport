@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
 /**
- * @data on 2018/10/17 17:12
  * @describe 解决滑动冲突
  */
 public class VpSwipeRefreshLayout extends SwipeRefreshLayout {

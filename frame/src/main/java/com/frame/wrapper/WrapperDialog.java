@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
 
+import com.frame.util.CustomClickListener;
+
 
 /**
  * @date 2018/7/9
@@ -30,10 +32,10 @@ public class WrapperDialog extends Dialog {
         mListener = listener;
         if (mListener != null && mIds != null && mIds.length != 0) {
             for (int id : mIds) {
-                findViewById(id).setOnClickListener(new View.OnClickListener() {
+                findViewById(id).setOnClickListener(new CustomClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        mListener.onClick(view);
+                    public void onSingleClick(View v) {
+                        mListener.onClick(v);
                     }
                 });
             }

@@ -115,7 +115,7 @@ public class IntentUtil {
         //  }
     }
 
-    public static void putIntent(Map<String, Object> param, Intent intent) {
+    private static void putIntent(Map<String, Object> param, Intent intent) {
         if (param != null && !param.isEmpty()) {
             for (Map.Entry<String, Object> me : param.entrySet()) {
                 Object value = me.getValue();

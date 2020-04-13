@@ -1,23 +1,16 @@
 package com.frame.bean;
 
-import java.io.Serializable;
-
 /**
- * @data on 2019/3/15 9:17
  * @describe 微信回调结果，一般都是这些参数
  * TODO  这里要根据后台返回的字段名和返回体，进行修改
  */
-public class WXResult extends BaseBean implements Serializable {
+public class WXResult {
 
-    public DataBean data;
-
-    public class DataBean implements Serializable {
-        public String appId;
-        public String partnerId;
-        public String prepayId;
-        public String packageValue;
-        public String nonceStr;
-        public String timeStamp;
-        public String sign;
-    }
+    public String appId;
+    public String partnerId;
+    public String prepayId;
+    public String packageValue;
+    public String nonceStr;
+    public String timeStamp;
+    public String sign;
 }

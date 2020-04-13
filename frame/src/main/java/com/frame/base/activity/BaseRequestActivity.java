@@ -8,6 +8,7 @@ import com.frame.base.BasePresenter;
 import com.frame.base.BaseRequestView;
 import com.frame.bean.BaseBean;
 import com.frame.loadingView.VaryViewHelperController;
+import com.frame.request.RxAPIManager;
 import com.frame.util.ToastUtil;
 
 /**
@@ -80,5 +81,11 @@ public abstract class BaseRequestActivity<P extends BasePresenter, B extends Bas
     //设置空数据布局(重写即为替换)
     protected int getEmptyView() {
         return R.layout.frame_view_pager_no_data;
+    }
+
+    @Override
+    protected void onDestroy() {
+        RxAPIManager.get().cancel(this);
+        super.onDestroy();
     }
 }

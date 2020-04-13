@@ -11,7 +11,6 @@ import java.text.DecimalFormat;
 
 
 /**
- * date：2018/5/21 16:09
  * 价格相关转换工具
  */
 public class PriceUtil {

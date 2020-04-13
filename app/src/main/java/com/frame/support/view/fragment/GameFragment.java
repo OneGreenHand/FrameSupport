@@ -10,7 +10,6 @@ import com.frame.config.BaseConfig;
 import com.frame.support.R;
 import com.frame.support.util.InstructionsUtils;
 import com.frame.support.view.activity.VideoWebActivity;
-import com.frame.util.CommonUtil;
 import com.frame.util.ToastUtil;
 
 import butterknife.OnClick;
@@ -44,7 +43,7 @@ public class GameFragment extends BaseFragment {
                     ToastUtil.showShortToast("请在wifi状态下下载");
                 } else {
                     //   if (CommonUtil.notificationAuthority(mActivity)) {//检测通知栏是否打开,未打开类似于静默下载
-                    InstructionsUtils.downloadApk(mActivity, "", downloadUrl);
+                    InstructionsUtils.checkInstallOrDown(mActivity, downloadUrl);
                     //   }
                 }
                 break;

@@ -6,11 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.frame.base.BaseModel;
-import com.frame.base.fragment.BaseRequestFragment;
-import com.frame.bean.BaseBean;
+import com.frame.base.fragment.BaseFragment;
 import com.frame.support.R;
-import com.frame.support.presenter.OnlinePt;
 import com.frame.support.util.photos.IPhotoResult;
 import com.frame.support.util.photos.TakePhotoDialog;
 
@@ -19,7 +16,7 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class OnlineFragment extends BaseRequestFragment<OnlinePt, BaseBean> {
+public class OnlineFragment extends BaseFragment {
     @BindView(R.id.request_msg)
     TextView requestMsg;
     TakePhotoDialog photoDialog;
@@ -74,18 +71,4 @@ public class OnlineFragment extends BaseRequestFragment<OnlinePt, BaseBean> {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    protected OnlinePt setPresenter() {
-        return new OnlinePt(this);
-    }
-
-    @Override
-    protected void reRequest() {
-
-    }
-
-
-    @Override
-    public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
-    }
 }

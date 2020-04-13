@@ -18,7 +18,6 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import java.util.Map;
 
 /**
- * @data on 2019/3/15 9:09
  * @describe 支付工具类
  */
 public class PayHelper {
@@ -34,15 +33,15 @@ public class PayHelper {
         return mPayHelper;
     }
 
-    public PayHelper() {
+    private PayHelper() {
     }
 
     /********************************微信支付**************************************/
-    IWXAPI wxapi = null;
+    private IWXAPI wxapi = null;
 
     public void WexPay(WXResult result) {
         if (wxapi == null) {
-            wxapi = WXAPIFactory.createWXAPI(FrameApplication.mContext, BaseConfig.WEIXIN_APP_ID);
+            wxapi = WXAPIFactory.createWXAPI(FrameApplication.getContext(), BaseConfig.WEIXIN_APP_ID);
             if (!wxapi.isWXAppInstalled()) {
                 ToastUtil.showShortToast("未安装微信客户端");
                 return;
@@ -51,13 +50,13 @@ public class PayHelper {
         }
         PayReq req = new PayReq();
         if (result != null) {//TODO  这里要根据后台返回的字段名和返回体，进行修改
-            req.appId = result.data.appId;
-            req.partnerId = result.data.partnerId;
-            req.prepayId = result.data.prepayId;
-            req.nonceStr = result.data.nonceStr;
-            req.timeStamp = result.data.timeStamp;
+            req.appId = result.appId;
+            req.partnerId = result.partnerId;
+            req.prepayId = result.prepayId;
+            req.nonceStr = result.nonceStr;
+            req.timeStamp = result.timeStamp;
             req.packageValue = "Sign=WXPay";
-            req.sign = result.data.sign;
+            req.sign = result.sign;
             wxapi.sendReq(req);
         }
     }

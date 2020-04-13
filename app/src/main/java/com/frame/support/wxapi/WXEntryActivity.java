@@ -24,7 +24,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         iwxapi = WXAPIFactory.createWXAPI(this, BaseConfig.WEIXIN_APP_ID);
         boolean handleIntent = iwxapi.handleIntent(getIntent(), this);
         //下面代码是判断微信分享后返回WXEnteryActivity的，如果handleIntent==false,说明没有调用IWXAPIEventHandler，则需要在这里销毁这个透明的Activity;
-        if (handleIntent == false)
+        if (!handleIntent)
             finish();
     }
 

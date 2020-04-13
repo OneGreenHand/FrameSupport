@@ -7,7 +7,6 @@ import android.net.Uri;
 import java.io.File;
 
 /**
- * date：2018/8/15 19:07
  * description: 跳转三方地图工具类
  */
 public class OpenMapUtil {
@@ -80,7 +79,6 @@ public class OpenMapUtil {
             Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(sb.toString()));
             context.startActivity(intent);
         } catch (Exception e) {
-
         }
     }
 

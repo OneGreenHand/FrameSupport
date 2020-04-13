@@ -2,6 +2,7 @@ package com.frame.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,11 +29,10 @@ public class PopupwindowUtil {
         popupWindow.setWidth(isMatch ? WindowManager.LayoutParams.MATCH_PARENT : WindowManager.LayoutParams.WRAP_CONTENT);
         popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         popupWindow.setAnimationStyle(R.style.ActionSheetDialogStyle);  //设置PopupWindow弹出窗体动画效果
-        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
-        popupWindow.setTouchable(cancel);
-        popupWindow.setOutsideTouchable(cancel);
-        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(cancel);// 设置popupwindow外部可点击
+        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);//让pop覆盖在输入法上面
+        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);//软键盘顶起当前界面,当前布局的高度会发生变化
         if (isAlpha) {
             CommonUtil.setBackgroundAlpha((Activity) context, 0.8f);  //显示阴影
             popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {//阴影消失

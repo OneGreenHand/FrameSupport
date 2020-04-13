@@ -9,10 +9,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * date：2018/4/2 13:29
  * description: 网络请求日志拦截
  */
-
 public class HttpLoggingInterceptor implements Interceptor {
 
     @Override
@@ -24,8 +22,6 @@ public class HttpLoggingInterceptor implements Interceptor {
                 .addHeader("Accept", "application/json")
                 .url(url);
         Request request = requestBuilder.build();
-        Response response = chain.proceed(request);
-        return response;
+        return chain.proceed(request);
     }
-
 }

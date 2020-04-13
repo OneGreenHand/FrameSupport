@@ -9,28 +9,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.frame.R;
 import com.frame.base.BaseView;
 import com.frame.bean.EventBean;
 import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.gyf.immersionbar.components.SimpleImmersionProxy;
-import com.trello.rxlifecycle3.components.support.RxFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.ButterKnife;
 
 /**
  * @Description: Fragment基类
  */
-public abstract class BaseFragment extends RxFragment implements BaseView, SimpleImmersionOwner {
+public abstract class BaseFragment extends Fragment implements BaseView, SimpleImmersionOwner {
     protected Activity mActivity;
     protected LoadingDialog progressDialog;
     protected View rootView;

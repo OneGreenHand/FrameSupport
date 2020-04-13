@@ -38,17 +38,17 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
 
     public VerificationCode(Context context) {
         super(context);
-        initView(context,null);
+        initView(context, null);
     }
 
     public VerificationCode(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context,attrs);
+        initView(context, attrs);
     }
 
     public VerificationCode(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView(context,attrs);
+        initView(context, attrs);
     }
 
     /**
@@ -105,11 +105,11 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     /**
      * 初始化
      */
-    private void initView(Context context,AttributeSet attrs) {
+    private void initView(Context context, AttributeSet attrs) {
         mContext = context;
         if (mContext instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) mContext;
-            if (activity != null)//注册绑定生命周期
+            if (!activity.isFinishing())//注册绑定生命周期
                 activity.getLifecycle().addObserver(this);
         }
         setMinWidth(SizeUtils.dp2px(95));

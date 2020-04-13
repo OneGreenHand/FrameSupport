@@ -1,17 +1,20 @@
 package com.frame.support.webview;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Handler;
 import android.webkit.JavascriptInterface;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PhoneUtils;
+import com.frame.FrameApplication;
 import com.frame.support.util.ChannelUtils;
 import com.frame.util.ToastUtil;
 import com.frame.view.TipDialog;
@@ -27,6 +30,8 @@ import io.reactivex.functions.Consumer;
 public class JSInterface {
 
     Context context;
+    // 将请求成功的数据返回到主线程进行数据更新
+    Handler mHandler = new Handler(FrameApplication.getContext().getMainLooper());
 
     public JSInterface(Context context) {
         this.context = context;
@@ -77,45 +82,25 @@ public class JSInterface {
     //吐司
     @JavascriptInterface
     public void showToast(String msg) {
-        Observable.just(1).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        ToastUtil.showShortToast(msg);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("Observable", "Js发生错误");
-                    }
-                });
+        mHandler.post(() -> ToastUtil.showShortToast(msg));
     }
 
     //弹框
     @JavascriptInterface
     public void showDialog(String title, String msg) {
-        Observable.just(1).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        TipDialog dialog = new TipDialog(context);
-                        dialog.setTitle(title);
-                        dialog.setContent(msg);
-                        dialog.show();
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        LogUtils.e("Observable", "Js发生错误");
-                    }
-                });
+        mHandler.post(() -> {
+            TipDialog dialog = new TipDialog(context);
+            dialog.setTitle(title);
+            dialog.setContent(msg);
+            dialog.show();
+        });
     }
 
     //结束当前页面
     @JavascriptInterface
     public void doFinish() {
-        if (context instanceof AppCompatActivity)
-            ((AppCompatActivity) context).finish();
+        if (context instanceof Activity)
+            ((Activity) context).finish();
     }
 
     /**

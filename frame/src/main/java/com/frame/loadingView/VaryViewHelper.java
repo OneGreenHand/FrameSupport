@@ -22,9 +22,8 @@ public class VaryViewHelper implements IVaryViewHelper {
         params = view.getLayoutParams();
         if (view.getParent() != null) {
             parentView = (ViewGroup) view.getParent();
-        } else {
+        } else
             parentView = (ViewGroup) view.getRootView().findViewById(android.R.id.content);
-        }
         int count = parentView.getChildCount();
         for (int index = 0; index < count; index++) {
             if (view == parentView.getChildAt(index)) {
@@ -47,15 +46,13 @@ public class VaryViewHelper implements IVaryViewHelper {
 
     @Override
     public void showLayout(final View view) {
-        if (parentView == null) {
+        if (parentView == null)
             init();
-        }
         this.currentView = view;
         if (parentView.getChildAt(viewIndex) != view) {
             ViewGroup parent = (ViewGroup) view.getParent();
-            if (parent != null) {
+            if (parent != null)
                 parent.removeView(view);
-            }
             parentView.removeViewAt(viewIndex);
             parentView.addView(view, viewIndex, params);
         }

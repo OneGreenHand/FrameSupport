@@ -32,10 +32,6 @@ import java.util.regex.Pattern;
  */
 public class CommonUtil {
 
-    public static Context getContext() {
-        return FrameApplication.mContext;
-    }
-
     /**
      * 请求权限弹框
      */
@@ -80,19 +76,6 @@ public class CommonUtil {
             dialog.show();
         }
         return isOpened;
-    }
-
-    private static long lastClickTime = 0;//上次点击的时间
-
-    /**
-     * 判断控件点击事件的触发事件间隔，防止用户多次点击
-     *
-     * @return true重复点击 false为不是
-     */
-    public static boolean isFastDoubleClick() {
-        long currentTime = System.currentTimeMillis();
-        lastClickTime = currentTime;
-        return currentTime - lastClickTime > 1000;
     }
 
     /**
@@ -212,8 +195,7 @@ public class CommonUtil {
     public static boolean isContainChinese(String str) {
         Pattern p = Pattern.compile("[\\u4e00-\\u9fa5]");
         Matcher m = p.matcher(str);
-        if (m.find()) return true;
-        return false;
+        return m.find();
     }
 
     // 使用正则表达式来判断字符串中是否包含字母
@@ -319,11 +301,11 @@ public class CommonUtil {
             tv.setVisibility(View.VISIBLE);
             tv.setText(count);
             tv.setBackgroundResource(R.drawable.shape_msg_circular);
-        } else if (count >= 10) {
+        } else if (count < 100) {
             tv.setVisibility(View.VISIBLE);
             tv.setText(count);
             tv.setBackgroundResource(R.drawable.shape_msg_square);
-        } else if (count > 99) {
+        } else {
             tv.setVisibility(View.VISIBLE);
             tv.setText("99+");
             tv.setBackgroundResource(R.drawable.shape_msg_square);

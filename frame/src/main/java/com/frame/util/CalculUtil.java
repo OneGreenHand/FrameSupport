@@ -3,7 +3,6 @@ package com.frame.util;
 import java.math.BigDecimal;
 
 /**
- * date: 2018/11/10 16:49
  * description: 高精度计算工具类
  */
 public class CalculUtil {
@@ -24,7 +23,6 @@ public class CalculUtil {
 
     /**
      * 提供精确的加法运算
-     * <p>
      * ROUND_HALF_UP 四舍五入
      * ROUND_FLOOR 不四舍五入
      *
@@ -56,7 +54,6 @@ public class CalculUtil {
 
     /**
      * 提供精确的减法运算
-     * <p>
      * ROUND_HALF_UP 四舍五入
      * ROUND_FLOOR 不四舍五入
      *
@@ -88,7 +85,6 @@ public class CalculUtil {
 
     /**
      * 提供精确的乘法运算
-     * <p>
      * ROUND_HALF_UP 四舍五入
      * ROUND_FLOOR 不四舍五入
      *
@@ -107,7 +103,6 @@ public class CalculUtil {
 
     /**
      * 提供精确的除法运算
-     * <p>
      * ROUND_HALF_UP 四舍五入
      * ROUND_FLOOR 不四舍五入
      *
@@ -126,7 +121,6 @@ public class CalculUtil {
 
     /**
      * 提供精确的除法运算
-     * <p>
      * ROUND_HALF_UP 四舍五入
      * ROUND_FLOOR 不四舍五入
      *
@@ -145,7 +139,6 @@ public class CalculUtil {
 
     /**
      * 提供精确的小数位处理
-     * <p>
      * ROUND_HALF_UP 四舍五入
      * ROUND_FLOOR 不四舍五入
      *
@@ -162,7 +155,6 @@ public class CalculUtil {
 
     /**
      * 提供精确的小数位处理
-     * <p>
      * ROUND_HALF_UP 四舍五入
      * ROUND_FLOOR 不四舍五入
      *
@@ -179,7 +171,6 @@ public class CalculUtil {
 
     /**
      * 取余数
-     * <p>
      * ROUND_HALF_UP 四舍五入
      * ROUND_FLOOR 不四舍五入
      *

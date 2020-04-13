@@ -259,10 +259,6 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
     @DownloadGroup.* <methods>;
 }
 #其他
--keep class com.trello.rxlifecycle3.** {*;}
--keep class com.trello.rxlifecycle3.android.** {*;}
--keep class com.trello.rxlifecycle3.components.** {*;}
--keep class com.trello.rxlifecycle3.components.support.** {*;}
 -dontwarn org.xmlpull.v1.XmlPullParser
 -dontwarn org.xmlpull.v1.XmlSerializer
 -keep class org.xmlpull.v1.* {*;}

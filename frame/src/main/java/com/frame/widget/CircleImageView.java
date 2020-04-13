@@ -34,7 +34,6 @@ import com.frame.R;
 
 
 /**
- * @data on 2018/7/28 16:23
  * @describe 圆形头像 https://github.com/hdodenhof/CircleImageView
  */
 public class CircleImageView extends ImageView {

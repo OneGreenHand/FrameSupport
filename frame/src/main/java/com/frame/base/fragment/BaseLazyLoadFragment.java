@@ -24,9 +24,8 @@ public abstract class BaseLazyLoadFragment extends BaseFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (!isNeedLoad()) {
-            if (!isLoad) {
+            if (!isLoad)
                 isCanLoadData();
-            }
         } else {
             isCanLoadData();
         }
@@ -40,16 +39,14 @@ public abstract class BaseLazyLoadFragment extends BaseFragment {
      * 3.没有被加载过
      */
     private void isCanLoadData() {
-        if (!isInit) {
+        if (!isInit)
             return;
-        }
         if (getUserVisibleHint()) {
             lazyLoad();
             isLoad = true;
         } else {
-            if (isLoad) {
+            if (isLoad)
                 stopLoad();
-            }
         }
     }
 

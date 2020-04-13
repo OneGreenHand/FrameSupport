@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * date：2018/7/2 11:19
  * description: 解析工具类
  */
 public class GsonUtil {

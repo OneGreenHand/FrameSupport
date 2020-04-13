@@ -14,7 +14,6 @@ import retrofit2.HttpException;
 
 
 /**
- * date：2018/4/2 13:29
  * description: 异常/错误信息
  */
 public class APIException {

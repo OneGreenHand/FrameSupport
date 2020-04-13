@@ -17,7 +17,6 @@ import okhttp3.Response;
 import okio.Buffer;
 
 /**
- * @data on 2018/8/18 10:40
  * @describe 添加公共请求参数(拦截器)
  */
 public class ParamInterceptor implements Interceptor {
@@ -41,9 +40,8 @@ public class ParamInterceptor implements Interceptor {
                 FormBody.Builder bodyBuilder = new FormBody.Builder();
                 FormBody formBody = (FormBody) request.body();
                 //把原来的参数添加到新的构造器，（因为没找到直接添加，所以就new新的）
-                for (int i = 0; i < formBody.size(); i++) {
+                for (int i = 0; i < formBody.size(); i++)
                     bodyBuilder.addEncoded(formBody.encodedName(i), formBody.encodedValue(i));
-                }
                 formBody = bodyBuilder
                         .addEncoded("apppwd", "d28feb4ca50b2da463331a2d32")//添加参数
                         .build();
@@ -52,10 +50,9 @@ public class ParamInterceptor implements Interceptor {
                 //   request = chain.request();
                 MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
                 List<MultipartBody.Part> oldParts = ((MultipartBody) request.body()).parts();
-                if (oldParts != null && oldParts.size() > 0) {
-                    for (MultipartBody.Part part : oldParts) {
+                if (oldParts.size() > 0) {
+                    for (MultipartBody.Part part : oldParts)
                         multipartBuilder.addPart(part);
-                    }
                 }
                 multipartBuilder.addFormDataPart("apppwd", "d28feb4ca50b2da463331a2d32");
                 request = request.newBuilder().post(multipartBuilder.build()).build();

@@ -16,22 +16,19 @@ ext {
     // 依赖相关版本控制
     depVersion = [
             retrofit                 : "2.7.2",
-            rxjava                   : "3.0.0",
-            rxandroid                : "3.0.0",
+            rxjava                   : "2.1.1",
+            rxandroid                : "2.1.1",
             okhttp                   : "4.4.0",
             utilcode                 : "1.26.0",
             autosize                 : "1.2.0",
             eventbus                 : "3.2.0",
-            litepal                  : "3.0.0",
             glide                    : "4.11.0",
             multidex                 : "2.0.1",
             butterknife              : "10.2.1",
-            rxpermissions            : "0.10.2",
             immersionbar             : "3.0.0",
             bugly_crashreport        : "3.1.0",
             bugly_crashreport_upgrade: "1.4.2",
             bugly_tinker             : "1.9.14",
-            rxlifecycle              : "3.1.0",
             aria                     : "3.8.6",
             walle                    : "1.1.6",
             RecyclerViewAdapter      : "3.0.1",
@@ -49,8 +46,8 @@ ext {
                     converter_gson : "com.squareup.retrofit2:converter-gson:${depVersion.retrofit}",
             ],
             rxjava2                : [
-                    rxjava   : "io.reactivex.rxjava3:rxjava:${depVersion.rxjava}",
-                    rxandroid: "io.reactivex.rxjava3:rxandroid:${depVersion.rxandroid}",
+                    rxjava   : "io.reactivex.rxjava2:rxjava:${depVersion.rxjava}",
+                    rxandroid: "io.reactivex.rxjava2:rxandroid:${depVersion.rxandroid}",
             ],
             glide                  : [
                     glide   : "com.github.bumptech.glide:glide:${depVersion.glide}",
@@ -79,18 +76,12 @@ ext {
             utilcode               : "com.blankj:utilcodex:${depVersion.utilcode}",
             //屏幕适配
             autosize               : "me.jessyan:autosize:${depVersion.autosize}",
-            //数据库
-            litepal                : "org.litepal.android:java:${depVersion.litepal}",
             //分Dex
             multidex               : "androidx.multidex:multidex:${depVersion.multidex}",
-            //权限管理
-            rxpermissions          : "com.github.tbruyelle:rxpermissions:${depVersion.rxpermissions}",
             //沉浸式状态栏(activity)
             immersionbar           : "com.gyf.immersionbar:immersionbar:${depVersion.immersionbar}",
             //沉浸式状态栏(fragment)
             immersionbar_components: "com.gyf.immersionbar:immersionbar-components:${depVersion.immersionbar}",
-            //retrofit绑定生命周期
-            rxlifecycle            : "com.trello.rxlifecycle3:rxlifecycle-components:${depVersion.rxlifecycle}",
             //walle读取渠道号
             walle                  : "com.meituan.android.walle:library:${depVersion.walle}",
             //微信支付(不包含统计)

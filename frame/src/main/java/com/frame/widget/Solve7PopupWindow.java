@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.PopupWindow;
 
 /**
- * @data on 2018/9/25 17:00
  * @describe 解决部分手机showAsDropDown位置不对问题
  */
 public class Solve7PopupWindow extends PopupWindow {

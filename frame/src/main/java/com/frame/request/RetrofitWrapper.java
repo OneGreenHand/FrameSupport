@@ -12,7 +12,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * date：2018/4/2 13:29
  * description: Retofit网络请求工具类
  */
 public class RetrofitWrapper {

@@ -41,7 +41,7 @@ public class BaseQuickHolder extends BaseViewHolder {
      */
     public BaseQuickHolder setLayoutManager(int viewId, RecyclerView.Adapter adapter, Context mContext, int direction) {
         RecyclerView rv = getView(viewId);
-        rv.setLayoutManager(new LinearLayoutManager(mContext, direction == 1 ? OrientationHelper.HORIZONTAL : OrientationHelper.VERTICAL, false));
+        rv.setLayoutManager(new LinearLayoutManager(mContext, direction == 1 ? RecyclerView.HORIZONTAL : RecyclerView.VERTICAL, false));
         rv.setAdapter(adapter);
         return this;
     }

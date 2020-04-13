@@ -5,12 +5,10 @@ import android.text.TextUtils;
 
 import com.frame.bean.FileInfoBean;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -19,9 +17,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
-/**
- * date：2018/4/21 16:09
- */
 public class HttpRequest {
     private APIService apiService;
 
@@ -29,26 +24,24 @@ public class HttpRequest {
         apiService = RetrofitWrapper.getInstance().createApi(APIService.class);
     }
 
-    public Observable<ResponseBody> get(String url, ObservableTransformer observer) {
-        Observable<ResponseBody> observable = apiService
+    public Observable<ResponseBody> get(String url) {
+        return apiService
                 .get(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        return observer == null ? observable : observable.compose(observer);
     }
 
-    public Observable<ResponseBody> post(String url, Object object, ObservableTransformer observer) {
-        Observable<ResponseBody> observable = apiService
+    public Observable<ResponseBody> post(String url, Object object) {
+        return apiService
                 .post(url, object == null ? "" : object)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        return observer == null ? observable : observable.compose(observer);
     }
 
     /**
      * @param mutilFileKey 多图的key
      */
-    public Observable<ResponseBody> uploadFile(String url, Map<String, Object> params, String mutilFileKey, List<FileInfoBean> fileList, ObservableTransformer observer) {
+    public Observable<ResponseBody> uploadFile(String url, Map<String, Object> params, String mutilFileKey, List<FileInfoBean> fileList) {
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
         if (params != null) {
@@ -67,10 +60,9 @@ public class HttpRequest {
                     builder.addFormDataPart(fileInfoBean.getParamName(), fileInfoBean.getFile().getName(), RequestBody.create(MediaType.parse("multipart/form-data"), fileInfoBean.getFile()));
             }
         RequestBody requestBody = builder.build();
-        Observable<ResponseBody> observable = apiService.upload(url, requestBody)
+        return apiService.upload(url, requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        return observer == null ? observable : observable.compose(observer);
     }
 
     /**

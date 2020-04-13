@@ -342,8 +342,6 @@ public class XRadioGroup extends LinearLayout {
 
     /**
      * 设置监听
-     *
-     * @param child
      */
     private void setListener(View child) {
         if (child instanceof RadioButton) {
@@ -366,8 +364,6 @@ public class XRadioGroup extends LinearLayout {
 
     /**
      * 移除监听
-     *
-     * @param child
      */
     private void removeListener(View child) {
         if (child instanceof RadioButton) {

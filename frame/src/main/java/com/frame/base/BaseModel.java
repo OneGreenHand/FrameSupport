@@ -3,7 +3,6 @@ package com.frame.base;
 
 import android.annotation.SuppressLint;
 
-
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.frame.bean.BaseBean;
@@ -11,12 +10,9 @@ import com.frame.bean.FileInfoBean;
 import com.frame.config.AppConfig;
 import com.frame.request.APIException;
 import com.frame.request.HttpRequest;
+import com.frame.request.RxAPIManager;
 import com.frame.util.GsonUtil;
 import com.frame.util.ToastUtil;
-import com.trello.rxlifecycle3.android.ActivityEvent;
-import com.trello.rxlifecycle3.android.FragmentEvent;
-import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
-import com.trello.rxlifecycle3.components.support.RxFragment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -52,53 +48,23 @@ public class BaseModel {
     public <B extends BaseBean> void post(String api, final Class<B> clazz) {
         Observer<ResponseBody> responseBodySubscriber = getResponseBodySubscriber(api, clazz);
         if (responseBodySubscriber == null) return;
-        if (mBuilder.mParam == null || mBuilder.mParam.size() == 0) { //参数为空时，添加一个无用参数
+        if (mBuilder.mParam == null || mBuilder.mParam.isEmpty()) { //参数为空时，添加一个无用参数
             mBuilder.mParam = new HashMap<>();
             mBuilder.mParam.put("", "");
         }
-        if (mBuilder.isSyncLifeCycle) {//是否需要同步生命周期
-            if (mBuilder.mBaseRequestView instanceof RxAppCompatActivity) {
-                mHttpRequest.post(api, mBuilder.mParam, ((RxAppCompatActivity) mBuilder.mBaseRequestView).bindUntilEvent(ActivityEvent.DESTROY)).subscribe(responseBodySubscriber);
-            } else if (mBuilder.mBaseRequestView instanceof RxFragment) {
-                mHttpRequest.post(api, mBuilder.mParam, ((RxFragment) mBuilder.mBaseRequestView).bindUntilEvent(FragmentEvent.DESTROY)).subscribe(responseBodySubscriber);
-            } else {
-                mHttpRequest.post(api, mBuilder.mParam, null).subscribe(responseBodySubscriber);
-            }
-        } else {
-            mHttpRequest.post(api, mBuilder.mParam, null).subscribe(responseBodySubscriber);
-        }
+        mHttpRequest.post(api, mBuilder.mParam).subscribe(responseBodySubscriber);
     }
 
     public <B extends BaseBean> void get(String api, final Class<B> clazz) {
         Observer<ResponseBody> responseBodySubscriber = getResponseBodySubscriber(api, clazz);
         if (responseBodySubscriber == null) return;
-        if (mBuilder.isSyncLifeCycle) {//是否需要同步生命周期
-            if (mBuilder.mBaseRequestView instanceof RxAppCompatActivity) {
-                mHttpRequest.get(api, ((RxAppCompatActivity) mBuilder.mBaseRequestView).bindUntilEvent(ActivityEvent.DESTROY)).subscribe(responseBodySubscriber);
-            } else if (mBuilder.mBaseRequestView instanceof RxFragment) {
-                mHttpRequest.get(api, ((RxFragment) mBuilder.mBaseRequestView).bindUntilEvent(FragmentEvent.DESTROY)).subscribe(responseBodySubscriber);
-            } else {
-                mHttpRequest.get(api, null).subscribe(responseBodySubscriber);
-            }
-        } else {
-            mHttpRequest.get(api, null).subscribe(responseBodySubscriber);//开启请求
-        }
+        mHttpRequest.get(api).subscribe(responseBodySubscriber);//开启请求
     }
 
     public <B extends BaseBean> void upload(String api, final Class<B> clazz) {
         Observer<ResponseBody> responseBodySubscriber = getResponseBodySubscriber(api, clazz);
         if (responseBodySubscriber == null) return;
-        if (mBuilder.isSyncLifeCycle) {//是否需要同步生命周期
-            if (mBuilder.mBaseRequestView instanceof RxAppCompatActivity) {
-                mHttpRequest.uploadFile(api, mBuilder.mParam, mBuilder.multiFileKey, mBuilder.mFileInfoBeans, ((RxAppCompatActivity) mBuilder.mBaseRequestView).bindUntilEvent(ActivityEvent.DESTROY)).subscribe(responseBodySubscriber);
-            } else if (mBuilder.mBaseRequestView instanceof RxFragment) {
-                mHttpRequest.uploadFile(api, mBuilder.mParam, mBuilder.multiFileKey, mBuilder.mFileInfoBeans, ((RxFragment) mBuilder.mBaseRequestView).bindUntilEvent(FragmentEvent.DESTROY)).subscribe(responseBodySubscriber);
-            } else {
-                mHttpRequest.uploadFile(api, mBuilder.mParam, mBuilder.multiFileKey, mBuilder.mFileInfoBeans, null).subscribe(responseBodySubscriber);
-            }
-        } else {
-            mHttpRequest.uploadFile(api, mBuilder.mParam, mBuilder.multiFileKey, mBuilder.mFileInfoBeans, null).subscribe(responseBodySubscriber);
-        }
+        mHttpRequest.uploadFile(api, mBuilder.mParam, mBuilder.multiFileKey, mBuilder.mFileInfoBeans).subscribe(responseBodySubscriber);
     }
 
     private <B extends BaseBean> Observer<ResponseBody> getResponseBodySubscriber(final String tag, final Class<B> clazz) {
@@ -157,6 +123,7 @@ public class BaseModel {
                 } else {
                     mBuilder.mBaseRequestView.showLoadingDialog(mBuilder.mMsg, mBuilder.isDialogCancel);
                 }
+                RxAPIManager.get().add(mBuilder.mBaseRequestView.getClass().getName(), d);//添加请求到订阅队列，以便于取消请求
             }
 
             @SuppressLint("CheckResult")
@@ -216,7 +183,6 @@ public class BaseModel {
         private String mMsg = null;
         private Object requestTag;
         private boolean isDialogCancel = true;//请求时dialog是否可以手动取消
-        private boolean isSyncLifeCycle = true;//是否同步生命周期
         //动态参数
         private Map<String, Object> mParam;
         private BaseRequestView mBaseRequestView;
@@ -226,31 +192,31 @@ public class BaseModel {
         private int pageCount = AppConfig.ViewPage.PAGE_COUNT;//每页请求的数据量
 
         //绑定界面就用这构造
-        public Builder( BaseRequestView baseRequestView) {
+        public Builder(BaseRequestView baseRequestView) {
             mBaseRequestView = baseRequestView;
         }
 
         //设置加载风格(无  ||加载框  ||重新加载)
-        public Builder setLoadStyle( LoadStyle loadStyle) {
+        public Builder setLoadStyle(LoadStyle loadStyle) {
             mLoadStyle = loadStyle;
             return this;
         }
 
         //设置上拉加载(第一次 ||加载更多)
-        public Builder setLoadMode( LoadMode loadMode) {
+        public Builder setLoadMode(LoadMode loadMode) {
             mLoadMode = loadMode;
             return this;
         }
 
         //添加参数
-        public Builder putParam( String key, Object value) {
+        public Builder putParam(String key, Object value) {
             if (mParam == null)
                 mParam = new HashMap<>();
             mParam.put(key, value);
             return this;
         }
 
-        public Builder putAllParam( Map<String, Object> map) {
+        public Builder putAllParam(Map<String, Object> map) {
             if (mParam == null) {
                 mParam = new HashMap<>();
             }
@@ -288,11 +254,6 @@ public class BaseModel {
 
         public Builder setDialogCancel(boolean dialogCancel) {
             isDialogCancel = dialogCancel;
-            return this;
-        }
-
-        public Builder isSyncLifeCycle(boolean isSync) {
-            isSyncLifeCycle = isSync;
             return this;
         }
 

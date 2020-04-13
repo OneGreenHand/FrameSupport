@@ -65,8 +65,6 @@ dependencies {
     api dependencies.immersionbar
     //沉浸式状态栏(fragment)
     api dependencies.immersionbar_components
-    //rxlifecycle生命周期绑定
-    api dependencies.rxlifecycle
     //微信支付
     api dependencies.wxpay
     // 支付宝支付

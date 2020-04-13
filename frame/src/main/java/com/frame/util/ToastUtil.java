@@ -10,16 +10,12 @@ import com.blankj.utilcode.util.ToastUtils;
 public class ToastUtil {
 
     public static void showShortToast(String content) {
-        if (TextUtils.isEmpty(content))
-            ToastUtils.showShort("额,好像什么也没有说");
-        else
+        if (!TextUtils.isEmpty(content))
             ToastUtils.showShort(content);
     }
 
     public static void showLongToast(String content) {
-        if (TextUtils.isEmpty(content))
-            ToastUtils.showLong("额,好像什么也没有说");
-        else
+        if (!TextUtils.isEmpty(content))
             ToastUtils.showLong(content);
     }
 }

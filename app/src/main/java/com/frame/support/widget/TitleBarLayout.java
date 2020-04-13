@@ -1,5 +1,6 @@
 package com.frame.support.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.frame.support.R;
@@ -29,7 +31,7 @@ public class TitleBarLayout extends LinearLayout implements View.OnClickListener
     private int rTextColor;//右侧文字颜色
     //控件
     private ImageView imgFinish;
-    private LinearLayout titlebar;
+    private RelativeLayout layoutTitle;
     private TextView title;
     private TextView other;
     //点击事件
@@ -68,11 +70,11 @@ public class TitleBarLayout extends LinearLayout implements View.OnClickListener
 
     private void findId() {
         View inflate = LayoutInflater.from(mContext).inflate(R.layout.titlebar, this);
-        titlebar = inflate.findViewById(R.id.titlebar);
+        layoutTitle = inflate.findViewById(R.id.layout_title);
         imgFinish = inflate.findViewById(R.id.img_finish);
         title = inflate.findViewById(R.id.app_title);
         other = inflate.findViewById(R.id.other);
-        titlebar.setBackgroundColor(backgroundColor);
+        layoutTitle.setBackgroundColor(backgroundColor);
         imgFinish.setImageResource(backImage);
         title.setText(TextUtils.isEmpty(tText) ? getResources().getString(R.string.app_name) : tText);
         title.setTextColor(tTextColor);
@@ -91,8 +93,8 @@ public class TitleBarLayout extends LinearLayout implements View.OnClickListener
             clickListener.onClick(v);
             return;
         }
-        if (mContext instanceof AppCompatActivity)
-            ((AppCompatActivity) mContext).finish();
+        if (mContext instanceof Activity)
+            ((Activity) mContext).finish();
     }
 
     public interface BackClickListener {

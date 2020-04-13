@@ -9,9 +9,6 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.FileUtils;
 import com.frame.config.BaseConfig;
 
-/**
- * @data on 2019/5/27 16:39
- */
 public class NotificationClickReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

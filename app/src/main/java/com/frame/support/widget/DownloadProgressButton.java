@@ -347,7 +347,7 @@ public class DownloadProgressButton extends TextView {
                 mProgressAnimation.start();
         } else if (progress < mMinProgress) {
             mProgress = 0;
-        } else if (progress >= mMaxProgress) {
+        } else {
             mProgress = 100;
             if (TextUtils.isEmpty(text))
                 mCurrentText = getContext().getResources().getString(R.string.downloaded, mProgress);

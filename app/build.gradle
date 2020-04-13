@@ -83,15 +83,11 @@ dependencies {
     implementation project(':frame')
     //屏幕适配
     implementation dependencies.autosize
-    //权限管理库
-    implementation dependencies.rxpermissions
     //walle读取渠道号
     implementation dependencies.walle
     //下载工具类
     implementation dependencies.aria.aria_core
     annotationProcessor dependencies.aria.aria_compiler
-    //litepal数据库
-    // implementation dependencies.litepal
     //腾讯x5
     implementation "com.tencent.tbs.tbssdk:sdk:43697"
     //bugly升级库(热更新相关)

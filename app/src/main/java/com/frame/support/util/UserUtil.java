@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 
 /**
- * @data on 2019/2/28 15:35
  * @describe 用户操作工具类
  */
 public class UserUtil {
@@ -31,10 +30,7 @@ public class UserUtil {
      * 目前是根据token来判断
      */
     public static boolean isLogin() {
-        if (TextUtils.isEmpty(getToken()) || getToken().trim().equals(""))
-            return false;
-        else
-            return true;
+        return !TextUtils.isEmpty(getToken());
     }
 
     /**

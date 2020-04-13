@@ -13,7 +13,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * @data on 2019/5/23 16:30
  * 通用提示框
  */
 public class TipDialog extends BaseDialog {
@@ -78,9 +77,7 @@ public class TipDialog extends BaseDialog {
     }
 
     /**
-     * 设置带颜色的问题(html)
-     *
-     * @param msg
+     * 设置带颜色的文字(html)
      */
     public void setSureColorText(String msg) {
         sure.setText(CommonUtil.setHtmlColor(msg));

@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import java.util.Map;
 
 /**
- * @data on 2019/3/15 9:25
  * @describe 支付宝支付结果
  */
 public class PayResult {

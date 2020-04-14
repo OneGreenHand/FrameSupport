@@ -89,7 +89,7 @@ dependencies {
     implementation dependencies.aria.aria_core
     annotationProcessor dependencies.aria.aria_compiler
     //腾讯x5
-    implementation "com.tencent.tbs.tbssdk:sdk:43697"
+    implementation "com.tencent.tbs.tbssdk:sdk:43903"
     //bugly升级库(热更新相关)
     //implementation dependencies.bugly.crashreport_upgrade
     // bugly 热更新tinker插件库

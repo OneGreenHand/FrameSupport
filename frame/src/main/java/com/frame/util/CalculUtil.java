@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 /**
  * description: 高精度计算工具类
+ * https://www.cnblogs.com/zhangyinhua/p/11545305.html
  */
 public class CalculUtil {
 

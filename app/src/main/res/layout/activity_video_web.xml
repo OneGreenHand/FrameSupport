@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".view.activity.VideoWebActivity">
 
     <com.frame.support.widget.TitleBarLayout
@@ -18,10 +19,9 @@
         android:layout_height="3dp"
         android:progressDrawable="@drawable/shape_progress" />
 
-    <com.frame.support.webview.X5WebView
+    <FrameLayout
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
 </LinearLayout>

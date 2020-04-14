@@ -30,7 +30,7 @@ public class VideoWebActivity extends BaseActivity {
     private VideoWebView mWebView;
 
     @Override
-    protected void initImmersionBar(int color) {
+    protected void initImmersionBar(int color) {//不这样写，如果播放视频全屏，状态栏显示异常
         ImmersionBar.with(this).statusBarColor(R.color.colorAccent).init();//状态栏颜色(布局文件设置了fitsSystemWindows="true")
     }
 
@@ -47,8 +47,8 @@ public class VideoWebActivity extends BaseActivity {
                 FrameLayout.LayoutParams.MATCH_PARENT));
         mWebView.setTextView(titlebar.getTitleText());
         mWebView.setProgressBar(mProgressBar);
-        mWebView.loadUrl("https://rayapi.livet.cn/m3u8url/raybet?url=https%3A%2F%2Fwww.huomao.com%2F8438&teams=Team%20Aspirations-Team%20Venture");
-        //  mWebView.loadUrl("http://debugtbs.qq.com");//检测X5内核是否安装
+        mWebView.loadUrl("https://www.baidu.com");
+        //  mWebView.loadUrl("http://debugtbs.qq.com");//用来检测X5内核是否安装
     }
 
     @Override

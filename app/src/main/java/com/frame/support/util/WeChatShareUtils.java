@@ -57,7 +57,7 @@ public class WeChatShareUtils {
         mediaMessage.title = title;//网页标题
         mediaMessage.description = desc;//网页描述
         Bitmap bitmap = ImageUtils.getBitmap(R.mipmap.ic_launcher);//图片
-        mediaMessage.thumbData = ImageUtils.bitmap2Bytes(bitmap, Bitmap.CompressFormat.PNG);
+        mediaMessage.thumbData = ImageUtils.bitmap2Bytes(bitmap);
         //构造一个Req
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = "";

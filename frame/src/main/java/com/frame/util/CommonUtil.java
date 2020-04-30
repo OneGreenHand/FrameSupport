@@ -145,7 +145,7 @@ public class CommonUtil {
         if (numner.length() < 5)
             return numner;
         else
-            return numner.substring(numner.length() - 4, numner.length());
+            return numner.substring(numner.length() - 4);
     }
 
     /**

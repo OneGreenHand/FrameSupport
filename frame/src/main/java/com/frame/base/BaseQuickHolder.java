@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.frame.util.CustomClickListener;
 import com.frame.util.GlideImageUtil;
 
 public class BaseQuickHolder extends BaseViewHolder {
@@ -31,7 +32,16 @@ public class BaseQuickHolder extends BaseViewHolder {
      */
     public BaseQuickHolder setImageByUrl(int viewId, String url, Context mContext) {
         ImageView iv = getView(viewId);
-        GlideImageUtil.showImage(mContext,url,iv);
+        GlideImageUtil.showImage(mContext, url, iv);
+        return this;
+    }
+
+    /**
+     * 点击事件(已经做了暴力点击处理)
+     */
+    public BaseQuickHolder setOnClickListener(int viewId, CustomClickListener listener) {
+        View view = getView(viewId);
+        view.setOnClickListener(listener);
         return this;
     }
 

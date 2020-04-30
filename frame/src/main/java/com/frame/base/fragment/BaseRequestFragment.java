@@ -9,6 +9,7 @@ import com.frame.base.BaseRequestView;
 import com.frame.bean.BaseBean;
 import com.frame.loadingView.VaryViewHelperController;
 import com.frame.request.RxAPIManager;
+import com.frame.util.CustomClickListener;
 import com.frame.util.ToastUtil;
 
 /**
@@ -57,7 +58,12 @@ public abstract class BaseRequestFragment<P extends BasePresenter, B extends Bas
     @Override
     public void showNetErrorView(String tips) {
         if (mVaryViewHelperController != null)
-            mVaryViewHelperController.showNetworkError(view -> reRequest(), tips);
+            mVaryViewHelperController.showNetworkError(new CustomClickListener() {
+                @Override
+                public void onSingleClick(View v) {
+                    reRequest();
+                }
+            }, tips);
     }
 
     @Override

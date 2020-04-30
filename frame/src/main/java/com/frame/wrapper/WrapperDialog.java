@@ -2,7 +2,6 @@ package com.frame.wrapper;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.view.View;
 
 import com.frame.util.CustomClickListener;
 
@@ -12,33 +11,23 @@ import com.frame.util.CustomClickListener;
  * 主要用于dialog统一点击事件
  */
 public class WrapperDialog extends Dialog {
-    private int[] mIds;
-    private View.OnClickListener mListener;
 
-    public WrapperDialog( Context context) {
+    public WrapperDialog(Context context) {
         super(context);
     }
 
-    public WrapperDialog( Context context, int themeResId) {
+    public WrapperDialog(Context context, int themeResId) {
         super(context, themeResId);
     }
 
-    protected WrapperDialog( Context context, boolean cancelable,  OnCancelListener cancelListener) {
+    protected WrapperDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 
-    public WrapperDialog setOnClickListener(int[] ids, View.OnClickListener listener) {
-        mIds = ids;
-        mListener = listener;
-        if (mListener != null && mIds != null && mIds.length != 0) {
-            for (int id : mIds) {
-                findViewById(id).setOnClickListener(new CustomClickListener() {
-                    @Override
-                    public void onSingleClick(View v) {
-                        mListener.onClick(v);
-                    }
-                });
-            }
+    public WrapperDialog setOnClickListener(int[] ids, CustomClickListener listener) {
+        if (listener != null && ids != null && ids.length != 0) {
+            for (int id : ids)
+                findViewById(id).setOnClickListener(listener);
         }
         return this;
     }

@@ -14,13 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.frame.support.R;
-
-import androidx.appcompat.app.AppCompatActivity;
+import com.frame.util.CustomClickListener;
 
 /**
  * @describe 通用标题栏
  */
-public class TitleBarLayout extends LinearLayout implements View.OnClickListener {
+public class TitleBarLayout extends LinearLayout {
     private Context mContext;
     private int backgroundColor;//背景颜色
     private int backImage;//左侧返回图标
@@ -35,19 +34,19 @@ public class TitleBarLayout extends LinearLayout implements View.OnClickListener
     private TextView title;
     private TextView other;
     //点击事件
-    private OnClickListener clickListener;//返回按钮
+    private CustomClickListener clickListener;//返回按钮
 
     public TitleBarLayout(Context context) {
         super(context);
         initView(context, null);
     }
 
-    public TitleBarLayout(Context context,  AttributeSet attrs) {
+    public TitleBarLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context, attrs);
     }
 
-    public TitleBarLayout(Context context,  AttributeSet attrs, int defStyleAttr) {
+    public TitleBarLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context, attrs);
     }
@@ -84,28 +83,28 @@ public class TitleBarLayout extends LinearLayout implements View.OnClickListener
             other.setTextColor(rTextColor);
         } else
             other.setVisibility(View.GONE);
-        imgFinish.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (clickListener != null) {
-            clickListener.onClick(v);
-            return;
-        }
-        if (mContext instanceof Activity)
-            ((Activity) mContext).finish();
+        imgFinish.setOnClickListener(new CustomClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+                if (clickListener != null) {
+                    clickListener.onClick(v);
+                    return;
+                }
+                if (mContext instanceof Activity)
+                    ((Activity) mContext).finish();
+            }
+        });
     }
 
     public interface BackClickListener {
         void onClick(View view);
     }
 
-    public void setOnBackListener(OnClickListener clickListener) {
+    public void setOnBackListener(CustomClickListener clickListener) {
         this.clickListener = clickListener;
     }
 
-    public void setOnRightListener(OnClickListener clickListener) {
+    public void setOnRightListener(CustomClickListener clickListener) {
         other.setOnClickListener(clickListener);
     }
 

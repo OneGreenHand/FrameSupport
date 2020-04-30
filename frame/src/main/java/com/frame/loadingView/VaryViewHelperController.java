@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.frame.R;
+import com.frame.util.CustomClickListener;
 
 public class VaryViewHelperController {
 
@@ -22,7 +23,7 @@ public class VaryViewHelperController {
         this.helper = helper;
     }
 
-    public void showNetworkError(View.OnClickListener onClickListener, String tips) {
+    public void showNetworkError(CustomClickListener onClickListener, String tips) {
         View layout = helper.inflate(R.layout.frame_view_pager_error);
         if (TextUtils.isEmpty(tips))
             ((TextView) layout.findViewById(R.id.v_tips)).setText(R.string.frame_view_net_error);

@@ -10,15 +10,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.frame.R;
+import com.frame.util.CustomClickListener;
+
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
-
-import com.frame.R;
-
 import butterknife.ButterKnife;
 
 /**
@@ -30,8 +30,6 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     private int animResId = 0;//动画样式
     private int gravity = 0;
     private boolean isCancelable = true;//点击外部是否可以取消弹框
-    private View.OnClickListener mListener;
-    private int[] mIds;
     public Context mContext;
 
     public BaseDialog(Context context) {
@@ -133,12 +131,10 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     protected abstract @LayoutRes
     int getLayoutID();
 
-    public BaseDialog setOnClickListener(int[] ids, View.OnClickListener listener) {
-        mIds = ids;
-        mListener = listener;
-        if (mListener != null && mIds != null && mIds.length != 0) {
-            for (int id : mIds)
-                findViewById(id).setOnClickListener(mListener);
+    public BaseDialog setOnClickListener(int[] ids, CustomClickListener listener) {
+        if (listener != null && ids != null && ids.length != 0) {
+            for (int id : ids)
+                findViewById(id).setOnClickListener(listener);
         }
         return this;
     }

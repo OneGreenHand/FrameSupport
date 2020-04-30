@@ -51,6 +51,10 @@ public class DownloadService extends Service {
      * 初始化下载相关东西
      */
     private void initServer(Intent intent) {
+        if (intent == null) {
+            stopSelf();
+            return;
+        }
         fileUrl = intent.getStringExtra("fileUrl");
         fileName = intent.getStringExtra("fileName");
         if (TextUtils.isEmpty(fileUrl) || TextUtils.isEmpty(fileName) || !FileUtils.createOrExistsDir(BaseConfig.FILE_FOLDER)) {

@@ -68,12 +68,9 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
         if (immersionBarEnabled())
             mSimpleImmersionProxy.onActivityCreated(savedInstanceState);
         init(savedInstanceState);
-        initData();
     }
 
     protected abstract void init(Bundle savedInstanceState);
-
-    protected abstract void initData();
 
     protected abstract int getLayoutID();
 

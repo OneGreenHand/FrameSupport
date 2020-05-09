@@ -27,14 +27,9 @@ public class OnlineFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {
-    }
-
-    @Override
     protected int getLayoutID() {
         return R.layout.fragment_online;
     }
-
 
     @OnClick({R.id.select_photo, R.id.crop_photo})
     public void onViewClicked(View view) {
@@ -48,8 +43,7 @@ public class OnlineFragment extends BaseFragment {
         }
     }
 
-
-    public void takePhoto(boolean isCrop) {
+    private void takePhoto(boolean isCrop) {
         if (photoDialog == null)
             photoDialog = new TakePhotoDialog(this);
         photoDialog.isCrop(isCrop);

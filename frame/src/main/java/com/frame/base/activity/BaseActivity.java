@@ -46,15 +46,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             initImmersionBar();
         if (isRegisterEventBus())
             EventBus.getDefault().register(this);
-        initData();
     }
 
     protected void initCommon() {
     }
 
     protected abstract void init(Bundle savedInstanceState);
-
-    protected abstract void initData();
 
     protected abstract int getLayoutID();
 

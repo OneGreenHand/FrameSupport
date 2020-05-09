@@ -52,11 +52,6 @@ public class VideoWebActivity extends BaseActivity {
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     public void onBackPressed() {
         if (mWebView.canGoBack()) {
             mWebView.goBack();

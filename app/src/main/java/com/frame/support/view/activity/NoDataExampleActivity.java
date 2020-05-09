@@ -14,7 +14,7 @@ import com.frame.util.ToastUtil;
 import butterknife.BindView;
 
 /**
- * @describe 无数据显示示例
+ * 无数据显示示例
  */
 public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExamplePt, BaseBean> {
     @BindView(R.id.titlebar)
@@ -39,16 +39,12 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
     @Override
     protected void init(Bundle savedInstanceState) {
         titlebar.setTitle("无数据显示示例");
+        mPresenter.getPersonalizedSignature();
     }
 
     @Override
     public String getEmptyViewMsg() {
         return "为了看出效果,这里请求了第999页数据,所以返回的数据为空";
-    }
-
-    @Override
-    protected void initData() {
-        mPresenter.getPersonalizedSignature();
     }
 
     @Override

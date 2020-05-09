@@ -17,10 +17,9 @@ import com.frame.support.util.NotificationHelper;
 import com.frame.util.ToastUtil;
 
 /**
- * @describe 下载服务
+ * 下载服务
  */
 public class DownloadService extends Service {
-    private String fileUrl;//下载的文件地址
     private String fileName;//文件名
     private NotificationHelper notificationHelper;
     private boolean isDownloading = false;//是否在下载中
@@ -55,7 +54,7 @@ public class DownloadService extends Service {
             stopSelf();
             return;
         }
-        fileUrl = intent.getStringExtra("fileUrl");
+        String fileUrl = intent.getStringExtra("fileUrl");//下载的文件地址
         fileName = intent.getStringExtra("fileName");
         if (TextUtils.isEmpty(fileUrl) || TextUtils.isEmpty(fileName) || !FileUtils.createOrExistsDir(BaseConfig.FILE_FOLDER)) {
             error();

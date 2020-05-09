@@ -16,7 +16,7 @@ import com.frame.support.widget.TitleBarLayout;
 import butterknife.BindView;
 
 /**
- * @describe 上拉刷新和下拉加载
+ *  上拉刷新和下拉加载
  */
 public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequestPt, BaseBean, DuanZiBean.ResultBean> {
     @BindView(R.id.titlebar)
@@ -54,10 +54,6 @@ public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequest
     @Override
     protected void init(Bundle savedInstanceState) {
         titlebar.setTitle("下拉刷新上拉加载示例");
-    }
-
-    @Override
-    protected void initData() {
         mPresenter.getDuanZiList(1);
     }
 

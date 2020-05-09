@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * @describe 添加头部和脚部的示例(带下拉刷新上拉加载)
+ *  添加头部和脚部的示例(带下拉刷新上拉加载)
  */
 public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt, BaseBean> {
     @BindView(R.id.titlebar)
@@ -53,6 +53,7 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt
         adapter.setEmptyView(LayoutInflater.from(mContext).inflate(getEmptyView(), recycleview, false));//设置空布局
         initHeadFootView();
         recycleview.setAdapter(adapter);
+        mPresenter.getDuanZiList();
     }
 
     /**
@@ -71,11 +72,6 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt
         foot.setGravity(Gravity.CENTER);
         adapter.addHeaderView(head);
         adapter.addFooterView(foot);
-    }
-
-    @Override
-    protected void initData() {
-        mPresenter.getDuanZiList();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.frame.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Looper;
@@ -23,12 +24,23 @@ import java.math.BigDecimal;
  * 图片处理类
  */
 public class GlideImageUtil {
+    /**
+     * 判断宿主是否存活
+     */
+    private static boolean isDestroy(Context context) {
+        if (context == null)
+            return true;
+        if ((context instanceof Activity))
+            return ((Activity) context).isFinishing() || ((Activity) context).isDestroyed();
+        else
+            return false;
+    }
 
     /**
      * 加载图片
      */
     public static void showImage(Context context, String url, ImageView view) {
-        if (context == null)
+        if (isDestroy(context))
             return;
         Glide.with(context)
                 .load(url)
@@ -40,15 +52,14 @@ public class GlideImageUtil {
      * 加载自适应的图片,返回的多大就显示多大
      */
     public static void showWrapImage(Context context, String url, ImageView view) {
-        if (context == null)
+        if (isDestroy(context))
             return;
         Glide.with(context)
                 .asBitmap()
                 .load(url)
-                .apply(getRequestOptions())
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
-                    public void onResourceReady( Bitmap resource,  Transition<? super Bitmap> transition) {
+                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                         view.setImageBitmap(resource);
                         float width = ScreenUtils.getScreenWidth();
                         float scale = width / resource.getWidth();
@@ -62,17 +73,6 @@ public class GlideImageUtil {
                 });
     }
 
-    /**
-     * 加载本地图片资源
-     */
-    public static void showLocalImage(Context context, int url, ImageView view) {
-        if (context == null)
-            return;
-        Glide.with(context)
-                .load(url)
-                .apply(getRequestOptions())
-                .into(view);
-    }
 
     private static RequestOptions getRequestOptions() {
         return new RequestOptions()
@@ -116,7 +116,7 @@ public class GlideImageUtil {
      * 清除图片所有缓存
      */
     public static void clearImageAllCache(Context context) {
-        if (context == null)
+        if (isDestroy(context))
             return;
         clearImageDiskCache(context);
         clearImageMemoryCache(context);

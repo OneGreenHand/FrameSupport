@@ -23,11 +23,6 @@ public class GameFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     protected int getLayoutID() {
         return R.layout.fragment_game;
     }

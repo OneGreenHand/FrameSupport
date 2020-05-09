@@ -16,12 +16,36 @@ import java.text.DecimalFormat;
 public class PriceUtil {
 
     /**
-     * 千位分隔符
-     * digit 小数点后保留几位（价格相关慎用，会被四舍五入）
+     * 得到转化后的数值
+     * 性能较好,精度低
+     * digit 小数点后保留几位（会四舍五入）
+     */
+    public static String getPerformanceNumber(double num, int digit) {
+        if (digit < 0)
+            return "0";
+        return String.format("%." + digit + "f", num);
+    }
+
+    /**
+     * 得到转化后的数值
+     * 性能较差,精度高
+     * digit 小数点后保留几位（价格为正:数值不变，价格为负:数值变小）
+     */
+    public static double getAccurateNumber(double num, int digit) {
+        if (digit < 0)
+            return 0;
+        BigDecimal bg = new BigDecimal(num);
+        return bg.setScale(digit, BigDecimal.ROUND_FLOOR).doubleValue();
+    }
+
+    /**
+     * 千位分隔符 10000会变成10,000.00
+     * 价格计算请勿使用,同时会被四舍五入
+     * digit 小数点后保留几位
      */
     public static String qianWeiFenGe(double num, int digit) {
         if (digit < 0)
-            return "小数位不能为空";
+            return "0";
         StringBuffer sb = new StringBuffer();
         sb.append("#,##0.");
         for (int i = 0; i < digit; i++)

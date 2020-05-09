@@ -20,11 +20,6 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     protected int getLayoutID() {
         return R.layout.fragment_mine;
     }

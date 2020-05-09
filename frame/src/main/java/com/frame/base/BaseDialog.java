@@ -77,7 +77,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     protected void initCommon(Context context) {
         if (context instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) context;
-            if (!activity.isFinishing())
+            if (!activity.isFinishing() && !activity.isDestroyed())//注册绑定生命周期
                 activity.getLifecycle().addObserver(this);
         }
         setCancelable(isCancelable);
@@ -115,7 +115,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     public void show() {
         if (mContext instanceof Activity) {
             Activity activity = (Activity) mContext;
-            if (activity.isFinishing())
+            if (activity.isFinishing()||activity.isDestroyed())
                 return;
         }
         super.show();

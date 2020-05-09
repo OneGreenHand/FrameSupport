@@ -109,7 +109,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
         mContext = context;
         if (mContext instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) mContext;
-            if (!activity.isFinishing())//注册绑定生命周期
+            if (!activity.isFinishing() && !activity.isDestroyed())//注册绑定生命周期
                 activity.getLifecycle().addObserver(this);
         }
         setMinWidth(SizeUtils.dp2px(95));

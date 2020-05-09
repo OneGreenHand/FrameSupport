@@ -40,10 +40,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-    }
-
-    @Override
-    protected void initData() {
         mDatas.add(new HomeFragment());
         mDatas.add(new GameFragment());
         mDatas.add(new OnlineFragment());

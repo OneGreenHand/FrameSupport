@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
@@ -26,8 +27,8 @@ public class PopupwindowUtil {
     public static Solve7PopupWindow getPopupWindow(Context context, View layout, boolean isMatch, boolean cancel, boolean isAlpha) {
         Solve7PopupWindow popupWindow = new Solve7PopupWindow();
         popupWindow.setContentView(layout);
-        popupWindow.setWidth(isMatch ? WindowManager.LayoutParams.MATCH_PARENT : WindowManager.LayoutParams.WRAP_CONTENT);
-        popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        popupWindow.setWidth(isMatch ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setAnimationStyle(R.style.ActionSheetDialogStyle);  //设置PopupWindow弹出窗体动画效果
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         popupWindow.setOutsideTouchable(cancel);// 设置popupwindow外部可点击

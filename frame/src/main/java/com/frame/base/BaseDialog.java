@@ -4,18 +4,15 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import com.frame.R;
 import com.frame.util.CustomClickListener;
 
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -26,7 +23,6 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseDialog extends Dialog implements LifecycleObserver {
 
-    public View mRootView;
     private int animResId = 0;//动画样式
     private int gravity = 0;
     private boolean isCancelable = true;//点击外部是否可以取消弹框
@@ -82,18 +78,13 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         }
         setCancelable(isCancelable);
         setCanceledOnTouchOutside(isCancelable);
-        if (isUseShadow()) {//是否周围圆角显示
-            setContentView(R.layout.dialog_shadow_bg);
-            CardView cardView = findViewById(R.id.v_root);
-            LayoutInflater.from(mContext).inflate(getLayoutID(), cardView);
-        } else
-            setContentView(getLayoutID());
+        setContentView(getLayoutID());
         ButterKnife.bind(this);
-        //居中显示
+        //必须在setContentView()之后
         Window window = getWindow();
         WindowManager.LayoutParams attributes = window.getAttributes();
-        attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
-        attributes.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        attributes.width = getWidth();
+        attributes.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         window.setAttributes(attributes);
         window.setGravity(gravity == 0 ? Gravity.CENTER : gravity);
         //设置动画（默认dialog样式）
@@ -101,30 +92,18 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         initView(context);
     }
 
-    protected boolean isUseShadow() {
-        return false;
-    }
-
-    // Tips:调用改方法后 BindView将会失效
-    protected void resetContentView(Context context, @LayoutRes int res) {
-        mRootView = LayoutInflater.from(context).inflate(res, null);
-        setContentView(mRootView, new LinearLayout.LayoutParams(getWidth(), LinearLayout.LayoutParams.WRAP_CONTENT));
-    }
-
     @Override
     public void show() {
         if (mContext instanceof Activity) {
             Activity activity = (Activity) mContext;
-            if (activity.isFinishing()||activity.isDestroyed())
+            if (activity.isFinishing() || activity.isDestroyed())
                 return;
         }
         super.show();
     }
-
     protected int getWidth() {
-        return LinearLayout.LayoutParams.MATCH_PARENT;
+        return ViewGroup.LayoutParams.MATCH_PARENT;
     }
-
     protected void initView(Context context) {
     }
 

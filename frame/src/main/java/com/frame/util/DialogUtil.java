@@ -2,6 +2,7 @@ package com.frame.util;
 
 import android.content.Context;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.frame.R;
@@ -28,8 +29,8 @@ public class DialogUtil {
         dialog.getWindow().setContentView(view);
         dialog.getWindow().setGravity(location);
         WindowManager.LayoutParams p = dialog.getWindow().getAttributes();
-        p.width = WindowManager.LayoutParams.MATCH_PARENT;
-        p.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        p.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        p.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         dialog.getWindow().setAttributes(p);
         return dialog;
     }

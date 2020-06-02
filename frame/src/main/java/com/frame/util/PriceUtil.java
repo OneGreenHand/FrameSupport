@@ -18,7 +18,7 @@ public class PriceUtil {
     /**
      * 得到转化后的数值
      * 性能较好,精度低
-     * digit 小数点后保留几位（会四舍五入）
+     * digit 小数点后保留几位（四舍五入）
      */
     public static String getPerformanceNumber(double num, int digit) {
         if (digit < 0)
@@ -34,8 +34,16 @@ public class PriceUtil {
     public static double getAccurateNumber(double num, int digit) {
         if (digit < 0)
             return 0;
-        BigDecimal bg = new BigDecimal(num);
-        return bg.setScale(digit, BigDecimal.ROUND_FLOOR).doubleValue();
+        return new BigDecimal(num).setScale(digit, BigDecimal.ROUND_FLOOR).doubleValue();
+    }
+
+    /**
+     * 四舍五入计算
+     * 性能较差
+     * digit 小数点后保留几位
+     */
+    public static double rounding(double num, int digit) {
+        return new BigDecimal(num).setScale(digit, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
     /**
@@ -113,7 +121,7 @@ public class PriceUtil {
         if (distance.length() <= 3)
             distance = m + "m";
         else
-            distance = round2((float) ((m / 100) * 0.1), 1).toString() + "km";
+            distance = rounding(((m / 100) * 0.1), 1) + "km";
         return distance;
     }
 
@@ -130,13 +138,6 @@ public class PriceUtil {
             }
         }
         return distance;
-    }
-
-    /**
-     * 四舍五入精确到小数随你几位
-     */
-    public static BigDecimal round2(float aFloat, int digit) {
-        return new BigDecimal(String.valueOf(aFloat)).setScale(digit, BigDecimal.ROUND_HALF_UP);
     }
 
     public static Spannable setLeftPriceSp(String company, int font1, int font2, int color, String text) {//￥99(单色)

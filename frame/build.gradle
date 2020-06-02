@@ -43,6 +43,8 @@ dependencies {
     //rxjava2
     api dependencies.rxjava2.rxjava
     api dependencies.rxjava2.rxandroid
+    //autodispose
+    api dependencies.autodispose
     //okhttp3
     api dependencies.okhttp3
     //RecyclerViewAdapter
@@ -68,5 +70,5 @@ dependencies {
     //微信支付
     api dependencies.wxpay
     // 支付宝支付
-    api(name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
+    api(name: 'alipaySdk-15.7.5-20200422171619', ext: 'aar')
 }

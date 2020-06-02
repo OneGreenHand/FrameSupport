@@ -30,7 +30,7 @@ public class ${activityClass}Fragment extends BaseSwipeListFragment<${activityCl
     }
 
     @Override
-    public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
+    public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
 
     }
 

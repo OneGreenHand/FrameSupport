@@ -8,7 +8,6 @@ import com.frame.base.BasePresenter;
 import com.frame.base.BaseRequestView;
 import com.frame.bean.BaseBean;
 import com.frame.loadingView.VaryViewHelperController;
-import com.frame.request.RxAPIManager;
 import com.frame.util.CustomClickListener;
 import com.frame.util.ToastUtil;
 
@@ -45,16 +44,14 @@ public abstract class BaseRequestActivity<P extends BasePresenter, B extends Bas
 
     @Override
     public void showLoadingView() {
-        if (mVaryViewHelperController != null) {
+        if (mVaryViewHelperController != null)
             mVaryViewHelperController.showLoading();
-        }
     }
 
     @Override
     public void showEmptyView() {
-        if (mVaryViewHelperController != null) {
+        if (mVaryViewHelperController != null)
             mVaryViewHelperController.showEmpty(getEmptyViewMsg());
-        }
     }
 
     @Override
@@ -70,9 +67,8 @@ public abstract class BaseRequestActivity<P extends BasePresenter, B extends Bas
 
     @Override
     public void refreshView() {
-        if (mVaryViewHelperController != null) {
+        if (mVaryViewHelperController != null)
             mVaryViewHelperController.restore();
-        }
     }
 
     @Override
@@ -89,9 +85,4 @@ public abstract class BaseRequestActivity<P extends BasePresenter, B extends Bas
         return R.layout.frame_view_pager_no_data;
     }
 
-    @Override
-    protected void onDestroy() {
-        RxAPIManager.get().cancel(this);
-        super.onDestroy();
-    }
 }

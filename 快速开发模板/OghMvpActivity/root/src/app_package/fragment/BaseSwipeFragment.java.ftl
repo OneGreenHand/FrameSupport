@@ -20,7 +20,7 @@ public class ${activityClass}Fragment extends BaseSwipeFragment<${activityClass}
     }
 
     @Override
-    public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
+    public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
 
     }
 

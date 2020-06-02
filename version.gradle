@@ -6,8 +6,8 @@ ext {
             minSdkVersion    : 18,//app最低支持的sdk版本号(Android4.3)
             targetSdkVersion : 29,//兼容targetSdkVersion 29(含)以下版本
 
-            compileSdkVersion: 29,//使用 Android SDK 28版本编译你的应用
-            buildToolsVersion: "29.0.2",//android构建工具的版本
+            compileSdkVersion: 29,//使用 Android SDK 29版本编译你的应用
+            buildToolsVersion: "29.0.3",//android构建工具的版本
 
             versionCode      : 100010,
             versionName      : "1.0.1"
@@ -15,52 +15,44 @@ ext {
 
     // 依赖相关版本控制
     depVersion = [
-            retrofit                 : "2.7.2",
-            rxjava                   : "2.1.1",
-            rxandroid                : "2.1.1",
-            okhttp                   : "4.4.0",
-            utilcode                 : "1.28.4",
-            autosize                 : "1.2.1",
-            eventbus                 : "3.2.0",
-            glide                    : "4.11.0",
-            multidex                 : "2.0.1",
-            butterknife              : "10.2.1",
-            immersionbar             : "3.0.0",
-            bugly_crashreport        : "3.1.0",
-            bugly_crashreport_upgrade: "1.4.2",
-            bugly_tinker             : "1.9.14",
-            aria                     : "3.8.6",
-            walle                    : "1.1.6",
-            RecyclerViewAdapter      : "3.0.1",
+            retrofit           : "2.9.0",
+            rxjava             : "3.0.0",
+            rxandroid          : "3.0.0",
+            okhttp             : "4.7.2",
+            utilcode           : "1.29.0",
+            autosize           : "1.2.1",
+            eventbus           : "3.2.0",
+            glide              : "4.11.0",
+            multidex           : "2.0.1",
+            butterknife        : "10.2.1",
+            immersionbar       : "3.0.0",
+            bugly_crashreport  : "3.2.2",
+            aria               : "3.8.7",
+            walle              : "1.1.6",
+            autodispose        : "2.0.0",
+            RecyclerViewAdapter: "3.0.4",
     ]
 
     // 依赖具体版本
     deps = [
             suport                 : [
-                    appcompat: 'androidx.appcompat:appcompat:1.1.0',
-                    design   : 'com.google.android.material:material:1.0.0',
+                    appcompat         : 'androidx.appcompat:appcompat:1.2.0-rc01',
+                    design            : 'com.google.android.material:material:1.1.0-alpha08',
             ],
             retrofit2              : [
                     retrofit       : "com.squareup.retrofit2:retrofit:${depVersion.retrofit}",
-                    adapter_rxjava2: "com.squareup.retrofit2:adapter-rxjava2:${depVersion.retrofit}",
+                    adapter_rxjava2: "com.squareup.retrofit2:adapter-rxjava3:${depVersion.retrofit}",
                     converter_gson : "com.squareup.retrofit2:converter-gson:${depVersion.retrofit}",
             ],
             rxjava2                : [
-                    rxjava   : "io.reactivex.rxjava2:rxjava:${depVersion.rxjava}",
-                    rxandroid: "io.reactivex.rxjava2:rxandroid:${depVersion.rxandroid}",
+                    rxjava   : "io.reactivex.rxjava3:rxjava:${depVersion.rxjava}",
+                    rxandroid: "io.reactivex.rxjava3:rxandroid:${depVersion.rxandroid}",
             ],
             glide                  : [
                     glide   : "com.github.bumptech.glide:glide:${depVersion.glide}",
                     compiler: "com.github.bumptech.glide:compiler:${depVersion.glide}",
             ],
-            bugly                  : [
-                    //异常捕获
-                    crashreport        : "com.tencent.bugly:crashreport:${depVersion.bugly_crashreport}",
-                    //升级库
-                    crashreport_upgrade: "com.tencent.bugly:crashreport_upgrade:${depVersion.bugly_crashreport_upgrade}",
-                    //热更新tinker插件库
-                    tinker             : "com.tencent.tinker:tinker-android-lib:${depVersion.bugly_tinker}",
-            ],
+
             butterknife            : [
                     butterknife: "com.jakewharton:butterknife:${depVersion.butterknife}",
                     compiler   : "com.jakewharton:butterknife-compiler:${depVersion.butterknife}",
@@ -70,6 +62,7 @@ ext {
                     aria_core    : "com.arialyy.aria:core:${depVersion.aria}",
                     aria_compiler: "com.arialyy.aria:compiler:${depVersion.aria}",
             ],
+            bugly_crashreport      : "com.tencent.bugly:crashreport:${depVersion.bugly_crashreport}",
             //RecyclerViewAdapter
             RecyclerViewAdapter    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depVersion.RecyclerViewAdapter}",
             //工具类
@@ -84,6 +77,8 @@ ext {
             immersionbar_components: "com.gyf.immersionbar:immersionbar-components:${depVersion.immersionbar}",
             //walle读取渠道号
             walle                  : "com.meituan.android.walle:library:${depVersion.walle}",
+            //绑定生命周期(rxjava)
+            autodispose            : "com.uber.autodispose2:autodispose-androidx-lifecycle:${depVersion.autodispose}",
             //微信支付(不包含统计)
             wxpay                  : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+",
             eventbus               : "org.greenrobot:eventbus:${depVersion.eventbus}",

@@ -40,8 +40,4 @@ public abstract class BaseSwipeActivity<P extends BasePresenter, B extends BaseB
             mSwipeRefreshLayout.setRefreshing(false);
     }
 
-    @Override
-    public void loadMoreFailView() {
-
-    }
 }

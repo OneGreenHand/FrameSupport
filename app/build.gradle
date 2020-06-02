@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-//apply from: 'tinker-support.gradle'//(热更新相关)
 def keystorePropertiesFile = rootProject.file("keystore.properties")//打包文件配置
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
@@ -21,7 +20,6 @@ android {
         javaCompileOptions {   //解决AndroidStudio 3.0的问题
             annotationProcessorOptions { includeCompileClasspath = true }
         }
-        multiDexKeepProguard file('tinker_multidexkeep.pro')
         manifestPlaceholders = [CHANNEL: "AA000",]
 //可用于三方sdk使用，例如极光推送的参数，可在AndroidManifest中使用，最后获取到这个参数
     }
@@ -81,6 +79,8 @@ android {
 dependencies {
     def dependencies = rootProject.ext.deps
     implementation project(':frame')
+    //LeakCanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
     //屏幕适配
     implementation dependencies.autosize
     //walle读取渠道号
@@ -90,12 +90,8 @@ dependencies {
     annotationProcessor dependencies.aria.aria_compiler
     //腾讯x5
     implementation "com.tencent.tbs.tbssdk:sdk:43903"
-    //bugly升级库(热更新相关)
-    //implementation dependencies.bugly.crashreport_upgrade
-    // bugly 热更新tinker插件库
-    //implementation dependencies.bugly.tinker
-    //bugly异常捕获（升级库和异常捕获二选一,因为升级库包含了异常捕获）
-    implementation dependencies.bugly.crashreport
+    //bugly异常捕获
+    implementation dependencies.bugly_crashreport
     //other
     annotationProcessor dependencies.glide.compiler
     annotationProcessor dependencies.butterknife.compiler

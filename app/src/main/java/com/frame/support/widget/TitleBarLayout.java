@@ -21,16 +21,14 @@ import com.frame.util.CustomClickListener;
  */
 public class TitleBarLayout extends LinearLayout {
     private Context mContext;
-    private int backgroundColor;//背景颜色
-    private int backImage;//左侧返回图标
-    private String tText;//标题文字
-    private int tTextColor;//标题文字颜色
+    private int backgroundColor = getResources().getColor(R.color.frame_colorAccent);//背景颜色
+    private int backImage = R.mipmap.back_white;//左侧返回图标
+    private String tText = getResources().getString(R.string.app_name);//标题文字
+    private int tTextColor = Color.WHITE;//标题文字颜色
     private boolean rTextIsShow;//右侧文字是否显示
     private String rText;//右侧文字
-    private int rTextColor;//右侧文字颜色
+    private int rTextColor = Color.WHITE;//右侧文字颜色
     //控件
-    private ImageView imgFinish;
-    private RelativeLayout layoutTitle;
     private TextView title;
     private TextView other;
     //点击事件
@@ -69,8 +67,8 @@ public class TitleBarLayout extends LinearLayout {
 
     private void findId() {
         View inflate = LayoutInflater.from(mContext).inflate(R.layout.titlebar, this);
-        layoutTitle = inflate.findViewById(R.id.layout_title);
-        imgFinish = inflate.findViewById(R.id.img_finish);
+        RelativeLayout layoutTitle = inflate.findViewById(R.id.layout_title);
+        ImageView imgFinish = inflate.findViewById(R.id.img_finish);
         title = inflate.findViewById(R.id.app_title);
         other = inflate.findViewById(R.id.other);
         layoutTitle.setBackgroundColor(backgroundColor);

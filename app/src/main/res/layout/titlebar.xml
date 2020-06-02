@@ -23,7 +23,7 @@
             android:ellipsize="end"
             android:maxWidth="250dp"
             android:singleLine="true"
-            android:textSize="17sp" />
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/other"
@@ -33,7 +33,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:textSize="15sp"
+            android:textSize="16dp"
             android:visibility="gone" />
     </RelativeLayout>
 </LinearLayout>

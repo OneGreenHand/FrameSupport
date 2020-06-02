@@ -63,11 +63,11 @@ public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequest
     }
 
     @Override
-    public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
+    public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
         DuanZiBean duanZiBean = (DuanZiBean) data;
         if (duanZiBean == null)
             return;
-        notifyAdapterStatus(duanZiBean.result, loadMode, pageCount);
+        notifyAdapterStatus(duanZiBean.result, pageIndex, pageCount);
     }
 
 }

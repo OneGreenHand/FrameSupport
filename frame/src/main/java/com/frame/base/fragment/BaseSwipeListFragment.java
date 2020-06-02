@@ -14,6 +14,7 @@ import com.frame.R;
 import com.frame.base.BaseModel;
 import com.frame.base.BasePresenter;
 import com.frame.base.BaseQuickHolder;
+import com.frame.base.BaseSwipeListView;
 import com.frame.bean.BaseBean;
 import com.frame.config.AppConfig;
 
@@ -23,7 +24,7 @@ import java.util.List;
  * @dessribe 自带recycler view的基类
  * Tips:布局中的recyclerView的id必须是frame_recycleView
  */
-public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends BaseBean, AB> extends BaseSwipeFragment<P, B> {
+public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends BaseBean, AB> extends BaseSwipeFragment<P, B> implements BaseSwipeListView<B> {
 
     protected RecyclerView mRecyclerView;
     protected BaseQuickAdapter<AB, BaseQuickHolder> mBaseAdapter;
@@ -41,33 +42,22 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
     }
 
     //自动更新adapter状态(正常情况使用)
-    protected void notifyAdapterStatus(List<AB> data, BaseModel.LoadMode loadMode, int pageCount) {
-        notifyAdapterStatus(data, data.size(), loadMode, pageCount);
+    protected void notifyAdapterStatus(List<AB> data, int pageIndex, int pageCount) {
+        notifyAdapterStatus(data, data.size(), pageIndex, pageCount);
     }
 
     //分组布局使用
-    protected void notifyAdapterStatus(List<AB> data, int dataSize, BaseModel.LoadMode loadMode, int pageCount) {
-        if (loadMode == BaseModel.LoadMode.LOAD_MODE) {
-            if (data == null) {
-                getLoadMoreModule().loadMoreEnd(false);
-            } else {
-                page++;
-                mBaseAdapter.addData(data);
-                if (dataSize < pageCount) {
-                    getLoadMoreModule().loadMoreEnd(false);
-                } else
-                    getLoadMoreModule().loadMoreComplete();
-            }
-        } else {
+    protected void notifyAdapterStatus(List<AB> data, int dataSize, int pageIndex, int pageCount) {
+        if (pageIndex == AppConfig.ViewPage.START_INDEX) {
             if (data == null || data.isEmpty()) {
                 if (UserAdapterEmpty())
                     mBaseAdapter.setNewData(null);
                 return;
             }
-            page = 1;
+            page = AppConfig.ViewPage.START_INDEX;
             if (dataSize >= pageCount) {
                 getLoadMoreModule().setOnLoadMoreListener(() -> {
-                    if (page > 1)
+                    if (page > AppConfig.ViewPage.START_INDEX)
                         loadMoreListRequest(page);
                     else
                         getLoadMoreModule().setEnableLoadMore(false);
@@ -77,6 +67,17 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
                 getLoadMoreModule().setOnLoadMoreListener(null);
             }
             mBaseAdapter.setNewData(data);
+        } else {
+            if (data == null || data.isEmpty()) {
+                getLoadMoreModule().loadMoreEnd(false);
+            } else {
+                page++;
+                mBaseAdapter.addData(data);
+                if (dataSize < pageCount) {
+                    getLoadMoreModule().loadMoreEnd(false);
+                } else
+                    getLoadMoreModule().loadMoreComplete();
+            }
         }
     }
 

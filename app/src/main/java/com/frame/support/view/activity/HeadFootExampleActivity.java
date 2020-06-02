@@ -80,7 +80,7 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt
     }
 
     @Override
-    public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
+    public void requestSuccess(BaseBean data,  Object tag,int pageIndex, int pageCount){
         DuanZiBean duanZiBean = (DuanZiBean) data;
         if (duanZiBean == null)
             return;

@@ -4,24 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Handler;
 import android.webkit.JavascriptInterface;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.frame.FrameApplication;
 import com.frame.support.util.ChannelUtils;
 import com.frame.util.ToastUtil;
 import com.frame.view.TipDialog;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 
 /**
  * 备注：在这里面的方法都是子线程

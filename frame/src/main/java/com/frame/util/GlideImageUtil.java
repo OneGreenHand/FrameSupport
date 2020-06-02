@@ -76,7 +76,7 @@ public class GlideImageUtil {
 
     private static RequestOptions getRequestOptions() {
         return new RequestOptions()
-                .placeholder(R.mipmap.img_showing)
+                .placeholder(R.mipmap.img_show_ing)
                 .error(R.mipmap.img_show_error);
     }
 

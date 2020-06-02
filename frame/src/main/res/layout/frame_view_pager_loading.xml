@@ -23,6 +23,6 @@
             android:paddingLeft="15dp"
             android:text="@string/frame_load_ing"
             android:textColor="#999999"
-            android:textSize="14sp" />
+            android:textSize="15dp" />
     </LinearLayout>
 </LinearLayout>

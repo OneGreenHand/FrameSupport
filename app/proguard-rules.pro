@@ -210,9 +210,6 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 #bugly异常捕获
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
-# tinker混淆规则
--dontwarn com.tencent.tinker.**
--keep class com.tencent.tinker.** { *; }
 #支付宝支付
 -keep class com.alipay.android.app.IAlixPay{*;}
 -keep class com.alipay.android.app.IAlixPay$Stub{*;}

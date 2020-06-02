@@ -18,7 +18,7 @@
         android:paddingBottom="15dp"
         android:text="拍照"
         android:textColor="@color/frame_title_name"
-        android:textSize="16sp" />
+        android:textSize="16dp" />
 
     <TextView
         android:id="@+id/tv_pick_photo"
@@ -33,7 +33,7 @@
         android:paddingBottom="15dp"
         android:text="相册"
         android:textColor="@color/frame_title_name"
-        android:textSize="16sp" />
+        android:textSize="16dp" />
 
     <TextView
         android:id="@+id/tv_cancle"
@@ -48,6 +48,6 @@
         android:paddingBottom="15dp"
         android:text="取消"
         android:textColor="@color/frame_title_name"
-        android:textSize="16sp" />
+        android:textSize="16dp" />
 
 </LinearLayout>

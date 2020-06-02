@@ -226,8 +226,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      * 解决activity被finish后onDestroy()不立即执行问题
      */
     private void destroy() {
-        if (!isDestroyed) {
-            // 回收资源
+        if (!isDestroyed) { // 回收资源
             isDestroyed = true;
             if (isRegisterEventBus())
                 EventBus.getDefault().unregister(this);

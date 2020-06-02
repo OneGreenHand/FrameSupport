@@ -40,8 +40,4 @@ public abstract class BaseSwipeLazyLoadFragment<P extends BasePresenter, B exten
         if (mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing())
             mSwipeRefreshLayout.setRefreshing(false);
     }
-    @Override
-    public void loadMoreFailView() {
-
-    }
 }

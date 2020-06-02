@@ -53,7 +53,7 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
     }
 
     @Override
-    public void requestSuccess(BaseBean data, BaseModel.LoadMode loadMode, Object tag, int pageCount) {
+    public void requestSuccess(BaseBean data, Object tag,int pageIndex, int pageCount) {
         //请求完成后返回的数据是空的，在实体bean中isEmpty()为true，basemodel会自动处理切换为空布局显示
         DuanZiBean duanZiBean = (DuanZiBean) data;
         ToastUtil.showShortToast(duanZiBean.message);

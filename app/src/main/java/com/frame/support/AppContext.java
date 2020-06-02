@@ -3,9 +3,6 @@ package com.frame.support;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import androidx.multidex.MultiDex;
-
-import com.arialyy.aria.core.Aria;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
 import com.frame.FrameApplication;
@@ -16,6 +13,8 @@ import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
 import java.io.File;
+
+import androidx.multidex.MultiDex;
 
 
 public class AppContext extends FrameApplication {
@@ -37,8 +36,6 @@ public class AppContext extends FrameApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
-        // 安装tinker插件(热更新相关)
-        // Beta.installTinker();
     }
 
     /**
@@ -84,7 +81,6 @@ public class AppContext extends FrameApplication {
         CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);// 设置是否为上报进程
         strategy.setAppChannel(ChannelUtils.getChannel());  //设置渠道
         // CrashReport.setUserId("");//设置用户ID
-        //  Bugly.init(context, "8706956f68", AppConfig.DEBUG, strategy);//使用热更新或者升级功能时使用这个(热更新相关)
         CrashReport.initCrashReport(context, "8706956f68", AppConfig.DEBUG, strategy); // 仅使用异常捕获功能时使用这个
     }
 

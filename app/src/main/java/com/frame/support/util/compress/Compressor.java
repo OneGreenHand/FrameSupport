@@ -3,11 +3,14 @@ package com.frame.support.util.compress;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import org.reactivestreams.Publisher;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.Callable;
 
-import io.reactivex.Flowable;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.functions.Supplier;
+
 
 /**
  * 这也是压缩工具类
@@ -68,9 +71,9 @@ public class Compressor {
     }
 
     public Flowable<File> compressToFileAsFlowable(final File imageFile, final String compressedFileName) {
-        return Flowable.defer(new Callable<Flowable<File>>() {
+        return  Flowable.defer(new Supplier<Publisher<? extends File>>() {
             @Override
-            public Flowable<File> call() {
+            public Publisher<? extends File> get() throws Throwable {
                 try {
                     return Flowable.just(compressToFile(imageFile, compressedFileName));
                 } catch (IOException e) {
@@ -81,9 +84,9 @@ public class Compressor {
     }
 
     public Flowable<Bitmap> compressToBitmapAsFlowable(final File imageFile) {
-        return Flowable.defer(new Callable<Flowable<Bitmap>>() {
+        return  Flowable.defer(new Supplier<Publisher<? extends Bitmap>>() {
             @Override
-            public Flowable<Bitmap> call() {
+            public Publisher<? extends Bitmap> get() throws Throwable {
                 try {
                     return Flowable.just(compressToBitmap(imageFile));
                 } catch (IOException e) {

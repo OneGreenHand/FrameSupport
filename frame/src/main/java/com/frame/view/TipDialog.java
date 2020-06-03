@@ -2,6 +2,7 @@ package com.frame.view;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.frame.R;
@@ -102,8 +103,7 @@ public class TipDialog extends BaseDialog {
         }
     }
 
-
-    public TipDialog( Context context) {
+    public TipDialog(Context context) {
         super(context);
     }
 

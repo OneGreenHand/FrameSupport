@@ -66,10 +66,10 @@ public class JSInterface {
         return hasPhonePermission(context) ? PhoneUtils.getIMSI() : "";
     }
 
-    //获取设备码(需要权限)
+    //获取唯一设备 ID
     @JavascriptInterface
     public String getDeviceId() {
-        return hasPhonePermission(context) ? DeviceUtils.getUniqueDeviceId() : "";
+        return DeviceUtils.getUniqueDeviceId();
     }
 
     //吐司

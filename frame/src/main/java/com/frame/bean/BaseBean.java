@@ -1,9 +1,11 @@
 package com.frame.bean;
 
 public class BaseBean {
-     public int code = 0;
-     public String msg = "";
+    public int code;
+    public String msg;
 
-     //判断数据是否为空
-     public boolean isEmpty(){return false;}
+    //判断数据是否为空(详情请看BaseModel)
+    public boolean isEmpty() {
+        return false;
+    }
 }

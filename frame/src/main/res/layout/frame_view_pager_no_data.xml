@@ -14,7 +14,7 @@
         android:id="@+id/tv_view_pager_no_data_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
         android:text="@string/frame_view_no_data"
         android:textColor="#999999"
         android:textSize="15dp" />

@@ -291,27 +291,6 @@ public class CommonUtil {
         fragment.startActivityForResult(intent, requestCode);
     }
 
-    //设置消息小图标
-    public static void setMsgCountIcon(int count, TextView tv) {
-        if (tv == null)
-            return;
-        if (count == 0) {
-            tv.setVisibility(View.INVISIBLE);
-        } else if (count < 10) {
-            tv.setVisibility(View.VISIBLE);
-            tv.setText(count);
-            tv.setBackgroundResource(R.drawable.shape_msg_circular);
-        } else if (count < 100) {
-            tv.setVisibility(View.VISIBLE);
-            tv.setText(count);
-            tv.setBackgroundResource(R.drawable.shape_msg_square);
-        } else {
-            tv.setVisibility(View.VISIBLE);
-            tv.setText("99+");
-            tv.setBackgroundResource(R.drawable.shape_msg_square);
-        }
-    }
-
     /**
      * 主要用于后台控制跳转本地
      * intentUrl举例：TaskActivity?ID=1&NAME=小明  意思就是跳转到TaskDetailActivity，然后带了ID和NAME，两个参数

@@ -2,52 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/frame_transparent"
-    android:orientation="vertical">
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/tv_take_photo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/shape_white_30"
+        android:layout_height="45dp"
+        android:background="@color/blue"
         android:gravity="center"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
         android:text="拍照"
-        android:textColor="@color/frame_title_name"
-        android:textSize="16dp" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_14sp" />
 
     <TextView
         android:id="@+id/tv_pick_photo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="18dp"
-        android:background="@drawable/shape_white_30"
+        android:layout_height="45dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/blue"
         android:gravity="center"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
         android:text="相册"
-        android:textColor="@color/frame_title_name"
-        android:textSize="16dp" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_14sp" />
 
     <TextView
         android:id="@+id/tv_cancle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/shape_white_30"
+        android:layout_height="45dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/blue"
         android:gravity="center"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
         android:text="取消"
-        android:textColor="@color/frame_title_name"
-        android:textSize="16dp" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_14sp" />
 
 </LinearLayout>

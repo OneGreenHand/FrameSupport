@@ -1,12 +1,13 @@
 package com.frame.util;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.frame.R;
-import com.frame.wrapper.WrapperDialog;
 
 
 /**
@@ -14,24 +15,27 @@ import com.frame.wrapper.WrapperDialog;
  */
 public class DialogUtil {
 
-    public static WrapperDialog getDialog(Context context, int view) {
+    public static Dialog getDialog(Context context, int view) {
         return getDialog(context, view, Gravity.CENTER);
     }
 
-    public static WrapperDialog getDialog(Context context, int view, int location) {
+    public static Dialog getDialog(Context context, int view, int location) {
         return getDialog(context, view, location, true);
     }
 
-    public static WrapperDialog getDialog(Context context, int view, int location, boolean cancel) {
-        WrapperDialog dialog = new WrapperDialog(context, R.style.ActionSheetDialogStyle);
+    public static Dialog getDialog(Context context, int view, int location, boolean cancel) {
+        Dialog dialog=new Dialog(context, R.style.ActionSheetDialogStyle);
         dialog.setCancelable(cancel);
         dialog.setCanceledOnTouchOutside(cancel);
-        dialog.getWindow().setContentView(view);
-        dialog.getWindow().setGravity(location);
-        WindowManager.LayoutParams p = dialog.getWindow().getAttributes();
-        p.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        p.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        dialog.getWindow().setAttributes(p);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        if (window != null) {
+            WindowManager.LayoutParams p = window.getAttributes();
+            p.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            p.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            window.setAttributes(p);
+            window.setGravity(location);
+        }
         return dialog;
     }
 

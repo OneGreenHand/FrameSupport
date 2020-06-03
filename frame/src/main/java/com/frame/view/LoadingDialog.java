@@ -2,6 +2,7 @@ package com.frame.view;
 
 import android.content.Context;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.frame.R;
@@ -18,17 +19,12 @@ public class LoadingDialog extends BaseDialog {
     @BindView(R2.id.loading_text)
     TextView loadingText;
 
-    public LoadingDialog( Context context) {
-        super(context, R.style.DialogStyle, R.style.PopWindowAnimStyle, Gravity.CENTER);
+    public LoadingDialog(Context context) {
+        super(context, R.style.DialogStyle);
     }
 
     @Override
     protected void initView(Context context) {
-    }
-
-    @Override
-    public void show() {
-        super.show();
     }
 
     @Override
@@ -38,6 +34,11 @@ public class LoadingDialog extends BaseDialog {
 
     public void setMsg(String msg) {
         loadingText.setText(msg);
+    }
+
+    @Override
+    protected int getWidth() {
+        return ViewGroup.LayoutParams.WRAP_CONTENT;
     }
 
     public void setCancle(boolean isCancle) {

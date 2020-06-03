@@ -29,7 +29,7 @@ public class PopupwindowUtil {
         popupWindow.setContentView(layout);
         popupWindow.setWidth(isMatch ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.setAnimationStyle(R.style.ActionSheetDialogStyle);  //设置PopupWindow弹出窗体动画效果
+       // popupWindow.setAnimationStyle(R.style.ActionSheetDialogStyle);  //设置PopupWindow弹出窗体动画效果
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         popupWindow.setOutsideTouchable(cancel);// 设置popupwindow外部可点击
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);//让pop覆盖在输入法上面

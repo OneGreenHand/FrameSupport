@@ -9,7 +9,6 @@
         <item name="colorAccent">@color/frame_colorAccent</item>
         <item name="android:textSize">13dp</item>
         <item name="android:textColor">@color/frame_title_name</item>
-        <item name="android:listDivider">@drawable/divider_default</item>
         <!--页面背景色-->
         <item name="android:windowBackground">@color/frame_white</item>
     </style>

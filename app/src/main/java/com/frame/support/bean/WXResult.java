@@ -1,4 +1,4 @@
-package com.frame.bean;
+package com.frame.support.bean;
 
 /**
  * @describe 微信回调结果，一般都是这些参数

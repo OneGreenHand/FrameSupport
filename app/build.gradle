@@ -69,9 +69,9 @@ android {
         preDexLibraries true
         javaMaxHeapSize "8g"
     }
-    repositories {
-        flatDir {//引用frame中的aar架包,名字、路径保持一致
-            dirs 'libs', '../frame/libs'
+    repositories {//依赖aar必须填写这个
+        flatDir {
+            dirs 'libs'
         }
     }
 }
@@ -81,6 +81,8 @@ dependencies {
     implementation project(':frame')
     //LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+    //分Dex
+    implementation dependencies.multidex
     //屏幕适配
     implementation dependencies.autosize
     //walle读取渠道号
@@ -99,4 +101,8 @@ dependencies {
     //other
     annotationProcessor dependencies.glide.compiler
     annotationProcessor dependencies.butterknife.compiler
+    //微信支付
+    implementation dependencies.wxpay
+    // 支付宝支付
+    implementation(name: 'alipaySdk-15.7.5-20200422171619', ext: 'aar')
 }

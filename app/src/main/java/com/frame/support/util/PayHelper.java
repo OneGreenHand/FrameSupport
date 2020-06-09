@@ -1,4 +1,4 @@
-package com.frame.util;
+package com.frame.support.util;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -8,8 +8,9 @@ import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
 import com.frame.FrameApplication;
-import com.frame.bean.PayResult;
-import com.frame.bean.WXResult;
+import com.frame.support.bean.PayResult;
+import com.frame.support.bean.WXResult;
+import com.frame.util.ToastUtil;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;

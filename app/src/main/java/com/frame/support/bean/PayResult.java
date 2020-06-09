@@ -1,4 +1,4 @@
-package com.frame.bean;
+package com.frame.support.bean;
 
 import android.text.TextUtils;
 

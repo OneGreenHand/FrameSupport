@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.frame.config.BaseConfig;
+import com.frame.support.R;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -19,9 +19,9 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     IWXAPI iwxapi;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        iwxapi = WXAPIFactory.createWXAPI(this, BaseConfig.WEIXIN_APP_ID);
+        iwxapi = WXAPIFactory.createWXAPI(this, this.getResources().getString(R.string.wx_appid));
         boolean handleIntent = iwxapi.handleIntent(getIntent(), this);
         //下面代码是判断微信分享后返回WXEnteryActivity的，如果handleIntent==false,说明没有调用IWXAPIEventHandler，则需要在这里销毁这个透明的Activity;
         if (!handleIntent)

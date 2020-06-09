@@ -8,7 +8,6 @@ import java.math.BigDecimal;
  */
 public class CalculUtil {
 
-
     /**
      * 提供精确的加法运算
      *

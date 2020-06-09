@@ -13,7 +13,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:text="选择照片(单张+压缩)"
-        android:textColor="@color/white" />
+        android:textColor="@color/c_FFFFFF" />
 
     <TextView
         android:id="@+id/crop_photo"
@@ -24,7 +24,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:text="选择照片(单张+压缩+裁剪)"
-        android:textColor="@color/white" />
+        android:textColor="@color/c_FFFFFF" />
 
     <TextView
         android:id="@+id/request_msg"

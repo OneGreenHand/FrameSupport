@@ -31,7 +31,7 @@ public class VideoWebActivity extends BaseActivity {
 
     @Override
     protected void initImmersionBar(int color) {//不这样写，如果播放视频全屏，状态栏显示异常
-        ImmersionBar.with(this).statusBarColor(R.color.colorAccent).init();//状态栏颜色(布局文件设置了fitsSystemWindows="true")
+        ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).init();//状态栏颜色(布局文件设置了fitsSystemWindows="true")
     }
 
     public static void openActivity(Context context) {

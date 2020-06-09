@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="45dp">
 
     <RelativeLayout
         android:id="@+id/layout_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/img_finish"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp" />
+            android:paddingRight="20dp"
+            tools:src="@mipmap/back_white" />
 
         <TextView
             android:id="@+id/app_title"
@@ -23,7 +26,9 @@
             android:ellipsize="end"
             android:maxWidth="250dp"
             android:singleLine="true"
-            android:textSize="15dp" />
+            android:textColor="@color/c_FFFFFF"
+            android:textSize="15dp"
+            tools:text="@string/app_name" />
 
         <TextView
             android:id="@+id/other"
@@ -33,7 +38,9 @@
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            android:textColor="@color/c_FFFFFF"
             android:textSize="15dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:text="确定" />
     </RelativeLayout>
 </LinearLayout>

@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import com.blankj.utilcode.util.ImageUtils;
 import com.frame.FrameApplication;
-import com.frame.config.BaseConfig;
+import com.frame.support.AppContext;
 import com.frame.support.R;
 import com.frame.util.ToastUtil;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -21,7 +21,8 @@ public class WeChatShareUtils {
 
     /**
      * 分享微信文本
-     * @param type    1：朋友圈  2：好友对话
+     *
+     * @param type 1：朋友圈  2：好友对话
      */
     public static void shareWeChatTxt(String content, int type) {
         WXTextObject textObject = new WXTextObject();
@@ -33,7 +34,7 @@ public class WeChatShareUtils {
         req.transaction = "";
         req.message = mediaMessage;
         req.scene = type == 1 ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
-        String appId = BaseConfig.WEIXIN_APP_ID;
+        String appId = AppContext.getContext().getResources().getString(R.string.wx_appid);
         IWXAPI iwxapi = WXAPIFactory.createWXAPI(FrameApplication.getContext(), appId);
         if (!iwxapi.isWXAppInstalled()) {
             ToastUtil.showShortToast("未安装微信,请安装后再尝试分享");
@@ -45,9 +46,10 @@ public class WeChatShareUtils {
 
     /**
      * 发起app网页分享
-     * @param type  1：朋友圈  2：好友对话
+     *
+     * @param type 1：朋友圈  2：好友对话
      */
-    public static void shareWeChatUrl(String title, String desc, String url, int type ) {
+    public static void shareWeChatUrl(String title, String desc, String url, int type) {
         //初始化一个WXWebpageObject，填写url
         WXWebpageObject object = new WXWebpageObject();
         object.webpageUrl = url;
@@ -63,7 +65,7 @@ public class WeChatShareUtils {
         req.transaction = "";
         req.message = mediaMessage;
         req.scene = type == 1 ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
-        String appId = BaseConfig.WEIXIN_APP_ID;
+        String appId = AppContext.getContext().getResources().getString(R.string.wx_appid);
         IWXAPI iwxapi = WXAPIFactory.createWXAPI(FrameApplication.getContext(), appId);
         if (!iwxapi.isWXAppInstalled()) {
             ToastUtil.showShortToast("未安装微信,请安装后再尝试分享");

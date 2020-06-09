@@ -13,7 +13,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:text="网络请求示例一：无数据空布局显示"
-        android:textColor="@color/white" />
+        android:textColor="@color/c_FFFFFF" />
 
     <TextView
         android:id="@+id/example_two"
@@ -24,7 +24,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:text="网络请求示例二：添加头部和底部"
-        android:textColor="@color/white" />
+        android:textColor="@color/c_FFFFFF" />
 
     <TextView
         android:id="@+id/example_three"
@@ -35,5 +35,5 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:text="网络请求示例三：下拉刷新和上拉加载"
-        android:textColor="@color/white" />
+        android:textColor="@color/c_FFFFFF" />
 </LinearLayout>

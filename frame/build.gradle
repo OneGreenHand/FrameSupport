@@ -53,11 +53,6 @@ dependencies {
     api dependencies.utilcode
     //eventbus
     api dependencies.eventbus
-    //glide图片加载
-    api(dependencies.glide.glide) {
-        exclude group: 'androidx.appcompat.app'
-    }
-    annotationProcessor dependencies.glide.compiler
     //分Dex
     api dependencies.multidex
     //butterknife

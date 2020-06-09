@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.frame.config.BaseConfig;
+import com.frame.support.R;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -24,7 +25,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        api = WXAPIFactory.createWXAPI(this, BaseConfig.WEIXIN_APP_ID);
+        api = WXAPIFactory.createWXAPI(this, this.getResources().getString(R.string.wx_appid));
         api.handleIntent(getIntent(), this);
     }
 

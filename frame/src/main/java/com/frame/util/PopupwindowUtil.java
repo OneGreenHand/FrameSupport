@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
-import com.frame.R;
 import com.frame.widget.Solve7PopupWindow;
 
 /**
@@ -18,7 +17,6 @@ import com.frame.widget.Solve7PopupWindow;
 public class PopupwindowUtil {
 
     /**
-     * @param context 上下文
      * @param layout  布局
      * @param isMatch 宽度是否MATCH_PARENT
      * @param cancel  是否可以点击取消

@@ -10,7 +10,6 @@ import com.alipay.sdk.app.PayTask;
 import com.frame.FrameApplication;
 import com.frame.bean.PayResult;
 import com.frame.bean.WXResult;
-import com.frame.config.BaseConfig;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;

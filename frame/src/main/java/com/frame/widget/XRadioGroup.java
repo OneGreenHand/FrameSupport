@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 /**
- * 2017/2/10.13:15
  * RadioGroup任意嵌套RadioButton
  */
 public class XRadioGroup extends LinearLayout {

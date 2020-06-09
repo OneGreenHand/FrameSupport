@@ -13,7 +13,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:text="可播放视频的WebView"
-        android:textColor="@color/white" />
+        android:textColor="@color/c_FFFFFF" />
 
     <TextView
         android:id="@+id/download_apk"
@@ -24,7 +24,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:text="通知栏下载(兼容8.0+)"
-        android:textColor="@color/white" />
+        android:textColor="@color/c_FFFFFF" />
 
     <TextView
         android:id="@+id/clear_download_apk"
@@ -35,7 +35,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:text="清除已下载文件"
-        android:textColor="@color/white" />
+        android:textColor="@color/c_FFFFFF" />
 
     <TextView
         android:layout_width="match_parent"

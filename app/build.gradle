@@ -92,6 +92,10 @@ dependencies {
     implementation "com.tencent.tbs.tbssdk:sdk:43903"
     //bugly异常捕获
     implementation dependencies.bugly_crashreport
+    //glide图片加载
+    implementation(dependencies.glide.glide) {
+        exclude group: 'androidx.appcompat.app'
+    }
     //other
     annotationProcessor dependencies.glide.compiler
     annotationProcessor dependencies.butterknife.compiler

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:background="@color/c_FFFFFF"
         app:itemIconTint="@drawable/selector_item_primary_color"
         app:itemTextColor="@drawable/selector_item_primary_color"
         app:labelVisibilityMode="labeled"

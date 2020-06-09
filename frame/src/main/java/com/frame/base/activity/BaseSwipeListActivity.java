@@ -11,14 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.module.BaseLoadMoreModule;
 import com.frame.R;
-import com.frame.base.BaseModel;
 import com.frame.base.BasePresenter;
 import com.frame.base.BaseQuickHolder;
 import com.frame.base.BaseSwipeListView;
-import com.frame.base.BaseSwipeView;
 import com.frame.bean.BaseBean;
 import com.frame.config.AppConfig;
-import com.frame.widget.VpSwipeRefreshLayout;
 
 import java.util.List;
 

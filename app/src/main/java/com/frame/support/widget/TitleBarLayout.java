@@ -20,8 +20,7 @@ import com.frame.util.CustomClickListener;
  * @describe 通用标题栏
  */
 public class TitleBarLayout extends LinearLayout {
-    private Context mContext;
-    private int backgroundColor = getResources().getColor(R.color.frame_colorAccent);//背景颜色
+    private int backgroundColor = getResources().getColor(R.color.colorPrimary);//背景颜色
     private int backImage = R.mipmap.back_white;//左侧返回图标
     private String tText = getResources().getString(R.string.app_name);//标题文字
     private int tTextColor = Color.WHITE;//标题文字颜色
@@ -50,10 +49,9 @@ public class TitleBarLayout extends LinearLayout {
     }
 
     private void initView(Context context, AttributeSet attrs) {
-        mContext = context;
         if (attrs != null) {
             TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TitleBarLayout);
-            backgroundColor = array.getColor(R.styleable.TitleBarLayout_TblBackgroundColor, getResources().getColor(R.color.frame_colorAccent));
+            backgroundColor = array.getColor(R.styleable.TitleBarLayout_TblBackgroundColor, getResources().getColor(R.color.colorPrimary));
             backImage = array.getResourceId(R.styleable.TitleBarLayout_TblBackImage, R.mipmap.back_white);
             tText = array.getString(R.styleable.TitleBarLayout_TblText);
             tTextColor = array.getColor(R.styleable.TitleBarLayout_TblTextColor, Color.WHITE);
@@ -66,7 +64,7 @@ public class TitleBarLayout extends LinearLayout {
     }
 
     private void findId() {
-        View inflate = LayoutInflater.from(mContext).inflate(R.layout.titlebar, this);
+        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.titlebar, this);
         RelativeLayout layoutTitle = inflate.findViewById(R.id.layout_title);
         ImageView imgFinish = inflate.findViewById(R.id.img_finish);
         title = inflate.findViewById(R.id.app_title);
@@ -88,8 +86,8 @@ public class TitleBarLayout extends LinearLayout {
                     clickListener.onClick(v);
                     return;
                 }
-                if (mContext instanceof Activity)
-                    ((Activity) mContext).finish();
+                if (getContext() instanceof Activity)
+                    ((Activity) getContext()).finish();
             }
         });
     }

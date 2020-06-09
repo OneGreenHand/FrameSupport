@@ -2,15 +2,12 @@ package com.frame.base;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.OrientationHelper;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.frame.util.CustomClickListener;
-import com.frame.util.GlideImageUtil;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class BaseQuickHolder extends BaseViewHolder {
 
@@ -24,15 +21,6 @@ public class BaseQuickHolder extends BaseViewHolder {
     public BaseQuickHolder setEnabled(int viewId, boolean isEnabled) {
         View v = getView(viewId);
         v.setEnabled(isEnabled);
-        return this;
-    }
-
-    /**
-     * 设置图片
-     */
-    public BaseQuickHolder setImageByUrl(int viewId, String url, Context mContext) {
-        ImageView iv = getView(viewId);
-        GlideImageUtil.showImage(mContext, url, iv);
         return this;
     }
 

@@ -26,8 +26,7 @@ public class ChannelUtils {
     private static String getMate(String key) {
         String result = "AA000";
         try {
-            String packageName = AppUtils.getAppPackageName();
-            ApplicationInfo appInfo = Utils.getApp().getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+            ApplicationInfo appInfo = Utils.getApp().getPackageManager().getApplicationInfo(AppUtils.getAppPackageName(), PackageManager.GET_META_DATA);
             result = appInfo.metaData.getString(key);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

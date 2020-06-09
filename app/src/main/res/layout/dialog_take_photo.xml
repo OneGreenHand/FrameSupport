@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/c_FFFFFF"
     android:orientation="vertical"
     android:padding="10dp">
 
@@ -13,7 +13,7 @@
         android:background="@color/blue"
         android:gravity="center"
         android:text="拍照"
-        android:textColor="@color/white"
+        android:textColor="@color/c_FFFFFF"
         android:textSize="@dimen/font_14sp" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:background="@color/blue"
         android:gravity="center"
         android:text="相册"
-        android:textColor="@color/white"
+        android:textColor="@color/c_FFFFFF"
         android:textSize="@dimen/font_14sp" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:background="@color/blue"
         android:gravity="center"
         android:text="取消"
-        android:textColor="@color/white"
+        android:textColor="@color/c_FFFFFF"
         android:textSize="@dimen/font_14sp" />
 
 </LinearLayout>

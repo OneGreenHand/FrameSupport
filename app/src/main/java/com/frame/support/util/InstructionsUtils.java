@@ -1,6 +1,5 @@
 package com.frame.support.util;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,7 +22,7 @@ public class InstructionsUtils {
     public static void JumpIntention(Context context, int type, String url) {
         switch (type) {
             case 0:
-                CommonUtil.goLocationActivity(context, url);
+                goLocationActivity(context, url);
                 break;
             case 1:
                 CommonUtil.intentToBrowsable(context, url);
@@ -117,6 +116,47 @@ public class InstructionsUtils {
                 download(context, downUrl);
             else//包名不为空,并且已经安装就打开应用
                 AppUtils.launchApp(packageName);
+        }
+    }
+
+    /**
+     * 主要用于后台控制跳转本地
+     * intentUrl举例：TaskActivity?ID=1&NAME=小明  意思就是跳转到TaskDetailActivity，然后带了ID和NAME，两个参数
+     */
+    private static void goLocationActivity(Context context, String intentUrl) {
+        if (TextUtils.isEmpty(intentUrl))
+            return;
+        try {
+//            if (needlogin) {//如果需要登录
+//             Intent intent = new Intent();
+//             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//             intent.setClass(context, getActivityClassName("LoginActivity"));
+//             context.startActivity(intent);
+//            } else {
+            Intent intent = new Intent(context, getActivityClassName(intentUrl.contains("?") ? intentUrl.split("\\?")[0] : intentUrl));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            if (intentUrl.contains("?")) {//说明带参数
+                for (String kv : intentUrl.split("\\?")[1].split("\\&")) {//拿到？后面的，然后对&分割处理
+                    String k = kv.split("=")[0];//拿到参数名
+                    String v = kv.split("=")[1];//拿到参数
+                    intent.putExtra(k, v);
+                }
+            }
+            context.startActivity(intent);
+            // }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 查找本地是否有这个class
+     */
+    private static Class getActivityClassName(String className) {
+        try {
+            return Class.forName(AppUtils.getAppPackageName() + ".view.activity." + className);//TODO 这里需要改成自己对应activity位置
+        } catch (Exception e) {
+            return null;
         }
     }
 }

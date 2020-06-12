@@ -24,11 +24,7 @@ public class RetrofitWrapper {
     private RetrofitWrapper() {
         OkHttpClient okHttpClient;
         if (AppConfig.DEBUG) {
-            //  构建 OkHttpClient 时,将 OkHttpClient.Builder() 传入 with() 方法,进行初始化配置( 用于Okhttp/Retofit Glide上传下载进度监听,还有动态切换baseUrl)
             okHttpClient = new OkHttpClient.Builder()
-                    // RetrofitUrlManager.getInstance().with(new OkHttpClient.Builder())//动态切换URL
-                    //ProgressManager.getInstance().with(new OkHttpClient.Builder())//监听下载
-                    // ProgressManager.getInstance().with(RetrofitUrlManager.getInstance().with(new OkHttpClient.Builder()))(组合写法)
                     .connectTimeout(CONN_TIMEOUT, TimeUnit.SECONDS)
                     .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                     .protocols(Collections.singletonList(Protocol.HTTP_1_1))//解决协议错误问题

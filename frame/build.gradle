@@ -31,6 +31,8 @@ dependencies {
     // Support libraries
     api dependencies.suport.appcompat
     api dependencies.suport.design
+    //okhttp日志
+    implementation dependencies.okhttp_logging
     //retrofit2
     api dependencies.retrofit2.retrofit
     api dependencies.retrofit2.adapter_rxjava2
@@ -40,8 +42,6 @@ dependencies {
     api dependencies.rxjava2.rxandroid
     //autodispose
     api dependencies.autodispose
-    //okhttp3
-    api dependencies.okhttp3
     //RecyclerViewAdapter
     api dependencies.RecyclerViewAdapter
     //工具类

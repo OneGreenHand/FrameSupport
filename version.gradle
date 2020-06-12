@@ -18,7 +18,7 @@ ext {
             retrofit           : "2.9.0",
             rxjava             : "3.0.0",
             rxandroid          : "3.0.0",
-            okhttp             : "4.7.2",
+            okhttp_logging     : "4.7.2",
             utilcode           : "1.29.0",
             autosize           : "1.2.1",
             eventbus           : "3.2.0",
@@ -26,7 +26,7 @@ ext {
             multidex           : "2.0.1",
             butterknife        : "10.2.1",
             immersionbar       : "3.0.0",
-            bugly_crashreport  : "3.2.2",
+            bugly_crashreport  : "3.2.3",
             aria               : "3.8.8",
             walle              : "1.1.6",
             autodispose        : "2.0.0",
@@ -36,8 +36,8 @@ ext {
     // 依赖具体版本
     deps = [
             suport                 : [
-                    appcompat         : 'androidx.appcompat:appcompat:1.2.0-rc01',
-                    design            : 'com.google.android.material:material:1.1.0-alpha08',
+                    appcompat: 'androidx.appcompat:appcompat:1.2.0-rc01',
+                    design   : 'com.google.android.material:material:1.1.0-alpha08',
             ],
             retrofit2              : [
                     retrofit       : "com.squareup.retrofit2:retrofit:${depVersion.retrofit}",
@@ -82,6 +82,6 @@ ext {
             //微信支付(不包含统计)
             wxpay                  : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+",
             eventbus               : "org.greenrobot:eventbus:${depVersion.eventbus}",
-            okhttp3                : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp}",
+            okhttp_logging         : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp_logging}",
     ]
 }

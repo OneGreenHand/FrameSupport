@@ -27,7 +27,7 @@ ext {
             butterknife        : "10.2.1",
             immersionbar       : "3.0.0",
             bugly_crashreport  : "3.2.3",
-            aria               : "3.8.8",
+            aria               : "3.8.9",
             walle              : "1.1.6",
             autodispose        : "2.0.0",
             RecyclerViewAdapter: "3.0.4",

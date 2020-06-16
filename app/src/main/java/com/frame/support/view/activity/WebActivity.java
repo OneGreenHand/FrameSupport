@@ -2,7 +2,6 @@ package com.frame.support.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.widget.FrameLayout;
@@ -19,7 +18,7 @@ import butterknife.BindView;
 /**
  * 可以播放视频的webview
  */
-public class VideoWebActivity extends BaseActivity {
+public class WebActivity extends BaseActivity {
 
     @BindView(R.id.web_view)
     FrameLayout mViewParent;
@@ -35,7 +34,7 @@ public class VideoWebActivity extends BaseActivity {
     }
 
     public static void openActivity(Context context) {
-        context.startActivity(new Intent(context, VideoWebActivity.class));
+        context.startActivity(new Intent(context, WebActivity.class));
     }
 
     @Override
@@ -93,7 +92,7 @@ public class VideoWebActivity extends BaseActivity {
 
     @Override
     protected int getLayoutID() {
-        return R.layout.activity_video_web;
+        return R.layout.activity_web;
     }
 
 }

@@ -30,11 +30,6 @@ public class ${activityClass}Activity extends BaseSwipeActivity<${activityClass}
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     protected int getLayoutID() {     
         return <#if generateLayout>R.layout.${layoutName}<#else>0</#if>;
     }

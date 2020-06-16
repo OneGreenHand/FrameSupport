@@ -22,6 +22,7 @@ import com.frame.util.CustomClickListener;
 public class TitleBarLayout extends LinearLayout {
     private int backgroundColor = getResources().getColor(R.color.colorPrimary);//背景颜色
     private int backImage = R.mipmap.back_white;//左侧返回图标
+    private boolean backShow = true;//返回图标是否显示
     private String tText = getResources().getString(R.string.app_name);//标题文字
     private int tTextColor = Color.WHITE;//标题文字颜色
     private boolean rTextIsShow;//右侧文字是否显示
@@ -52,6 +53,7 @@ public class TitleBarLayout extends LinearLayout {
         if (attrs != null) {
             TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TitleBarLayout);
             backgroundColor = array.getColor(R.styleable.TitleBarLayout_TblBackgroundColor, getResources().getColor(R.color.colorPrimary));
+            backShow = array.getBoolean(R.styleable.TitleBarLayout_TblBackShow, true);
             backImage = array.getResourceId(R.styleable.TitleBarLayout_TblBackImage, R.mipmap.back_white);
             tText = array.getString(R.styleable.TitleBarLayout_TblText);
             tTextColor = array.getColor(R.styleable.TitleBarLayout_TblTextColor, Color.WHITE);
@@ -70,7 +72,11 @@ public class TitleBarLayout extends LinearLayout {
         title = inflate.findViewById(R.id.app_title);
         other = inflate.findViewById(R.id.other);
         layoutTitle.setBackgroundColor(backgroundColor);
-        imgFinish.setImageResource(backImage);
+        if (backShow) {
+            imgFinish.setVisibility(View.VISIBLE);
+            imgFinish.setImageResource(backImage);
+        } else
+            imgFinish.setVisibility(View.GONE);
         title.setText(TextUtils.isEmpty(tText) ? getResources().getString(R.string.app_name) : tText);
         title.setTextColor(tTextColor);
         if (rTextIsShow) {

@@ -40,11 +40,6 @@ public class ${activityClass}Fragment extends BaseSwipeListFragment<${activityCl
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     protected int getLayoutID() {     
         return <#if generateLayout>R.layout.${layoutFragmentName}<#else>0</#if>;
     }	

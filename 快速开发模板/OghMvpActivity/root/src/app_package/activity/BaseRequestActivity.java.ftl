@@ -25,11 +25,6 @@ public class ${activityClass}Activity extends BaseRequestActivity<${activityClas
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     protected int getLayoutID() {     
         return <#if generateLayout>R.layout.${layoutName}<#else>0</#if>;
     }

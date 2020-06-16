@@ -41,6 +41,6 @@
             android:textColor="@color/c_FFFFFF"
             android:textSize="15dp"
             android:visibility="gone"
-            tools:text="确定" />
+            tools:text="@string/sure" />
     </RelativeLayout>
 </LinearLayout>

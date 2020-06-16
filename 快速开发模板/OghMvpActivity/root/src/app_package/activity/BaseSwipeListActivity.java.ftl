@@ -45,11 +45,6 @@ public class ${activityClass}Activity extends BaseSwipeListActivity<${activityCl
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     protected int getLayoutID() {     
         return <#if generateLayout>R.layout.${layoutName}<#else>0</#if>;
     }

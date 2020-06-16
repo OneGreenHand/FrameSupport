@@ -9,7 +9,7 @@ import com.frame.base.fragment.BaseFragment;
 import com.frame.config.BaseConfig;
 import com.frame.support.R;
 import com.frame.support.util.InstructionsUtils;
-import com.frame.support.view.activity.VideoWebActivity;
+import com.frame.support.view.activity.WebActivity;
 import com.frame.util.ToastUtil;
 
 import butterknife.OnClick;
@@ -31,7 +31,7 @@ public class GameFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.video_web:
-                VideoWebActivity.openActivity(mActivity);
+                WebActivity.openActivity(mActivity);
                 break;
             case R.id.download_apk:
                 if (!NetworkUtils.isWifiConnected()) {

@@ -39,16 +39,6 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mActivity = getActivity();
         rootView = inflater.inflate(getLayoutID(), container, false);

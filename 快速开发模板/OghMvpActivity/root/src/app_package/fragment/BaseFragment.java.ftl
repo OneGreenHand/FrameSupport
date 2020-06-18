@@ -13,5 +13,4 @@ public class ${activityClass}Fragment extends BaseFragment {
     protected int getLayoutID() {     
         return <#if generateLayout>R.layout.${layoutFragmentName}<#else>0</#if>;
     }
-	
 }

@@ -11,7 +11,6 @@ public class ${activityClass}Activity extends BaseRequestActivity<${activityClas
 
     @Override
     protected void reRequest() {
-
     }
 
     @Override

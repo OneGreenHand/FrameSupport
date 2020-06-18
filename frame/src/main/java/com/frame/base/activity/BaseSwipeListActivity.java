@@ -50,7 +50,7 @@ public abstract class BaseSwipeListActivity<P extends BasePresenter, B extends B
         if (pageIndex == AppConfig.ViewPage.START_INDEX) {
             if (data == null || data.isEmpty()) {
                 if (UserAdapterEmpty())
-                    mBaseAdapter.setNewData(null);
+                    mBaseAdapter.setList(null);
                 return;
             }
             page = AppConfig.ViewPage.START_INDEX;
@@ -65,7 +65,7 @@ public abstract class BaseSwipeListActivity<P extends BasePresenter, B extends B
             } else {
                 getLoadMoreModule().setOnLoadMoreListener(null);
             }
-            mBaseAdapter.setNewData(data);
+            mBaseAdapter.setList(data);
         } else {
             if (data == null || data.isEmpty()) {
                 getLoadMoreModule().loadMoreEnd(false);
@@ -111,7 +111,7 @@ public abstract class BaseSwipeListActivity<P extends BasePresenter, B extends B
     protected abstract void loadMoreListRequest(int page);
 
     /**
-     * 设置适配器,若{@link BaseActivity#UserAdapterEmpty()}为true,切换布局只需setNewData(null)
+     * 设置适配器,若{@link BaseActivity#UserAdapterEmpty()}为true,切换布局只需setList(null)
      */
     private void getAdapter() {
         if (UserAdapterEmpty()) {//必须在setAdapter之前调用

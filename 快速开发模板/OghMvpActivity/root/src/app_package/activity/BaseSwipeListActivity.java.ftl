@@ -31,7 +31,6 @@ public class ${activityClass}Activity extends BaseSwipeListActivity<${activityCl
 
     @Override
     protected void reRequest() {
-
     }
 
     @Override

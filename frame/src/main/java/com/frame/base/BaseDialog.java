@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseDialog extends Dialog implements LifecycleObserver {
 
+    public Context mContext;
     private int gravity;
     private boolean isCancelable = true;//点击外部是否可以取消弹框
 
@@ -44,6 +45,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     }
 
     protected void initCommon(Context context) {
+        this.mContext = context;
         if (context instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) context;
             if (!activity.isFinishing() && !activity.isDestroyed())//注册绑定生命周期
@@ -67,8 +69,8 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
 
     @Override
     public void show() {
-        if (getContext() instanceof Activity) {
-            Activity activity = (Activity) getContext();
+        if (mContext instanceof Activity) {
+            Activity activity = (Activity) mContext;
             if (activity.isFinishing() || activity.isDestroyed())
                 return;
         }
@@ -82,7 +84,7 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     protected void initView(Context context) {
     }
 
-    protected abstract  int getLayoutID();
+    protected abstract int getLayoutID();
 
     public BaseDialog setOnClickListener(int[] ids, CustomClickListener listener) {
         if (listener != null && ids != null && ids.length != 0) {

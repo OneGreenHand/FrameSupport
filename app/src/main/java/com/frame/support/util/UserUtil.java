@@ -60,7 +60,7 @@ public class UserUtil {
 //        if (userInfo == null)
 //            SPStaticUtils.put("userInfo", "");
 //        else
-//            SPStaticUtils.put("userInfo", new Gson().toJson(userInfo));
+//            SPStaticUtils.put("userInfo",  GsonUtil.getString(userInfo));
 //    }
 /*************************登录和退出相关操作结束*******************************/
 }

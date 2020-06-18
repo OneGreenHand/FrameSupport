@@ -16,7 +16,6 @@ public class ${activityClass}Activity extends BaseSwipeActivity<${activityClass}
 
     @Override
     protected void reRequest() {
-
     }
 
     @Override

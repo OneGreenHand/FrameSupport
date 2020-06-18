@@ -16,7 +16,6 @@ public class ${activityClass}Fragment extends BaseSwipeFragment<${activityClass}
 
     @Override
     protected void reRequest() {
-
     }
 
     @Override

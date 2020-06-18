@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.bumptech.glide.request.RequestOptions;
@@ -46,6 +47,18 @@ public class GlideImageUtil {
                 .load(url)
                 .apply(getRequestOptions())
                 .into(view);
+    }
+
+    /**
+     * 加载图片(跳过缓存,一般是频繁更换的图片)
+     */
+    public static void showImageNoCache(Context context, String url, ImageView view) {
+        if (isDestroy(context))
+            return;
+        Glide.with(context)
+                .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true).apply(getRequestOptions()).into(view);
     }
 
     /**

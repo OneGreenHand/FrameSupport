@@ -2,6 +2,7 @@ package com.frame.support.util.photos;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -13,7 +14,6 @@ import android.view.View;
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.PermissionUtils;
-import com.frame.FrameApplication;
 import com.frame.base.BaseDialog;
 import com.frame.config.BaseConfig;
 import com.frame.support.R;
@@ -24,7 +24,6 @@ import java.io.File;
 import java.io.IOException;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.loader.content.CursorLoader;
 import butterknife.OnClick;
 
@@ -33,7 +32,7 @@ import butterknife.OnClick;
  */
 public class TakePhotoDialog extends BaseDialog {
 
-    private FragmentActivity mActivity;
+    private Activity mActivity;
     private Fragment mFragment;
     private String imagePath = BaseConfig.PHOTO_FOLDER;//图片地址
     private String imageName = "";//文件名
@@ -42,13 +41,13 @@ public class TakePhotoDialog extends BaseDialog {
     //删除文件相关
     private String deleteImagePath = "";//需要删除的图片路径，主要是图库选择的图片
 
-    public TakePhotoDialog(FragmentActivity activity) {
-        super(activity, Gravity.BOTTOM,true);
+    public TakePhotoDialog(Activity activity) {
+        super(activity, Gravity.BOTTOM, true);
         mActivity = activity;
     }
 
-    public TakePhotoDialog(FragmentActivity activity, boolean isCrop) {
-        super(activity, Gravity.BOTTOM,true);
+    public TakePhotoDialog(Activity activity, boolean isCrop) {
+        super(activity, Gravity.BOTTOM, true);
         mActivity = activity;
         this.isCrop = isCrop;
     }
@@ -57,12 +56,12 @@ public class TakePhotoDialog extends BaseDialog {
      * 使用fragment方式的话必须要在父Activity中onActivityResult方法回调
      */
     public TakePhotoDialog(Fragment fragment) {
-        super(fragment.getActivity(),Gravity.BOTTOM,true);
+        super(fragment.getActivity(), Gravity.BOTTOM, true);
         mFragment = fragment;
     }
 
     public TakePhotoDialog(Fragment fragment, boolean isCrop) {
-        super(fragment.getActivity(), Gravity.BOTTOM,true);
+        super(fragment.getActivity(), Gravity.BOTTOM, true);
         mFragment = fragment;
         this.isCrop = isCrop;
     }
@@ -218,7 +217,7 @@ public class TakePhotoDialog extends BaseDialog {
     private String getPathByUri(Uri uri) {
         if (uri == null)
             return null;
-        CursorLoader cl = new CursorLoader(FrameApplication.getContext() == null ? mActivity == null ? mFragment.getActivity() : mActivity : FrameApplication.getContext());
+        CursorLoader cl = new CursorLoader(mActivity == null ? mFragment.getActivity() : mActivity);
         cl.setUri(uri);
         cl.setProjection(new String[]{MediaStore.Audio.Media.DATA});
         Cursor cursor = null;

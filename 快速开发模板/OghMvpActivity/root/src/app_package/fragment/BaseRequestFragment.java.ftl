@@ -11,7 +11,6 @@ public class ${activityClass}Fragment extends BaseRequestFragment<${activityClas
 
     @Override
     protected void reRequest() {
-
     }
 
     @Override

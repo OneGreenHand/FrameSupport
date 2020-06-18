@@ -84,6 +84,6 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt
         DuanZiBean duanZiBean = (DuanZiBean) data;
         if (duanZiBean == null)
             return;
-        adapter.setNewData(duanZiBean.result);
+        adapter.setList(duanZiBean.result);
     }
 }

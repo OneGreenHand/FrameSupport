@@ -4,16 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/frame_root_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-          <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/frame_recycleView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+     <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/frame_recycleView"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent" />
 
 </LinearLayout>

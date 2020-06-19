@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- *  添加头部和脚部的示例(带下拉刷新上拉加载)
+ * 添加头部和脚部的示例(带下拉刷新上拉加载)
  */
 public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt, BaseBean> {
     @BindView(R.id.titlebar)
@@ -50,9 +50,9 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt
         adapter = new ExampleAdapter();
         //  adapter.setHeaderWithEmptyEnable(true);//空布局时,头部显示出来
         // adapter.setFooterWithEmptyEnable(true);//空布局时,脚部显示出来
-        adapter.setEmptyView(LayoutInflater.from(mContext).inflate(getEmptyView(), recycleview, false));//设置空布局
         initHeadFootView();
         recycleview.setAdapter(adapter);
+        adapter.setEmptyView(getEmptyView());//设置空布局(引用资源文件必须放在setAdapter()后才有效)
         mPresenter.getDuanZiList();
     }
 
@@ -80,7 +80,7 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt
     }
 
     @Override
-    public void requestSuccess(BaseBean data,  Object tag,int pageIndex, int pageCount){
+    public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
         DuanZiBean duanZiBean = (DuanZiBean) data;
         if (duanZiBean == null)
             return;

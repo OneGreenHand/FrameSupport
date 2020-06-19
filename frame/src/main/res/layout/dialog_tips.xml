@@ -15,7 +15,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:text="提示"
+        android:text="@string/frame_tips"
         android:textColor="#333333"
         android:textSize="16dp" />
 
@@ -23,8 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:fillViewport="true"
-        android:scrollbars="none">
+        android:fillViewport="true">
 
         <TextView
             android:id="@+id/content"
@@ -32,7 +31,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:lineSpacingExtra="3dp"
-            android:text="内容"
+            android:text="@string/frame_no_data"
             android:textColor="#333333"
             android:textSize="14dp" />
     </androidx.core.widget.NestedScrollView>
@@ -50,7 +49,7 @@
             android:background="@drawable/shape_cancel"
             android:gravity="center"
             android:singleLine="true"
-            android:text="取消"
+            android:text="@string/frame_cancle"
             android:textColor="#ffffff"
             android:textSize="15dp" />
 
@@ -66,7 +65,7 @@
             android:background="@drawable/shape_sure"
             android:gravity="center"
             android:singleLine="true"
-            android:text="确定"
+            android:text="@string/frame_sure"
             android:textColor="#ffffff"
             android:textSize="15dp" />
     </LinearLayout>

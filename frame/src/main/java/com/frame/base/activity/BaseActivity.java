@@ -20,9 +20,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.ButterKnife;
 
 
@@ -138,27 +135,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void receiveStickyEvent(EventBean event) {
     }
 
-    /**
-     * 水平布局
-     */
-    protected void setLayoutManager(RecyclerView rv, int orientation) {
-        rv.setLayoutManager(new LinearLayoutManager(mContext, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
-    }
-
-    /**
-     * 表格布局
-     */
-    protected void setLayoutManager(RecyclerView rv, int spanCount, int orientation) {
-        rv.setLayoutManager(new GridLayoutManager(mContext, spanCount, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
-    }
-
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
-            if (isShouldHideKeyboard(v, ev)) {
+            if (isShouldHideKeyboard(v, ev))
                 KeyboardUtils.hideSoftInput(this);
-            }
         }
         return super.dispatchTouchEvent(ev);
     }
@@ -180,9 +162,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
             dismissLoadingDialog();
-        }
         return super.onKeyDown(keyCode, event);
     }
 

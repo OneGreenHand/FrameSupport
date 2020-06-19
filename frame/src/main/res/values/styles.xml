@@ -15,6 +15,8 @@
     </style>
     <!-- loading dialog(加载动画) -->
     <style name="DialogStyle">
+        <!-- 背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
         <!-- 边框 -->
         <item name="android:windowFrame">@null</item>
         <!-- 无标题 -->

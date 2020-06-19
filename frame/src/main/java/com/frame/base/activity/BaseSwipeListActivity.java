@@ -114,7 +114,7 @@ public abstract class BaseSwipeListActivity<P extends BasePresenter, B extends B
      * 设置适配器,若{@link BaseActivity#UserAdapterEmpty()}为true,切换布局只需setList(null)
      */
     private void getAdapter() {
-        if (UserAdapterEmpty()) {//必须在setAdapter之前调用
+        if (UserAdapterEmpty()) {
             View mEmptyView = LayoutInflater.from(mContext).inflate(getEmptyView(), (ViewGroup) mRecyclerView.getParent(), false);
             ((TextView) mEmptyView.findViewById(R.id.tv_view_pager_no_data_content)).setText(getEmptyViewMsg());
             mBaseAdapter.setHeaderWithEmptyEnable(isHeaderAndEmpty());

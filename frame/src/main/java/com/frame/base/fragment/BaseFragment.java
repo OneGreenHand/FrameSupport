@@ -21,9 +21,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.ButterKnife;
 
 /**
@@ -158,20 +155,6 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
     public void dismissLoadingDialog() {
         if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
-    }
-
-    /**
-     * 水平布局
-     */
-    protected void setLayoutManager(RecyclerView rv, int orientation) {
-        rv.setLayoutManager(new LinearLayoutManager(mActivity, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
-    }
-
-    /**
-     * 表格布局
-     */
-    protected void setLayoutManager(RecyclerView rv, int spanCount, int orientation) {
-        rv.setLayoutManager(new GridLayoutManager(mActivity, spanCount, orientation == 1 ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL, false));
     }
 
     @Override

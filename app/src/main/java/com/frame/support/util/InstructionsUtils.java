@@ -16,8 +16,8 @@ import com.frame.util.ToastUtil;
 public class InstructionsUtils {
 
     /**
-     * @param type 操作类别： 0、跳转本地 1、打开外部浏览器 2、通知栏下载APK或打开app 3、打开指定QQ
-     * @param url  跳转URL：根据type变动，可能是本地activity或者浏览器之类的
+     * @param type 操作类别:  0、跳转本地 1、打开外部浏览器 2、通知栏下载APK或打开app 3、打开指定QQ
+     * @param url  跳转URL: 根据type变动，可能是本地activity或者浏览器之类的
      */
     public static void JumpIntention(Context context, int type, String url) {
         switch (type) {
@@ -121,7 +121,7 @@ public class InstructionsUtils {
 
     /**
      * 主要用于后台控制跳转本地
-     * intentUrl举例：TaskActivity?ID=1&NAME=小明  意思就是跳转到TaskDetailActivity，然后带了ID和NAME，两个参数
+     * intentUrl举例: TaskActivity?ID=1&NAME=小明  意思就是跳转到TaskDetailActivity，然后带了ID和NAME，两个参数
      */
     private static void goLocationActivity(Context context, String intentUrl) {
         if (TextUtils.isEmpty(intentUrl))

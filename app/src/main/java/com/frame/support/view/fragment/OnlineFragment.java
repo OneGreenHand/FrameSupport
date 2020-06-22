@@ -56,10 +56,10 @@ public class OnlineFragment extends BaseFragment {
             @Override
             public void onResult(File file, String path) {
                 LogUtils.e("路径", file.getPath());
-                requestMsg.setText("图片路径(压缩后)："
-                        + "\nPath：" + file.getPath()
-                        + "\nAbsolutePath：" + file.getAbsolutePath()
-                        + "\n返回的path：" + path);
+                requestMsg.setText("图片路径(压缩后): "
+                        + "\nPath: " + file.getPath()
+                        + "\nAbsolutePath: " + file.getAbsolutePath()
+                        + "\n返回的path: " + path);
             }
         });
         super.onActivityResult(requestCode, resultCode, data);

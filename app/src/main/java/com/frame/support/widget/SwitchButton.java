@@ -28,7 +28,7 @@ public class SwitchButton extends View implements Checkable {
     private static final int DEFAULT_HEIGHT = dp2pxInt(36);
 
     /**
-     * 动画状态：
+     * 动画状态:
      * 1.静止
      * 2.进入拖动
      * 3.处于拖动

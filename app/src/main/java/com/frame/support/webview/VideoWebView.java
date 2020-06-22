@@ -22,7 +22,7 @@ import com.tencent.smtt.sdk.WebViewClient;
 
 /**
  * 基类 WebView(集成腾讯X5)
- * 备注：使用的时候不要设置 android:scrollbars="none"，不然部分机型会显示空白
+ * 备注: 使用的时候不要设置 android:scrollbars="none"，不然部分机型会显示空白
  */
 public class VideoWebView extends WebView {
     private TextView mTextView;

@@ -51,7 +51,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
                     ToastUtils.showShort("支付取消");
                     break;
                 default:
-                    ToastUtils.showShort("支付失败，错误码：" + resp.errCode);
+                    ToastUtils.showShort("支付失败，错误码: " + resp.errCode);
                     break;
             }
         }

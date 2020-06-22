@@ -55,11 +55,11 @@ public class OpenMapUtil {
      * 参考http://lbs.qq.com/uri_v1/guide-mobile-navAndRoute.html
      *
      * @param context
-     * @param type      路线规划方式参数：bus 或 drive 或 walk 或 bike
-     * @param from      起点名称：鼓楼
-     * @param fromcoord 起点坐标：39.907380,116.388501
-     * @param to        终点名称：奥林匹克森林公园
-     * @param tocoord   终点坐标：40.010024,116.392239
+     * @param type      路线规划方式参数: bus 或 drive 或 walk 或 bike
+     * @param from      起点名称: 鼓楼
+     * @param fromcoord 起点坐标: 39.907380,116.388501
+     * @param to        终点名称: 奥林匹克森林公园
+     * @param tocoord   终点坐标: 40.010024,116.392239
      * @param referer   请填写开发者key
      */
     public static void openTencentMap(Context context, String type, String from, String fromcoord, String to, String tocoord, String referer) {
@@ -127,11 +127,11 @@ public class OpenMapUtil {
      * http://lbsyun.baidu.com/index.php?title=uri/api/android
      *
      * @param context
-     * @param sName   起点名称：天安门
-     * @param sLatlng 起点经纬度：39.98871,116.43234
-     * @param eName   终点名称：对外经贸大学
-     * @param eLatlng 终点经纬度：39.98871,116.43234
-     * @param mode    导航模式：transit 或 driving 或 walking 或 riding
+     * @param sName   起点名称: 天安门
+     * @param sLatlng 起点经纬度: 39.98871,116.43234
+     * @param eName   终点名称: 对外经贸大学
+     * @param eLatlng 终点经纬度: 39.98871,116.43234
+     * @param mode    导航模式: transit 或 driving 或 walking 或 riding
      */
     public static void openBaiduMap(Context context, String sName, String sLatlng, String eName, String eLatlng, String mode) {
         try {

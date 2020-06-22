@@ -49,13 +49,13 @@ public class HttpRequest {
                 builder.addFormDataPart(key, params.get(key).toString());
         }
         if (!fileList.isEmpty())
-            if (!TextUtils.isEmpty(mutilFileKey)) {//类型：photos[0]、photos[1]、photos[2]
+            if (!TextUtils.isEmpty(mutilFileKey)) {//类型: photos[0]、photos[1]、photos[2]
                 int i = 0;
                 for (FileInfoBean fileInfoBean : fileList) {
                     builder.addFormDataPart(mutilFileKey + "[" + i + "]", fileInfoBean.file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), fileInfoBean.file));
                     i++;
                 }
-            } else {//类型：pic1、pic2、pic3
+            } else {//类型: pic1、pic2、pic3
                 for (FileInfoBean fileInfoBean : fileList)
                     builder.addFormDataPart(fileInfoBean.paramName, fileInfoBean.file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), fileInfoBean.file));
             }

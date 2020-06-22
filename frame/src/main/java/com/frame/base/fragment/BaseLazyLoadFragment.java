@@ -33,7 +33,7 @@ public abstract class BaseLazyLoadFragment extends BaseFragment {
 
     /**
      * 是否可以加载数据
-     * 可以加载数据的条件：
+     * 可以加载数据的条件:
      * 1.视图已经初始化
      * 2.视图对用户可见
      * 3.没有被加载过

@@ -17,7 +17,7 @@ import com.frame.view.TipDialog;
 
 
 /**
- * 备注：在这里面的方法都是子线程
+ * 备注: 在这里面的方法都是子线程
  */
 @SuppressLint({"MissingPermission", "CheckResult"})
 public class JSInterface {

@@ -22,7 +22,7 @@ public class WeChatShareUtils {
     /**
      * 分享微信文本
      *
-     * @param type 1：朋友圈  2：好友对话
+     * @param type 1: 朋友圈  2: 好友对话
      */
     public static void shareWeChatTxt(String content, int type) {
         WXTextObject textObject = new WXTextObject();
@@ -47,7 +47,7 @@ public class WeChatShareUtils {
     /**
      * 发起app网页分享
      *
-     * @param type 1：朋友圈  2：好友对话
+     * @param type 1: 朋友圈  2: 好友对话
      */
     public static void shareWeChatUrl(String title, String desc, String url, int type) {
         //初始化一个WXWebpageObject，填写url

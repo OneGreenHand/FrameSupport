@@ -1,7 +1,7 @@
 package com.frame.config;
 
 /**
- * 应用程序配置类：用于保存用户相关信息及设置
+ * 应用程序配置类: 用于保存用户相关信息及设置
  */
 public class AppConfig {
 

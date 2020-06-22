@@ -16,7 +16,6 @@ import com.frame.bean.BaseBean;
 import com.frame.support.R;
 import com.frame.support.api.API;
 import com.frame.util.ToastUtil;
-import com.frame.view.LoadingDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
@@ -33,9 +32,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     private String companyText = " s";//倒计时后面显示的单位
     private int durationTime = 60000;//持续时间
     private int intervalTime = 1000;//间隔时间
-    private Context mContext;
     private VerificationCountDownTimer countDownTimer;
-    protected LoadingDialog progressDialog;
 
     public VerificationCode(Context context) {
         super(context);
@@ -64,7 +61,6 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
             new BaseModel.Builder(this)
                     .putParam("Mobile", phone)
                     .putParam("VCType", codeType.getValue())
-                    .setLoadStyle(BaseModel.LoadStyle.DIALOG)
                     .create().post(API.GET_DUAN_ZI);//这里填写真实请求地址
         }
     }
@@ -102,16 +98,14 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
             setText(endText);
             setTextColor(endColor);
         }
-
     }
 
     /**
      * 初始化
      */
     private void initView(Context context, AttributeSet attrs) {
-        mContext = context;
-        if (mContext instanceof AppCompatActivity) {
-            AppCompatActivity activity = (AppCompatActivity) mContext;
+        if (context instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) context;
             if (!activity.isFinishing() && !activity.isDestroyed())//注册绑定生命周期
                 activity.getLifecycle().addObserver(this);
         }
@@ -119,7 +113,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
         setMinHeight(SizeUtils.dp2px(30));
         setGravity(Gravity.CENTER);
         if (attrs != null) {
-            TypedArray array = mContext.obtainStyledAttributes(attrs, R.styleable.VerificationCode);
+            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.VerificationCode);
             conductColor = array.getColor(R.styleable.VerificationCode_VcConductColor, Color.RED);
             endColor = array.getColor(R.styleable.VerificationCode_VcEndColor, Color.RED);
             endText = array.getString(R.styleable.VerificationCode_VcEndText);
@@ -133,7 +127,6 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
             array.recycle();
         }
         countDownTimer = new VerificationCountDownTimer(durationTime, intervalTime);//初始化倒计时
-        progressDialog = new LoadingDialog(mContext);//初始化加载框
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -164,46 +157,29 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
 
     @Override
     public void showLoadingView() {
-
     }
 
     @Override
     public void showEmptyView() {
-
     }
 
     @Override
     public void showNetErrorView(String tips) {
-
     }
 
     @Override
     public void refreshView() {
-
     }
 
     @Override
     public void tokenOverdue() {
-
     }
 
-    /**
-     * 显示加载对话框
-     */
     @Override
     public void showLoadingDialog(String msg, boolean isCancel) {
-        String message = TextUtils.isEmpty(msg) ? "拼命加载中..." : msg;
-        if (progressDialog == null)
-            progressDialog = new LoadingDialog(mContext);
-        progressDialog.setCancle(isCancel);
-        progressDialog.setMsg(message);
-        if (!progressDialog.isShowing())
-            progressDialog.show();
     }
 
     @Override
     public void dismissLoadingDialog() {
-        if (progressDialog != null && progressDialog.isShowing())
-            progressDialog.dismiss();
     }
 }

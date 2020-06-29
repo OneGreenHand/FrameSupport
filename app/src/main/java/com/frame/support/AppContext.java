@@ -1,18 +1,14 @@
 package com.frame.support;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
 import com.frame.FrameApplication;
 import com.frame.config.AppConfig;
-import com.frame.config.BaseConfig;
 import com.frame.support.util.ChannelUtils;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
-
-import java.io.File;
 
 import androidx.multidex.MultiDex;
 
@@ -26,7 +22,6 @@ public class AppContext extends FrameApplication {
         LogUtils.getConfig().setLogSwitch(AppConfig.DEBUG);//设置log开关
         //initBugly();
         initX5();
-        initFolder();
     }
 
     /**
@@ -56,21 +51,6 @@ public class AppContext extends FrameApplication {
         };
         //x5内核初始化接口
         QbSdk.initX5Environment(getApplicationContext(), cb);
-    }
-
-    /**
-     * 创建APP文件
-     */
-    @SuppressLint("MissingPermission")
-    private void initFolder() {
-        File dir = new File(BaseConfig.APP_FOLDER);  // 创建app目录
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-        File fileDir = new File(BaseConfig.FILE_FOLDER);  //创建file目录
-        if (!fileDir.exists()) {
-            fileDir.mkdir();
-        }
     }
 
     /**

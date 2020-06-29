@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 
 import com.frame.base.activity.BaseActivity;
 import com.frame.support.R;
-import com.frame.support.webview.VideoWebView;
+import com.frame.support.webview.BaseWebView;
 import com.frame.support.widget.TitleBarLayout;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -26,7 +26,7 @@ public class WebActivity extends BaseActivity {
     ProgressBar mProgressBar;
     @BindView(R.id.titlebar)
     TitleBarLayout titlebar;
-    private VideoWebView mWebView;
+    private BaseWebView mWebView;
 
     @Override
     protected void initImmersionBar(int color) {//不这样写，如果播放视频全屏，状态栏显示异常
@@ -40,7 +40,7 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         getWindow().setFormat(PixelFormat.TRANSLUCENT);//为了避免视频闪屏和透明问题
-        mWebView = new VideoWebView(this, null);
+        mWebView = new BaseWebView(this);
         mViewParent.addView(mWebView, new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT));

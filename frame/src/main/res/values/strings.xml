@@ -1,5 +1,4 @@
 <resources>
-    <string name="frame_app_name">FrameSupport</string>
     <string name="frame_no_data">暂无数据</string>
     <string name="frame_tips">提示</string>
     <string name="frame_cancle">取消</string>

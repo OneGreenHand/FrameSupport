@@ -17,21 +17,21 @@ public class InstructionsUtils {
 
     /**
      * @param type 操作类别:  0、跳转本地 1、打开外部浏览器 2、通知栏下载APK或打开app 3、打开指定QQ
-     * @param url  跳转URL: 根据type变动，可能是本地activity或者浏览器之类的
+     * @param action  跳转意图: 根据type变动，可能是本地activity或者浏览器之类的
      */
-    public static void JumpIntention(Context context, int type, String url) {
+    public static void JumpIntention(Context context, int type, String action) {
         switch (type) {
             case 0:
-                goLocationActivity(context, url);
+                goLocationActivity(context, action);
                 break;
             case 1:
-                CommonUtil.intentToBrowsable(context, url);
+                CommonUtil.intentToBrowsable(context, action);
                 break;
             case 2:
-                checkInstallOrDown(context, url);
+                checkInstallOrDown(context, action);
                 break;
             case 3:
-                CommonUtil.ContactQQ(context, url);
+                CommonUtil.ContactQQ(context, action);
                 break;
         }
     }

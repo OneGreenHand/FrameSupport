@@ -35,11 +35,11 @@ public class TakePhotoDialog extends BaseDialog {
     private Activity mActivity;
     private Fragment mFragment;
     private String imagePath = BaseConfig.PHOTO_FOLDER;//图片地址
-    private String imageName = "";//文件名
-    private String cropImageName = "";//裁剪后的文件名字
+    private String imageName;//文件名
+    private String cropImageName;//裁剪后的文件名字
     private boolean isCrop;//是否裁剪
     //删除文件相关
-    private String deleteImagePath = "";//需要删除的图片路径，主要是图库选择的图片
+    private String deleteImagePath;//需要删除的图片路径，主要是图库选择的图片
 
     public TakePhotoDialog(Activity activity) {
         super(activity, Gravity.BOTTOM, true);

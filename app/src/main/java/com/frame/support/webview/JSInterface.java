@@ -1,15 +1,12 @@
 package com.frame.support.webview;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.webkit.JavascriptInterface;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
-import com.blankj.utilcode.util.PhoneUtils;
 import com.frame.FrameApplication;
 import com.frame.support.util.ChannelUtils;
 import com.frame.util.ToastUtil;
@@ -19,15 +16,14 @@ import com.frame.view.TipDialog;
 /**
  * 备注: 在这里面的方法都是子线程
  */
-@SuppressLint({"MissingPermission", "CheckResult"})
 public class JSInterface {
 
-    Context context;
+    private Context mContext;
     // 将请求成功的数据返回到主线程进行数据更新
-    Handler mHandler = new Handler(FrameApplication.getContext().getMainLooper());
+    private Handler mHandler = new Handler(FrameApplication.getContext().getMainLooper());
 
     public JSInterface(Context context) {
-        this.context = context;
+        this.mContext = context;
     }
 
     //获取渠道号
@@ -60,18 +56,6 @@ public class JSInterface {
         return DeviceUtils.getAndroidID();
     }
 
-    //获取IMSI码(需要权限)
-    @JavascriptInterface
-    public String getIMSI() {
-        return hasPhonePermission(context) ? PhoneUtils.getIMSI() : "";
-    }
-
-    //获取唯一设备 ID
-    @JavascriptInterface
-    public String getDeviceId() {
-        return DeviceUtils.getUniqueDeviceId();
-    }
-
     //吐司
     @JavascriptInterface
     public void showToast(String msg) {
@@ -82,7 +66,7 @@ public class JSInterface {
     @JavascriptInterface
     public void showDialog(String title, String msg) {
         mHandler.post(() -> {
-            TipDialog dialog = new TipDialog(context);
+            TipDialog dialog = new TipDialog(mContext);
             dialog.setTitle(title);
             dialog.setContent(msg);
             dialog.show();
@@ -92,14 +76,8 @@ public class JSInterface {
     //结束当前页面
     @JavascriptInterface
     public void doFinish() {
-        if (context instanceof Activity)
-            ((Activity) context).finish();
+        if (mContext instanceof Activity)
+            ((Activity) mContext).finish();
     }
 
-    /**
-     * 检测是否有电话权限
-     */
-    private boolean hasPhonePermission(Context context) {
-        return (PackageManager.PERMISSION_GRANTED == context.getPackageManager().checkPermission("android.permission.READ_PHONE_STATE", AppUtils.getAppPackageName()));
-    }
 }

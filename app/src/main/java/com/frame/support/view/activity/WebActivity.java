@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
@@ -21,7 +22,7 @@ import butterknife.BindView;
 public class WebActivity extends BaseActivity {
 
     @BindView(R.id.web_view)
-    FrameLayout mViewParent;
+    ViewGroup mViewParent;
     @BindView(R.id.pb_web_base)
     ProgressBar mProgressBar;
     @BindView(R.id.titlebar)
@@ -30,7 +31,7 @@ public class WebActivity extends BaseActivity {
 
     @Override
     protected void initImmersionBar(int color) {//不这样写，如果播放视频全屏，状态栏显示异常
-        ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).init();//状态栏颜色(布局文件设置了fitsSystemWindows="true")
+        ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).statusBarDarkFont(true, 0.2f).init();//状态栏颜色(布局文件设置了fitsSystemWindows="true")
     }
 
     public static void openActivity(Context context) {

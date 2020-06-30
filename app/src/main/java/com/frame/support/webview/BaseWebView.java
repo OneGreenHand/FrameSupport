@@ -1,6 +1,7 @@
 package com.frame.support.webview;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +10,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -16,6 +18,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient;
+import com.tencent.smtt.export.external.interfaces.JsResult;
+import com.tencent.smtt.export.external.interfaces.SslError;
+import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
 import com.tencent.smtt.sdk.DownloadListener;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
@@ -40,11 +45,7 @@ public class BaseWebView extends WebView {
         init(context);
     }
 
-    public BaseWebView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(context);
-    }
-
+    @SuppressLint("SetJavaScriptEnabled")
     public void init(Context context) {
         WebSettings webSettings = getSettings();
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不缓存
@@ -56,6 +57,8 @@ public class BaseWebView extends WebView {
         webSettings.setAllowFileAccess(true);  // 设置是否允许 WebView 使用 File 协议
         webSettings.setDatabaseEnabled(true);//数据库存储API是否可用，默认值false
         webSettings.setDomStorageEnabled(true);//是否开启本地DOM存储
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)//允许Https+Http的混合使用方式
+            webSettings.setMixedContentMode(0);
         setDownloadListener(new DownloadListener() {//下载事件
             @Override
             public void onDownloadStart(String s, String s1, String s2, String s3, long l) {
@@ -116,7 +119,7 @@ public class BaseWebView extends WebView {
             }
 
             @Override
-            public boolean onJsAlert(WebView webView, String url, String message, com.tencent.smtt.export.external.interfaces.JsResult jsResult) {
+            public boolean onJsAlert(WebView webView, String url, String message, JsResult jsResult) {
                 AlertDialog.Builder b = new AlertDialog.Builder(context);
                 b.setTitle("提示");
                 b.setMessage(message);
@@ -132,6 +135,10 @@ public class BaseWebView extends WebView {
             }
         });
         setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView webView, SslErrorHandler sslErrorHandler, SslError sslError) {
+                sslErrorHandler.proceed();  // 忽略证书错误
+            }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView webView, String url) {

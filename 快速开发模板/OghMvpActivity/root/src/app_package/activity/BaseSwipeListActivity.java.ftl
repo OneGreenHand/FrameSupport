@@ -1,8 +1,7 @@
 package ${packageName}.view.activity;
 
 import android.os.Bundle;
-import com.frame.adapter.BaseQuickAdapter;
-import com.frame.base.BaseModel;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.frame.base.BaseQuickHolder;
 import com.frame.base.activity.BaseSwipeListActivity;
 import com.frame.bean.BaseBean;

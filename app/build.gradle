@@ -90,8 +90,6 @@ dependencies {
     //下载工具类
     implementation dependencies.aria.aria_core
     annotationProcessor dependencies.aria.aria_compiler
-    //腾讯x5
-    implementation "com.tencent.tbs.tbssdk:sdk:43903"
     //bugly异常捕获
     implementation dependencies.bugly_crashreport
     //glide图片加载

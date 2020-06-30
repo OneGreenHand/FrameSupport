@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FrameSupport.iml" filepath="$PROJECT_DIR$/FrameSupport.iml" group="FrameSupport" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="FrameSupport/app" />
-      <module fileurl="file://$PROJECT_DIR$/frame/frame.iml" filepath="$PROJECT_DIR$/frame/frame.iml" group="FrameSupport/frame" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="FrameSupport/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/frame/frame.iml" filepath="$PROJECT_DIR$/.idea/modules/frame/frame.iml" group="FrameSupport/frame" />
     </modules>
   </component>
 </project>

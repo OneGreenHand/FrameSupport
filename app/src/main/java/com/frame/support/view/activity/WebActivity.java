@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.frame.base.activity.BaseActivity;
@@ -22,12 +20,11 @@ import butterknife.BindView;
 public class WebActivity extends BaseActivity {
 
     @BindView(R.id.web_view)
-    ViewGroup mViewParent;
+    BaseWebView mWebView;
     @BindView(R.id.pb_web_base)
     ProgressBar mProgressBar;
     @BindView(R.id.titlebar)
     TitleBarLayout titlebar;
-    private BaseWebView mWebView;
 
     @Override
     protected void initImmersionBar(int color) {//不这样写，如果播放视频全屏，状态栏显示异常
@@ -41,10 +38,6 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         getWindow().setFormat(PixelFormat.TRANSLUCENT);//为了避免视频闪屏和透明问题
-        mWebView = new BaseWebView(this);
-        mViewParent.addView(mWebView, new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT));
         mWebView.setTextView(titlebar.getTitleText());
         mWebView.setProgressBar(mProgressBar);
         mWebView.loadUrl("https://www.baidu.com");

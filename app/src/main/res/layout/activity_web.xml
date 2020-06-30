@@ -17,7 +17,7 @@
         android:layout_height="3dp"
         android:progressDrawable="@drawable/shape_progress" />
 
-    <FrameLayout
+    <com.frame.support.webview.BaseWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

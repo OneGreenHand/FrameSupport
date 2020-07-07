@@ -3,10 +3,7 @@ package com.frame.config;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.PathUtils;
-import com.blankj.utilcode.util.SDCardUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
-
-import java.io.File;
 
 /**
  * 应用程序配置类: 用于保存用户相关信息及设置

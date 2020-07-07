@@ -39,7 +39,7 @@ public class AppContext extends FrameApplication {
         CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);// 设置是否为上报进程
         strategy.setAppChannel(ChannelUtils.getChannel());  //设置渠道
         // CrashReport.setUserId("");//设置用户ID
-        CrashReport.initCrashReport(context, "8706956f68", AppConfig.DEBUG, strategy); // 仅使用异常捕获功能时使用这个
+        CrashReport.initCrashReport(context, "8706956f68", AppConfig.DEBUG, strategy);
     }
 
 }

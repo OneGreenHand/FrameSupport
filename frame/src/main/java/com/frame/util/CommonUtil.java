@@ -79,6 +79,21 @@ public class CommonUtil {
     }
 
     /**
+     * 判断控件点击事件的触发事件间隔，防止用户多次点击
+     *
+     * @return true重复点击 false为不是
+     */
+    private static long lastClickTime;
+
+    public static boolean isFastClick() {
+        long time = System.currentTimeMillis();
+        if (time - lastClickTime <= 1000)
+            return true;
+        lastClickTime = time;
+        return false;
+    }
+
+    /**
      * 设置文本大小及颜色
      * String s = "<font color='#999999'>温馨提示: </font>" + "<font color='#FF8727'>本商品无质量问题不能退换</font>";
      */

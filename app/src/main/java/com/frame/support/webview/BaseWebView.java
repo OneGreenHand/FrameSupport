@@ -8,12 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.net.http.SslError;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.JsResult;
-import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -43,16 +42,16 @@ public class BaseWebView extends WebView {
     @SuppressLint("SetJavaScriptEnabled")
     public void init(Context context) {
         WebSettings webSettings = getSettings();
+        webSettings.setLoadsImagesAutomatically(Build.VERSION.SDK_INT >= 19);//设置自动加载图片
         webSettings.setJavaScriptEnabled(true); // 设置支持javascript脚本
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);//设置允许js弹出alert对话框
-        webSettings.setSupportZoom(true); //支持缩放
-        webSettings.setUseWideViewPort(true);//将图片调整到适合webview的大小
-        webSettings.setLoadWithOverviewMode(true);//缩放至屏幕的大小
-        webSettings.setDomStorageEnabled(true);//是否开启本地DOM存储
-        webSettings.setAllowContentAccess(true);//是否允许在WebView中访问内容URL
+        webSettings.setUseWideViewPort(true);  //设置webview推荐使用的窗口，使html界面自适应屏幕
+        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+        webSettings.setDomStorageEnabled(true);//DOM存储API是否可用
         webSettings.setDatabaseEnabled(true);//数据库存储API是否可用
-        webSettings.setAppCacheEnabled(true);//开启 Application Caches 功能
-        webSettings.setCacheMode(android.webkit.WebSettings.LOAD_NO_CACHE);//不缓存
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)//支持同时加载Https和Http混合模式  
+            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不缓存
         setDownloadListener(new DownloadListener() {//下载事件
             @Override
             public void onDownloadStart(String s, String s1, String s2, String s3, long l) {
@@ -95,10 +94,6 @@ public class BaseWebView extends WebView {
             }
         });
         setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView webView, SslErrorHandler sslErrorHandler, SslError sslError) {
-                sslErrorHandler.proceed();  // 忽略证书错误
-            }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView webView, String url) {
@@ -128,6 +123,8 @@ public class BaseWebView extends WebView {
             @Override
             public void onPageFinished(WebView webView, String url) {
                 super.onPageFinished(webView, url);
+                if (!webSettings.getLoadsImagesAutomatically())//不设置的话，部分机型不显示图片
+                    webSettings.setLoadsImagesAutomatically(true);
                 if (mProgressBar != null)
                     mProgressBar.setVisibility(View.GONE);
             }
@@ -140,7 +137,7 @@ public class BaseWebView extends WebView {
      */
     public void setAutoPlay() {
         WebSettings webSettings = getSettings();
-        // 设置WebView是否需要用户手势才能播放媒体。默认true
+        // 允许自动播放多媒体
         webSettings.setMediaPlaybackRequiresUserGesture(false);
     }
 

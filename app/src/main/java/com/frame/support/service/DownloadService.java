@@ -12,7 +12,7 @@ import com.arialyy.aria.core.Aria;
 import com.arialyy.aria.core.task.DownloadTask;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.FileUtils;
-import com.frame.config.BaseConfig;
+import com.frame.config.AppConfig;
 import com.frame.support.util.NotificationHelper;
 import com.frame.util.ToastUtil;
 
@@ -56,21 +56,22 @@ public class DownloadService extends Service {
         }
         String fileUrl = intent.getStringExtra("fileUrl");//下载的文件地址
         fileName = intent.getStringExtra("fileName");
-        if (TextUtils.isEmpty(fileUrl) || TextUtils.isEmpty(fileName) || !FileUtils.createOrExistsDir(BaseConfig.FILE_FOLDER)) {
+        if (TextUtils.isEmpty(fileUrl) || TextUtils.isEmpty(fileName) || !FileUtils.createOrExistsDir(AppConfig.FilePath.FILE_FOLDER)) {
             error();
             return;
         }
         if (!isDownloading) {//没有在下载中才可以下载
-            if (FileUtils.isFileExists(BaseConfig.FILE_FOLDER + fileName)) {  //如果更新之前存在apk就直接安装
+            if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER + "/" + fileName)) {  //如果更新之前存在apk就直接安装
                 stopSelf();//手动停止服务(8.0同时通知栏会消失)
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)//未没有绑定service,手动取消通知栏
                     getNotification().cancel();
-                AppUtils.installApp(BaseConfig.FILE_FOLDER + fileName);
+                AppUtils.installApp(AppConfig.FilePath.FILE_FOLDER + "/" + fileName);
             } else {
                 try {
                     Aria.download(this)
                             .load(fileUrl)
-                            .setFilePath(BaseConfig.FILE_FOLDER + fileName, true)
+                            .setFilePath(AppConfig.FilePath.FILE_FOLDER + "/" + fileName)
+                            .ignoreFilePathOccupy()
                             .create();
                 } catch (Exception e) {//有可能下载地址错误
                     error();
@@ -112,8 +113,8 @@ public class DownloadService extends Service {
     public void onTaskComplete(DownloadTask task) {
         getNotification().downloadComplete(fileName);//手动设置下载完成,并且设置通知栏点击事件(不然进度显示有问题)
         isDownloading = false;
-        if (FileUtils.isFileExists(BaseConfig.FILE_FOLDER + fileName)) //如果本地存在文件，直接调用安装操作
-            AppUtils.installApp(BaseConfig.FILE_FOLDER + fileName);
+        if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER + "/" + fileName)) //如果本地存在文件，直接调用安装操作
+            AppUtils.installApp(AppConfig.FilePath.FILE_FOLDER + "/" + fileName);
         stopSelf();
     }
 

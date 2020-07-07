@@ -19,6 +19,6 @@ public class RefreshRequestPt extends BasePresenter<RefreshRequestActivity> {
                 .setLoadStyle(page == 1 ? BaseModel.LoadStyle.DIALOG : BaseModel.LoadStyle.NONE)
                 .setPageIndex(page)
                 .create()
-                .get(API.GET_DUAN_ZI + "?page=" + page + "&count=15&type=text", DuanZiBean.class);
+                .get(API.GET_DUAN_ZI + "?page=" + page + "&count=10&type=text", DuanZiBean.class);
     }
 }

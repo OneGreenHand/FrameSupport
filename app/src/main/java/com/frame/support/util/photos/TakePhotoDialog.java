@@ -11,11 +11,14 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+import androidx.loader.content.CursorLoader;
+
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.frame.base.BaseDialog;
-import com.frame.config.BaseConfig;
+import com.frame.config.AppConfig;
 import com.frame.support.R;
 import com.frame.support.util.compress.Compressor;
 import com.frame.util.ToastUtil;
@@ -23,8 +26,6 @@ import com.frame.util.ToastUtil;
 import java.io.File;
 import java.io.IOException;
 
-import androidx.fragment.app.Fragment;
-import androidx.loader.content.CursorLoader;
 import butterknife.OnClick;
 
 /**
@@ -34,7 +35,7 @@ public class TakePhotoDialog extends BaseDialog {
 
     private Activity mActivity;
     private Fragment mFragment;
-    private String imagePath = BaseConfig.PHOTO_FOLDER;//图片地址
+    private String imagePath = AppConfig.FilePath.PHOTO_FOLDER;//图片地址
     private String imageName;//文件名
     private String cropImageName;//裁剪后的文件名字
     private boolean isCrop;//是否裁剪
@@ -77,9 +78,9 @@ public class TakePhotoDialog extends BaseDialog {
             case R.id.tv_take_photo://拍照
                 dismiss();
                 if (mActivity != null)
-                    mActivity.startActivityForResult(PhotoUtil.takePhoto(FileUtils.getFileByPath(imagePath + imageName)), 0x001);
+                    mActivity.startActivityForResult(PhotoUtil.takePhoto(FileUtils.getFileByPath(imagePath + "/" + imageName)), 0x001);
                 else
-                    mFragment.startActivityForResult(PhotoUtil.takePhoto(FileUtils.getFileByPath(imagePath + imageName)), 0x001);
+                    mFragment.startActivityForResult(PhotoUtil.takePhoto(FileUtils.getFileByPath(imagePath + "/" + imageName)), 0x001);
                 break;
             case R.id.tv_pick_photo://图库
                 dismiss();
@@ -140,14 +141,14 @@ public class TakePhotoDialog extends BaseDialog {
     private void takePhotoResult(IPhotoResult iPhotoResult) {
         if (isCrop) {
             deleteImagePath = "";
-            File file = FileUtils.getFileByPath(imagePath + imageName);//源文件
-            File outFile = FileUtils.getFileByPath(imagePath + cropImageName);//裁剪后的文件
+            File file = FileUtils.getFileByPath(imagePath + "/" + imageName);//源文件
+            File outFile = FileUtils.getFileByPath(imagePath + "/" +cropImageName);//裁剪后的文件
             if (mActivity != null)
                 mActivity.startActivityForResult(PhotoUtil.cropPhoto(file, outFile), 0x003);
             else
                 mFragment.startActivityForResult(PhotoUtil.cropPhoto(file, outFile), 0x003);
         } else {
-            compressTheImg(imagePath + imageName, iPhotoResult);
+            compressTheImg(imagePath + "/" + imageName, iPhotoResult);
         }
     }
 
@@ -159,7 +160,7 @@ public class TakePhotoDialog extends BaseDialog {
             Uri imageUri = data.getData();
             if (isCrop) {
                 deleteImagePath = getPathByUri(imageUri);
-                File outFile = FileUtils.getFileByPath(imagePath + cropImageName);//裁剪后的文件
+                File outFile = FileUtils.getFileByPath(imagePath + "/" + cropImageName);//裁剪后的文件
                 if (mActivity != null)
                     mActivity.startActivityForResult(PhotoUtil.cropPhoto(new File(getPathByUri(imageUri)), outFile), 0x003);
                 else
@@ -183,12 +184,12 @@ public class TakePhotoDialog extends BaseDialog {
      */
     private void cropPhotoResult(IPhotoResult iPhotoResult) {
         if (TextUtils.isEmpty(deleteImagePath)) {//删除拍照相关创建的文件
-            FileUtils.delete(imagePath + imageName);//删除拍照后的源文件
+            FileUtils.delete(imagePath + "/" + imageName);//删除拍照后的源文件
         } else {//删除选择的图片相关创建的文件
             FileUtils.delete(deleteImagePath);//删除图库选择的源文件
         }
         deleteImagePath = "";
-        compressTheImg(imagePath + cropImageName, iPhotoResult);
+        compressTheImg(imagePath + "/" + cropImageName, iPhotoResult);
     }
 
     /**

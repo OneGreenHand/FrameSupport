@@ -6,7 +6,7 @@ import android.view.View;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.frame.base.fragment.BaseFragment;
-import com.frame.config.BaseConfig;
+import com.frame.config.AppConfig;
 import com.frame.support.R;
 import com.frame.support.util.InstructionsUtils;
 import com.frame.support.view.activity.WebActivity;
@@ -43,8 +43,8 @@ public class GameFragment extends BaseFragment {
                 }
                 break;
             case R.id.clear_download_apk:
-                if (FileUtils.isFileExists(BaseConfig.FILE_FOLDER + "tim.apk")) {
-                    if (FileUtils.delete(BaseConfig.FILE_FOLDER + "tim.apk")) {
+                if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER + "/" + "tim.apk")) {
+                    if (FileUtils.delete(AppConfig.FilePath.FILE_FOLDER + "/" + "tim.apk")) {
                         ToastUtil.showShortToast("文件已删除,可以重新下载了");
                     } else {
                         ToastUtil.showShortToast("文件删除失败");

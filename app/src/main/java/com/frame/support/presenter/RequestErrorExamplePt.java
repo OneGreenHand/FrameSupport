@@ -18,6 +18,6 @@ public class RequestErrorExamplePt extends BasePresenter<NoDataExampleActivity> 
         createRequestBuilder()
                 .setLoadStyle(BaseModel.LoadStyle.DIALOG_VIEW)
                 .create()
-                .get(API.GET_DUAN_ZI+"?page=999&count=15&type=text", DuanZiBean.class);
+                .get(API.GET_DUAN_ZI+"?page=999&count=10&type=text", DuanZiBean.class);
     }
 }

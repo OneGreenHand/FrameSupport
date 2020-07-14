@@ -102,5 +102,5 @@ dependencies {
     //微信支付
     implementation dependencies.wxpay
     // 支付宝支付
-    implementation(name: 'alipaySdk-15.7.5-20200422171619', ext: 'aar')
+    implementation(name: 'alipaySdk-15.7.7-20200702160044', ext: 'aar')
 }

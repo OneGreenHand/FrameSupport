@@ -77,6 +77,7 @@ public class OpenMapUtil {
                     .append(tocoord + "&")
                     .append("referer=myapp");
             Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(sb.toString()));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         } catch (Exception e) {
         }
@@ -115,6 +116,7 @@ public class OpenMapUtil {
                     .append("dev=0&")
                     .append("t=0");
             Intent intent = new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setData(Uri.parse(sb.toString()));
             context.startActivity(intent);
         } catch (Exception e) {
@@ -146,6 +148,7 @@ public class OpenMapUtil {
                     .append("mode=driving&")
                     .append("src=andr.baidu.openAPIdemo");
             Intent intent = new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setData(Uri.parse(sb.toString()));
             context.startActivity(intent);
         } catch (Exception e) {

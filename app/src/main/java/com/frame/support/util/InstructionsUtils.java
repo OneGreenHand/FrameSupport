@@ -129,12 +129,12 @@ public class InstructionsUtils {
         try {
 //            if (needlogin) {//如果需要登录
 //             Intent intent = new Intent();
-//             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //             intent.setClass(context, getActivityClassName("LoginActivity"));
 //             context.startActivity(intent);
 //            } else {
             Intent intent = new Intent(context, getActivityClassName(intentUrl.contains("?") ? intentUrl.split("\\?")[0] : intentUrl));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (intentUrl.contains("?")) {//说明带参数
                 for (String kv : intentUrl.split("\\?")[1].split("\\&")) {//拿到？后面的，然后对&分割处理
                     String k = kv.split("=")[0];//拿到参数名

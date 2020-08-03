@@ -18,14 +18,14 @@ import java.util.Map;
 public class IntentUtil {
     public static void goActivity(Context context, Class<?> activity) {
         Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setClass(context, activity);
         context.startActivity(intent);
     }
 
     public static void goActivity(Context context, Class<?> activity, boolean ifLogin) {
         Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        if (ifLogin && !UserUtil.isLogin()) {
 //            ToastUtil.showShortToast("请先登录");
 //            intent.setClass(context, LoginActivity.class);
@@ -41,7 +41,7 @@ public class IntentUtil {
      */
     public static void goActivity(Context context, Class<?> activity, Bundle bundle, boolean ifLogin) {
         Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//在Activity上下文之外启动Activity
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//在Activity上下文之外启动Activity
         //  if (ifLogin && !UserUtil.isLogin()) {
         //intent.setClass(context, LoginActivity.class);
         //  context.startActivity(intent);
@@ -92,7 +92,7 @@ public class IntentUtil {
      */
     public static void goActivity(Context context, Class<?> activity, Map<String, Object> param, boolean ifLogin) {
         Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //  if (ifLogin && !UserUtil.isLogin()) {
         //   intent.setClass(context, LoginActivity.class);
         //    context.startActivity(intent);

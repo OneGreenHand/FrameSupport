@@ -206,7 +206,7 @@ public class TakePhotoDialog extends BaseDialog {
                 if (iPhotoResult != null)
                     iPhotoResult.onResult(file2, path);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             if (iPhotoResult != null)
                 iPhotoResult.onResult(new File(path), path);
         }

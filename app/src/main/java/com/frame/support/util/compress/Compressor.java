@@ -76,7 +76,7 @@ public class Compressor {
             public Publisher<? extends File> get() throws Throwable {
                 try {
                     return Flowable.just(compressToFile(imageFile, compressedFileName));
-                } catch (IOException e) {
+                } catch (Exception e) {
                     return Flowable.error(e);
                 }
             }
@@ -89,7 +89,7 @@ public class Compressor {
             public Publisher<? extends Bitmap> get() throws Throwable {
                 try {
                     return Flowable.just(compressToBitmap(imageFile));
-                } catch (IOException e) {
+                } catch (Exception e) {
                     return Flowable.error(e);
                 }
             }

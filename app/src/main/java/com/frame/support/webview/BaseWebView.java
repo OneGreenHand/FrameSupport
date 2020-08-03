@@ -56,6 +56,7 @@ public class BaseWebView extends WebView {
             @Override
             public void onDownloadStart(String s, String s1, String s2, String s3, long l) {
                 Intent intent = new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setAction("android.intent.action.VIEW");
                 intent.setData(Uri.parse(s));
                 getContext().startActivity(intent);
@@ -106,6 +107,7 @@ public class BaseWebView extends WebView {
                 }
                 try {  // Otherwise allow the OS to handle things like tel, mailto, etc.
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();

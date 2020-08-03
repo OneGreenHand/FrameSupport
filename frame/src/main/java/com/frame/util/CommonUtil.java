@@ -241,6 +241,7 @@ public class CommonUtil {
             return;
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addCategory(Intent.CATEGORY_BROWSABLE);
             intent.setData(Uri.parse(url));
             mContext.startActivity(intent);
@@ -259,7 +260,9 @@ public class CommonUtil {
             url = "mqqwpa://im/chat?chat_type=wpa&uin=" + q + "";
         else
             url = "http://wpa.qq.com/msgrd?v=3&uin=" + q + "&site=qq&menu=yes";
-        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     //密码8-20，不能为中文且必须包含字符，不能为纯数字
@@ -298,11 +301,13 @@ public class CommonUtil {
     //跳转GPS设置界面
     public static void IntentToOpenGps(Activity activity, int requestCode) {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivityForResult(intent, requestCode);
     }
 
     public static void IntentToOpenGps(Fragment fragment, int requestCode) {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         fragment.startActivityForResult(intent, requestCode);
     }
 

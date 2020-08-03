@@ -35,11 +35,11 @@ dependencies {
     implementation dependencies.okhttp_logging
     //retrofit2
     api dependencies.retrofit2.retrofit
-    api dependencies.retrofit2.adapter_rxjava2
+    api dependencies.retrofit2.adapter_rxjava3
     api dependencies.retrofit2.converter_gson
-    //rxjava2
-    api dependencies.rxjava2.rxjava
-    api dependencies.rxjava2.rxandroid
+    //rxjava3
+    api dependencies.rxjava3.rxjava
+    api dependencies.rxjava3.rxandroid
     //autodispose
     api dependencies.autodispose
     //RecyclerViewAdapter

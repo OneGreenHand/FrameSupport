@@ -67,6 +67,7 @@ public class JSInterface {
     public void showDialog(String title, String msg) {
         mHandler.post(() -> {
             TipDialog dialog = new TipDialog(mContext);
+            dialog.setCancel(false);
             dialog.setTitle(title);
             dialog.setContent(msg);
             dialog.show();

@@ -28,7 +28,7 @@ public class ChannelUtils {
         try {
             ApplicationInfo appInfo = Utils.getApp().getPackageManager().getApplicationInfo(AppUtils.getAppPackageName(), PackageManager.GET_META_DATA);
             result = appInfo.metaData.getString(key);
-        } catch (PackageManager.NameNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return result;

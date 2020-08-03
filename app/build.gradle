@@ -80,7 +80,7 @@ dependencies {
     def dependencies = rootProject.ext.deps
     implementation project(':frame')
     //LeakCanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
     //分Dex
     implementation dependencies.multidex
     //屏幕适配

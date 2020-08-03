@@ -37,7 +37,7 @@ public class PermissionPageUtils {
         else
             intent = google(context);
         if (newTask)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             context.startActivity(intent);
         } catch (Exception e) {

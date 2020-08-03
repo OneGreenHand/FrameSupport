@@ -2,6 +2,7 @@ package com.frame.base;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.frame.util.CustomClickListener;
@@ -13,6 +14,13 @@ public class BaseQuickHolder extends BaseViewHolder {
 
     public BaseQuickHolder(View view) {
         super(view);
+    }
+
+    /**
+     * 获取图片控件
+     */
+    public ImageView getImgView(int viewId) {
+        return getView(viewId);
     }
 
     /**

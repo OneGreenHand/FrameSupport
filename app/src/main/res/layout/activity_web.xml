@@ -5,7 +5,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <com.frame.support.widget.TitleBarLayout
+    <com.ogh.support.widget.TitleBarLayout
         android:id="@+id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -17,7 +17,7 @@
         android:layout_height="3dp"
         android:progressDrawable="@drawable/shape_progress" />
 
-    <com.frame.support.webview.BaseWebView
+    <com.ogh.support.webview.BaseWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

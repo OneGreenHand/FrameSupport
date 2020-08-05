@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.frame.support.widget.TitleBarLayout
+    <com.ogh.support.widget.TitleBarLayout
         android:id="@+id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

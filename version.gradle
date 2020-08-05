@@ -2,7 +2,7 @@ ext {
     //使用该文件必须在project根目录下的 build.gradle 添加一行代码，例如 apply from: 'version.gradle'
     // app 相关版本控制
     versions = [
-            applicationId    : "com.frame.support",//默认和包名一致，修改任一一方相互不影响
+            applicationId    : "com.ogh.support",//默认和包名一致，修改任一一方相互不影响
             minSdkVersion    : 18,//app最低支持的sdk版本号(Android4.3)
             targetSdkVersion : 29,//兼容targetSdkVersion 29(含)以下版本
 

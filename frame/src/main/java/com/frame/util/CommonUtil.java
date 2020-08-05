@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.frame.FrameApplication;
 import com.frame.R;
 import com.frame.view.TipDialog;
@@ -42,7 +43,7 @@ public class CommonUtil {
         dialog.setOnSureClick(new TipDialog.SureCalk() {
             @Override
             public void OnClick(View view) {
-                PermissionPageUtils.start(context, false);
+                PermissionUtils.launchAppDetailsSettings();
             }
         });
         dialog.show();

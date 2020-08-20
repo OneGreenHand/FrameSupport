@@ -1,7 +1,6 @@
 package com.ogh.support.view.activity;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -12,15 +11,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.frame.base.activity.BaseActivity;
+import com.frame.util.ToastUtil;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ogh.support.R;
 import com.ogh.support.util.ChannelUtils;
 import com.ogh.support.view.adapter.FragmentAdapter;
-import com.ogh.support.view.fragment.GameFragment;
 import com.ogh.support.view.fragment.HomeFragment;
 import com.ogh.support.view.fragment.MineFragment;
-import com.ogh.support.view.fragment.OnlineFragment;
-import com.frame.util.ToastUtil;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +38,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         mDatas.add(new HomeFragment());
-        mDatas.add(new GameFragment());
-        mDatas.add(new OnlineFragment());
         mDatas.add(new MineFragment());
         viewPager.setOffscreenPageLimit(mDatas.size());
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), mDatas));
@@ -53,15 +48,10 @@ public class MainActivity extends BaseActivity {
                 int i = item.getItemId();
                 if (i == R.id.home) {
                     viewPager.setCurrentItem(0);
-                } else if (i == R.id.game) {
-                    viewPager.setCurrentItem(1);
                 } else if (i == R.id.core) {
                     return false;
-                } else if (i == R.id.online) {
-                    viewPager.setCurrentItem(2);
-                } else if (i == R.id.mine) {
-                    viewPager.setCurrentItem(3);
-                }
+                } else if (i == R.id.mine)
+                    viewPager.setCurrentItem(1);
                 return true;
             }
         });
@@ -71,12 +61,11 @@ public class MainActivity extends BaseActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
             public void onPageSelected(int position) {
-                if (position >= 2)//第三个为悬浮按钮
+                if (position == 1)//第二个为悬浮按钮
                     position++;
                 MenuItem menuItem = navigationView.getMenu().getItem(position);
                 if (menuItem != null)
@@ -85,7 +74,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
     }
@@ -103,22 +91,14 @@ public class MainActivity extends BaseActivity {
                 Toast.makeText(MainActivity.this, "再按一次退出", Toast.LENGTH_SHORT).show();
                 firstTime = secondTime;
                 return true;
-            } else {
+            } else
                 AppUtils.exitApp();
-            }
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @OnClick(R.id.floating_action)
     public void onViewClicked() {
         ToastUtil.showShortToast("当前渠道号为: " + ChannelUtils.getChannel());
-        //WalleChannelReader.get(this, "CHANNEL");//使用walle获取到的渠道号(需要通过walle手动注入渠道信息，不然获取不到)
-        // ChannelUtils.getChannel();//这里获取到的信息是build中manifestPlaceholders对应的CHANNEL信息
     }
 }

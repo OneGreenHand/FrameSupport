@@ -15,7 +15,7 @@ public class UserUtil {
      * 获取token
      */
     public static String getToken() {
-        return SPStaticUtils.getString("token", "");
+        return SPStaticUtils.getString("token");
     }
 
     /**

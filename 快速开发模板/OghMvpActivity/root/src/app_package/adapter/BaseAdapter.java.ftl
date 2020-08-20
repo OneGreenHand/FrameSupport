@@ -12,6 +12,5 @@ public class ${activityClass}Adapter extends BaseQuickAdapter<${activityClass}Be
 	
     @Override
     protected void convert(BaseQuickHolder helper, ${activityClass}Bean item) {
-        
     }
 }

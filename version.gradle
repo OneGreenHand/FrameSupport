@@ -16,18 +16,16 @@ ext {
     // 依赖相关版本控制
     depVersion = [
             retrofit           : "2.9.0",
-            rxjava             : "3.0.0",
-            rxandroid          : "3.0.0",
             okhttp_logging     : "4.7.2",
             utilcode           : "1.29.0",
             autosize           : "1.2.1",
             eventbus           : "3.2.0",
             glide              : "4.11.0",
             multidex           : "2.0.1",
-            butterknife        : "10.2.1",
+            butterknife        : "10.2.3",
             immersionbar       : "3.0.0",
             bugly_crashreport  : "3.2.3",
-            aria               : "3.8.10",
+            aria               : "3.8.12",
             walle              : "1.1.6",
             autodispose        : "2.0.0",
             RecyclerViewAdapter: "3.0.4",
@@ -43,10 +41,6 @@ ext {
                     retrofit       : "com.squareup.retrofit2:retrofit:${depVersion.retrofit}",
                     adapter_rxjava3: "com.squareup.retrofit2:adapter-rxjava3:${depVersion.retrofit}",
                     converter_gson : "com.squareup.retrofit2:converter-gson:${depVersion.retrofit}",
-            ],
-            rxjava3                : [
-                    rxjava   : "io.reactivex.rxjava3:rxjava:${depVersion.rxjava}",
-                    rxandroid: "io.reactivex.rxjava3:rxandroid:${depVersion.rxandroid}",
             ],
             glide                  : [
                     glide   : "com.github.bumptech.glide:glide:${depVersion.glide}",

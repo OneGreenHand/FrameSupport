@@ -1,30 +1,36 @@
 {
   "defaultExtraInfo": {
-    "CHANNEL": "AA000"
+    "CHANNEL": "MeiZu"
   },
   "channelInfoList": [
     {
-      "channel": "AA000",
+      "channel": "MeiZu",
       "extraInfo": {
-        "CHANNEL": "AA000"
+        "CHANNEL": "MeiZu"
       }
     },
     {
-      "channel": "AA001",
+      "channel": "XiaoMi",
       "extraInfo": {
-        "CHANNEL": "AA001"
+        "CHANNEL": "XiaoMi"
       }
     },
     {
-      "channel": "AA002",
+      "channel": "HuaWei",
       "extraInfo": {
-        "CHANNEL": "AA002"
+        "CHANNEL": "HuaWei"
       }
     },
     {
-      "channel": "AA003",
+      "channel": "OPPO",
       "extraInfo": {
-        "CHANNEL": "AA003"
+        "CHANNEL": "OPPO"
+      }
+    },
+    {
+      "channel": "VIVO",
+      "extraInfo": {
+        "CHANNEL": "VIVO"
       }
     }
   ]

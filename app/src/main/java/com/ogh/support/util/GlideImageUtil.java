@@ -58,7 +58,8 @@ public class GlideImageUtil {
         Glide.with(context)
                 .load(url)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true).apply(getRequestOptions()).into(view);
+                .skipMemoryCache(true)
+                .apply(getRequestOptions()).into(view);
     }
 
     /**

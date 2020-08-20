@@ -6,7 +6,6 @@ public class ${activityClass}Activity extends BaseSwipeActivity<${activityClass}
 
     @Override
     protected void onRefreshRequest() {
-
     }
 
     @Override
@@ -20,12 +19,10 @@ public class ${activityClass}Activity extends BaseSwipeActivity<${activityClass}
 
     @Override
     public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
-
     }
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
     }
 
     @Override

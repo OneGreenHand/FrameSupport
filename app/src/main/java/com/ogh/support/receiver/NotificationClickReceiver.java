@@ -15,7 +15,7 @@ public class NotificationClickReceiver extends BroadcastReceiver {
         String fileName = intent.getStringExtra("FILE_NAME");
         if (TextUtils.isEmpty(fileName))
             return;
-        if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER + "/" + fileName)) //如果本地存在文件，直接调用安装操作
-            AppUtils.installApp(AppConfig.FilePath.FILE_FOLDER + "/" + fileName);
+        if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER + fileName)) //如果本地存在文件，直接调用安装操作
+            AppUtils.installApp(AppConfig.FilePath.FILE_FOLDER + fileName);
     }
 }

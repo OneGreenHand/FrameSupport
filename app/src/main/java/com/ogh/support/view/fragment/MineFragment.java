@@ -16,7 +16,6 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
     }
 
     @Override

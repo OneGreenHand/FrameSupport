@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.arialyy.annotations.Download;
 import com.arialyy.aria.core.Aria;
@@ -61,16 +62,16 @@ public class DownloadService extends Service {
             return;
         }
         if (!isDownloading) {//没有在下载中才可以下载
-            if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER + "/" + fileName)) {  //如果更新之前存在apk就直接安装
+            if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER  + fileName)) {  //如果更新之前存在apk就直接安装
                 stopSelf();//手动停止服务(8.0同时通知栏会消失)
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)//未没有绑定service,手动取消通知栏
                     getNotification().cancel();
-                AppUtils.installApp(AppConfig.FilePath.FILE_FOLDER + "/" + fileName);
+                AppUtils.installApp(AppConfig.FilePath.FILE_FOLDER  + fileName);
             } else {
                 try {
                     Aria.download(this)
                             .load(fileUrl)
-                            .setFilePath(AppConfig.FilePath.FILE_FOLDER + "/" + fileName)
+                            .setFilePath(AppConfig.FilePath.FILE_FOLDER  + fileName)
                             .ignoreFilePathOccupy()
                             .create();
                 } catch (Exception e) {//有可能下载地址错误
@@ -113,8 +114,8 @@ public class DownloadService extends Service {
     public void onTaskComplete(DownloadTask task) {
         getNotification().downloadComplete(fileName);//手动设置下载完成,并且设置通知栏点击事件(不然进度显示有问题)
         isDownloading = false;
-        if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER + "/" + fileName)) //如果本地存在文件，直接调用安装操作
-            AppUtils.installApp(AppConfig.FilePath.FILE_FOLDER + "/" + fileName);
+        if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER  + fileName)) //如果本地存在文件，直接调用安装操作
+            AppUtils.installApp(AppConfig.FilePath.FILE_FOLDER  + fileName);
         stopSelf();
     }
 
@@ -123,9 +124,8 @@ public class DownloadService extends Service {
         long len = task.getFileSize();
         if (len == 0) {
             getNotification().updateProgress(-1);
-        } else {
-            getNotification().updateProgress((int) (task.getCurrentProgress() * 100 / len));
-        }
+        } else
+            getNotification().updateProgress(task.getPercent());
     }
 
     private void error() {

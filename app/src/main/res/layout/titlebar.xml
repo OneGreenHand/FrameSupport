@@ -27,7 +27,7 @@
             android:maxWidth="250dp"
             android:singleLine="true"
             android:textColor="@color/c_FFFFFF"
-            android:textSize="@dimen/font_15sp"
+            android:textSize="@dimen/font_16sp"
             tools:text="@string/app_name" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:textColor="@color/c_FFFFFF"
-            android:textSize="@dimen/font_15sp"
+            android:textSize="@dimen/font_16sp"
             android:visibility="gone"
             tools:text="@string/sure" />
     </RelativeLayout>

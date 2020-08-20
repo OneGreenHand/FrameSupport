@@ -26,4 +26,8 @@
     <dimen name="font_34sp">34dp</dimen>
     <dimen name="font_35sp">35dp</dimen>
     <dimen name="font_36sp">36dp</dimen>
+    <dimen name="font_37sp">37dp</dimen>
+    <dimen name="font_38sp">38dp</dimen>
+    <dimen name="font_39sp">39dp</dimen>
+    <dimen name="font_40sp">40dp</dimen>
 </resources>

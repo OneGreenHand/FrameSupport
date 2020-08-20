@@ -17,7 +17,7 @@
         android:layout_marginTop="7dp"
         android:text="@string/frame_view_net_error"
         android:textColor="#999999"
-        android:textSize="15dp" />
+        android:textSize="16dp" />
 
     <TextView
         android:id="@+id/tv_view_pager_error_load"
@@ -28,5 +28,5 @@
         android:gravity="center"
         android:text="@string/frame_load_again"
         android:textColor="@color/frame_white"
-        android:textSize="15dp" />
+        android:textSize="16dp" />
 </LinearLayout>

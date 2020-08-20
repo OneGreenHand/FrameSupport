@@ -20,7 +20,7 @@ android {
         javaCompileOptions {   //解决AndroidStudio 3.0的问题
             annotationProcessorOptions { includeCompileClasspath = true }
         }
-        manifestPlaceholders = [CHANNEL: "AA000",]
+        manifestPlaceholders = [CHANNEL: "MeiZu",]
 //可用于三方sdk使用，例如极光推送的参数，可在AndroidManifest中使用，最后获取到这个参数
     }
     signingConfigs {

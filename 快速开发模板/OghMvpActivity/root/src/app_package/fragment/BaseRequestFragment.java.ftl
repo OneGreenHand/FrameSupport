@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 public class ${activityClass}Fragment extends BaseRequestFragment<${activityClass}Pt,BaseBean> {
 
- @Override
+    @Override
     protected ${activityClass}Pt setPresenter() {
         return new ${activityClass}Pt(this);
     }
@@ -15,12 +15,10 @@ public class ${activityClass}Fragment extends BaseRequestFragment<${activityClas
 
     @Override
     public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
-
     }
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
     }
 
     @Override

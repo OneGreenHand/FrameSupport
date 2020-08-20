@@ -4,9 +4,8 @@ import android.os.Bundle;
 
 public class ${activityClass}Activity extends BaseActivity {
 
- @Override
+    @Override
     protected void init(Bundle savedInstanceState) {
-
     }
 
     @Override

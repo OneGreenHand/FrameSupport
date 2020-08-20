@@ -6,20 +6,11 @@
         android:checked="true"
         android:icon="@drawable/selector_navigation_bar_home"
         android:title="@string/home" />
-
-    <item
-        android:id="@+id/game"
-        android:icon="@drawable/selector_navigation_bar_game"
-        android:title="@string/game" />
     <!--must set the item title to empty-->
     <item
         android:id="@+id/core"
         android:icon="@null"
         android:title="" />
-    <item
-        android:id="@+id/online"
-        android:icon="@drawable/selector_navigation_bar_online"
-        android:title="@string/online" />
     <item
         android:id="@+id/mine"
         android:icon="@drawable/selector_navigation_bar_mine"

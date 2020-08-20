@@ -1,12 +1,14 @@
 package com.frame.base;
 
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.frame.bean.BaseBean;
 import com.frame.bean.FileInfoBean;
 import com.frame.config.AppConfig;
-import com.frame.request.APIException;
 import com.frame.request.HttpRequest;
 import com.frame.util.GsonUtil;
 import com.frame.util.ToastUtil;
@@ -15,8 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -144,7 +144,7 @@ public class BaseModel {
                 try { //解析json
                     B bean = GsonUtil.getBean(requestBody.string(), clazz);
                     mIsEmpty = bean.isEmpty();
-                    if (bean.code == APIException.SUCCESS) {
+                    if (bean.code == 200) {
                         mBuilder.mBaseRequestView.requestSuccess(bean, mBuilder.requestTag == null ? tag : mBuilder.requestTag, mBuilder.pageIndex, mBuilder.pageCount);
                     } else {
                         mBuilder.mBaseRequestView.requestFail(bean, mBuilder.requestTag == null ? tag : mBuilder.requestTag);

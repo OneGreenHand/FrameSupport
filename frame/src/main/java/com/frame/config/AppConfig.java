@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.blankj.utilcode.util.PathUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 
+import java.io.File;
+
 /**
  * 应用程序配置类: 用于保存用户相关信息及设置
  */
@@ -29,8 +31,7 @@ public class AppConfig {
     }
 
     public static final class FilePath {
-        public static final String PHOTO_FOLDER = PathUtils.getExternalAppPicturesPath(); //  /storage/emulated/0/Android/data/package/files/Pictures.
-        public static final String FILE_FOLDER = PathUtils.getExternalAppDownloadPath(); //   /storage/emulated/0/Android/data/package/files/Download.
+        public static final String FILE_FOLDER = PathUtils.getExternalAppDownloadPath() + File.separator; //   /storage/emulated/0/Android/data/package/files/Download/
     }
 
     public static final class ViewPage {

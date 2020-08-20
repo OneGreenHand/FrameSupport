@@ -4,8 +4,8 @@ package com.frame.bean;
  * description: EventBus封装Bean
  */
 public class EventBean<T> {
-    private int code;
-    private T data;
+    public int code;
+    public T data;
 
     public EventBean(int code) {
         this.code = code;
@@ -16,19 +16,4 @@ public class EventBean<T> {
         this.data = data;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 }

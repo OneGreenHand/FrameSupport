@@ -15,12 +15,10 @@ public class ${activityClass}Activity extends BaseSwipeListActivity<${activityCl
 
     @Override
     public void loadMoreListRequest(int page) {
-
     }
 
     @Override
     protected void onRefreshRequest() {
-
     }
 
     @Override
@@ -34,12 +32,10 @@ public class ${activityClass}Activity extends BaseSwipeListActivity<${activityCl
 
     @Override
     public void requestSuccess(BaseBean data,  Object tag, int pageIndex, int pageCount) {
-
     }
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
     }
 
     @Override

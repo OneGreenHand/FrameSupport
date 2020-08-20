@@ -8,15 +8,15 @@ import android.text.TextUtils;
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.PermissionUtils;
-import com.ogh.support.R;
-import com.ogh.support.service.DownloadService;
 import com.frame.util.CommonUtil;
 import com.frame.util.ToastUtil;
+import com.ogh.support.R;
+import com.ogh.support.service.DownloadService;
 
 public class InstructionsUtils {
 
     /**
-     * @param type 操作类别:  0、跳转本地 1、打开外部浏览器 2、通知栏下载APK或打开app 3、打开指定QQ
+     * @param type 操作类别:  0、跳转本地 1、打开外部浏览器 2、通知栏下载APK或打开app 3、打开指定QQ 4、分享文本
      * @param action  跳转意图: 根据type变动，可能是本地activity或者浏览器之类的
      */
     public static void JumpIntention(Context context, int type, String action) {
@@ -32,6 +32,15 @@ public class InstructionsUtils {
                 break;
             case 3:
                 CommonUtil.ContactQQ(context, action);
+                break;
+            case 4:
+                if (!TextUtils.isEmpty(action)) {
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, action);
+                    context.startActivity(Intent.createChooser(intent, "分享至"));
+                }
                 break;
         }
     }
@@ -83,9 +92,8 @@ public class InstructionsUtils {
             String packageName = url.split("&")[0];
             String downUrl = url.split("&")[1];
             new CheckInstallTask(context, packageName, downUrl).execute();
-        } else {
+        } else
             download(context, url);
-        }
     }
 
     /**

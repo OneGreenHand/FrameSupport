@@ -4,9 +4,8 @@ import android.os.Bundle;
 
 public class ${activityClass}Fragment extends BaseFragment {
 
- @Override
+    @Override
     protected void init(Bundle savedInstanceState) {
-
     }
 
     @Override

@@ -121,8 +121,7 @@ public class DownloadService extends Service {
 
     @Download.onTaskRunning
     public void onTaskRunning(DownloadTask task) {
-        long len = task.getFileSize();
-        if (len == 0) {
+        if (task.getFileSize() == 0) {
             getNotification().updateProgress(-1);
         } else
             getNotification().updateProgress(task.getPercent());

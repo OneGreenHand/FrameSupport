@@ -13,7 +13,7 @@ import java.io.File;
 public class AppConfig {
 
     //true打开调试，false关闭调试
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
 
     //通用请求地址
     public static String getUrl() {

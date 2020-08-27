@@ -5,6 +5,17 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/zhuan_pan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellows"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="抽奖大转盘"
+        android:textColor="@color/c_FFFFFF" />
+
+    <TextView
         android:id="@+id/video_web"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

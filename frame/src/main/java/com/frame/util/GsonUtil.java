@@ -32,17 +32,14 @@ public class GsonUtil {
      * Object转成String
      */
     public static String getString(Object object) {
-        Gson gson = buildGson();
-        String gsonString = gson.toJson(object);
-        return gsonString;
+        return buildGson().toJson(object);
     }
 
     /**
      * Object转成Bean
      */
     public static <T> T getBean(Object object, Class<T> clz) {
-        Gson gson = buildGson();
-        T t = gson.fromJson(object.toString(), clz);
+        T t = buildGson().fromJson(object.toString(), clz);
         return t;
     }
 
@@ -50,8 +47,7 @@ public class GsonUtil {
      * 指定JSONObject转成Bean
      */
     public static <T> T getBean(String key, JSONObject json, Class<T> clz) throws JSONException {
-        Gson gson = buildGson();
-        T t = gson.fromJson(json.getString(key), clz);
+        T t = buildGson().fromJson(json.getString(key), clz);
         return t;
     }
 
@@ -59,18 +55,14 @@ public class GsonUtil {
      * Object转成JSONObject
      */
     public static JSONObject getJSONObject(Object object) throws JSONException {
-        Gson gson = buildGson();
-        String jsonStr = gson.toJson(object);
-        JSONObject jsonObject = new JSONObject(jsonStr);
-        return jsonObject;
+        return new JSONObject(buildGson().toJson(object));
     }
 
     /**
      * Object转成List<T>
      */
     public static <T> List<T> getBeanList(Object object, TypeToken<List<T>> typeToken) {
-        Gson gson = buildGson();
-        List<T> t = gson.fromJson(object.toString(), typeToken.getType());
+        List<T> t =  buildGson().fromJson(object.toString(), typeToken.getType());
         return t;
     }
 
@@ -78,8 +70,7 @@ public class GsonUtil {
      * Object转成list中有map的
      */
     public static <T> List<Map<String, T>> getListMap(Object object) {
-        Gson gson = buildGson();
-        List<Map<String, T>> list = gson.fromJson(object.toString(), new TypeToken<List<Map<String, T>>>() {
+        List<Map<String, T>> list = buildGson().fromJson(object.toString(), new TypeToken<List<Map<String, T>>>() {
         }.getType());
         return list;
     }
@@ -88,8 +79,7 @@ public class GsonUtil {
      * Object转成Map
      */
     public static <T> Map<String, T> getMap(Object object) {
-        Gson gson = buildGson();
-        Map<String, T> map = gson.fromJson(object.toString(), new TypeToken<Map<String, T>>() {
+        Map<String, T> map = buildGson().fromJson(object.toString(), new TypeToken<Map<String, T>>() {
         }.getType());
         return map;
     }

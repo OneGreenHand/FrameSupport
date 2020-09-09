@@ -143,7 +143,7 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
         String message = TextUtils.isEmpty(msg) ? getResString(R.string.frame_load_ing) : msg;
         if (progressDialog == null)
             progressDialog = new LoadingDialog(mActivity);
-        progressDialog.setCancle(isCancel);
+        progressDialog.setCancel(isCancel);
         progressDialog.setMsg(message);
         if (!progressDialog.isShowing())
             progressDialog.show();

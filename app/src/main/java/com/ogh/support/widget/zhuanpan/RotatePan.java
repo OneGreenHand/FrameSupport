@@ -140,8 +140,14 @@ public class RotatePan extends View {
      * 初始化数据,防止不写数据闪退问题
      */
     private void initData() {
-        for (int i = 0; i < 8; i++)
-            mNames.add("内容" + i);
+        mNames.add("牛扒");
+        mNames.add("挂面");
+        mNames.add("饺子");
+        mNames.add("泡面");
+        mNames.add("火锅");
+        mNames.add("西餐");
+        mNames.add("包子");
+        mNames.add("喝粥");
         panNum = mNames.size();
     }
 
@@ -154,6 +160,9 @@ public class RotatePan extends View {
         this.panNum = names.size();
         this.mNames.clear();
         this.mNames.addAll(names);
+        InitAngle = 360 / panNum;
+        verPanRadius = 360 / panNum;
+        diffRadius = verPanRadius / 2;
         this.invalidate();
     }
 

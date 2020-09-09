@@ -42,9 +42,8 @@ public class NoScrollViewPager extends ViewPager {
         //return super.onInterceptTouchEvent(ev);//不行,会有细微移动
         if (isScroll) {
             return super.onInterceptTouchEvent(ev);
-        } else {
+        } else
             return false;
-        }
     }
 
     /**
@@ -61,9 +60,8 @@ public class NoScrollViewPager extends ViewPager {
         //但是如果viewpage里面子控件不是viewgroup,还是会调用这个方法.
         if (isScroll) {
             return super.onTouchEvent(ev);
-        } else {
+        } else
             return true;// 可行,消费,拦截事件
-        }
     }
 
     public void setScroll(boolean scroll) {

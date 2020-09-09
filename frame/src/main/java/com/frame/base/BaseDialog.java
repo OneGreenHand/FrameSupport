@@ -8,14 +8,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.frame.R;
-import com.frame.util.CustomClickListener;
-
-import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
+
+import com.blankj.utilcode.util.ScreenUtils;
+import com.frame.R;
+import com.frame.util.CustomClickListener;
+
 import butterknife.ButterKnife;
 
 /**
@@ -55,14 +56,13 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         setCanceledOnTouchOutside(isCancelable);
         setContentView(getLayoutID());
         ButterKnife.bind(this);
-        //必须在setContentView()之后
-        Window window = getWindow();
+        Window window = getWindow(); //必须在setContentView()之后
         if (window != null) {
             WindowManager.LayoutParams attributes = window.getAttributes();
             attributes.width = getWidth();
-            attributes.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            attributes.height = getHeight();
+            attributes.gravity=gravity == 0 ? Gravity.CENTER : gravity;
             window.setAttributes(attributes);
-            window.setGravity(gravity == 0 ? Gravity.CENTER : gravity);
         }
         initView(context);
     }
@@ -78,7 +78,11 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
     }
 
     protected int getWidth() {
-        return ViewGroup.LayoutParams.MATCH_PARENT;
+        return (int) (ScreenUtils.getScreenWidth() * 0.9);
+    }
+
+    protected int getHeight() {
+        return ViewGroup.LayoutParams.WRAP_CONTENT;
     }
 
     protected void initView(Context context) {

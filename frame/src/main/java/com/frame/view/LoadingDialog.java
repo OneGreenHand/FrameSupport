@@ -40,8 +40,8 @@ public class LoadingDialog extends BaseDialog {
         return ViewGroup.LayoutParams.WRAP_CONTENT;
     }
 
-    public void setCancle(boolean isCancle) {
-        setCancelable(isCancle);
-        setCanceledOnTouchOutside(isCancle);
+    public void setCancel(boolean isCancel) {
+        setCancelable(isCancel);
+        setCanceledOnTouchOutside(isCancel);
     }
 }

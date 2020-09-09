@@ -3,7 +3,7 @@
     <string name="frame_tips">提示</string>
     <string name="frame_cancle">取消</string>
     <string name="frame_sure">确定</string>
-    <string name="frame_load_ing">拼命加载中...</string>
+    <string name="frame_load_ing">拼命加载中…</string>
     <string name="frame_view_net_error">当前网络环境较差,请重新加载</string>
     <string name="frame_load_again">重新加载</string>
     <string name="frame_view_no_data">亲,暂时没有相关数据</string>

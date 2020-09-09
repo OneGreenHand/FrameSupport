@@ -22,12 +22,14 @@ public class TipDialog extends BaseDialog {
     TextView content;
     @BindView(R2.id.cancel)
     TextView cancel;
-    @BindView(R2.id.line_view)
-    View line_view;
     @BindView(R2.id.sure)
     TextView sure;
     private SureCalk sureCalk;
     private CancelCalk cancelCalk;
+
+    public TipDialog(Context context) {
+        super(context);
+    }
 
     public void setOnSureClick(SureCalk sureCalk) {
         this.sureCalk = sureCalk;
@@ -51,17 +53,15 @@ public class TipDialog extends BaseDialog {
     public void setCancel(boolean canCancel) {
         setCancelable(canCancel);
         setCanceledOnTouchOutside(canCancel);
-        if (!canCancel) {
-            cancel.setVisibility(View.GONE);
-            line_view.setVisibility(View.GONE);
-        } else {
-            cancel.setVisibility(View.VISIBLE);
-            line_view.setVisibility(View.VISIBLE);
-        }
+        cancel.setVisibility(canCancel ? View.VISIBLE : View.GONE);
     }
 
     public void setTitle(String msg) {
         title.setText(msg);
+    }
+
+    public void setColorTitle(String msg) {
+        title.setText(CommonUtil.setHtmlColor(msg));
     }
 
     public void setContent(String msg) {
@@ -76,9 +76,6 @@ public class TipDialog extends BaseDialog {
         sure.setText(msg);
     }
 
-    /**
-     * 设置带颜色的文字(html)
-     */
     public void setSureColorText(String msg) {
         sure.setText(CommonUtil.setHtmlColor(msg));
     }
@@ -87,6 +84,9 @@ public class TipDialog extends BaseDialog {
         cancel.setText(msg);
     }
 
+    public void setCancelColorText(String msg) {
+        cancel.setText(CommonUtil.setHtmlColor(msg));
+    }
 
     @OnClick({R2.id.cancel, R2.id.sure})
     public void onViewClicked(View view) {
@@ -100,10 +100,6 @@ public class TipDialog extends BaseDialog {
                 sureCalk.OnClick(view);
             dismiss();
         }
-    }
-
-    public TipDialog(Context context) {
-        super(context);
     }
 
     @Override

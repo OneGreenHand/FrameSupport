@@ -121,7 +121,7 @@ public class PriceUtil {
         if (distance.length() <= 3)
             distance = m + "m";
         else
-            distance = rounding(((m / 100) * 0.1), 1) + "km";
+            distance = rounding(m / 100 * 0.1, 1) + "km";
         return distance;
     }
 

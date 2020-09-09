@@ -87,10 +87,14 @@ public class CommonUtil {
     private static long lastClickTime;
 
     public static boolean isFastClick() {
-        long time = System.currentTimeMillis();
-        if (time - lastClickTime <= 1000)
+        return isFastClick(1000);
+    }
+
+    public static boolean isFastClick(long time) {
+        long nowTime = System.currentTimeMillis();
+        if (nowTime - lastClickTime <= time)
             return true;
-        lastClickTime = time;
+        lastClickTime = nowTime;
         return false;
     }
 
@@ -140,7 +144,7 @@ public class CommonUtil {
     /**
      * 手机号用****号隐藏中间数字
      */
-    public static String settingphone(String phone) {
+    public static String setTingPhone(String phone) {
         if (TextUtils.isEmpty(phone)) return "";
         return phone.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
     }
@@ -190,7 +194,7 @@ public class CommonUtil {
     /**
      * 邮箱用****号隐藏前面的字母
      */
-    public static String settingemail(String email) {
+    public static String setTingEmail(String email) {
         if (TextUtils.isEmpty(email)) return "";
         return email.replaceAll("(\\w?)(\\w+)(\\w)(@\\w+\\.[a-z]+(\\.[a-z]+)?)", "$1****$3$4");
     }

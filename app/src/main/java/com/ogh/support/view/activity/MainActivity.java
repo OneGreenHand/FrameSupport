@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
         mDatas.add(new HomeFragment());
         mDatas.add(new MineFragment());
         //  viewPager.setUserInputEnabled(false);//禁止滑动
-        //   viewPager.setOffscreenPageLimit(mDatas.size());//设置缓存,数量少的时候可不设置
+        //   viewPager.setOffscreenPageLimit(mDatas.size());//设置缓存,数量超过2可设置
         viewPager.setAdapter(new FragmentAdapter(this, mDatas));
         initViewPagerChangeListener();
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

@@ -34,8 +34,9 @@ ext {
     // 依赖具体版本
     deps = [
             suport                 : [
-                    appcompat: 'androidx.appcompat:appcompat:1.2.0-rc01',
-                    design   : 'com.google.android.material:material:1.1.0-alpha08',
+                    design            : 'com.google.android.material:material:1.2.1',
+                    appcompat         : 'androidx.appcompat:appcompat:1.3.0-alpha02',
+                    swiperefreshlayout: 'androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01',
             ],
             retrofit2              : [
                     retrofit       : "com.squareup.retrofit2:retrofit:${depVersion.retrofit}",

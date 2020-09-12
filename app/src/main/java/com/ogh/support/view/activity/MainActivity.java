@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.frame.base.activity.BaseActivity;
@@ -28,7 +28,7 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.view_pager)
-    ViewPager viewPager;
+    ViewPager2 viewPager;
     @BindView(R.id.navigation_view)
     BottomNavigationView navigationView;
     private List<Fragment> mDatas = new ArrayList<>();
@@ -39,8 +39,9 @@ public class MainActivity extends BaseActivity {
     protected void init(Bundle savedInstanceState) {
         mDatas.add(new HomeFragment());
         mDatas.add(new MineFragment());
-        viewPager.setOffscreenPageLimit(mDatas.size());
-        viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), mDatas));
+        //  viewPager.setUserInputEnabled(false);//禁止滑动
+        //   viewPager.setOffscreenPageLimit(mDatas.size());//设置缓存,数量少的时候可不设置
+        viewPager.setAdapter(new FragmentAdapter(this, mDatas));
         initViewPagerChangeListener();
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -58,22 +59,15 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initViewPagerChangeListener() {
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
+                super.onPageSelected(position);
                 if (position == 1)//第二个为悬浮按钮
                     position++;
                 MenuItem menuItem = navigationView.getMenu().getItem(position);
                 if (menuItem != null)
                     menuItem.setChecked(true);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
             }
         });
     }

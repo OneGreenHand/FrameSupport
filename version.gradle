@@ -19,7 +19,6 @@ ext {
             okhttp_logging     : "4.7.2",
             utilcode           : "1.29.0",
             autosize           : "1.2.1",
-            eventbus           : "3.2.0",
             glide              : "4.11.0",
             multidex           : "2.0.1",
             butterknife        : "10.2.3",
@@ -76,7 +75,6 @@ ext {
             autodispose            : "com.uber.autodispose2:autodispose-androidx-lifecycle:${depVersion.autodispose}",
             //微信支付
             wxpay                  : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+",
-            eventbus               : "org.greenrobot:eventbus:${depVersion.eventbus}",
             okhttp_logging         : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp_logging}",
     ]
 }

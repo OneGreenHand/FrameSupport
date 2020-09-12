@@ -9,18 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
+import com.blankj.utilcode.util.BusUtils;
 import com.frame.R;
 import com.frame.base.BaseView;
-import com.frame.bean.EventBean;
 import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.gyf.immersionbar.components.SimpleImmersionProxy;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
 
 /**
@@ -41,8 +38,8 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
         rootView = inflater.inflate(getLayoutID(), container, false);
         ButterKnife.bind(this, rootView);//绑定framgent
         initCommon();
-        if (isRegisterEventBus())
-            EventBus.getDefault().register(this);
+        if (isRegisterBus())
+            BusUtils.register(this);
         return rootView;
     }
 
@@ -70,9 +67,9 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
     }
 
     /**
-     * 是否需要注册EventBus
+     * 是否需要注册BusUtils
      */
-    protected boolean isRegisterEventBus() {
+    protected boolean isRegisterBus() {
         return false;
     }
 
@@ -107,32 +104,6 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
 
     @Override
     public void initImmersionBar() {
-
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBusCome(EventBean event) {
-        if (event != null)
-            receiveEvent(event);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onStickyEventBusCome(EventBean event) {
-        if (event != null)
-            receiveStickyEvent(event);
-        EventBus.getDefault().removeStickyEvent(event);//手动移除,不然还是会接收到
-    }
-
-    /**
-     * 接收到分发的普通事件
-     */
-    protected void receiveEvent(EventBean event) {
-    }
-
-    /**
-     * 接受到分发的粘性事件
-     */
-    protected void receiveStickyEvent(EventBean event) {
     }
 
     /**
@@ -162,8 +133,8 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
         super.onDestroy();
         //页面销毁时隐藏dialog，否则重新打开页面时可能会报java.lang.IllegalArgumentException: View not attached to window manager
         dismissLoadingDialog();
-        if (isRegisterEventBus())
-            EventBus.getDefault().unregister(this);
+        if (isRegisterBus())
+            BusUtils.unregister(this);
         if (immersionBarEnabled())
             mSimpleImmersionProxy.onDestroy();
     }

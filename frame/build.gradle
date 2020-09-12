@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: "com.blankj.bus"
 apply plugin: 'com.jakewharton.butterknife'
 android {
     def version = rootProject.ext.versions
@@ -44,8 +45,6 @@ dependencies {
     api dependencies.RecyclerViewAdapter
     //工具类
     api dependencies.utilcode
-    //eventbus
-    api dependencies.eventbus
     //butterknife
     api dependencies.butterknife.butterknife
     annotationProcessor dependencies.butterknife.compiler

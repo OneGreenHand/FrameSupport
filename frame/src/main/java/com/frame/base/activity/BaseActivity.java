@@ -8,18 +8,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.blankj.utilcode.util.BusUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.frame.R;
 import com.frame.base.BaseView;
-import com.frame.bean.EventBean;
 import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.ImmersionBar;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 
 
@@ -41,8 +38,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
         if (isImmersionBarEnabled())
             initImmersionBar();
-        if (isRegisterEventBus())
-            EventBus.getDefault().register(this);
+        if (isRegisterBus())
+            BusUtils.register(this);
     }
 
     protected void initCommon() {
@@ -58,6 +55,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected int getResInt(int res) {
         return getResources().getInteger(res);
+    }
+
+    /**
+     * 是否需要注册BusUtils
+     */
+    protected boolean isRegisterBus() {
+        return false;
     }
 
     /**
@@ -100,39 +104,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      */
     protected void initImmersionBar(int color) {
         ImmersionBar.with(this).statusBarColor(color).autoStatusBarDarkModeEnable(true, 0.2f).fitsSystemWindows(true).init();
-    }
-
-    /**
-     * 是否需要注册EventBus
-     */
-    protected boolean isRegisterEventBus() {
-        return false;
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBusCome(EventBean event) {
-        if (event != null)
-            receiveEvent(event);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onStickyEventBusCome(EventBean event) {
-        if (event != null) {
-            receiveStickyEvent(event);
-            EventBus.getDefault().removeStickyEvent(event);//手动移除,不然还是会接收到
-        }
-    }
-
-    /**
-     * 接收到分发的普通事件
-     */
-    protected void receiveEvent(EventBean event) {
-    }
-
-    /**
-     * 接受到分发的粘性事件
-     */
-    protected void receiveStickyEvent(EventBean event) {
     }
 
     @Override
@@ -209,8 +180,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private void destroy() {
         if (!isDestroyed) { // 回收资源
             isDestroyed = true;
-            if (isRegisterEventBus())
-                EventBus.getDefault().unregister(this);
+            if (isRegisterBus())
+                BusUtils.unregister(this);
         }
     }
 }

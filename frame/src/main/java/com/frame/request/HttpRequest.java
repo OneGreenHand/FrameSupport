@@ -48,7 +48,7 @@ public class HttpRequest {
             for (String key : params.keySet())  //添加请求参数
                 builder.addFormDataPart(key, params.get(key).toString());
         }
-        if (!fileList.isEmpty())
+        if (fileList != null && !fileList.isEmpty())
             if (!TextUtils.isEmpty(mutilFileKey)) {//类型: photos[0]、photos[1]、photos[2]
                 int i = 0;
                 for (FileInfoBean fileInfoBean : fileList) {

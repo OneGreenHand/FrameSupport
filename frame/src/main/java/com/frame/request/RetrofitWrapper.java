@@ -23,6 +23,7 @@ public class RetrofitWrapper {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(time, TimeUnit.SECONDS)
                 .readTimeout(time, TimeUnit.SECONDS)
+                .writeTimeout(time, TimeUnit.SECONDS)
                 //.addInterceptor(new HttpLoggingInterceptor())//此处设置的拦截器用来添加统一的请求头
                 //.addInterceptor(new ParamInterceptor())//添加公共请求参数
                 .protocols(Collections.singletonList(Protocol.HTTP_1_1));//解决协议错误问题

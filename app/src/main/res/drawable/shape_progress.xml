@@ -12,7 +12,7 @@
                 <corners
                     android:bottomLeftRadius="3dp"
                     android:topLeftRadius="3dp" />
-                <solid android:color="@color/colorPrimary" />
+                <solid android:color="#3BC68C" />
             </shape>
         </clip>
     </item>

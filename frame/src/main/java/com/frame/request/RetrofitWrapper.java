@@ -18,8 +18,11 @@ public class RetrofitWrapper {
 
     private static volatile RetrofitWrapper instance = null;
     private Retrofit retrofit;
+    private static int NOW_TIME_OUT = 10;//当前的超时时长
+    private static int ALL_TIME_OUT = 10;//总超时时长
 
     private RetrofitWrapper(int time) {
+        NOW_TIME_OUT = time;
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(time, TimeUnit.SECONDS)
                 .readTimeout(time, TimeUnit.SECONDS)
@@ -38,7 +41,7 @@ public class RetrofitWrapper {
     }
 
     public static RetrofitWrapper getInstance(int time, boolean isRelease) {
-        if (isRelease)//重置
+        if (isRelease || NOW_TIME_OUT != ALL_TIME_OUT)//需要重置或超时时长不等于10秒(目的是为了仅单次重置有效)
             instance = null;
         if (instance == null) {
             synchronized (RetrofitWrapper.class) {
@@ -50,7 +53,7 @@ public class RetrofitWrapper {
     }
 
     public static RetrofitWrapper getInstance() {
-        return getInstance(10, false);
+        return getInstance(ALL_TIME_OUT, false);
     }
 
     public <T> T createApi(Class<T> clazz) {

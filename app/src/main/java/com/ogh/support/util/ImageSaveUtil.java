@@ -24,9 +24,9 @@ import java.io.OutputStream;
 public class ImageSaveUtil {
 
     /**
+     * 保存图片到公共目录
      * 29 以下，需要提前申请文件读写权限
      * 29及29以上的，不需要权限
-     * <p>
      * 保存的文件在 DCIM 目录下
      *
      * @param context 上下文
@@ -37,7 +37,7 @@ public class ImageSaveUtil {
      * @return 文件的 uri
      */
     @Nullable
-    public static Uri save2Album(Context context, Bitmap bitmap, Bitmap.CompressFormat format, int quality, boolean recycle) {
+    public static Uri saveAlbum(Context context, Bitmap bitmap, Bitmap.CompressFormat format, int quality, boolean recycle) {
         String suffix;
         if (Bitmap.CompressFormat.JPEG == format)
             suffix = "JPG";
@@ -63,14 +63,14 @@ public class ImageSaveUtil {
             return uri;
         } else {
             // Android 10 使用
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
-            contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
             Uri contentUri;
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
             } else
                 contentUri = MediaStore.Images.Media.INTERNAL_CONTENT_URI;
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
+            contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
             contentValues.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_DCIM + "/");
             // 告诉系统，文件还未准备好，暂时不对外暴露
             contentValues.put(MediaStore.MediaColumns.IS_PENDING, 1);

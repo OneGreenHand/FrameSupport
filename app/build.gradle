@@ -79,6 +79,8 @@ android {
 dependencies {
     def dependencies = rootProject.ext.deps
     implementation project(':frame')
+    //测试用的
+    implementation 'androidx.test.ext:junit:1.1.2'
     //LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
     //分Dex

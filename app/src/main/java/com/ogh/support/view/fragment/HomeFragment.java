@@ -12,7 +12,6 @@ import com.frame.util.ToastUtil;
 import com.ogh.support.R;
 import com.ogh.support.util.InstructionsUtils;
 import com.ogh.support.view.activity.WebActivity;
-import com.ogh.support.view.activity.ZhuanPanActivity;
 
 import butterknife.OnClick;
 
@@ -27,12 +26,9 @@ public class HomeFragment extends BaseFragment {
         return R.layout.fragment_home;
     }
 
-    @OnClick({R.id.zhuan_pan, R.id.video_web, R.id.download_apk, R.id.clear_download_apk})
+    @OnClick({ R.id.video_web, R.id.download_apk, R.id.clear_download_apk})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.zhuan_pan:
-                ZhuanPanActivity.openActivity(mActivity);
-                break;
             case R.id.video_web:
                 WebActivity.openActivity(mActivity);
                 break;

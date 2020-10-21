@@ -94,7 +94,7 @@ public class PriceUtil {
         if (TextUtils.isEmpty(price) || price.trim().isEmpty())
             return "0";
         else
-            num = subZeroAndDot(CalculUtil.div(price, bili + "", 2));
+            num = subZeroAndDot(CalculUtil.div(Double.parseDouble(price), bili , 2));
         return num;
     }
 
@@ -121,7 +121,7 @@ public class PriceUtil {
         if (distance.length() <= 3)
             distance = m + "m";
         else
-            distance = rounding(m / 100 * 0.1, 1) + "km";
+            distance = rounding(((m / 100) * 0.1), 1) + "km";
         return distance;
     }
 

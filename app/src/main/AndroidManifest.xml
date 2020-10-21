@@ -71,9 +71,6 @@
             android:name=".view.activity.NoDataExampleActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.activity.ZhuanPanActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".view.activity.WebActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"

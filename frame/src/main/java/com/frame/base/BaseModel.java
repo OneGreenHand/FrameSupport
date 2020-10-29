@@ -243,13 +243,13 @@ public class BaseModel {
             return this;
         }
 
-        //设置加载弹框文字
-        public Builder setMsgType(String msg) {
+        //设置加载框文字
+        public Builder setLoadMsg(String msg) {
             mMsg = msg;
             return this;
         }
 
-        //可用于多个baseben情况区分网络请求
+        //设置请求标题(用于区分请求)
         public Builder setRequestTag(Object requestTag) {
             this.requestTag = requestTag;
             return this;

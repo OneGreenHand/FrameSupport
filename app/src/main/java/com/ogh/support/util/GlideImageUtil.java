@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
@@ -63,7 +62,7 @@ public class GlideImageUtil {
     }
 
     /**
-     * 加载自适应的图片,返回的多大就显示多大
+     * 等比例缩放图片
      */
     public static void showWrapImage(Context context, String url, ImageView view) {
         if (isDestroy(context))
@@ -75,18 +74,21 @@ public class GlideImageUtil {
                     @Override
                     public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                         view.setImageBitmap(resource);
-                        float width = ScreenUtils.getScreenWidth();
-                        float scale = width / resource.getWidth();
-                        int afterWidth = (int) (resource.getWidth() * scale);
-                        int afterHeight = (int) (resource.getHeight() * scale);
-                        ViewGroup.LayoutParams lp = view.getLayoutParams();
-                        lp.width = afterWidth;
-                        lp.height = afterHeight;
-                        view.setLayoutParams(lp);
+                        //获取原图的宽高
+                        int width = resource.getWidth();
+                        int height = resource.getHeight();
+                        //获取imageView的宽
+                        int imageViewWidth = view.getWidth();
+                        //计算缩放比例
+                        float sy = (float) (imageViewWidth * 0.1) / (float) (width * 0.1);
+                        //计算图片等比例放大后的高
+                        int imageViewHeight = (int) (height * sy);
+                        ViewGroup.LayoutParams params = view.getLayoutParams();
+                        params.height = imageViewHeight;
+                        view.setLayoutParams(params);
                     }
                 });
     }
-
 
     private static RequestOptions getRequestOptions() {
         return new RequestOptions()

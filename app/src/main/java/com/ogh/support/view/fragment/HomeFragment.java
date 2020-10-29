@@ -26,7 +26,7 @@ public class HomeFragment extends BaseFragment {
         return R.layout.fragment_home;
     }
 
-    @OnClick({ R.id.video_web, R.id.download_apk, R.id.clear_download_apk})
+    @OnClick({R.id.video_web, R.id.download_apk, R.id.clear_download_apk})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.video_web:
@@ -42,8 +42,8 @@ public class HomeFragment extends BaseFragment {
                 }
                 break;
             case R.id.clear_download_apk:
-                if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER + "/" + "tim.apk")) {
-                    if (FileUtils.delete(AppConfig.FilePath.FILE_FOLDER + "/" + "tim.apk")) {
+                if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER + "tim.apk")) {
+                    if (FileUtils.delete(AppConfig.FilePath.FILE_FOLDER  + "tim.apk")) {
                         ToastUtil.showShortToast("文件已删除,可以重新下载了");
                     } else
                         ToastUtil.showShortToast("文件删除失败");

@@ -42,7 +42,7 @@ public class BaseWebView extends WebView {
     @SuppressLint("SetJavaScriptEnabled")
     public void init(Context context) {
         WebSettings webSettings = getSettings();
-        webSettings.setLoadsImagesAutomatically(Build.VERSION.SDK_INT >= 19);//设置自动加载图片
+        webSettings.setLoadsImagesAutomatically(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT);//设置自动加载图片
         webSettings.setJavaScriptEnabled(true); // 设置支持javascript脚本
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);//设置允许js弹出alert对话框
         webSettings.setUseWideViewPort(true);  //设置webview推荐使用的窗口，使html界面自适应屏幕

@@ -20,7 +20,7 @@ public class Solve7PopupWindow extends PopupWindow {
 
     @Override
     public void showAsDropDown(View anchor) {
-        if (Build.VERSION.SDK_INT >= 24) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Rect rect = new Rect();
             anchor.getGlobalVisibleRect(rect);
             int h = anchor.getResources().getDisplayMetrics().heightPixels - rect.bottom;
@@ -31,7 +31,7 @@ public class Solve7PopupWindow extends PopupWindow {
 
     @Override
     public void showAsDropDown(View anchor, final int xoff, final int yoff) {
-        if (Build.VERSION.SDK_INT >= 24) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Rect rect = new Rect();
             anchor.getGlobalVisibleRect(rect);
             int h = anchor.getResources().getDisplayMetrics().heightPixels - rect.bottom + Math.abs(yoff);
@@ -42,7 +42,7 @@ public class Solve7PopupWindow extends PopupWindow {
 
     @Override
     public void showAsDropDown(View anchor, final int xoff, final int yoff, final int gravity) {
-        if (Build.VERSION.SDK_INT >= 24) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Rect rect = new Rect();
             anchor.getGlobalVisibleRect(rect);
             int h = anchor.getResources().getDisplayMetrics().heightPixels - rect.bottom + Math.abs(yoff);

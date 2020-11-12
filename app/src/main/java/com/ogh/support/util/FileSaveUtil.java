@@ -32,7 +32,7 @@ public class FileSaveUtil {
     public static Uri saveTextFile(Context mContext, String content) {
         if (TextUtils.isEmpty(content))
             return null;
-        if (Build.VERSION.SDK_INT < 29) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             if (!isGranted(mContext)) {
                 Log.e("FileSaveUtil", "save to file need storage permission");
                 return null;

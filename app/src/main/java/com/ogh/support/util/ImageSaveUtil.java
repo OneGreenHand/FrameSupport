@@ -44,7 +44,7 @@ public class ImageSaveUtil {
         else
             suffix = format.name();
         String fileName = System.currentTimeMillis() + "_" + quality + "." + suffix;
-        if (Build.VERSION.SDK_INT < 29) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             if (!isGranted(context)) {
                 Log.e("ImageUtils", "save to album need storage permission");
                 return null;

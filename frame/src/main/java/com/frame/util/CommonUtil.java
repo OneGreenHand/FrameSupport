@@ -7,21 +7,17 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-
-import androidx.fragment.app.Fragment;
-import androidx.core.app.NotificationManagerCompat;
-
 import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.TextView;
+
+import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.PermissionUtils;
-import com.frame.FrameApplication;
-import com.frame.R;
 import com.frame.view.TipDialog;
 
 import java.util.regex.Matcher;
@@ -60,10 +56,10 @@ public class CommonUtil {
             dialog.setContent("系统通知未开启,将不能及时收到消息通知,请前往开启");
             dialog.setOnSureClick(view -> {
                 Intent intent = new Intent();
-                if (Build.VERSION.SDK_INT >= 26) { // android 8.0引导
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // android 8.0引导
                     intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
                     intent.putExtra("android.provider.extra.APP_PACKAGE", context.getPackageName());
-                } else if (Build.VERSION.SDK_INT >= 21) {  // android 5.0-7.0
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {  // android 5.0-7.0
                     intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
                     intent.putExtra("app_package", context.getPackageName());
                     intent.putExtra("app_uid", context.getApplicationInfo().uid);
@@ -77,25 +73,6 @@ public class CommonUtil {
             dialog.show();
         }
         return isOpened;
-    }
-
-    /**
-     * 判断控件点击事件的触发事件间隔，防止用户多次点击
-     *
-     * @return true重复点击 false为不是
-     */
-    private static long lastClickTime;
-
-    public static boolean isFastClick() {
-        return isFastClick(1000);
-    }
-
-    public static boolean isFastClick(long time) {
-        long nowTime = System.currentTimeMillis();
-        if (nowTime - lastClickTime <= time)
-            return true;
-        lastClickTime = nowTime;
-        return false;
     }
 
     /**

@@ -17,9 +17,6 @@ android {
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a'
         }
-        javaCompileOptions {   //解决AndroidStudio 3.0的问题
-            annotationProcessorOptions { includeCompileClasspath = true }
-        }
         manifestPlaceholders = [CHANNEL: "MeiZu",]
 //可用于三方sdk使用，例如极光推送的参数，可在AndroidManifest中使用，最后获取到这个参数
     }
@@ -102,7 +99,7 @@ dependencies {
     annotationProcessor dependencies.glide.compiler
     annotationProcessor dependencies.butterknife.compiler
     //微信支付
-    implementation dependencies.wxpay
+    implementation "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+"
     // 支付宝支付
     implementation(name: 'alipaySdk-15.7.7-20200702160044', ext: 'aar')
 }

@@ -73,8 +73,6 @@ ext {
             walle                  : "com.meituan.android.walle:library:${depVersion.walle}",
             //绑定生命周期(rxjava)
             autodispose            : "com.uber.autodispose2:autodispose-androidx-lifecycle:${depVersion.autodispose}",
-            //微信支付
-            wxpay                  : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+",
             okhttp_logging         : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp_logging}",
     ]
 }

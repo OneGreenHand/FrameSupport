@@ -5,18 +5,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.frame.R;
-import com.frame.R2;
 import com.frame.base.BaseDialog;
-
-import butterknife.BindView;
 
 
 /**
  * 加载框
  */
 public class LoadingDialog extends BaseDialog {
-    @BindView(R2.id.loading_text)
-    TextView loadingText;
+    private TextView loadingText;
 
     public LoadingDialog(Context context) {
         super(context, R.style.DialogStyle);
@@ -24,6 +20,7 @@ public class LoadingDialog extends BaseDialog {
 
     @Override
     protected void initView(Context context) {
+        loadingText = findViewById(R.id.loading_text);
     }
 
     @Override

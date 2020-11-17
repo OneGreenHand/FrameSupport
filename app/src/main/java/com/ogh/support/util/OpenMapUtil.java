@@ -1,4 +1,4 @@
-package com.frame.util;
+package com.ogh.support.util;
 
 import android.content.Context;
 import android.content.Intent;

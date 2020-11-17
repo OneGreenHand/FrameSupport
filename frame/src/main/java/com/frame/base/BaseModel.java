@@ -8,7 +8,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.frame.bean.BaseBean;
 import com.frame.bean.FileInfoBean;
-import com.frame.config.AppConfig;
+import com.frame.config.BaseConfig;
 import com.frame.request.HttpRequest;
 import com.frame.util.GsonUtil;
 import com.frame.util.ToastUtil;
@@ -87,7 +87,7 @@ public class BaseModel {
         if (!NetworkUtils.isWifiConnected() && !NetworkUtils.isConnected()) { //检查网络是否连接
             if (mBuilder.mBaseRequestView instanceof BaseSwipeView) {
                 ((BaseSwipeView) mBuilder.mBaseRequestView).resetRefreshView();
-                if (mBuilder.pageIndex != AppConfig.ViewPage.START_INDEX)
+                if (mBuilder.pageIndex != BaseConfig.ViewPage.START_INDEX)
                     ((BaseSwipeListView) mBuilder.mBaseRequestView).loadMoreFailView();
             }
             if (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW)
@@ -151,7 +151,7 @@ public class BaseModel {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    if (AppConfig.DEBUG) {
+                    if (BaseConfig.DEBUG) {
                         LogUtils.e("数据解析异常", e.getMessage() + "");
                         throw new RuntimeException("数据解析异常");
                     } else
@@ -180,7 +180,7 @@ public class BaseModel {
         mBuilder.mBaseRequestView.requestError(e, tag);
         if (mBuilder.mBaseRequestView instanceof BaseSwipeView) {
             ((BaseSwipeView) mBuilder.mBaseRequestView).resetRefreshView();
-            if (mBuilder.pageIndex != AppConfig.ViewPage.START_INDEX)
+            if (mBuilder.pageIndex != BaseConfig.ViewPage.START_INDEX)
                 ((BaseSwipeListView) mBuilder.mBaseRequestView).loadMoreFailView();
         }
     }
@@ -198,8 +198,8 @@ public class BaseModel {
         //上传文件
         private List<FileInfoBean> mFileInfoBeans;
         private String multiFileKey;
-        private int pageCount = AppConfig.ViewPage.PAGE_COUNT;//每页请求的数据量
-        private int pageIndex = AppConfig.ViewPage.START_INDEX;//当前页码数
+        private int pageCount = BaseConfig.ViewPage.PAGE_COUNT;//每页请求的数据量
+        private int pageIndex = BaseConfig.ViewPage.START_INDEX;//当前页码数
 
         //绑定界面就用这构造
         public Builder(BaseRequestView baseRequestView) {

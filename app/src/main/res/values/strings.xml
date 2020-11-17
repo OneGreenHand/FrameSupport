@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">FrameSupport</string>
+    <string name="tips">提示</string>
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
     <string name="home">首页</string>
     <string name="mine">我的</string>
-    <string name="sure">确定</string>
     <string name="update_download_progress">已下载:%1$d%%</string>
     <string name="downloaded">%1$d%%</string>
     <string name="wx_appid">wx87c75a5bc154737c</string>

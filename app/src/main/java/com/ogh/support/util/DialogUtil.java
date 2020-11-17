@@ -1,4 +1,4 @@
-package com.frame.util;
+package com.ogh.support.util;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.frame.R;
+import com.ogh.support.R;
 
 
 /**

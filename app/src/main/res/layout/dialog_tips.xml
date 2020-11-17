@@ -13,7 +13,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:text="@string/frame_tips"
+        android:text="@string/tips"
         android:textColor="#333333"
         android:textSize="16dp" />
 
@@ -25,7 +25,7 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:minHeight="100dp"
-        android:text="@string/frame_no_data"
+        android:text="@string/app_name"
         android:textColor="#333333"
         android:textSize="14dp" />
 
@@ -43,7 +43,7 @@
             android:background="@drawable/shape_cancel"
             android:gravity="center"
             android:singleLine="true"
-            android:text="@string/frame_cancle"
+            android:text="@string/cancel"
             android:textColor="#ffffff"
             android:textSize="15dp" />
 
@@ -54,7 +54,7 @@
             android:background="@drawable/shape_sure"
             android:gravity="center"
             android:singleLine="true"
-            android:text="@string/frame_sure"
+            android:text="@string/sure"
             android:textColor="#ffffff"
             android:textSize="15dp" />
     </LinearLayout>

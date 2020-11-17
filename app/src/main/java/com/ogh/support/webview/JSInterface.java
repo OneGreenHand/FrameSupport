@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.DeviceUtils;
 import com.frame.FrameApplication;
 import com.ogh.support.util.ChannelUtils;
 import com.frame.util.ToastUtil;
-import com.frame.view.TipDialog;
+import com.ogh.support.view.dialog.TipDialog;
 
 
 /**

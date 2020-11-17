@@ -1,13 +1,12 @@
-package com.frame.view;
+package com.ogh.support.view.dialog;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.frame.R;
-import com.frame.R2;
 import com.frame.base.BaseDialog;
-import com.frame.util.CommonUtil;
+import com.ogh.support.R;
+import com.ogh.support.util.CommonUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -16,13 +15,13 @@ import butterknife.OnClick;
  * 通用提示框
  */
 public class TipDialog extends BaseDialog {
-    @BindView(R2.id.title)
+    @BindView(R.id.title)
     TextView title;
-    @BindView(R2.id.content)
+    @BindView(R.id.content)
     TextView content;
-    @BindView(R2.id.cancel)
+    @BindView(R.id.cancel)
     TextView cancel;
-    @BindView(R2.id.sure)
+    @BindView(R.id.sure)
     TextView sure;
     private SureCalk sureCalk;
     private CancelCalk cancelCalk;
@@ -88,17 +87,19 @@ public class TipDialog extends BaseDialog {
         cancel.setText(CommonUtil.setHtmlColor(msg));
     }
 
-    @OnClick({R2.id.cancel, R2.id.sure})
+    @OnClick({R.id.cancel, R.id.sure})
     public void onViewClicked(View view) {
-        int v = view.getId();
-        if (v == R.id.cancel) {
-            if (cancelCalk != null)
-                cancelCalk.OnClick(view);
-            dismiss();
-        } else if (v == R.id.sure) {
-            if (sureCalk != null)
-                sureCalk.OnClick(view);
-            dismiss();
+        switch (view.getId()) {
+            case R.id.cancel:
+                if (cancelCalk != null)
+                    cancelCalk.OnClick(view);
+                dismiss();
+                break;
+            case R.id.sure:
+                if (sureCalk != null)
+                    sureCalk.OnClick(view);
+                dismiss();
+                break;
         }
     }
 

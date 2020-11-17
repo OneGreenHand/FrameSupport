@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.PermissionUtils;
-import com.frame.util.CommonUtil;
 import com.frame.util.ToastUtil;
 import com.ogh.support.R;
 import com.ogh.support.service.DownloadService;

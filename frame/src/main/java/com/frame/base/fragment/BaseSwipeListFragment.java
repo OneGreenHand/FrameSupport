@@ -15,7 +15,7 @@ import com.frame.base.BasePresenter;
 import com.frame.base.BaseQuickHolder;
 import com.frame.base.BaseSwipeListView;
 import com.frame.bean.BaseBean;
-import com.frame.config.AppConfig;
+import com.frame.config.BaseConfig;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
 
     protected RecyclerView mRecyclerView;
     protected BaseQuickAdapter<AB, BaseQuickHolder> mBaseAdapter;
-    private int page = AppConfig.ViewPage.START_INDEX;
+    private int page = BaseConfig.ViewPage.START_INDEX;
 
     @Override
     protected void initCommon() {
@@ -47,16 +47,16 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
 
     //分组布局使用
     protected void notifyAdapterStatus(List<AB> data, int dataSize, int pageIndex, int pageCount) {
-        if (pageIndex == AppConfig.ViewPage.START_INDEX) {
+        if (pageIndex == BaseConfig.ViewPage.START_INDEX) {
             if (data == null || data.isEmpty()) {
                 if (UserAdapterEmpty())
                     mBaseAdapter.setList(null);
                 return;
             }
-            page = AppConfig.ViewPage.START_INDEX;
+            page = BaseConfig.ViewPage.START_INDEX;
             if (dataSize >= pageCount) {
                 getLoadMoreModule().setOnLoadMoreListener(() -> {
-                    if (page > AppConfig.ViewPage.START_INDEX)
+                    if (page > BaseConfig.ViewPage.START_INDEX)
                         loadMoreListRequest(page);
                     else
                         getLoadMoreModule().setEnableLoadMore(false);

@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.frame.widget.roundedimageview;
+package com.ogh.support.widget.roundedimageview;
 
 import androidx.annotation.IntDef;
 

@@ -7,7 +7,7 @@ import android.text.TextUtils;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.FileUtils;
-import com.frame.config.AppConfig;
+import com.ogh.support.config.AppConfig;
 
 public class NotificationClickReceiver extends BroadcastReceiver {
     @Override

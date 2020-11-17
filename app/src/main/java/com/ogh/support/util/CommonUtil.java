@@ -1,4 +1,4 @@
-package com.frame.util;
+package com.ogh.support.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,7 +18,8 @@ import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.PermissionUtils;
-import com.frame.view.TipDialog;
+import com.frame.util.ToastUtil;
+import com.ogh.support.view.dialog.TipDialog;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

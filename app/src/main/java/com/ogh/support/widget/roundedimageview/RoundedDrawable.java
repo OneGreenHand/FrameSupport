@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.frame.widget.roundedimageview;
+package com.ogh.support.widget.roundedimageview;
 
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -35,8 +35,6 @@ import android.graphics.drawable.LayerDrawable;
 import android.widget.ImageView.ScaleType;
 
 import androidx.annotation.ColorInt;
-
-import com.blankj.utilcode.util.LogUtils;
 
 import java.util.HashSet;
 import java.util.Set;

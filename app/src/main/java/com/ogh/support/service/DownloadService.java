@@ -6,16 +6,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.arialyy.annotations.Download;
 import com.arialyy.aria.core.Aria;
 import com.arialyy.aria.core.task.DownloadTask;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.FileUtils;
-import com.frame.config.AppConfig;
-import com.ogh.support.util.NotificationHelper;
 import com.frame.util.ToastUtil;
+import com.ogh.support.config.AppConfig;
+import com.ogh.support.util.NotificationHelper;
 
 /**
  * 下载服务

@@ -15,7 +15,7 @@ import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.frame.R;
+import com.ogh.support.R;
 
 import java.io.File;
 import java.math.BigDecimal;

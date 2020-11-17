@@ -7,9 +7,9 @@ import android.view.View;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.frame.base.fragment.BaseFragment;
-import com.frame.config.AppConfig;
 import com.frame.util.ToastUtil;
 import com.ogh.support.R;
+import com.ogh.support.config.AppConfig;
 import com.ogh.support.util.InstructionsUtils;
 import com.ogh.support.view.activity.WebActivity;
 

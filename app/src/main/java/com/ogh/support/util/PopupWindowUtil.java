@@ -1,4 +1,4 @@
-package com.frame.util;
+package com.ogh.support.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
-import com.frame.widget.Solve7PopupWindow;
+import com.ogh.support.widget.Solve7PopupWindow;
 
 /**
  * Popupwindow工具类，直接传入view然后调用显示即可
  */
-public class PopupwindowUtil {
+public class PopupWindowUtil {
 
     /**
      * @param layout  布局

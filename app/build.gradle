@@ -17,8 +17,7 @@ android {
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a'
         }
-        manifestPlaceholders = [CHANNEL: "MeiZu",]
-//可用于三方sdk使用，例如极光推送的参数，可在AndroidManifest中使用，最后获取到这个参数
+        manifestPlaceholders = [CHANNEL: "MeiZu",]//可用于三方sdk使用，例如极光推送的参数，可在AndroidManifest中使用，最后获取到这个参数
     }
     signingConfigs {
         release {

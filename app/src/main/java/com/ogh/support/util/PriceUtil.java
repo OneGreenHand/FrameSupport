@@ -1,4 +1,4 @@
-package com.frame.util;
+package com.ogh.support.util;
 
 import android.text.Spannable;
 import android.text.SpannableString;

@@ -12,7 +12,7 @@ import com.frame.util.CustomClickListener;
 import com.frame.util.ToastUtil;
 
 /**
- * @dessribe 带网络请求的界面
+ *  带网络请求的Activity
  */
 public abstract class BaseRequestActivity<P extends BasePresenter, B extends BaseBean> extends BaseActivity implements BaseRequestView<B> {
 

@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.SPStaticUtils;
 public class BaseConfig {
 
     //true打开调试，false关闭调试
-    public static boolean DEBUG = false;
+    public static boolean DEBUG = true;
 
     //通用请求地址
     public static String getUrl() {
@@ -18,7 +18,7 @@ public class BaseConfig {
             return "https://api.apiopen.top/";
         } else {
             String urls = SPStaticUtils.getString("baseUrl");
-            return TextUtils.isEmpty(urls) ? "http://api.jiefuk.com:8019/" : urls;
+            return TextUtils.isEmpty(urls) ? "https://api.apiopen.top/" : urls;
         }
     }
 

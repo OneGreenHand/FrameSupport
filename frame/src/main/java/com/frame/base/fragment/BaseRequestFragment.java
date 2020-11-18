@@ -12,7 +12,7 @@ import com.frame.util.CustomClickListener;
 import com.frame.util.ToastUtil;
 
 /**
- * @des 通用请求fragment
+ *  带网络请求的fragment
  */
 public abstract class BaseRequestFragment<P extends BasePresenter, B extends BaseBean> extends BaseFragment implements BaseRequestView<B> {
     protected P mPresenter;

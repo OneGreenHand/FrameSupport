@@ -14,10 +14,10 @@ public class RequestErrorExamplePt extends BasePresenter<NoDataExampleActivity> 
     /**
      * 获取段子
      */
-    public  void getPersonalizedSignature( ){
+    public void getPersonalizedSignature() {
         createRequestBuilder()
                 .setLoadStyle(BaseModel.LoadStyle.DIALOG_VIEW)
                 .create()
-                .get(API.GET_DUAN_ZI+"?page=999&count=10&type=text", DuanZiBean.class);
+                .get(API.GET_DUAN_ZI + "?page=999&count=10&type=text", DuanZiBean.class);
     }
 }

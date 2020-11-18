@@ -20,7 +20,7 @@ import com.frame.config.BaseConfig;
 import java.util.List;
 
 /**
- * @dessribe 自带recycler view的基类
+ * 自带recyclerview的基类
  * Tips:布局中的recyclerView的id必须是frame_recycleView
  */
 public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends BaseBean, AB> extends BaseSwipeFragment<P, B> implements BaseSwipeListView<B> {
@@ -38,6 +38,27 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
         mRecyclerView.setLayoutManager(setLayoutManager());
         mBaseAdapter = setAdapter();
         getAdapter();
+    }
+
+    /**
+     * 空布局时,Rv头部是否显示,结合{@link #UserAdapterEmpty()}使用
+     */
+    protected boolean isHeaderAndEmpty() {
+        return false;
+    }
+
+    /**
+     * 空布局时,Rv脚部是否显示,结合{@link #UserAdapterEmpty()}使用
+     */
+    protected boolean isFooterAndEmpty() {
+        return false;
+    }
+
+    /**
+     * 无数据时,是否使用Adapter设置空布局(不能和frame_root_view一起使用)
+     */
+    protected boolean UserAdapterEmpty() {
+        return false;
     }
 
     //自动更新adapter状态(正常情况使用)
@@ -62,9 +83,8 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
                         getLoadMoreModule().setEnableLoadMore(false);
                 });
                 page++;
-            } else {
+            } else
                 getLoadMoreModule().setOnLoadMoreListener(null);
-            }
             mBaseAdapter.setList(data);
         } else {
             if (data == null || data.isEmpty()) {
@@ -111,7 +131,7 @@ public abstract class BaseSwipeListFragment<P extends BasePresenter, B extends B
     protected abstract void loadMoreListRequest(int page);
 
     /**
-     * 设置适配器,若{@link BaseFragment#UserAdapterEmpty()}为true,切换布局只需setList(null)
+     * 设置适配器,若{@link #UserAdapterEmpty()}为true,切换布局只需setList(null)
      */
     private void getAdapter() {
         if (UserAdapterEmpty()) {

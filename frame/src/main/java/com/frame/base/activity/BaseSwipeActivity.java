@@ -10,7 +10,7 @@ import com.frame.bean.BaseBean;
 import com.frame.widget.VpSwipeRefreshLayout;
 
 /**
- * @dessribe 带下拉刷新的基类
+ *  带下拉刷新的Activity
  */
 public abstract class BaseSwipeActivity<P extends BasePresenter, B extends BaseBean> extends BaseRequestActivity<P, B> implements VpSwipeRefreshLayout.OnRefreshListener, BaseSwipeView<B> {
 

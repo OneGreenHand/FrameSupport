@@ -12,7 +12,7 @@ import com.frame.widget.VpSwipeRefreshLayout;
 
 
 /**
- * @des 通用请求fragment(带下拉)
+ *  带下拉刷新的fragment
  */
 public abstract class BaseSwipeFragment<P extends BasePresenter, B extends BaseBean> extends BaseRequestFragment<P, B> implements VpSwipeRefreshLayout.OnRefreshListener, BaseSwipeView<B> {
     protected VpSwipeRefreshLayout mSwipeRefreshLayout;

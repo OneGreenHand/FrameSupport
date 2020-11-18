@@ -17,7 +17,8 @@ public class HeadFootExamplePt extends BasePresenter<HeadFootExampleActivity> {
     public void getDuanZiList() {
         createRequestBuilder()
                 .setLoadStyle(BaseModel.LoadStyle.DIALOG)
+                .putParam("type", "text")
                 .create()
-                .get(API.GET_DUAN_ZI + "?page=1&count=10&type=text", DuanZiBean.class);
+                .post(API.GET_DUAN_ZI, DuanZiBean.class);
     }
 }

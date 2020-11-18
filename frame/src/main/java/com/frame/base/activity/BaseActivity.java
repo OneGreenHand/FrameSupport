@@ -35,8 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         ButterKnife.bind(this);
         initCommon();
         init(savedInstanceState);//初始化
-        //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
-        if (isImmersionBarEnabled())
+        if (isImmersionBarEnabled())   //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
             initImmersionBar();
         if (isRegisterBus())
             BusUtils.register(this);
@@ -69,27 +68,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      */
     protected boolean isImmersionBarEnabled() {
         return true;
-    }
-
-    /**
-     * 空布局时,Rv头部是否显示,结合{@link BaseActivity#UserAdapterEmpty()}使用
-     */
-    protected boolean isHeaderAndEmpty() {
-        return false;
-    }
-
-    /**
-     * 空布局时,Rv脚部是否显示,结合{@link BaseActivity#UserAdapterEmpty()}使用
-     */
-    protected boolean isFooterAndEmpty() {
-        return false;
-    }
-
-    /**
-     * 无数据时,是否使用Adapter设置空布局(不能和frame_root_view一起使用)
-     */
-    protected boolean UserAdapterEmpty() {
-        return false;
     }
 
     /**

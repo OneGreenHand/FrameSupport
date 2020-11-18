@@ -18,7 +18,10 @@ public class RefreshRequestPt extends BasePresenter<RefreshRequestActivity> {
         createRequestBuilder()
                 .setLoadStyle(page == 1 ? BaseModel.LoadStyle.DIALOG : BaseModel.LoadStyle.NONE)
                 .setPageIndex(page)
+                .putParam("type", "text")
+                .putParam("page", page)
+                .putParam("count", "10")
                 .create()
-                .get(API.GET_DUAN_ZI + "?page=" + page + "&count=10&type=text", DuanZiBean.class);
+                .post(API.GET_DUAN_ZI, DuanZiBean.class);
     }
 }

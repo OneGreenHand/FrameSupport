@@ -21,7 +21,7 @@ import com.gyf.immersionbar.components.SimpleImmersionProxy;
 import butterknife.ButterKnife;
 
 /**
- * @Description: Fragment基类
+ *  Fragment基类
  */
 public abstract class BaseFragment extends Fragment implements BaseView, SimpleImmersionOwner {
     protected Activity mActivity;
@@ -36,7 +36,7 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mActivity = getActivity();
         rootView = inflater.inflate(getLayoutID(), container, false);
-        ButterKnife.bind(this, rootView);//绑定framgent
+        ButterKnife.bind(this, rootView);//绑定fragment
         initCommon();
         if (isRegisterBus())
             BusUtils.register(this);
@@ -70,27 +70,6 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
      * 是否需要注册BusUtils
      */
     protected boolean isRegisterBus() {
-        return false;
-    }
-
-    /**
-     * 空布局时,Rv头部是否显示,结合{@link BaseFragment#UserAdapterEmpty()}使用
-     */
-    protected boolean isHeaderAndEmpty() {
-        return false;
-    }
-
-    /**
-     * 空布局时,Rv脚部是否显示,结合{@link BaseFragment#UserAdapterEmpty()}使用
-     */
-    protected boolean isFooterAndEmpty() {
-        return false;
-    }
-
-    /**
-     * 无数据时,是否使用Adapter设置空布局(不能和frame_root_view一起使用)
-     */
-    protected boolean UserAdapterEmpty() {
         return false;
     }
 

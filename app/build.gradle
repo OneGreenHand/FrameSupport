@@ -77,10 +77,12 @@ dependencies {
     implementation project(':frame')
     //测试用的
     implementation 'androidx.test.ext:junit:1.1.2'
+    //分Dex
+    implementation 'androidx.multidex:multidex:2.0.1'
     //LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
-    //分Dex
-    implementation dependencies.multidex
+    //bugly异常捕获
+    //implementation  'com.tencent.bugly:crashreport:3.2.422'
     //屏幕适配
     implementation dependencies.autosize
     //walle读取渠道号
@@ -88,8 +90,6 @@ dependencies {
     //下载工具类
     implementation dependencies.aria.aria_core
     annotationProcessor dependencies.aria.aria_compiler
-    //bugly异常捕获
-    implementation dependencies.bugly_crashreport
     //glide图片加载
     implementation(dependencies.glide.glide) {
         exclude group: 'androidx.appcompat.app'
@@ -100,5 +100,5 @@ dependencies {
     //微信支付
     implementation "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+"
     // 支付宝支付
-    implementation(name: 'alipaySdk-15.7.7-20200702160044', ext: 'aar')
+    implementation(name: 'alipaysdk-15.8.00.201112210139', ext: 'aar')
 }

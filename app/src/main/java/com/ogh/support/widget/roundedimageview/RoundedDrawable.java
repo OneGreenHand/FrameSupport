@@ -16,9 +16,9 @@
 
 package com.ogh.support.widget.roundedimageview;
 
+
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -32,7 +32,7 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.widget.ImageView.ScaleType;
+import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
 
@@ -63,7 +63,7 @@ public class RoundedDrawable extends Drawable {
     private boolean mOval = false;
     private float mBorderWidth = 0;
     private ColorStateList mBorderColor = ColorStateList.valueOf(DEFAULT_BORDER_COLOR);
-    private ScaleType mScaleType = ScaleType.FIT_CENTER;
+    private ImageView.ScaleType mScaleType = ImageView.ScaleType.FIT_CENTER;
 
     public RoundedDrawable(Bitmap bitmap) {
         mBitmap = bitmap;
@@ -121,7 +121,7 @@ public class RoundedDrawable extends Drawable {
         int width = Math.max(drawable.getIntrinsicWidth(), 2);
         int height = Math.max(drawable.getIntrinsicHeight(), 2);
         try {
-            bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
             drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
             drawable.draw(canvas);
@@ -512,13 +512,13 @@ public class RoundedDrawable extends Drawable {
         return this;
     }
 
-    public ScaleType getScaleType() {
+    public ImageView.ScaleType getScaleType() {
         return mScaleType;
     }
 
-    public RoundedDrawable setScaleType(ScaleType scaleType) {
+    public RoundedDrawable setScaleType(ImageView.ScaleType scaleType) {
         if (scaleType == null) {
-            scaleType = ScaleType.FIT_CENTER;
+            scaleType = ImageView.ScaleType.FIT_CENTER;
         }
         if (mScaleType != scaleType) {
             mScaleType = scaleType;

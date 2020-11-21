@@ -5,26 +5,19 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.frame.base.activity.BaseSwipeActivity;
 import com.frame.bean.BaseBean;
-import com.ogh.support.R;
 import com.ogh.support.bean.DuanZiBean;
+import com.ogh.support.databinding.LayoutHeadFootExampleBinding;
 import com.ogh.support.presenter.HeadFootExamplePt;
 import com.ogh.support.view.adapter.ExampleAdapter;
-import com.ogh.support.widget.TitleBarLayout;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
 /**
  * 添加头部和脚部的示例(带下拉刷新上拉加载)
  */
-public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt, BaseBean> {
-    @BindView(R.id.titlebar)
-    TitleBarLayout titlebar;
-    @BindView(R.id.frame_recycleView)
-    RecyclerView recycleview;
+public class HeadFootExampleActivity extends BaseSwipeActivity<LayoutHeadFootExampleBinding,HeadFootExamplePt, BaseBean> {
     ExampleAdapter adapter;
 
     @Override
@@ -43,13 +36,13 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        titlebar.setTitle("添加头部和脚部的示例");
-        recycleview.setLayoutManager(new LinearLayoutManager(mContext));
+        viewBinding.titlebar.setTitle("添加头部和脚部的示例");
+        viewBinding.frameRecycleView.setLayoutManager(new LinearLayoutManager(mContext));
         adapter = new ExampleAdapter();
         //  adapter.setHeaderWithEmptyEnable(true);//空布局时,头部显示出来
         // adapter.setFooterWithEmptyEnable(true);//空布局时,脚部显示出来
         initHeadFootView();
-        recycleview.setAdapter(adapter);
+        viewBinding.frameRecycleView.setAdapter(adapter);
         adapter.setEmptyView(getEmptyView());//设置空布局(引用资源文件必须放在setAdapter()后才有效)
         mPresenter.getDuanZiList();
     }
@@ -70,11 +63,6 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<HeadFootExamplePt
         foot.setGravity(Gravity.CENTER);
         adapter.addHeaderView(head);
         adapter.addFooterView(foot);
-    }
-
-    @Override
-    protected int getLayoutID() {
-        return R.layout.layout_head_foot_example;
     }
 
     @Override

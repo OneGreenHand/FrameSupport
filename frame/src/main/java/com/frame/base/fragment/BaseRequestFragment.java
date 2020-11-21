@@ -2,6 +2,8 @@ package com.frame.base.fragment;
 
 import android.view.View;
 
+import androidx.viewbinding.ViewBinding;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.frame.R;
 import com.frame.base.BasePresenter;
@@ -12,15 +14,15 @@ import com.frame.util.CustomClickListener;
 import com.frame.util.ToastUtil;
 
 /**
- *  带网络请求的fragment
+ * 带网络请求的fragment
  */
-public abstract class BaseRequestFragment<P extends BasePresenter, B extends BaseBean> extends BaseFragment implements BaseRequestView<B> {
+public abstract class BaseRequestFragment<T extends ViewBinding, P extends BasePresenter, B extends BaseBean> extends BaseFragment<T> implements BaseRequestView<B> {
     protected P mPresenter;
     private VaryViewHelperController mVaryViewHelperController;
 
     @Override
     protected void initCommon() {
-        View frameRootView = rootView.findViewById(R.id.frame_root_view);
+        View frameRootView = viewBinding.getRoot().findViewById(R.id.frame_root_view);
         if (frameRootView != null)
             mVaryViewHelperController = new VaryViewHelperController(frameRootView, getEmptyView());
         mPresenter = setPresenter();

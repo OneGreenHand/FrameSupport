@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: "com.blankj.bus"
-apply plugin: 'com.jakewharton.butterknife'
 android {
     def version = rootProject.ext.versions
     compileSdkVersion versions.compileSdkVersion
@@ -13,7 +12,6 @@ android {
         versionName version.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -44,9 +42,6 @@ dependencies {
     api dependencies.RecyclerViewAdapter
     //工具类
     api dependencies.utilcode
-    //butterknife
-    api dependencies.butterknife.butterknife
-    annotationProcessor dependencies.butterknife.compiler
     //沉浸式状态栏(activity)
     api dependencies.immersionbar
     //沉浸式状态栏(fragment)

@@ -8,31 +8,28 @@ import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.frame.base.fragment.BaseFragment;
 import com.frame.util.ToastUtil;
-import com.ogh.support.R;
 import com.ogh.support.config.AppConfig;
+import com.ogh.support.databinding.FragmentHomeBinding;
 import com.ogh.support.util.InstructionsUtils;
 import com.ogh.support.view.activity.WebActivity;
 
-import butterknife.OnClick;
-
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        setViewClicked();
     }
 
-    @Override
-    protected int getLayoutID() {
-        return R.layout.fragment_home;
-    }
-
-    @OnClick({R.id.video_web, R.id.download_apk, R.id.clear_download_apk})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.video_web:
+    private void setViewClicked() {
+        viewBinding.videoWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 WebActivity.openActivity(mActivity);
-                break;
-            case R.id.download_apk:
+            }
+        });
+        viewBinding.downloadApk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 if (!NetworkUtils.isWifiConnected()) {
                     ToastUtil.showShortToast("请在wifi状态下下载");
                 } else {
@@ -40,18 +37,20 @@ public class HomeFragment extends BaseFragment {
                     InstructionsUtils.checkInstallOrDown(mActivity, "http://sqdd.myapp.com/myapp/qqteam/tim/down/tim.apk");//Tim下载地址,大概51.9Mb
                     //   }
                 }
-                break;
-            case R.id.clear_download_apk:
+            }
+        });
+        viewBinding.clearDownloadApk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 if (FileUtils.isFileExists(AppConfig.FilePath.FILE_FOLDER + "tim.apk")) {
-                    if (FileUtils.delete(AppConfig.FilePath.FILE_FOLDER  + "tim.apk")) {
+                    if (FileUtils.delete(AppConfig.FilePath.FILE_FOLDER + "tim.apk")) {
                         ToastUtil.showShortToast("文件已删除,可以重新下载了");
                     } else
                         ToastUtil.showShortToast("文件删除失败");
                 } else
                     ToastUtil.showShortToast("无需清除");
-                break;
-        }
+            }
+        });
     }
-
 
 }

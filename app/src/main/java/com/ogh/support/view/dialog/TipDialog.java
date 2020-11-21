@@ -8,20 +8,13 @@ import com.frame.base.BaseDialog;
 import com.ogh.support.R;
 import com.ogh.support.util.CommonUtil;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * 通用提示框
  */
 public class TipDialog extends BaseDialog {
-    @BindView(R.id.title)
     TextView title;
-    @BindView(R.id.content)
     TextView content;
-    @BindView(R.id.cancel)
     TextView cancel;
-    @BindView(R.id.sure)
     TextView sure;
     private SureCalk sureCalk;
     private CancelCalk cancelCalk;
@@ -44,6 +37,30 @@ public class TipDialog extends BaseDialog {
 
     public interface CancelCalk {
         void OnClick(View view);
+    }
+
+    @Override
+    protected void initView(Context context) {
+        title = findViewById(R.id.title);
+        content = findViewById(R.id.content);
+        cancel = findViewById(R.id.cancel);
+        sure = findViewById(R.id.sure);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cancelCalk != null)
+                    cancelCalk.OnClick(cancel);
+                dismiss();
+            }
+        });
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sureCalk != null)
+                    sureCalk.OnClick(sure);
+                dismiss();
+            }
+        });
     }
 
     /**
@@ -85,22 +102,6 @@ public class TipDialog extends BaseDialog {
 
     public void setCancelColorText(String msg) {
         cancel.setText(CommonUtil.setHtmlColor(msg));
-    }
-
-    @OnClick({R.id.cancel, R.id.sure})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.cancel:
-                if (cancelCalk != null)
-                    cancelCalk.OnClick(view);
-                dismiss();
-                break;
-            case R.id.sure:
-                if (sureCalk != null)
-                    sureCalk.OnClick(view);
-                dismiss();
-                break;
-        }
     }
 
     @Override

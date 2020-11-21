@@ -6,20 +6,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.frame.base.BaseQuickHolder;
 import com.frame.base.activity.BaseSwipeListActivity;
 import com.frame.bean.BaseBean;
-import com.ogh.support.R;
 import com.ogh.support.bean.DuanZiBean;
+import com.ogh.support.databinding.LayoutHeadFootExampleBinding;
 import com.ogh.support.presenter.RefreshRequestPt;
 import com.ogh.support.view.adapter.ExampleAdapter;
-import com.ogh.support.widget.TitleBarLayout;
-
-import butterknife.BindView;
 
 /**
  *  上拉刷新和下拉加载
  */
-public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequestPt, BaseBean, DuanZiBean.ResultBean> {
-    @BindView(R.id.titlebar)
-    TitleBarLayout titlebar;
+public class RefreshRequestActivity extends BaseSwipeListActivity<LayoutHeadFootExampleBinding,RefreshRequestPt, BaseBean, DuanZiBean.ResultBean> {
 
     @Override
     public BaseQuickAdapter<DuanZiBean.ResultBean, BaseQuickHolder> setAdapter() {
@@ -52,13 +47,8 @@ public class RefreshRequestActivity extends BaseSwipeListActivity<RefreshRequest
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        titlebar.setTitle("下拉刷新上拉加载示例");
+        viewBinding.titlebar.setTitle("下拉刷新上拉加载示例");
         mPresenter.getDuanZiList(1);
-    }
-
-    @Override
-    protected int getLayoutID() {
-        return R.layout.layout_head_foot_example;
     }
 
     @Override

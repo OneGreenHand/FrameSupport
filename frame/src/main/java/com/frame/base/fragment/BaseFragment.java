@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewbinding.ViewBinding;
 
 import com.blankj.utilcode.util.BusUtils;
 import com.frame.R;
@@ -18,15 +19,17 @@ import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.gyf.immersionbar.components.SimpleImmersionProxy;
 
-import butterknife.ButterKnife;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
- *  Fragment基类
+ * Fragment基类
  */
-public abstract class BaseFragment extends Fragment implements BaseView, SimpleImmersionOwner {
+public abstract class BaseFragment<T extends ViewBinding> extends Fragment implements BaseView, SimpleImmersionOwner {
     protected Activity mActivity;
     protected LoadingDialog progressDialog;
-    protected View rootView;
+    protected T viewBinding;
 
     public BaseFragment() {
         super();
@@ -35,12 +38,18 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mActivity = getActivity();
-        rootView = inflater.inflate(getLayoutID(), container, false);
-        ButterKnife.bind(this, rootView);//绑定fragment
+        Type superclass = getClass().getGenericSuperclass();
+        Class<?> aClass = (Class<?>) ((ParameterizedType) superclass).getActualTypeArguments()[0];
+        try {
+            Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class, ViewGroup.class, boolean.class);
+            viewBinding = (T) method.invoke(null, getLayoutInflater(), container, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initCommon();
         if (isRegisterBus())
             BusUtils.register(this);
-        return rootView;
+        return viewBinding.getRoot();
     }
 
     protected void initCommon() {
@@ -55,8 +64,6 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
     }
 
     protected abstract void init(Bundle savedInstanceState);
-
-    protected abstract int getLayoutID();
 
     protected String getResString(int res) {
         return getResources().getString(res);
@@ -105,6 +112,12 @@ public abstract class BaseFragment extends Fragment implements BaseView, SimpleI
     public void dismissLoadingDialog() {
         if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        viewBinding = null;
     }
 
     @Override

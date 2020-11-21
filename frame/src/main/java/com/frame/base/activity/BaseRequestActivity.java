@@ -2,6 +2,8 @@ package com.frame.base.activity;
 
 import android.view.View;
 
+import androidx.viewbinding.ViewBinding;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.frame.R;
 import com.frame.base.BasePresenter;
@@ -12,9 +14,9 @@ import com.frame.util.CustomClickListener;
 import com.frame.util.ToastUtil;
 
 /**
- *  带网络请求的Activity
+ * 带网络请求的Activity
  */
-public abstract class BaseRequestActivity<P extends BasePresenter, B extends BaseBean> extends BaseActivity implements BaseRequestView<B> {
+public abstract class BaseRequestActivity<T extends ViewBinding, P extends BasePresenter, B extends BaseBean> extends BaseActivity<T> implements BaseRequestView<B> {
 
     protected P mPresenter;
     private VaryViewHelperController mVaryViewHelperController;

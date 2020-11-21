@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewbinding.ViewBinding;
 
 import com.blankj.utilcode.util.BusUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
@@ -17,22 +19,31 @@ import com.frame.base.BaseView;
 import com.frame.view.LoadingDialog;
 import com.gyf.immersionbar.ImmersionBar;
 
-import butterknife.ButterKnife;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 
 
 /**
  * Activity基类，所有的Activity均继承它
  */
-public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActivity implements BaseView {
     protected Activity mContext = this;
     protected LoadingDialog progressDialog;
     private boolean isDestroyed = false;//是否真的被finish
+    protected T viewBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutID());
-        ButterKnife.bind(this);
+        ParameterizedType type = (ParameterizedType) getClass().getGenericSuperclass();
+        Class cls = (Class) type.getActualTypeArguments()[0];
+        try {
+            Method inflate = cls.getDeclaredMethod("inflate", LayoutInflater.class);
+            viewBinding = (T) inflate.invoke(null, getLayoutInflater());
+            setContentView(viewBinding.getRoot());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initCommon();
         init(savedInstanceState);//初始化
         if (isImmersionBarEnabled())   //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
@@ -45,8 +56,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     protected abstract void init(Bundle savedInstanceState);
-
-    protected abstract int getLayoutID();
 
     protected String getResString(int res) {
         return getResources().getString(res);

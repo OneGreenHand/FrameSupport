@@ -17,7 +17,6 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.frame.R;
 import com.frame.util.CustomClickListener;
 
-import butterknife.ButterKnife;
 
 /**
  * 通用dialog
@@ -55,7 +54,6 @@ public abstract class BaseDialog extends Dialog implements LifecycleObserver {
         setCancelable(isCancelable);
         setCanceledOnTouchOutside(isCancelable);
         setContentView(getLayoutID());
-        ButterKnife.bind(this);
         Window window = getWindow(); //必须在setContentView()之后
         if (window != null) {
             WindowManager.LayoutParams attributes = window.getAttributes();

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.module.BaseLoadMoreModule;
@@ -23,7 +24,7 @@ import java.util.List;
  * 自带recyclerview的基类
  * Tips:布局中的recyclerView的id必须是frame_recycleView
  */
-public abstract class BaseSwipeListActivity<P extends BasePresenter, B extends BaseBean, AB> extends BaseSwipeActivity<P, B> implements BaseSwipeListView<B> {
+public abstract class BaseSwipeListActivity<T extends ViewBinding, P extends BasePresenter, B extends BaseBean, AB> extends BaseSwipeActivity<T, P, B> implements BaseSwipeListView<B> {
 
     protected RecyclerView mRecyclerView;
     protected BaseQuickAdapter<AB, BaseQuickHolder> mBaseAdapter;

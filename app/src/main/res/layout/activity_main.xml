@@ -21,7 +21,6 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_navigation" />
 
-
     <ImageView
         android:id="@+id/floating_action"
         android:layout_width="50dp"

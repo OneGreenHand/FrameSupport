@@ -4,27 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
-import android.widget.ProgressBar;
 
 import com.frame.base.activity.BaseActivity;
-import com.ogh.support.R;
-import com.ogh.support.webview.BaseWebView;
-import com.ogh.support.widget.TitleBarLayout;
 import com.gyf.immersionbar.ImmersionBar;
-
-import butterknife.BindView;
+import com.ogh.support.R;
+import com.ogh.support.databinding.ActivityWebBinding;
 
 /**
  * 可以播放视频的webview
  */
-public class WebActivity extends BaseActivity {
-
-    @BindView(R.id.web_view)
-    BaseWebView mWebView;
-    @BindView(R.id.pb_web_base)
-    ProgressBar mProgressBar;
-    @BindView(R.id.titlebar)
-    TitleBarLayout titlebar;
+public class WebActivity extends BaseActivity<ActivityWebBinding> {
 
     @Override
     protected void initImmersionBar(int color) {//不这样写，如果播放视频全屏，状态栏显示异常
@@ -38,16 +27,16 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         getWindow().setFormat(PixelFormat.TRANSLUCENT);//为了避免视频闪屏和透明问题
-        mWebView.setTextView(titlebar.getTitleText());
-        mWebView.setProgressBar(mProgressBar);
-        mWebView.loadUrl("https://www.baidu.com");
+        viewBinding.webView.setTextView(viewBinding.titlebar.getTitleText());
+        viewBinding.webView.setProgressBar(viewBinding.pbWebBase);
+        viewBinding.webView.loadUrl("https://www.baidu.com");
         //  mWebView.loadUrl("http://debugtbs.qq.com");//用来检测X5内核是否安装
     }
 
     @Override
     public void onBackPressed() {
-        if (mWebView.canGoBack()) {
-            mWebView.goBack();
+        if (viewBinding.webView.canGoBack()) {
+            viewBinding.webView.goBack();
         } else {
             finish();
         }
@@ -55,10 +44,7 @@ public class WebActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        if (mWebView != null) {
-            mWebView.destroy();//为了使WebView退出时音频或视频关闭
-            mWebView = null;
-        }
+        viewBinding.webView.destroy();//为了使WebView退出时音频或视频关闭
         super.onDestroy();
     }
 
@@ -66,8 +52,7 @@ public class WebActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         try {
-            if (mWebView != null)
-                mWebView.onResume();
+            viewBinding.webView.onResume();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,16 +62,9 @@ public class WebActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         try {
-            if (mWebView != null)
-                mWebView.onPause();
+            viewBinding.webView.onPause();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    @Override
-    protected int getLayoutID() {
-        return R.layout.activity_web;
-    }
-
 }

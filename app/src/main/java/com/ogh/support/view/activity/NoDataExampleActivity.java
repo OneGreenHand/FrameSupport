@@ -4,20 +4,15 @@ import android.os.Bundle;
 
 import com.frame.base.activity.BaseSwipeActivity;
 import com.frame.bean.BaseBean;
-import com.ogh.support.R;
-import com.ogh.support.bean.DuanZiBean;
-import com.ogh.support.presenter.RequestErrorExamplePt;
-import com.ogh.support.widget.TitleBarLayout;
 import com.frame.util.ToastUtil;
-
-import butterknife.BindView;
+import com.ogh.support.bean.DuanZiBean;
+import com.ogh.support.databinding.LayoutHeadFootExampleBinding;
+import com.ogh.support.presenter.RequestErrorExamplePt;
 
 /**
  * 无数据显示示例
  */
-public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExamplePt, BaseBean> {
-    @BindView(R.id.titlebar)
-    TitleBarLayout titlebar;
+public class NoDataExampleActivity extends BaseSwipeActivity<LayoutHeadFootExampleBinding, RequestErrorExamplePt, BaseBean> {
 
     @Override
     protected void onRefreshRequest() {
@@ -37,7 +32,7 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        titlebar.setTitle("无数据显示示例");
+        viewBinding.titlebar.setTitle("无数据显示示例");
         mPresenter.getPersonalizedSignature();
     }
 
@@ -47,12 +42,7 @@ public class NoDataExampleActivity extends BaseSwipeActivity<RequestErrorExample
     }
 
     @Override
-    protected int getLayoutID() {
-        return R.layout.layout_head_foot_example;
-    }
-
-    @Override
-    public void requestSuccess(BaseBean data, Object tag,int pageIndex, int pageCount) {
+    public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
         //请求完成后返回的数据是空的，在实体bean中isEmpty()为true，baseModel会自动处理,并切换为空布局显示
         DuanZiBean duanZiBean = (DuanZiBean) data;
         ToastUtil.showShortToast(duanZiBean.message);

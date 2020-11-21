@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.viewbinding.ViewBinding;
+
 import com.frame.base.BasePresenter;
 import com.frame.base.BaseSwipeView;
 import com.frame.bean.BaseBean;
@@ -12,13 +14,13 @@ import com.frame.widget.VpSwipeRefreshLayout;
 
 
 /**
- *  带下拉刷新的fragment
+ * 带下拉刷新的fragment
  */
-public abstract class BaseSwipeFragment<P extends BasePresenter, B extends BaseBean> extends BaseRequestFragment<P, B> implements VpSwipeRefreshLayout.OnRefreshListener, BaseSwipeView<B> {
+public abstract class BaseSwipeFragment<T extends ViewBinding, P extends BasePresenter, B extends BaseBean> extends BaseRequestFragment<T, P, B> implements VpSwipeRefreshLayout.OnRefreshListener, BaseSwipeView<B> {
     protected VpSwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         mSwipeRefreshLayout = new VpSwipeRefreshLayout(mActivity);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_light, android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_red_light);

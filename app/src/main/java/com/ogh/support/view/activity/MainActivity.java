@@ -1,6 +1,7 @@
 package com.ogh.support.view.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -31,6 +32,14 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        if (!this.isTaskRoot()) {//第一次安装成功点击“打开”后Home键切出应用后再点击桌面图标返回导致应用重启问题(在配置了Intent.ACTION_MAIN的Activity中添加)
+            Intent mainIntent = getIntent();
+            String action = mainIntent.getAction();
+            if (mainIntent.hasCategory(Intent.CATEGORY_LAUNCHER) && Intent.ACTION_MAIN.equals(action)) {
+                finish();
+                return;
+            }
+        }
         mDatas.add(new HomeFragment());
         mDatas.add(new MineFragment());
         //   viewBinding.viewPager.setUserInputEnabled(false);//禁止滑动

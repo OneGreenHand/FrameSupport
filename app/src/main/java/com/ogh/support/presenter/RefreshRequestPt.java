@@ -20,7 +20,7 @@ public class RefreshRequestPt extends BasePresenter<RefreshRequestActivity> {
                 .setPageIndex(page)
                 .putParam("type", "text")
                 .putParam("page", page)
-                .putParam("count", "10")
+                .putParam("count", "15")
                 .create()
                 .post(API.GET_DUAN_ZI, DuanZiBean.class);
     }

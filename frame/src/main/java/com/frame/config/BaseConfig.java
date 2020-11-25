@@ -29,6 +29,6 @@ public class BaseConfig {
 
     public static final class ViewPage {
         public static final int START_INDEX = 1; //起始页下标
-        public static final int PAGE_COUNT = 10;  //每页的数据量
+        public static final int PAGE_COUNT = 15;  //每页的数据量
     }
 }

@@ -84,7 +84,7 @@ public abstract class BaseRequestActivity<T extends ViewBinding, P extends BaseP
 
     //设置空数据布局(重写即为替换)
     protected int getEmptyView() {
-        return R.layout.frame_view_pager_no_data;
+        return R.layout.frame_layout_no_data;
     }
 
 }

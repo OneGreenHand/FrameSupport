@@ -20,7 +20,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/tv_view_pager_error_load"
+        android:id="@+id/tv_error_load"
         android:layout_width="130dp"
         android:layout_height="35dp"
         android:layout_marginTop="30dp"

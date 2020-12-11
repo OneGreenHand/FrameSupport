@@ -66,7 +66,7 @@ public class OpenMapUtil {
         try {
             StringBuffer sb = new StringBuffer();
             sb.append("qqmap://map/routeplan?")
-                    .append("type=drive&")
+                    .append("type=" + type + "&")
                     .append("from=")
                     .append(from + "&")
                     .append("fromcoord=")
@@ -113,8 +113,8 @@ public class OpenMapUtil {
                     .append(dlon + "&")
                     .append("dname=")
                     .append(dname + "&")
-                    .append("dev=0&")
-                    .append("t=0");
+                    .append("dev=" + dev + "&")
+                    .append("t=" + t);
             Intent intent = new Intent();
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setData(Uri.parse(sb.toString()));
@@ -145,7 +145,7 @@ public class OpenMapUtil {
                     .append("destination=")
                     .append("name:" + eName + "|")
                     .append("latlng:" + eLatlng + "&")
-                    .append("mode=driving&")
+                    .append("mode=" + mode + "&")
                     .append("src=andr.baidu.openAPIdemo");
             Intent intent = new Intent();
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

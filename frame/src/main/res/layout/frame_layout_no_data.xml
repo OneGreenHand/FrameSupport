@@ -15,7 +15,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
-        android:gravity="center_horizontal"
         android:text="@string/frame_view_no_data"
         android:textColor="#999999"
         android:textSize="16sp" />

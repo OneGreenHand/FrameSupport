@@ -24,12 +24,12 @@ public class VaryViewHelperController {
     }
 
     public void showNetworkError(CustomClickListener onClickListener, String tips) {
-        View layout = helper.inflate(R.layout.frame_view_pager_error);
+        View layout = helper.inflate(R.layout.frame_layout_error);
         if (TextUtils.isEmpty(tips))
             ((TextView) layout.findViewById(R.id.v_tips)).setText(R.string.frame_view_net_error);
         else
             ((TextView) layout.findViewById(R.id.v_tips)).setText(tips);
-        TextView againBtn = layout.findViewById(R.id.tv_view_pager_error_load);
+        TextView againBtn = layout.findViewById(R.id.tv_error_load);
         if (null != onClickListener)
             againBtn.setOnClickListener(onClickListener);
         helper.showLayout(layout);
@@ -44,7 +44,7 @@ public class VaryViewHelperController {
     }
 
     public void showLoading() {
-        View layout = helper.inflate(R.layout.frame_view_pager_loading);
+        View layout = helper.inflate(R.layout.frame_layout_loading);
         helper.showLayout(layout);
     }
 

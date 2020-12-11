@@ -4,16 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/navigation_view" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:background="@color/c_FFFFFF"
         app:itemIconTint="@drawable/selector_item_primary_color"
@@ -21,14 +15,20 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_navigation" />
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation_view" />
+
     <ImageView
         android:id="@+id/floating_action"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:elevation="8dp"
+        android:layout_marginBottom="16dp"
+        android:elevation="9dp"
         android:src="@mipmap/ic_launcher" />
 
 </RelativeLayout>

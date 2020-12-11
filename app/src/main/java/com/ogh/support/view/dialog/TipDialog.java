@@ -1,7 +1,9 @@
 package com.ogh.support.view.dialog;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.frame.base.BaseDialog;
@@ -62,6 +64,23 @@ public class TipDialog extends BaseDialog {
             }
         });
     }
+
+//    @Override
+//    public void show() {
+//        content.getViewTreeObserver().addOnGlobalLayoutListener(listener);
+//        super.show();
+//    }
+
+    private ViewTreeObserver.OnGlobalLayoutListener listener = new ViewTreeObserver.OnGlobalLayoutListener() {
+        @Override
+        public void onGlobalLayout() {
+            if (content.getLineCount() > 1) {
+                content.setGravity(Gravity.LEFT);
+            } else
+                content.setGravity(Gravity.CENTER);
+            content.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
+        }
+    };
 
     /**
      * 是否可以点击取消

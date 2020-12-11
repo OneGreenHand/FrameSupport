@@ -13,6 +13,8 @@ import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,7 +36,7 @@ public class FileSaveUtil {
             return null;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             if (!isGranted(mContext)) {
-                Log.e("FileSaveUtil", "save to file need storage permission");
+                LogUtils.e("FileSaveUtil", "save to file need storage permission");
                 return null;
             }
             File destFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), System.currentTimeMillis() + ".txt");
@@ -83,7 +85,7 @@ public class FileSaveUtil {
 
     private static boolean save(File file, String content) {
         if (!createFile(file, true)) {
-            Log.e("FileSaveUtil", "create or delete file <$file> failed.");
+            LogUtils.e("FileSaveUtil", "create or delete file <$file> failed.");
             return false;
         }
         FileOutputStream outStream = null;

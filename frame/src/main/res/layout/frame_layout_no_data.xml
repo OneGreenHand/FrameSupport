@@ -6,8 +6,8 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="160dp"
-        android:layout_height="147dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@mipmap/frame_pager_error" />
 
     <TextView
@@ -17,5 +17,5 @@
         android:layout_margin="7dp"
         android:text="@string/frame_view_no_data"
         android:textColor="#999999"
-        android:textSize="16sp" />
+        android:textSize="15sp" />
 </LinearLayout>

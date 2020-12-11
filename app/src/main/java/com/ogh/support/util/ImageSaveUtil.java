@@ -15,6 +15,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,7 +48,7 @@ public class ImageSaveUtil {
         String fileName = System.currentTimeMillis() + "_" + quality + "." + suffix;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             if (!isGranted(context)) {
-                Log.e("ImageUtils", "save to album need storage permission");
+                LogUtils.e("ImageUtils", "save to album need storage permission");
                 return null;
             }
             File picDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
@@ -103,15 +105,15 @@ public class ImageSaveUtil {
 
     private static boolean save(Bitmap bitmap, File file, Bitmap.CompressFormat format, int quality, boolean recycle) {
         if (isEmptyBitmap(bitmap)) {
-            Log.e("ImageUtils", "bitmap is empty.");
+            LogUtils.e("ImageUtils", "bitmap is empty.");
             return false;
         }
         if (bitmap.isRecycled()) {
-            Log.e("ImageUtils", "bitmap is recycled.");
+            LogUtils.e("ImageUtils", "bitmap is recycled.");
             return false;
         }
         if (!createFile(file, true)) {
-            Log.e("ImageUtils", "create or delete file <$file> failed.");
+            LogUtils.e("ImageUtils", "create or delete file <$file> failed.");
             return false;
         }
         OutputStream os = null;

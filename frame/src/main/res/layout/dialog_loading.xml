@@ -18,10 +18,12 @@
         android:id="@+id/loading_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="7dp"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:singleLine="true"
         android:text="@string/frame_load_ing"
         android:textColor="@color/frame_white"
-        android:textSize="15sp" />
+        android:textSize="14sp" />
 </LinearLayout>

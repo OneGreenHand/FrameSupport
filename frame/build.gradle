@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: "com.blankj.bus"
+apply plugin: "com.blankj.bus"//BusUtils
 android {
     def version = rootProject.ext.versions
     compileSdkVersion versions.compileSdkVersion

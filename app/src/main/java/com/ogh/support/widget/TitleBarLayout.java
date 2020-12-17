@@ -66,11 +66,10 @@ public class TitleBarLayout extends LinearLayout {
     }
 
     private void findId() {
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.titlebar, this);
-        RelativeLayout layoutTitle = inflate.findViewById(R.id.layout_title);
-        ImageView imgFinish = inflate.findViewById(R.id.img_finish);
-        title = inflate.findViewById(R.id.app_title);
-        other = inflate.findViewById(R.id.other);
+        LinearLayout layoutTitle = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.titlebar, this);
+        ImageView imgFinish = layoutTitle.findViewById(R.id.img_finish);
+        title = layoutTitle.findViewById(R.id.app_title);
+        other = layoutTitle.findViewById(R.id.other);
         layoutTitle.setBackgroundColor(backgroundColor);
         if (backShow) {
             imgFinish.setVisibility(View.VISIBLE);

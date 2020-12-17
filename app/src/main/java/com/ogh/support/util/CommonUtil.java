@@ -288,10 +288,4 @@ public class CommonUtil {
         activity.startActivityForResult(intent, requestCode);
     }
 
-    public static void IntentToOpenGps(Fragment fragment, int requestCode) {
-        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        fragment.startActivityForResult(intent, requestCode);
-    }
-
 }

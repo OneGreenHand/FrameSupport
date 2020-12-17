@@ -71,22 +71,6 @@ public class IntentUtil {
     }
 
     /**
-     * fragment跳转activity,通过bundle方式传入数据
-     */
-    public static void goFragmentForResult(Fragment fragment, Class<?> activity, Bundle bundle, int requestCode, boolean ifLogin) {
-        Intent intent = new Intent();
-        //   if (ifLogin && !UserUtil.isLogin()) {
-        //intent.setClass(fragment.getActivity(), LoginActivity.class);
-        //  mContext.startActivity(intent);
-        //   } else {
-        intent.setClass(fragment.getActivity(), activity);
-        if (bundle != null)
-            intent.putExtras(bundle);
-        fragment.startActivityForResult(intent, requestCode);
-        //  }
-    }
-
-    /**
      * 跳转activity,通过map方式传入数据,主要配合CommonUtil中goLocationActivity方法使用
      * 携带的数据(目前只支持 String、Boolean、Integer、Double、Long、Float、Bundle、Parcelable、Serializable)
      */
@@ -116,22 +100,6 @@ public class IntentUtil {
         intent.setClass(context, activity);
         putIntent(param, intent);
         context.startActivityForResult(intent, requestCode);
-        //  }
-    }
-
-    /**
-     * fragment跳转activity,通过map方式传入数据,主要配合CommonUtil中goLocationActivity方法使用
-     * 携带的数据(目前只支持 String、Boolean、Integer、Double、Long、Float、Bundle、Parcelable、Serializable)
-     */
-    public static void goFragmentForResult(Fragment fragment, Class<?> activity, Map<String, Object> param, int requestCode, boolean ifLogin) {
-        Intent intent = new Intent();
-        //  if (ifLogin && !UserUtil.isLogin()) {
-        //    intent.setClass(fragment.getActivity(), LoginActivity.class);
-        //    mContext.startActivity(intent);
-        //  } else {
-        intent.setClass(fragment.getActivity(), activity);
-        putIntent(param, intent);
-        fragment.startActivityForResult(intent, requestCode);
         //  }
     }
 

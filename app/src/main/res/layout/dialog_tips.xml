@@ -8,12 +8,13 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:drawableLeft="@mipmap/img_dialog_tips"
+        android:drawablePadding="10dp"
         android:text="@string/tips"
         android:textColor="@color/c_333333"
-        android:textSize="@dimen/font_16sp" />
+        android:textSize="@dimen/font_18sp" />
 
     <TextView
         android:id="@+id/content"
@@ -38,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
-            android:background="@drawable/shape_cancel"
+            android:background="@drawable/shape_cc7c7c7_30"
             android:gravity="center"
             android:minWidth="110dp"
             android:text="@string/cancel"

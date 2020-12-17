@@ -27,9 +27,6 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
-    private List<Fragment> mDatas = new ArrayList<>();
-    private long firstTime = 0;  //记录用户首次点击返回键的时间
-
     @Override
     protected void init(Bundle savedInstanceState) {
         if (!this.isTaskRoot()) {//第一次安装成功点击“打开”后Home键切出应用后再点击桌面图标返回导致应用重启问题(在配置了Intent.ACTION_MAIN的Activity中添加)
@@ -40,22 +37,23 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                 return;
             }
         }
-        mDatas.add(new HomeFragment());
-        mDatas.add(new MineFragment());
+        List<Fragment> mFragment = new ArrayList<>();
+        mFragment.add(new HomeFragment());
+        mFragment.add(new MineFragment());
         //   viewBinding.viewPager.setUserInputEnabled(false);//禁止滑动
-        //    viewBinding.viewPager.setOffscreenPageLimit(mDatas.size());//设置缓存,数量超过2可设置
-        viewBinding.viewPager.setAdapter(new FragmentAdapter(this, mDatas));
+        //    viewBinding.viewPager.setOffscreenPageLimit(mFragment.size());//设置缓存,数量超过2可设置
+        viewBinding.viewPager.setAdapter(new FragmentAdapter(this, mFragment));
         initViewPagerChangeListener();
         viewBinding.navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 int i = item.getItemId();
                 if (i == R.id.home) {
-                    viewBinding.viewPager.setCurrentItem(0);
+                    viewBinding.viewPager.setCurrentItem(0, false);
                 } else if (i == R.id.core) {
                     return false;
                 } else if (i == R.id.mine)
-                    viewBinding.viewPager.setCurrentItem(1);
+                    viewBinding.viewPager.setCurrentItem(1, false);
                 return true;
             }
         });
@@ -80,6 +78,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             }
         });
     }
+
+    private long firstTime = 0;  //记录用户首次点击返回键的时间
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

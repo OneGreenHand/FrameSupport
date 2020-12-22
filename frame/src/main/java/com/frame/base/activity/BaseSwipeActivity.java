@@ -19,11 +19,10 @@ public abstract class BaseSwipeActivity<T extends ViewBinding,P extends BasePres
     protected VpSwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
-    public void setContentView(int layoutResID) {
-        View inflate = LayoutInflater.from(this).inflate(layoutResID, null);
+    public void setContentView(View view) {
         mSwipeRefreshLayout = new VpSwipeRefreshLayout(this);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_light, android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_red_light);
-        mSwipeRefreshLayout.addView(inflate);
+        mSwipeRefreshLayout.addView(view);
         mSwipeRefreshLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mSwipeRefreshLayout.setOnRefreshListener(this);
         super.setContentView(mSwipeRefreshLayout);

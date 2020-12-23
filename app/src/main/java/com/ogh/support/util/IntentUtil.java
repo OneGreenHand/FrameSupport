@@ -8,6 +8,8 @@ import android.os.Parcelable;
 
 import androidx.fragment.app.Fragment;
 
+import com.frame.util.ToastUtil;
+
 import java.io.Serializable;
 import java.util.Map;
 
@@ -29,11 +31,9 @@ public class IntentUtil {
 //        if (ifLogin && !UserUtil.isLogin()) {
 //            ToastUtil.showShortToast("请先登录");
 //            intent.setClass(context, LoginActivity.class);
-//            context.startActivity(intent);
-//        } else {
+//        } else
         intent.setClass(context, activity);
         context.startActivity(intent);
-        //    }
     }
 
     /**
@@ -42,16 +42,14 @@ public class IntentUtil {
     public static void goActivity(Context context, Class<?> activity, Bundle bundle, boolean ifLogin) {
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//在Activity上下文之外启动Activity
-        //  if (ifLogin && !UserUtil.isLogin()) {
-        //intent.setClass(context, LoginActivity.class);
-        //  context.startActivity(intent);
-        //   } else {
+//        if (ifLogin && !UserUtil.isLogin()) {
+//            intent.setClass(context, LoginActivity.class);
+//        } else {
         intent.setClass(context, activity);
-        if (bundle == null)
-            bundle = new Bundle();
-        intent.putExtras(bundle);
+        if (bundle != null)
+            intent.putExtras(bundle);
+//        }
         context.startActivity(intent);
-        //  }
     }
 
     /**
@@ -59,15 +57,15 @@ public class IntentUtil {
      */
     public static void goActivityForResult(Activity context, Class<?> activity, Bundle bundle, int requestCode, boolean ifLogin) {
         Intent intent = new Intent();
-        //    if (ifLogin && !UserUtil.isLogin()) {
-        //intent.setClass(context, LoginActivity.class);
-        //  context.startActivity(intent);
-        //    } else {
+//        if (ifLogin && !UserUtil.isLogin()) {
+//            intent.setClass(context, LoginActivity.class);
+//            context.startActivity(intent);
+//        } else {
         intent.setClass(context, activity);
         if (bundle != null)
             intent.putExtras(bundle);
         context.startActivityForResult(intent, requestCode);
-        //   }
+//        }
     }
 
     /**
@@ -77,14 +75,13 @@ public class IntentUtil {
     public static void goActivity(Context context, Class<?> activity, Map<String, Object> param, boolean ifLogin) {
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //  if (ifLogin && !UserUtil.isLogin()) {
-        //   intent.setClass(context, LoginActivity.class);
-        //    context.startActivity(intent);
-        //   } else {
+//        if (ifLogin && !UserUtil.isLogin()) {
+//            intent.setClass(context, LoginActivity.class);
+//        } else {
         intent.setClass(context, activity);
         putIntent(param, intent);
+//        }
         context.startActivity(intent);
-        //   }
     }
 
     /**

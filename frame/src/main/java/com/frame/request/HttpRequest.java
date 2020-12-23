@@ -52,12 +52,12 @@ public class HttpRequest {
             if (!TextUtils.isEmpty(mutilFileKey)) {//类型: photos[0]、photos[1]、photos[2]
                 int i = 0;
                 for (FileInfoBean fileInfoBean : fileList) {
-                    builder.addFormDataPart(mutilFileKey + "[" + i + "]", fileInfoBean.file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), fileInfoBean.file));
+                    builder.addFormDataPart(mutilFileKey + "[" + i + "]", fileInfoBean.file.getName(), RequestBody.create(fileInfoBean.file, MediaType.parse("multipart/form-data")));
                     i++;
                 }
             } else {//类型: pic1、pic2、pic3
                 for (FileInfoBean fileInfoBean : fileList)
-                    builder.addFormDataPart(fileInfoBean.paramName, fileInfoBean.file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), fileInfoBean.file));
+                    builder.addFormDataPart(fileInfoBean.paramName, fileInfoBean.file.getName(), RequestBody.create(fileInfoBean.file, MediaType.parse("multipart/form-data")));
             }
         RequestBody requestBody = builder.build();
         return apiService.upload(url, requestBody)

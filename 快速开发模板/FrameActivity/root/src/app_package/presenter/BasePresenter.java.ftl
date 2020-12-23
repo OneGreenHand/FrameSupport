@@ -1,6 +1,6 @@
 package ${packageName}.presenter;
 import com.frame.base.BasePresenter;
-import ${packageName}.view <#if selectViewType == "activity">.activity.${activityClass}Activity<#else>.fragment.${activityClass}Fragment</#if>;
+import ${packageName}.view<#if selectViewType == "activity">.activity.${activityClass}Activity<#else>.fragment.${activityClass}Fragment</#if>;
 
 <#if selectViewType == 'activity'>
 public class ${activityClass}Pt extends BasePresenter<${activityClass}Activity>  {

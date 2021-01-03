@@ -1,9 +1,5 @@
 package com.ogh.support.util;
 
-import android.annotation.SuppressLint;
-import android.text.TextUtils;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,13 +7,6 @@ import java.util.Date;
  * description: 所有关于时间计算的工具类
  */
 public class DateUtil {
-
-    /**
-     * 获取当前系统时间
-     */
-    public static String getDate(String pattern) {
-        return new SimpleDateFormat(TextUtils.isEmpty(pattern) ? "yyyy-MM-dd HH:mm:ss" : pattern).format(Calendar.getInstance().getTime());
-    }
 
     /**
      * 设置时间

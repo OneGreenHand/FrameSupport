@@ -64,7 +64,7 @@ public abstract class BaseSwipeListActivity<T extends ViewBinding, P extends Bas
 
     //自动更新adapter状态(正常情况使用)
     protected void notifyAdapterStatus(List<AB> data, int pageIndex, int pageCount) {
-        notifyAdapterStatus(data, data.size(), pageIndex, pageCount);
+        notifyAdapterStatus(data, data == null ? 0 : data.size(), pageIndex, pageCount);
     }
 
     //分组布局使用

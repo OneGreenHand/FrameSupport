@@ -9,8 +9,8 @@ import com.blankj.utilcode.util.Utils;
 public class ChannelUtils {
 
     public static String getChannel() {
-//        String channerl = WalleChannelReader.get(FrameApplication.getContext(), "CHANNEL");//通过Walle获取到的渠道号,需要手动注入渠道信息,不然为空
-//        return TextUtils.isEmpty(channerl) ? "MeiZu" : channerl;
+//        String channel = WalleChannelReader.get(FrameApplication.getContext(), "CHANNEL");//通过Walle获取到的渠道号,需要手动注入渠道信息,不然为空
+//        return TextUtils.isEmpty(channel) ? "MeiZu" : channel;
         return getMate("channel");
     }
 

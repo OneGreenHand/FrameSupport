@@ -34,7 +34,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
                     ToastUtil.showShortToast("请在wifi状态下下载");
                 } else {
                     //   if (CommonUtil.notificationAuthority(mActivity)) {//检测通知栏是否打开,未打开类似于静默下载
-                    InstructionsUtils.checkInstallOrDown(mActivity, "http://sqdd.myapp.com/myapp/qqteam/tim/down/tim.apk");//Tim下载地址,大概51.9Mb
+                    InstructionsUtils.checkInstallOrDown(mActivity, "https://qd.myapp.com/myapp/qqteam/tim/down/tim.apk");//Tim下载地址,大概51.9Mb
                     //   }
                 }
             }

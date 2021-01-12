@@ -155,7 +155,7 @@ public class InstructionsUtils {
             Intent intent = new Intent(context, getActivityClassName(intentUrl.contains("?") ? intentUrl.split("\\?")[0] : intentUrl));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (intentUrl.contains("?")) {//说明带参数
-                for (String kv : intentUrl.split("\\?")[1].split("\\&")) {//拿到？后面的，然后对&分割处理
+                for (String kv : intentUrl.split("\\?")[1].split("&")) {//拿到？后面的，然后对&分割处理
                     String k = kv.split("=")[0];//拿到参数名
                     String v = kv.split("=")[1];//拿到参数
                     intent.putExtra(k, v);

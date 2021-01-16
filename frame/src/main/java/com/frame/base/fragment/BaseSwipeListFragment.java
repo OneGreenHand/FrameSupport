@@ -62,13 +62,9 @@ public abstract class BaseSwipeListFragment<T extends ViewBinding, P extends Bas
         return false;
     }
 
-    //自动更新adapter状态(正常情况使用)
+    //自动更新adapter状态
     protected void notifyAdapterStatus(List<AB> data, int pageIndex, int pageCount) {
-        notifyAdapterStatus(data, data == null ? 0 : data.size(), pageIndex, pageCount);
-    }
-
-    //分组布局使用
-    protected void notifyAdapterStatus(List<AB> data, int dataSize, int pageIndex, int pageCount) {
+        int dataSize = data == null ? 0 : data.size();
         if (pageIndex == BaseConfig.ViewPage.START_INDEX) {
             if (data == null || data.isEmpty()) {
                 if (UserAdapterEmpty())

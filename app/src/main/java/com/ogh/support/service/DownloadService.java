@@ -71,6 +71,7 @@ public class DownloadService extends Service {
                     Aria.download(this)
                             .load(fileUrl)
                             .setFilePath(AppConfig.FilePath.FILE_FOLDER  + fileName)
+                            .ignoreCheckPermissions()
                             .ignoreFilePathOccupy()
                             .create();
                 } catch (Exception e) {//有可能下载地址错误

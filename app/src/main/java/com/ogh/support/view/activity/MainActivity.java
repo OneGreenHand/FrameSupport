@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 2000) {
-                Toast.makeText(MainActivity.this, "再按一次退出", Toast.LENGTH_SHORT).show();
+                ToastUtil.showShortToast("再按一次退出");
                 firstTime = secondTime;
                 return true;
             } else

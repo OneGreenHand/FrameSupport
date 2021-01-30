@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.ogh.support.R;
 
 
@@ -34,7 +35,7 @@ public class DownloadProgressButton extends TextView {
     //覆盖后颜色
     private int mTextCoverColor;
     //文字大小
-    private float mAboveTextSize = 40;
+    private float mAboveTextSize = 14;
     private int mProgress = -1;
     private int mToProgress;
     private int mMaxProgress;
@@ -80,7 +81,7 @@ public class DownloadProgressButton extends TextView {
             mBackgroundColor = a.getColor(R.styleable.AnimDownloadProgressButton_progressbtn_background_color, Color.parseColor("#6699ff"));
             mBackgroundSecondColor = a.getColor(R.styleable.AnimDownloadProgressButton_progressbtn_background_second_color, Color.LTGRAY);
             mButtonRadius = a.getFloat(R.styleable.AnimDownloadProgressButton_progressbtn_radius, 60);
-            mAboveTextSize = a.getFloat(R.styleable.AnimDownloadProgressButton_progressbtn_text_size, 40);
+            mAboveTextSize = a.getFloat(R.styleable.AnimDownloadProgressButton_progressbtn_text_size, 14);
             mTextColor = a.getColor(R.styleable.AnimDownloadProgressButton_progressbtn_text_color, mBackgroundSecondColor);
             mTextCoverColor = a.getColor(R.styleable.AnimDownloadProgressButton_progressbtn_text_covercolor, Color.WHITE);
             mCurrentText = a.getString(R.styleable.AnimDownloadProgressButton_progressbtn_text);
@@ -103,7 +104,7 @@ public class DownloadProgressButton extends TextView {
         //设置文字画笔
         mTextPaint = new Paint();
         mTextPaint.setAntiAlias(true);
-        mTextPaint.setTextSize(mAboveTextSize);
+        mTextPaint.setTextSize(SizeUtils.sp2px(mAboveTextSize));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
             setLayerType(LAYER_TYPE_SOFTWARE, mTextPaint);  //解决文字有时候画不出问题
     }

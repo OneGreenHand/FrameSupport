@@ -16,7 +16,7 @@ ext {
     // 依赖相关版本控制
     depVersion = [
             retrofit           : "2.9.0",
-            okhttp_logging     : "4.7.2",
+            okhttp_logging     : "4.9.0",
             utilcode           : "1.30.5",
             autosize           : "1.2.1",
             glide              : "4.11.0",

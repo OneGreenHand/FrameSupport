@@ -3,6 +3,7 @@ package com.frame.base;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
@@ -54,9 +55,9 @@ public class BaseModel {
             mBuilder.mParam.put("", "");
         }
         if (mBuilder.mBaseRequestView instanceof FragmentActivity) {//绑定生命周期
-            mHttpRequest.post(api, mBuilder.mParam).to(autoDisposable(AndroidLifecycleScopeProvider.from(((FragmentActivity) mBuilder.mBaseRequestView)))).subscribe(responseBodySubscriber);
+            mHttpRequest.post(api, mBuilder.mParam).to(autoDisposable(AndroidLifecycleScopeProvider.from(((FragmentActivity) mBuilder.mBaseRequestView), Lifecycle.Event.ON_DESTROY))).subscribe(responseBodySubscriber);
         } else if (mBuilder.mBaseRequestView instanceof Fragment) {
-            mHttpRequest.post(api, mBuilder.mParam).to(autoDisposable(AndroidLifecycleScopeProvider.from(((Fragment) mBuilder.mBaseRequestView)))).subscribe(responseBodySubscriber);
+            mHttpRequest.post(api, mBuilder.mParam).to(autoDisposable(AndroidLifecycleScopeProvider.from(((Fragment) mBuilder.mBaseRequestView), Lifecycle.Event.ON_DESTROY))).subscribe(responseBodySubscriber);
         } else
             mHttpRequest.post(api, mBuilder.mParam).subscribe(responseBodySubscriber);
     }
@@ -65,9 +66,9 @@ public class BaseModel {
         Observer<ResponseBody> responseBodySubscriber = getResponseBodySubscriber(api, clazz);
         if (responseBodySubscriber == null) return;
         if (mBuilder.mBaseRequestView instanceof FragmentActivity) {
-            mHttpRequest.get(api).to(autoDisposable(AndroidLifecycleScopeProvider.from(((FragmentActivity) mBuilder.mBaseRequestView)))).subscribe(responseBodySubscriber);
+            mHttpRequest.get(api).to(autoDisposable(AndroidLifecycleScopeProvider.from(((FragmentActivity) mBuilder.mBaseRequestView), Lifecycle.Event.ON_DESTROY))).subscribe(responseBodySubscriber);
         } else if (mBuilder.mBaseRequestView instanceof Fragment) {
-            mHttpRequest.get(api).to(autoDisposable(AndroidLifecycleScopeProvider.from(((Fragment) mBuilder.mBaseRequestView)))).subscribe(responseBodySubscriber);
+            mHttpRequest.get(api).to(autoDisposable(AndroidLifecycleScopeProvider.from(((Fragment) mBuilder.mBaseRequestView), Lifecycle.Event.ON_DESTROY))).subscribe(responseBodySubscriber);
         } else
             mHttpRequest.get(api).subscribe(responseBodySubscriber);
     }
@@ -76,9 +77,9 @@ public class BaseModel {
         Observer<ResponseBody> responseBodySubscriber = getResponseBodySubscriber(api, clazz);
         if (responseBodySubscriber == null) return;
         if (mBuilder.mBaseRequestView instanceof FragmentActivity) {
-            mHttpRequest.uploadFile(api, mBuilder.mParam, mBuilder.multiFileKey, mBuilder.mFileInfoBeans).to(autoDisposable(AndroidLifecycleScopeProvider.from(((FragmentActivity) mBuilder.mBaseRequestView)))).subscribe(responseBodySubscriber);
+            mHttpRequest.uploadFile(api, mBuilder.mParam, mBuilder.multiFileKey, mBuilder.mFileInfoBeans).to(autoDisposable(AndroidLifecycleScopeProvider.from(((FragmentActivity) mBuilder.mBaseRequestView), Lifecycle.Event.ON_DESTROY))).subscribe(responseBodySubscriber);
         } else if (mBuilder.mBaseRequestView instanceof Fragment) {
-            mHttpRequest.uploadFile(api, mBuilder.mParam, mBuilder.multiFileKey, mBuilder.mFileInfoBeans).to(autoDisposable(AndroidLifecycleScopeProvider.from(((Fragment) mBuilder.mBaseRequestView)))).subscribe(responseBodySubscriber);
+            mHttpRequest.uploadFile(api, mBuilder.mParam, mBuilder.multiFileKey, mBuilder.mFileInfoBeans).to(autoDisposable(AndroidLifecycleScopeProvider.from(((Fragment) mBuilder.mBaseRequestView), Lifecycle.Event.ON_DESTROY))).subscribe(responseBodySubscriber);
         } else
             mHttpRequest.uploadFile(api, mBuilder.mParam, mBuilder.multiFileKey, mBuilder.mFileInfoBeans).subscribe(responseBodySubscriber);
     }

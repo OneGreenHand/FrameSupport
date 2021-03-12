@@ -167,6 +167,7 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
     private void destroy() {
         if (!isDestroyed) { // 回收资源
             isDestroyed = true;
+            dismissLoadingDialog();
             if (isRegisterBus())
                 BusUtils.unregister(this);
         }

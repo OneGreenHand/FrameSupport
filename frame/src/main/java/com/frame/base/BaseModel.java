@@ -154,7 +154,7 @@ public class BaseModel {
                     e.printStackTrace();
                     if (BaseConfig.DEBUG) {
                         LogUtils.e("数据解析异常", e.getMessage() + "");
-                        throw new RuntimeException("数据解析异常");
+                        throw new RuntimeException("数据解析异常：" + e.getMessage());
                     } else
                         mBuilder.mBaseRequestView.requestError(e, mBuilder.requestTag == null ? tag : mBuilder.requestTag);
                 }

@@ -2,23 +2,32 @@ package com.ogh.support.webview;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Base64;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.JsResult;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
+import com.blankj.utilcode.constant.PermissionConstants;
+import com.blankj.utilcode.util.PermissionUtils;
+import com.frame.util.ToastUtil;
+import com.ogh.support.util.ImageSaveUtil;
 
 
 /**
@@ -26,8 +35,8 @@ import android.widget.TextView;
  * 备注: 使用的时候不要设置 android:scrollbars="none"，不然部分机型会显示空白
  */
 public class BaseWebView extends WebView {
-    private TextView mTextView;
     private ProgressBar mProgressBar;
+    private ValueCallback<Uri[]> filePathCallback;
 
     public BaseWebView(Context context) {
         super(context);
@@ -42,7 +51,7 @@ public class BaseWebView extends WebView {
     @SuppressLint("SetJavaScriptEnabled")
     public void init(Context context) {
         WebSettings webSettings = getSettings();
-        webSettings.setLoadsImagesAutomatically(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT);//设置自动加载图片
+        webSettings.setLoadsImagesAutomatically(true);//设置自动加载图片
         webSettings.setJavaScriptEnabled(true); // 设置支持javascript脚本
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);//设置允许js弹出alert对话框
         webSettings.setUseWideViewPort(true);  //设置webview推荐使用的窗口，使html界面自适应屏幕
@@ -55,20 +64,48 @@ public class BaseWebView extends WebView {
         setDownloadListener(new DownloadListener() {//下载事件
             @Override
             public void onDownloadStart(String s, String s1, String s2, String s3, long l) {
-                Intent intent = new Intent();
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setAction("android.intent.action.VIEW");
-                intent.setData(Uri.parse(s));
-                getContext().startActivity(intent);
+                try {
+                    if (s.startsWith("data:image")) {//下载图片
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {//android 10以下
+                            PermissionUtils.permission(PermissionConstants.STORAGE)
+                                    .callback(new PermissionUtils.SimpleCallback() {
+                                        @Override
+                                        public void onGranted() {
+                                            SaveImage(s);
+                                        }
+
+                                        @Override
+                                        public void onDenied() {
+                                            ToastUtil.showShortToast("没有权限");
+                                        }
+                                    })
+                                    .request();
+                        } else
+                            SaveImage(s);
+                    } else {//调用系统下载器
+                        Intent intent = new Intent();
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setAction("android.intent.action.VIEW");
+                        intent.setData(Uri.parse(s));
+                        getContext().startActivity(intent);
+                    }
+                } catch (Exception e) {
+                }
             }
         });
         setWebChromeClient(new WebChromeClient() {
 
             @Override
-            public void onReceivedTitle(WebView view, String title) {
-                super.onReceivedTitle(view, title);
-                if (mTextView != null)
-                    mTextView.setText(title);
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+                BaseWebView.this.filePathCallback = filePathCallback;
+                if (getContext() instanceof Activity) {
+                    Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                    i.addCategory(Intent.CATEGORY_OPENABLE);
+                    i.setType("image/*");
+                    ((Activity) getContext()).startActivityForResult(Intent.createChooser(i, "File Browser"), 1);
+                    return true;
+                }
+                return false;
             }
 
             @Override
@@ -135,16 +172,56 @@ public class BaseWebView extends WebView {
     }
 
     /**
+     * 保存图片到本地
+     *
+     * @param url 图片地址 data:image/png;base64格式
+     */
+    public void SaveImage(String url) {
+        try {
+            byte[] bytes = Base64.decode(url.split(",")[1], Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            if (bitmap == null) {
+                ToastUtil.showShortToast("下载失败,请稍后重试!");
+                return;
+            }
+            Uri uri = ImageSaveUtil.saveAlbum(getContext(), bitmap, Bitmap.CompressFormat.JPEG, 90, true);
+            ToastUtil.showShortToast(uri == null ? "下载失败,请稍后重试!" : "图片下载完成");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtil.showShortToast("下载失败,请稍后重试!");
+        }
+    }
+
+    public void doFileChoose(Intent data) {
+        if (filePathCallback == null)
+            return;
+        if (data == null) {
+            filePathCallback.onReceiveValue(null);
+            return;
+        }
+        Uri[] results = null;
+        String dataString = data.getDataString();
+        ClipData clipData = data.getClipData();
+        if (clipData != null) {
+            results = new Uri[clipData.getItemCount()];
+            for (int i = 0; i < clipData.getItemCount(); i++) {
+                ClipData.Item item = clipData.getItemAt(i);
+                results[i] = item.getUri();
+            }
+        }
+        if (dataString != null)
+            results = new Uri[]{Uri.parse(dataString)};
+        filePathCallback.onReceiveValue(results);
+        filePathCallback = null;
+    }
+
+    /**
      * 自动播放视频
      */
     public void setAutoPlay() {
         WebSettings webSettings = getSettings();
         // 允许自动播放多媒体
         webSettings.setMediaPlaybackRequiresUserGesture(false);
-    }
-
-    public void setTextView(TextView view) {
-        mTextView = view;
     }
 
     public void setProgressBar(ProgressBar progressBar) {

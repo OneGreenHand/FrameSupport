@@ -27,10 +27,16 @@ public class WebActivity extends BaseActivity<ActivityWebBinding> {
     @Override
     protected void init(Bundle savedInstanceState) {
         getWindow().setFormat(PixelFormat.TRANSLUCENT);//为了避免视频闪屏和透明问题
-        viewBinding.webView.setTextView(viewBinding.titlebar.getTitleText());
         viewBinding.webView.setProgressBar(viewBinding.pbWebBase);
         viewBinding.webView.loadUrl("https://www.baidu.com");
         //  mWebView.loadUrl("http://debugtbs.qq.com");//用来检测X5内核是否安装
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK)
+            viewBinding.webView.doFileChoose(data);
     }
 
     @Override

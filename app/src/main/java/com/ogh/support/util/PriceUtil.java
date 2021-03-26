@@ -8,6 +8,7 @@ import android.text.style.ForegroundColorSpan;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.regex.Pattern;
 
 
 /**
@@ -48,18 +49,15 @@ public class PriceUtil {
 
     /**
      * 千位分隔符 10000会变成10,000.00
-     * 价格计算请勿使用,同时会被四舍五入
-     * digit 小数点后保留几位
+     * digit 每隔几位分割
      */
-    public static String qianWeiFenGe(double num, int digit) {
-        if (digit < 0)
-            return "0";
-        StringBuffer sb = new StringBuffer();
-        sb.append("#,##0.");
-        for (int i = 0; i < digit; i++)
-            sb.append("0");
-        DecimalFormat df = new DecimalFormat(sb.toString());
-        return df.format(num);
+    public static String QianWeiFenGe(double num, int digit) {
+        // ① 把串倒过来
+        StringBuffer tmp = new StringBuffer().append(num).reverse();
+        // ② 替换这样的串：连续split位数字的串，其右边还有个数字，在串的右边添加逗号
+        String retNum = Pattern.compile("(\\d{" + digit + "})(?=\\d)").matcher(tmp.toString()).replaceAll("$1,");
+        // ③ 替换完后，再把串倒回去返回
+        return new StringBuffer().append(retNum).reverse().toString();
     }
 
     /**

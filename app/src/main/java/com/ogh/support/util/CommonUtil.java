@@ -136,71 +136,11 @@ public class CommonUtil {
     }
 
     /**
-     * 截取最后四位(银行卡)
-     */
-    public static String getLastFourNum(String numner) {
-        if (TextUtils.isEmpty(numner)) return "";
-        if (numner.length() < 5)
-            return numner;
-        else
-            return numner.substring(numner.length() - 4);
-    }
-
-    /**
-     * 将银行卡中间位数设置为*号
-     */
-    public static String getHideBankCardNum(String bankCardNum) {
-        try {
-            if (TextUtils.isEmpty(bankCardNum)) return "未绑定银行卡";
-            int length = bankCardNum.length();
-            if (length < 8) //如果小于9位直接返回
-                return bankCardNum;
-            else {
-                String startNum = bankCardNum.substring(0, 4);
-                String endNum = bankCardNum.substring(length - 4, length);
-                String str = "";
-                for (int i = 0; i < bankCardNum.substring(4, bankCardNum.length() - 4).length(); i++)
-                    str = str + "*";
-                bankCardNum = startNum + str + endNum;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bankCardNum;
-    }
-
-    /**
      * 邮箱用****号隐藏前面的字母
      */
     public static String setTingEmail(String email) {
         if (TextUtils.isEmpty(email)) return "";
         return email.replaceAll("(\\w?)(\\w+)(\\w)(@\\w+\\.[a-z]+(\\.[a-z]+)?)", "$1****$3$4");
-    }
-
-    /**
-     * 判断是否含有特殊字符
-     *
-     * @return true为包含，false为不包含
-     */
-    public static boolean isSpecialChar(String str) {
-        String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]|\n|\r|\t";
-        Pattern p = Pattern.compile(regEx);
-        Matcher m = p.matcher(str);
-        return m.find();
-    }
-
-    //是否包含中文 true为包含，false为不包含
-    public static boolean isContainChinese(String str) {
-        Pattern p = Pattern.compile("[\\u4e00-\\u9fa5]");
-        Matcher m = p.matcher(str);
-        return m.find();
-    }
-
-    // 使用正则表达式来判断字符串中是否包含字母
-    public static boolean judgeContainsStr(String str) {
-        String regex = ".*[a-zA-Z]+.*";
-        Matcher m = Pattern.compile(regex).matcher(str);
-        return m.matches();
     }
 
     /**
@@ -246,33 +186,6 @@ public class CommonUtil {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-    }
-
-    //密码8-20，不能为中文且必须包含字符，不能为纯数字
-    public static boolean checkPassword(String edInput) {
-        if (TextUtils.isEmpty(edInput)) {
-            ToastUtil.showShortToast("密码不能为空");
-            return false;
-        } else if (edInput.length() < 8 || edInput.length() > 20) {
-            ToastUtil.showShortToast("密码长度为8-20位");
-            return false;
-        } else {
-            Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
-            Matcher m = p.matcher(edInput);
-            if (!m.find()) {
-                p = Pattern.compile("[0-9]*");
-                Matcher m2 = p.matcher(edInput);
-                if (m2.matches()) {
-                    ToastUtil.showShortToast("密码不能为纯数字");
-                    return false;
-                } else {
-                    return true;
-                }
-            } else {
-                ToastUtil.showShortToast("密码不能包含中文");
-                return false;
-            }
-        }
     }
 
     //检测GPS是否打开

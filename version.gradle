@@ -56,8 +56,6 @@ ext {
             autosize               : "me.jessyan:autosize:${depVersion.autosize}",
             //沉浸式状态栏(activity)
             immersionbar           : "com.gyf.immersionbar:immersionbar:${depVersion.immersionbar}",
-            //沉浸式状态栏(fragment)
-            immersionbar_components: "com.gyf.immersionbar:immersionbar-components:${depVersion.immersionbar}",
             //walle读取渠道号
             walle                  : "com.meituan.android.walle:library:${depVersion.walle}",
             //绑定生命周期(RxJava)

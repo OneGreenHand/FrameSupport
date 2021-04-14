@@ -28,12 +28,4 @@ public class AppContext extends FrameApplication {
         MultiDex.install(this);
     }
 
-//   private void initBugly() {//初始化bugly
-//        Context context = getApplicationContext();
-//        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);// 设置是否为上报进程
-//        strategy.setAppChannel(ChannelUtils.getChannel());  //设置渠道
-//        // CrashReport.setUserId("");//设置用户ID
-//        CrashReport.initCrashReport(context, "8706956f68", BaseConfig.DEBUG, strategy);
-//    }
-
 }

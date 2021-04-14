@@ -44,6 +44,4 @@ dependencies {
     api dependencies.utilcode
     //沉浸式状态栏(activity)
     api dependencies.immersionbar
-    //沉浸式状态栏(fragment)
-    api dependencies.immersionbar_components
 }

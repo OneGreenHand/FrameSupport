@@ -250,7 +250,6 @@ public class RoundedImageView extends ImageView {
             try {
                 d = rsrc.getDrawable(mResource);
             } catch (Exception e) {
-                LogUtils.w(TAG, "Unable to find resource: " + mResource, e);
                 // Don't try again.
                 mResource = 0;
             }
@@ -288,7 +287,6 @@ public class RoundedImageView extends ImageView {
             try {
                 d = rsrc.getDrawable(mBackgroundResource);
             } catch (Exception e) {
-                LogUtils.w(TAG, "Unable to find resource: " + mBackgroundResource, e);
                 // Don't try again.
                 mBackgroundResource = 0;
             }

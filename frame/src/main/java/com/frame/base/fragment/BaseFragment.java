@@ -2,7 +2,6 @@ package com.frame.base.fragment;
 
 
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,8 +15,6 @@ import com.blankj.utilcode.util.BusUtils;
 import com.frame.R;
 import com.frame.base.BaseView;
 import com.frame.view.LoadingDialog;
-import com.gyf.immersionbar.components.SimpleImmersionOwner;
-import com.gyf.immersionbar.components.SimpleImmersionProxy;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -26,7 +23,7 @@ import java.lang.reflect.Type;
 /**
  * Fragment基类
  */
-public abstract class BaseFragment<T extends ViewBinding> extends Fragment implements BaseView, SimpleImmersionOwner {
+public abstract class BaseFragment<T extends ViewBinding> extends Fragment implements BaseView {
     protected Activity mActivity;
     protected LoadingDialog progressDialog;
     protected T viewBinding;
@@ -58,8 +55,6 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment imple
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (immersionBarEnabled())
-            mSimpleImmersionProxy.onActivityCreated(savedInstanceState);
         init(savedInstanceState);
     }
 
@@ -78,18 +73,6 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment imple
      */
     protected boolean isRegisterBus() {
         return false;
-    }
-
-    /**
-     * 是否需要开启沉浸式
-     */
-    @Override
-    public boolean immersionBarEnabled() {
-        return false;
-    }
-
-    @Override
-    public void initImmersionBar() {
     }
 
     /**
@@ -127,33 +110,6 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment imple
         dismissLoadingDialog();
         if (isRegisterBus())
             BusUtils.unregister(this);
-        if (immersionBarEnabled())
-            mSimpleImmersionProxy.onDestroy();
-    }
-    /************************************ImmersionBar沉浸式相关***********************************/
-    /**
-     * ImmersionBar代理类
-     */
-    private SimpleImmersionProxy mSimpleImmersionProxy = new SimpleImmersionProxy(this);
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (immersionBarEnabled())
-            mSimpleImmersionProxy.setUserVisibleHint(isVisibleToUser);
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (immersionBarEnabled())
-            mSimpleImmersionProxy.onHiddenChanged(hidden);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (immersionBarEnabled())
-            mSimpleImmersionProxy.onConfigurationChanged(newConfig);
-    }
 }

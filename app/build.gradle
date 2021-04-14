@@ -82,9 +82,7 @@ dependencies {
     //分Dex
     implementation 'androidx.multidex:multidex:2.0.1'
     //LeakCanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
-    //bugly异常捕获
-    //implementation  'com.tencent.bugly:crashreport:3.2.422'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
     //屏幕适配
     implementation dependencies.autosize
     //walle读取渠道号

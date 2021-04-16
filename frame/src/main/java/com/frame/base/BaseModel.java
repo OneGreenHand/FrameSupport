@@ -7,6 +7,8 @@ import androidx.lifecycle.Lifecycle;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.frame.FrameApplication;
+import com.frame.R;
 import com.frame.bean.BaseBean;
 import com.frame.bean.FileInfoBean;
 import com.frame.config.BaseConfig;
@@ -50,10 +52,6 @@ public class BaseModel {
     public <B extends BaseBean> void post(String api, final Class<B> clazz) {
         Observer<ResponseBody> responseBodySubscriber = getResponseBodySubscriber(api, clazz);
         if (responseBodySubscriber == null) return;
-        if (mBuilder.mParam == null || mBuilder.mParam.isEmpty()) { //参数为空时，添加一个无用参数
-            mBuilder.mParam = new HashMap<>();
-            mBuilder.mParam.put("", "");
-        }
         if (mBuilder.mBaseRequestView instanceof FragmentActivity) {//绑定生命周期
             mHttpRequest.post(api, mBuilder.mParam).to(autoDisposable(AndroidLifecycleScopeProvider.from(((FragmentActivity) mBuilder.mBaseRequestView), Lifecycle.Event.ON_DESTROY))).subscribe(responseBodySubscriber);
         } else if (mBuilder.mBaseRequestView instanceof Fragment) {
@@ -93,7 +91,7 @@ public class BaseModel {
             }
             if (mBuilder.mLoadStyle == LoadStyle.DIALOG_VIEW || mBuilder.mLoadStyle == LoadStyle.VIEW)
                 mBuilder.mBaseRequestView.showNetErrorView("");
-            ToastUtil.showShortToast("请检查网络");
+            ToastUtil.showShortToast(FrameApplication.getContext().getResources().getString(R.string.frame_check_network));
             return null;
         }
         Observer<ResponseBody> subscriber = new Observer<ResponseBody>() {
@@ -168,14 +166,14 @@ public class BaseModel {
             case NONE:
                 break;
             case VIEW:
-                mBuilder.mBaseRequestView.showNetErrorView("服务器错误: " + e.getMessage());
+                mBuilder.mBaseRequestView.showNetErrorView(FrameApplication.getContext().getResources().getString(R.string.frame_server_error) + e.getMessage());
                 break;
             case DIALOG:
                 mBuilder.mBaseRequestView.dismissLoadingDialog();
                 break;
             case DIALOG_VIEW:
                 mBuilder.mBaseRequestView.dismissLoadingDialog();
-                mBuilder.mBaseRequestView.showNetErrorView("服务器错误: " + e.getMessage());
+                mBuilder.mBaseRequestView.showNetErrorView(FrameApplication.getContext().getResources().getString(R.string.frame_server_error) + e.getMessage());
                 break;
         }
         mBuilder.mBaseRequestView.requestError(e, tag);

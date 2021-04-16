@@ -1,5 +1,6 @@
 package com.frame.util;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -11,11 +12,11 @@ public class ToastUtil {
 
     public static void showShortToast(String content) {
         if (!TextUtils.isEmpty(content))
-            ToastUtils.showShort(content);
+            ToastUtils.make().setTextColor(Color.WHITE).setBgColor(Color.BLACK).show(content);
     }
 
     public static void showLongToast(String content) {
         if (!TextUtils.isEmpty(content))
-            ToastUtils.showLong(content);
+            ToastUtils.make().setTextColor(Color.WHITE).setDurationIsLong(true).setBgColor(Color.BLACK).show(content);
     }
 }

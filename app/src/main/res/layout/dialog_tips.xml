@@ -42,6 +42,8 @@
             android:background="@drawable/shape_cc7c7c7_30"
             android:gravity="center"
             android:minWidth="110dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:text="@string/cancel"
             android:textColor="@color/c_FFFFFF"
             android:textSize="@dimen/font_15sp" />
@@ -53,6 +55,8 @@
             android:background="@drawable/shape_sure"
             android:gravity="center"
             android:minWidth="110dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:text="@string/sure"
             android:textColor="@color/c_FFFFFF"
             android:textSize="@dimen/font_15sp" />

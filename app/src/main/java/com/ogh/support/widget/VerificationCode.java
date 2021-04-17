@@ -138,7 +138,7 @@ public class VerificationCode extends TextView implements LifecycleObserver, Bas
     }
 
     @Override
-    public void requestSuccess(BaseBean data,  Object tag, int pageIndex, int pageCount) {
+    public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
         if (countDownTimer == null)
             countDownTimer = new VerificationCountDownTimer(durationTime, intervalTime);
         ToastUtil.showShortToast("验证码已发送");

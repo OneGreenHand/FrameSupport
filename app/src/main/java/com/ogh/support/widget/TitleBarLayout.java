@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.frame.util.CustomClickListener;
@@ -66,7 +65,7 @@ public class TitleBarLayout extends LinearLayout {
     }
 
     private void findId() {
-        LinearLayout layoutTitle = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.titlebar, this);
+        LinearLayout layoutTitle = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.layout_titlebar, this);
         ImageView imgFinish = layoutTitle.findViewById(R.id.img_finish);
         title = layoutTitle.findViewById(R.id.app_title);
         other = layoutTitle.findViewById(R.id.other);

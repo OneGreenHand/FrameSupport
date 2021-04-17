@@ -21,9 +21,21 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -160,9 +172,9 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="998" y="260" width="647" height="534" key="find.popup" timestamp="1618562272947">
+    <state x="998" y="260" width="647" height="534" key="find.popup" timestamp="1618564447417">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="998" y="260" width="647" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1618562272947" />
+    <state x="998" y="260" width="647" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1618564447417" />
   </component>
 </project>

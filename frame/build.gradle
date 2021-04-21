@@ -30,6 +30,7 @@ dependencies {
     api dependencies.suport.appcompat
     api dependencies.suport.design
     api dependencies.suport.swiperefreshlayout
+    api dependencies.suport.viewbinding
     //okhttp日志
     implementation dependencies.okhttp_logging
     //retrofit2

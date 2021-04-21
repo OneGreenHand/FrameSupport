@@ -99,5 +99,5 @@ dependencies {
     //微信支付
     implementation "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+"
     // 支付宝支付
-    implementation(name: 'alipaysdk-15.8.00.201112210139', ext: 'aar')
+    implementation(name: 'alipaysdk-15.8.02.210308182128', ext: 'aar')
 }

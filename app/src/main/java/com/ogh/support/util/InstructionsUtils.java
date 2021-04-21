@@ -16,8 +16,8 @@ import com.ogh.support.service.DownloadService;
 public class InstructionsUtils {
 
     /**
-     * @param type 操作类别:  0、跳转本地 1、打开外部浏览器 2、通知栏下载APK或打开app 3、打开指定QQ 4、分享文本
-     * @param action  跳转意图: 根据type变动，可能是本地activity或者浏览器之类的
+     * @param type   操作类别:  0、跳转本地 1、打开外部浏览器 2、通知栏下载APK或打开app 3、打开指定QQ 4、分享文本
+     * @param action 跳转意图: 根据type变动，可能是本地activity或者浏览器之类的
      */
     public static void JumpIntention(Context context, int type, String action) {
         switch (type) {
@@ -173,7 +173,7 @@ public class InstructionsUtils {
      */
     private static Class getActivityClassName(String className) {
         try {
-            return Class.forName(AppUtils.getAppPackageName() + ".view.activity." + className);//TODO 这里需要改成自己对应activity位置
+            return Class.forName("com.ogh.support.view.activity." + className);//TODO 这里需要改成自己对应activity位置
         } catch (Exception e) {
             return null;
         }

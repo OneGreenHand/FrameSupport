@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FF4081</color>
-    <color name="light">#57D6E2</color>
-    <color name="green">#3BC68C</color>
-    <color name="violet">#9B30FF</color>
-    <color name="blue">#60A2EB</color>
-    <color name="orange">#FF7F00</color>
-    <color name="yellows">#FFCC00</color>
-    <color name="red">#FF0000</color>
-
+    <color name="c_FF0000">#FF0000</color>
     <color name="c_999999">#999999</color>
-    <color name="c_666666">#666666</color>
     <color name="c_333333">#333333</color>
     <color name="c_FFFFFF">#FFFFFF</color>
     <color name="c_F0F2F5">#F0F2F5</color>
-    <color name="c_434343">#434343</color>
 </resources>

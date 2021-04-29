@@ -43,9 +43,8 @@ public class WebActivity extends BaseActivity<ActivityWebBinding> {
     public void onBackPressed() {
         if (viewBinding.webView.canGoBack()) {
             viewBinding.webView.goBack();
-        } else {
+        } else
             finish();
-        }
     }
 
     @Override

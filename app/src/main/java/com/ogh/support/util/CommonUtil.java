@@ -169,6 +169,7 @@ public class CommonUtil {
             intent.setData(Uri.parse(url));
             mContext.startActivity(intent);
         } catch (Exception e) {
+            e.printStackTrace();
             ToastUtil.showShortToast("浏览器打开失败");
         }
     }

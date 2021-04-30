@@ -250,6 +250,7 @@ public class RoundedImageView extends ImageView {
             try {
                 d = rsrc.getDrawable(mResource);
             } catch (Exception e) {
+                e.printStackTrace();
                 // Don't try again.
                 mResource = 0;
             }
@@ -287,6 +288,7 @@ public class RoundedImageView extends ImageView {
             try {
                 d = rsrc.getDrawable(mBackgroundResource);
             } catch (Exception e) {
+                e.printStackTrace();
                 // Don't try again.
                 mBackgroundResource = 0;
             }

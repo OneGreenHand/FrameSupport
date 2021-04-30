@@ -21,6 +21,7 @@ import com.gyf.immersionbar.ImmersionBar;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 
 /**
@@ -35,14 +36,16 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ParameterizedType type = (ParameterizedType) getClass().getGenericSuperclass();
-        Class cls = (Class) type.getActualTypeArguments()[0];
-        try {
-            Method inflate = cls.getDeclaredMethod("inflate", LayoutInflater.class);
-            viewBinding = (T) inflate.invoke(null, getLayoutInflater());
-            setContentView(viewBinding.getRoot());
-        } catch (Exception e) {
-            e.printStackTrace();
+        Type type = this.getClass().getGenericSuperclass();
+        if (type instanceof ParameterizedType) {
+            try {
+                Class<T> clazz = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];
+                Method method = clazz.getMethod("inflate", LayoutInflater.class);
+                viewBinding = (T) method.invoke(null, getLayoutInflater());
+                setContentView(viewBinding.getRoot());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         initCommon();
         init(savedInstanceState);//初始化

@@ -75,6 +75,7 @@ public class DownloadService extends Service {
                             .ignoreFilePathOccupy()
                             .create();
                 } catch (Exception e) {//有可能下载地址错误
+                    e.printStackTrace();
                     error();
                     ToastUtil.showShortToast("下载失败");
                 }

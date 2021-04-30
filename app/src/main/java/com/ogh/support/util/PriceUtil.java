@@ -63,6 +63,7 @@ public class PriceUtil {
             // ③ 替换完后，再把串倒回去返回
             return subZeroAndDot(new StringBuffer().append(retNum).reverse().toString());
         } catch (Exception e) {
+            e.printStackTrace();
             return num;
         }
     }

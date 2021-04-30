@@ -19,6 +19,7 @@ public class OpenMapUtil {
             if (!new File("/data/data/" + "com.baidu.BaiduMap").exists())
                 return false;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -32,6 +33,7 @@ public class OpenMapUtil {
             if (!new File("/data/data/" + "com.autonavi.minimap").exists())
                 return false;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -45,6 +47,7 @@ public class OpenMapUtil {
             if (!new File("/data/data/" + "com.tencent.map").exists())
                 return false;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -80,6 +83,7 @@ public class OpenMapUtil {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -120,7 +124,7 @@ public class OpenMapUtil {
             intent.setData(Uri.parse(sb.toString()));
             context.startActivity(intent);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -152,7 +156,7 @@ public class OpenMapUtil {
             intent.setData(Uri.parse(sb.toString()));
             context.startActivity(intent);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

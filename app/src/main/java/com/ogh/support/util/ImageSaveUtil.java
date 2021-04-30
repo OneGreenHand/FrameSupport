@@ -97,6 +97,7 @@ public class ImageSaveUtil {
                     if (os != null)
                         os.close();
                 } catch (IOException e) {
+                    e.printStackTrace();
                     // ignore
                 }
             }
@@ -129,6 +130,7 @@ public class ImageSaveUtil {
                 if (os != null)
                     os.close();
             } catch (IOException e) {
+                e.printStackTrace();
                 // ignore
             }
         }
@@ -151,6 +153,7 @@ public class ImageSaveUtil {
         try {
             return file.createNewFile();
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }

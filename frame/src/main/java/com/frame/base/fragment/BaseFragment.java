@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;
 
@@ -35,27 +37,29 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment imple
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mActivity = getActivity();
-        Type superclass = getClass().getGenericSuperclass();
-        Class<?> aClass = (Class<?>) ((ParameterizedType) superclass).getActualTypeArguments()[0];
-        try {
-            Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class, ViewGroup.class, boolean.class);
-            viewBinding = (T) method.invoke(null, getLayoutInflater(), container, false);
-        } catch (Exception e) {
-            e.printStackTrace();
+        Type type = this.getClass().getGenericSuperclass();
+        if (type instanceof ParameterizedType) {
+            try {
+                Class<T> clazz = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];
+                Method method = clazz.getMethod("inflate", LayoutInflater.class, ViewGroup.class, boolean.class);
+                viewBinding = (T) method.invoke(null, getLayoutInflater(), container, false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        initCommon();
-        if (isRegisterBus())
-            BusUtils.register(this);
         return viewBinding.getRoot();
     }
 
-    protected void initCommon() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initCommon();
+        if (isRegisterBus())
+            BusUtils.register(this);
+        init(savedInstanceState);
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        init(savedInstanceState);
+    protected void initCommon() {
     }
 
     protected abstract void init(Bundle savedInstanceState);

@@ -175,6 +175,7 @@ public class InstructionsUtils {
         try {
             return Class.forName("com.ogh.support.view.activity." + className);//TODO 这里需要改成自己对应activity位置
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

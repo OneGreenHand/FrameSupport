@@ -90,6 +90,7 @@ public class BaseWebView extends WebView {
                         getContext().startActivity(intent);
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });

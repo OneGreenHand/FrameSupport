@@ -27,6 +27,7 @@ import android.widget.ProgressBar;
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.frame.util.ToastUtil;
+import com.ogh.support.R;
 import com.ogh.support.util.ImageSaveUtil;
 
 
@@ -121,7 +122,7 @@ public class BaseWebView extends WebView {
                 AlertDialog.Builder b = new AlertDialog.Builder(context);
                 b.setTitle("提示");
                 b.setMessage(message);
-                b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                b.setPositiveButton(getResources().getString(R.string.sure), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         jsResult.confirm();

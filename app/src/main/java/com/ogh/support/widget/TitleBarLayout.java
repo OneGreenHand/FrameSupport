@@ -65,7 +65,7 @@ public class TitleBarLayout extends LinearLayout {
     }
 
     private void findId() {
-        LinearLayout view = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.layout_titlebar, this);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_titlebar, this);
         LinearLayout layout_title = view.findViewById(R.id.layout_title);
         ImageView imgFinish = view.findViewById(R.id.img_finish);
         title = view.findViewById(R.id.app_title);

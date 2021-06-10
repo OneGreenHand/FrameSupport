@@ -52,6 +52,7 @@ public class BaseWebView extends WebView {
     @SuppressLint("SetJavaScriptEnabled")
     public void init(Context context) {
         WebSettings webSettings = getSettings();
+        webSettings.setMediaPlaybackRequiresUserGesture(false);// 允许自动播放多媒体
         webSettings.setLoadsImagesAutomatically(true);//设置自动加载图片
         webSettings.setJavaScriptEnabled(true); // 设置支持javascript脚本
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);//设置允许js弹出alert对话框
@@ -215,15 +216,6 @@ public class BaseWebView extends WebView {
             results = new Uri[]{Uri.parse(dataString)};
         filePathCallback.onReceiveValue(results);
         filePathCallback = null;
-    }
-
-    /**
-     * 自动播放视频
-     */
-    public void setAutoPlay() {
-        WebSettings webSettings = getSettings();
-        // 允许自动播放多媒体
-        webSettings.setMediaPlaybackRequiresUserGesture(false);
     }
 
     public void setProgressBar(ProgressBar progressBar) {

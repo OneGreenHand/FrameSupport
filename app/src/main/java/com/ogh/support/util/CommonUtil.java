@@ -180,7 +180,7 @@ public class CommonUtil {
     public static void ContactQQ(Context context, String qq) {
         String url;
         String q = TextUtils.isEmpty(qq) ? "40012345" : qq;
-        if (AppUtils.isAppInstalled("com.tencent.mobileqq") || AppUtils.isAppInstalled("com.tencent.tim") || AppUtils.isAppInstalled("com.tencent.qqlite"))
+        if (AppUtils.isAppInstalled("com.tencent.mobileqq") || AppUtils.isAppInstalled("com.tencent.tim"))
             url = "mqqwpa://im/chat?chat_type=wpa&uin=" + q + "";
         else
             url = "http://wpa.qq.com/msgrd?v=3&uin=" + q + "&site=qq&menu=yes";

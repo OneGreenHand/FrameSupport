@@ -4,10 +4,10 @@ ext {
     versions = [
             applicationId    : "com.ogh.support",//默认和包名一致，修改任一一方相互不影响
             minSdkVersion    : 21,//app最低支持的sdk版本号(Android5.0)
-            targetSdkVersion : 29,//兼容targetSdkVersion 29(含)以下版本
+            targetSdkVersion : 30,//兼容targetSdkVersion 30(含)以下版本
 
-            compileSdkVersion: 29,//使用 Android SDK 29版本编译你的应用
-            buildToolsVersion: "29.0.3",//android构建工具的版本
+            compileSdkVersion: 30,//使用 Android SDK 29版本编译你的应用
+            buildToolsVersion: "30.0.2",//android构建工具的版本
 
             versionCode      : 100010,
             versionName      : "1.0.1"

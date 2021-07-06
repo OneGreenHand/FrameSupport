@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -14,12 +15,15 @@ import com.blankj.utilcode.util.AppUtils;
 import com.frame.base.activity.BaseActivity;
 import com.frame.util.ToastUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.ogh.support.R;
 import com.ogh.support.databinding.ActivityMainBinding;
 import com.ogh.support.util.ChannelUtils;
 import com.ogh.support.view.adapter.FragmentAdapter;
 import com.ogh.support.view.fragment.HomeFragment;
 import com.ogh.support.view.fragment.MineFragment;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +47,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         //    viewBinding.viewPager.setOffscreenPageLimit(mFragment.size());//设置缓存,数量超过2可设置
         viewBinding.viewPager.setAdapter(new FragmentAdapter(this, mFragment));
         initViewPagerChangeListener();
-        viewBinding.navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        viewBinding.navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int i = item.getItemId();
                 if (i == R.id.home) {
                     viewBinding.viewPager.setCurrentItem(0, false);

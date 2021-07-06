@@ -12,6 +12,27 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <!--三方可见性适配-->
+    <queries>
+        <package android:name="com.eg.android.AlipayGphone" /><!--支付宝-->
+        <package android:name="hk.alipay.wallet" /> <!--AlipayHK-->
+        <package android:name="com.tencent.mm" /> <!--微信-->
+        <package android:name="com.tencent.mobileqq" /> <!--QQ-->
+        <package android:name="com.tencent.tim" />   <!--Tim-->
+        <intent><!--好像是万能写法-->
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+    <!--Android R包可见性-->
+    <queries package="${applicationId}">
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" />
+        </intent>
+    </queries>
     <application
         android:name=".AppContext"
         android:allowBackup="false"

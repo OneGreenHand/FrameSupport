@@ -92,13 +92,11 @@ public class RoundedImageView extends ImageView {
     public RoundedImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundedImageView, defStyle, 0);
-        int index = a.getInt(R.styleable.RoundedImageView_android_scaleType, -1);
+        int index = a.getInt(R.styleable.RoundedImageView_riv_scaleType, 3);
         if (index >= 0) {
             setScaleType(SCALE_TYPES[index]);
-        } else {
-            // default scaletype to FIT_CENTER
+        } else  // default scaletype to FIT_CENTER
             setScaleType(ScaleType.FIT_CENTER);
-        }
         float cornerRadiusOverride =
                 a.getDimensionPixelSize(R.styleable.RoundedImageView_riv_corner_radius, -1);
         mCornerRadii[Corner.TOP_LEFT] =

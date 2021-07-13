@@ -18,7 +18,16 @@
         <attr name="riv_border_color" format="color" />
         <attr name="riv_mutate_background" format="boolean" />
         <attr name="riv_oval" format="boolean" />
-        <attr name="android:scaleType" />
+        <attr name="riv_scaleType">
+            <enum name="matrix" value="0" />
+            <enum name="fitXY" value="1" />
+            <enum name="fitStart" value="2" />
+            <enum name="fitCenter" value="3" />
+            <enum name="fitEnd" value="4" />
+            <enum name="center" value="5" />
+            <enum name="centerCrop" value="6" />
+            <enum name="centerInside" value="7" />
+        </attr>
         <attr name="riv_tile_mode">
             <enum name="clamp" value="0" />
             <enum name="repeat" value="1" />

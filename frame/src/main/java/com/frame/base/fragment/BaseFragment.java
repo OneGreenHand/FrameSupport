@@ -68,10 +68,6 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment imple
         return getResources().getString(res);
     }
 
-    protected int getResInt(int res) {
-        return getResources().getInteger(res);
-    }
-
     /**
      * 是否需要注册BusUtils
      */

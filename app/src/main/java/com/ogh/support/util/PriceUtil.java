@@ -55,9 +55,9 @@ public class PriceUtil {
             return "0";
         try {
             // ① 去掉所有逗号，并把串倒过来。
-            StringBuffer tmp = new StringBuffer().append(num.replaceAll(",", "")).reverse();
+            //  StringBuffer tmp = new StringBuffer().append(subZeroAndDot(num.replaceAll(",", ""))).reverse();
             // ① 把串倒过来
-            //  StringBuffer tmp = new StringBuffer().append(num).reverse();
+            StringBuffer tmp = new StringBuffer().append(subZeroAndDot(num)).reverse();
             // ② 替换这样的串：连续split位数字的串，其右边还有个数字，在串的右边添加逗号
             String retNum = Pattern.compile("(\\d{" + digit + "})(?=\\d)").matcher(tmp.toString()).replaceAll("$1,");
             // ③ 替换完后，再把串倒回去返回

@@ -81,12 +81,16 @@ public class CommonUtil {
      * String s = "<font color='#999999'>温馨提示: </font>" + "<font color='#FF8727'>本商品无质量问题不能退换</font>";
      */
     public static Spanned setHtmlColor(String string) {
-        Spanned spanned;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            spanned = Html.fromHtml(string, Html.FROM_HTML_MODE_COMPACT);
-        else
-            spanned = Html.fromHtml(string);
-        return spanned;
+        if (TextUtils.isEmpty(string))
+            return Html.fromHtml("");
+        else {
+            Spanned spanned;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                spanned = Html.fromHtml(string, Html.FROM_HTML_MODE_COMPACT);
+            else
+                spanned = Html.fromHtml(string);
+            return spanned;
+        }
     }
 
     /**

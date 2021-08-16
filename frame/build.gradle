@@ -38,8 +38,9 @@ dependencies {
     api dependencies.retrofit2.retrofit
     api dependencies.retrofit2.adapter_rxjava3
     api dependencies.retrofit2.converter_gson
-    //autodispose(RxJava、RxAndroid)
+    //autoDispose(RxJava)
     api dependencies.autodispose
+    api dependencies.rxandroid
     //RecyclerViewAdapter
     api dependencies.RecyclerViewAdapter
     //工具类

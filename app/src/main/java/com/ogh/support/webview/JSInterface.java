@@ -50,10 +50,10 @@ public class JSInterface {
         return DeviceUtils.getManufacturer();
     }
 
-    //获取AndroidID
+    //获取唯一设备ID
     @JavascriptInterface
-    public String getAndroidID() {
-        return DeviceUtils.getAndroidID();
+    public String getDeviceId() {
+        return DeviceUtils.getUniqueDeviceId();
     }
 
     //吐司

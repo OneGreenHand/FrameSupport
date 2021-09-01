@@ -47,24 +47,29 @@ public class PriceUtil {
     }
 
     /**
-     * 千位分隔符 10000会变成10,000.00
+     * 千位分隔符 10000会变成10,000
+     * 小数点后的数字不会参与分割
      * digit 每隔几位分割
      */
     public static String QianWeiFenGe(String num, int digit) {
         if (TextUtils.isEmpty(num))
             return "0";
+        String decimal = "";
+        if (num.contains(".")) {//有小数点
+            decimal = num.substring(num.indexOf("."));//小数点后的数字
+            num = num.substring(0, num.indexOf("."));//小数点前的数字
+        }
         try {
-            // ① 去掉所有逗号，并把串倒过来。
-            //  StringBuffer tmp = new StringBuffer().append(subZeroAndDot(num.replaceAll(",", ""))).reverse();
             // ① 把串倒过来
-            StringBuffer tmp = new StringBuffer().append(subZeroAndDot(num)).reverse();
+            StringBuffer tmp = new StringBuffer().append(num).reverse();
             // ② 替换这样的串：连续split位数字的串，其右边还有个数字，在串的右边添加逗号
-            String retNum = Pattern.compile("(\\d{" + digit + "})(?=\\d)").matcher(tmp.toString()).replaceAll("$1,");
+            String retNum = Pattern.compile("(\\d{" + 3 + "})(?=\\d)").matcher(tmp.toString()).replaceAll("$1,");
             // ③ 替换完后，再把串倒回去返回
-            return subZeroAndDot(new StringBuffer().append(retNum).reverse().toString());
+            String resultNum = new StringBuffer().append(retNum).reverse().toString();
+            return !TextUtils.isEmpty(decimal) ? subZeroAndDot(resultNum + decimal) : resultNum;
         } catch (Exception e) {
             e.printStackTrace();
-            return num;
+            return !TextUtils.isEmpty(decimal) ? subZeroAndDot(num + decimal) : num;
         }
     }
 

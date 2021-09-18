@@ -84,18 +84,17 @@ dependencies {
     //LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
     //屏幕适配
-    implementation dependencies.autosize
+    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     //walle读取渠道号
     implementation dependencies.walle
-    //下载工具类
-    implementation dependencies.aria.aria_core
-    annotationProcessor dependencies.aria.aria_compiler
+    //下载上传工具类
+    implementation 'me.laoyuyu.aria:core:3.8.16'
+    annotationProcessor 'me.laoyuyu.aria:compiler:3.8.16'
     //glide图片加载
-    implementation(dependencies.glide.glide) {
+    implementation('com.github.bumptech.glide:glide:4.12.0') {
         exclude group: 'androidx.appcompat.app'
     }
-    //other
-    annotationProcessor dependencies.glide.compiler
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     //微信支付
     implementation "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+"
     // 支付宝支付

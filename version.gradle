@@ -18,52 +18,38 @@ ext {
             retrofit           : "2.9.0",
             okhttp_logging     : "4.9.1",
             utilcode           : "1.30.6",
-            autosize           : "v1.2.1",
-            glide              : "4.12.0",
             immersionbar       : "3.0.0",
-            aria               : "3.8.16",
             walle              : "1.1.7",
-            autodispose        : "2.1.0",
+            autodispose        : "2.1.1",
             rxandroid          : "3.0.0",
             RecyclerViewAdapter: "3.0.4",
     ]
 
     // 依赖具体版本
     deps = [
-            suport             : [
+            suport                 : [
                     design            : 'com.google.android.material:material:1.4.0',
                     appcompat         : 'androidx.appcompat:appcompat:1.3.1',
                     swiperefreshlayout: 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
-                    viewbinding       : 'androidx.databinding:viewbinding:7.0.0',
+                    viewbinding       : 'androidx.databinding:viewbinding:7.0.2',
                     recyclerview       : 'androidx.recyclerview:recyclerview:1.2.1',
             ],
-            retrofit2          : [
+            retrofit2              : [
                     retrofit       : "com.squareup.retrofit2:retrofit:${depVersion.retrofit}",
                     adapter_rxjava3: "com.squareup.retrofit2:adapter-rxjava3:${depVersion.retrofit}",
                     converter_gson : "com.squareup.retrofit2:converter-gson:${depVersion.retrofit}",
             ],
-            glide              : [
-                    glide   : "com.github.bumptech.glide:glide:${depVersion.glide}",
-                    compiler: "com.github.bumptech.glide:compiler:${depVersion.glide}",
-            ],
-            //下载上传工具类
-            aria               : [
-                    aria_core    : "me.laoyuyu.aria:core:${depVersion.aria}",
-                    aria_compiler: "me.laoyuyu.aria:compiler:${depVersion.aria}",
-            ],
             //RecyclerViewAdapter
-            RecyclerViewAdapter: "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depVersion.RecyclerViewAdapter}",
+            RecyclerViewAdapter    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depVersion.RecyclerViewAdapter}",
             //工具类
-            utilcode           : "com.blankj:utilcodex:${depVersion.utilcode}",
-            //屏幕适配
-            autosize           : "com.github.JessYanCoding:AndroidAutoSize:${depVersion.autosize}",
+            utilcode               : "com.blankj:utilcodex:${depVersion.utilcode}",
             //沉浸式状态栏(activity)
-            immersionbar       : "com.gyf.immersionbar:immersionbar:${depVersion.immersionbar}",
+            immersionbar           : "com.gyf.immersionbar:immersionbar:${depVersion.immersionbar}",
             //walle读取渠道号
-            walle              : "com.meituan.android.walle:library:${depVersion.walle}",
+            walle                  : "com.meituan.android.walle:library:${depVersion.walle}",
             //绑定生命周期(RxJava)
             autodispose        : "com.uber.autodispose2:autodispose-androidx-lifecycle:${depVersion.autodispose}",
             rxandroid          : "io.reactivex.rxjava3:rxandroid:${depVersion.rxandroid}",
-            okhttp_logging     : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp_logging}",
+            okhttp_logging         : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp_logging}",
     ]
 }

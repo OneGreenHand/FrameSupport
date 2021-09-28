@@ -20,6 +20,7 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.frame.util.ToastUtil;
 import com.ogh.support.view.dialog.TipDialog;
+import com.ogh.support.widget.HtmlParser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,8 +78,8 @@ public class CommonUtil {
     }
 
     /**
-     * 设置文本大小及颜色
-     * String s = "<font color='#999999'>温馨提示: </font>" + "<font color='#FF8727'>本商品无质量问题不能退换</font>";
+     * 设置支持html标签
+     * String s = "<font color='#999999'>温馨提示</font>";
      */
     public static Spanned setHtmlColor(String string) {
         if (TextUtils.isEmpty(string))
@@ -91,6 +92,14 @@ public class CommonUtil {
                 spanned = Html.fromHtml(string);
             return spanned;
         }
+    }
+
+    /**
+     * 设置支持html标签（额外支持文字大小、删除线,数值不能带有单位,默认就是sp）
+     * String s = "<font color='#999999' size='20'>温馨提示</font>";
+     */
+    public static Spanned setHtmlColor2(String string) {
+        return new HtmlParser().buildSpannedText(string);
     }
 
     /**

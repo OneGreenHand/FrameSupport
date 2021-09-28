@@ -2,32 +2,50 @@ package com.ogh.support.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.frame.base.activity.BaseActivity;
+import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.ogh.support.R;
 import com.ogh.support.databinding.ActivityWebBinding;
 
 /**
- * 可以播放视频的webview
+ * 可以播放视频的WebView
  */
 public class WebActivity extends BaseActivity<ActivityWebBinding> {
 
     @Override
-    protected void initImmersionBar(int color) {//不这样写，如果播放视频全屏，状态栏显示异常
-        ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).statusBarDarkFont(true, 0.2f).init();//状态栏颜色(布局文件设置了fitsSystemWindows="true")
+    protected boolean isImmersionBarEnabled() {
+        return false;
     }
 
     public static void openActivity(Context context) {
         context.startActivity(new Intent(context, WebActivity.class));
     }
 
+    public static void openActivity(Context context, boolean isHorizontalScreen) {
+        Intent intent = new Intent(context, WebActivity.class);
+        intent.putExtra("isHorizontalScreen", isHorizontalScreen);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void init(Bundle savedInstanceState) {
         getWindow().setFormat(PixelFormat.TRANSLUCENT);//为了避免视频闪屏和透明问题
+        boolean isHorizontalScreen = getIntent().getBooleanExtra("isHorizontalScreen", false);
         viewBinding.webView.setProgressBar(viewBinding.pbWebBase);
+        if (isHorizontalScreen) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);//横屏可翻转
+            ImmersionBar.with(this).hideBar(BarHide.FLAG_HIDE_BAR).init();
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//保持屏幕常亮
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//竖屏
+            ImmersionBar.with(this).statusBarColor(R.color.c_FFFFFF).autoStatusBarDarkModeEnable(true, 0.2f).fitsSystemWindows(true).init();
+        }
         viewBinding.webView.loadUrl("https://www.baidu.com");
         //  mWebView.loadUrl("http://debugtbs.qq.com");//用来检测X5内核是否安装
     }

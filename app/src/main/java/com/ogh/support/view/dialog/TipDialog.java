@@ -14,10 +14,10 @@ import com.ogh.support.util.CommonUtil;
  * 通用提示框
  */
 public class TipDialog extends BaseDialog {
-    TextView title;
-    TextView content;
-    TextView cancel;
-    TextView sure;
+    private TextView title;
+    private TextView content;
+    private TextView cancel;
+    private TextView sure;
     private SureCalk sureCalk;
     private CancelCalk cancelCalk;
 

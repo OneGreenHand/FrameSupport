@@ -66,14 +66,14 @@ public class NotificationHelper {
     }
 
     /**
-     * 显示通知栏(8.0以下调用)
+     * 显示通知栏
      */
     public void showNotification() {
         getManager().notify(NOTIFICATION_ID, getNofity("准备下载").build());
     }
 
     /**
-     * 显示通知栏(8.0以上调用)
+     * 获取 Notification
      */
     public Notification getNotification() {
         return getNofity("准备下载").build();
@@ -94,7 +94,7 @@ public class NotificationHelper {
         Intent intentClick = new Intent(mContext, NotificationClickReceiver.class);
         intentClick.setAction("NOTIFICATION_CLICKED");
         intentClick.putExtra("FILE_NAME", fileName);
-        PendingIntent pendingIntentClick = PendingIntent.getBroadcast(mContext, 0, intentClick, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntentClick = PendingIntent.getBroadcast(mContext, 0, intentClick, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Builder builder = getNofity("下载已完成").setContentIntent(pendingIntentClick);
         getManager().notify(NOTIFICATION_ID, builder.build());
     }

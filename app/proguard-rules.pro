@@ -147,17 +147,21 @@ void *(**On*Event);
 -dontskipnonpubliclibraryclasses
 #---------------------------------业务组件实体类---------------------------------
 #主体部分
--keep class com.overseas.pocket.bean.** {*;}
--keep class com.overseas.pocket.service.** {*;}
--keep class com.overseas.pocket.receiver.** {*;}
--keep class com.overseas.pocket.util.** {*;}
--keep class com.overseas.pocket.widget.** {*;}
+-keep class com.ogh.support.databinding.** {*;}
+-keep class com.ogh.support.bean.** {*;}
+-keep class com.ogh.support.service.** {*;}
+-keep class com.ogh.support.receiver.** {*;}
+-keep class com.ogh.support.util.** {*;}
+-keep class com.ogh.support.widget.** {*;}
 #Frame框架部分
 -keep class com.frame.bean.** {*;}
 -keep class com.frame.util.** {*;}
 -keep class com.frame.widget.** {*;}
 -keep class com.frame.base.** {*;}
 #---------------------------------第三方库及jar包-------------------------------
+#Stream
+-keep class java9.lang.** {*;}
+-keep class java9.util.** {*;}
 #com.goole
 -keep class com.goole.gson.** {*;}
 # Gson && protobuf

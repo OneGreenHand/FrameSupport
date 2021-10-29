@@ -152,12 +152,12 @@ public class InstructionsUtils {
 //             intent.setClass(context, getActivityClassName("LoginActivity"));
 //             context.startActivity(intent);
 //            } else {
-            Intent intent = new Intent(context, getActivityClassName(intentUrl.contains("?") ? intentUrl.split("\\?")[0] : intentUrl));
+            Intent intent = new Intent(context, getActivityClassName(intentUrl.contains("@") ? intentUrl.split("@")[0] : intentUrl));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            if (intentUrl.contains("?")) {//说明带参数
-                for (String kv : intentUrl.split("\\?")[1].split("&")) {//拿到？后面的，然后对&分割处理
-                    String k = kv.split("=")[0];//拿到参数名
-                    String v = kv.split("=")[1];//拿到参数
+            if (intentUrl.contains("@")) {//说明带参数
+                for (String kv : intentUrl.split("@")[1].split("\\$")) {//拿到@后面的，然后对$分割处理
+                    String k = kv.substring(0, kv.indexOf("="));//拿到参数名
+                    String v = kv.substring(kv.indexOf("=")).replaceFirst("=", "");//拿到参数
                     intent.putExtra(k, v);
                 }
             }

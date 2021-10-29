@@ -95,8 +95,8 @@ public class CommonUtil {
     }
 
     /**
-     * 设置支持html标签（额外支持文字大小、删除线,数值不能带有单位,默认就是sp）
-     * String s = "<font color='#999999' size='20'>温馨提示</font>";
+     * 设置支持html标签（额外支持文字大小、删除线,单位为px）
+     * String s = "<font color='#999999' size='20px'>温馨提示</font>";
      */
     public static Spanned setHtmlColor2(String string) {
         return new HtmlParser().buildSpannedText(string);

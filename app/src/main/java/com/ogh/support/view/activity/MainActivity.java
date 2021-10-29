@@ -14,7 +14,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.blankj.utilcode.util.AppUtils;
 import com.frame.base.activity.BaseActivity;
 import com.frame.util.ToastUtil;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.ogh.support.R;
 import com.ogh.support.databinding.ActivityMainBinding;

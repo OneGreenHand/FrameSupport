@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.chad.library.adapter.base.module.BaseLoadMoreModule;
 import com.frame.R;
 import com.frame.base.BasePresenter;
@@ -62,37 +63,39 @@ public abstract class BaseSwipeListFragment<T extends ViewBinding, P extends Bas
         return false;
     }
 
+    private OnLoadMoreListener loadMoreListener = new OnLoadMoreListener() {
+        @Override
+        public void onLoadMore() {
+            loadMoreListRequest(page);
+        }
+    };
+
     //自动更新adapter状态
     protected void notifyAdapterStatus(List<AB> data, int pageIndex, int pageCount) {
         int dataSize = data == null ? 0 : data.size();
         if (pageIndex == BaseConfig.ViewPage.START_INDEX) {
+            page = pageIndex;
             if (data == null || data.isEmpty()) {
                 if (UserAdapterEmpty())
                     mBaseAdapter.setList(null);
-                return;
+            } else {
+                if (dataSize >= pageCount) {
+                    page++;
+                    getLoadMoreModule().setOnLoadMoreListener(loadMoreListener);
+                } else
+                    getLoadMoreModule().setOnLoadMoreListener(null);
+                mBaseAdapter.setList(data);
             }
-            page = BaseConfig.ViewPage.START_INDEX;
-            if (dataSize >= pageCount) {
-                getLoadMoreModule().setOnLoadMoreListener(() -> {
-                    if (page > BaseConfig.ViewPage.START_INDEX)
-                        loadMoreListRequest(page);
-                    else
-                        getLoadMoreModule().setEnableLoadMore(false);
-                });
-                page++;
-            } else
-                getLoadMoreModule().setOnLoadMoreListener(null);
-            mBaseAdapter.setList(data);
         } else {
             if (data == null || data.isEmpty()) {
                 getLoadMoreModule().loadMoreEnd(false);
             } else {
                 page++;
                 mBaseAdapter.addData(data);
-                if (dataSize < pageCount) {
-                    getLoadMoreModule().loadMoreEnd(false);
-                } else
+                if (dataSize >= pageCount)
                     getLoadMoreModule().loadMoreComplete();
+                else
+                    getLoadMoreModule().loadMoreEnd(false);
             }
         }
     }
@@ -103,15 +106,8 @@ public abstract class BaseSwipeListFragment<T extends ViewBinding, P extends Bas
 
     @Override
     public void onRefresh() {
-        getLoadMoreModule().loadMoreEnd(false);
         super.onRefresh();
-    }
-
-    @Override
-    public void resetRefreshView() {
-        super.resetRefreshView();
-        if (!getLoadMoreModule().isEnableLoadMore())
-            getLoadMoreModule().setEnableLoadMore(true);
+        getLoadMoreModule().setOnLoadMoreListener(null);
     }
 
     @Override

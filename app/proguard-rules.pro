@@ -11,6 +11,7 @@
 # 保留了继承自Activity、Application这些类的子类
 # 因为这些子类有可能被外部调用
 # 比如第一行就保证了所有Activity的子类不要被混淆
+-keepattributes Exceptions,InnerClasses,... # 保护异常内部类不被混淆
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
@@ -60,6 +61,12 @@ public static **[] values();
 public static ** valueOf(java.lang.String);
 }
 # 保留自定义控件(继承自View)不能被混淆
+-keepclasseswithmembers class * { # 保持自定义控件类不被混淆
+   public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {# 保持自定义控件类不被混淆
+   public <init>(android.content.Context, android.util.AttributeSet, int);
+}
 -keep public class * extends android.view.View {
 public <init>(android.content.Context);
 public <init>(android.content.Context, android.util.AttributeSet);
@@ -83,10 +90,6 @@ public static final android.os.Parcelable$Creator *;
       private void readObject(java.io.ObjectInputStream);
       java.lang.Object writeReplace();
       java.lang.Object readResolve();
-}
-# 对R文件下的所有类及其方法，都不能被混淆
--keep public class com.foresee.R$*{
-public static final int *;
 }
 #避免资源混淆
 -keep class **.R$* {*;}
@@ -146,6 +149,11 @@ void *(**On*Event);
 # 不混淆第三方引用的库
 -dontskipnonpubliclibraryclasses
 #---------------------------------业务组件实体类---------------------------------
+# 对R文件下的所有类及其方法，都不能被混淆
+###注意com.demo.demo是你的包名
+-keep public class com.ogh.support.R$*{
+public static final int *;
+}
 #主体部分
 -keep class com.ogh.support.databinding.** {*;}
 -keep class com.ogh.support.bean.** {*;}

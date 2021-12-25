@@ -17,7 +17,7 @@ ext {
     depVersion = [
             retrofit           : "2.9.0",
             okhttp_logging     : "4.9.2",
-            utilcode           : "1.30.6",
+            utilcode           : "1.31.0",
             immersionbar       : "3.0.0",
             walle              : "1.1.7",
             autodispose        : "2.1.1",

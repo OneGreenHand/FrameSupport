@@ -16,6 +16,8 @@ public abstract class CustomClickListener implements View.OnClickListener {
         this.timeInterval = interval;
     }
 
+    public abstract void onSingleClick(View v);
+
     @Override
     public void onClick(View v) {
         long nowTime = System.currentTimeMillis();
@@ -24,7 +26,5 @@ public abstract class CustomClickListener implements View.OnClickListener {
             mLastClickTime = nowTime;
         }
     }
-
-    public abstract void onSingleClick(View v);
 
 }

@@ -37,7 +37,8 @@ public abstract class BaseRequestActivity<T extends ViewBinding, P extends BaseP
         ToastUtil.showShortToast(data.msg);
     }
 
-    protected abstract void reRequest();
+    protected void reRequest() {
+    }
 
     @Override
     public void requestError(Throwable e, Object tag) {

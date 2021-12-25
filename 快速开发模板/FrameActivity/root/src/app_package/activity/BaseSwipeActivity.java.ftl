@@ -18,10 +18,6 @@ public class ${activityClass}Activity extends BaseSwipeActivity<Activity${activi
     }
 
     @Override
-    protected void reRequest() {
-    }
-
-    @Override
     public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
     }
 

@@ -14,10 +14,6 @@ public class ${activityClass}Activity extends BaseRequestActivity<Activity${acti
     }
 
     @Override
-    protected void reRequest() {
-    }
-
-    @Override
     public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
     }
 

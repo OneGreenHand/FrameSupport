@@ -42,10 +42,6 @@ public class RefreshRequestActivity extends BaseSwipeListActivity<LayoutHeadFoot
     }
 
     @Override
-    protected void reRequest() {
-    }
-
-    @Override
     protected void init(Bundle savedInstanceState) {
         viewBinding.titlebar.setTitle("下拉刷新上拉加载示例");
         mPresenter.getDuanZiList(1);

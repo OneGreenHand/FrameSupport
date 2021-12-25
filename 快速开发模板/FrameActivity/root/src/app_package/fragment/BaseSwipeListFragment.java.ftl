@@ -31,10 +31,6 @@ public class ${activityClass}Fragment extends BaseSwipeListFragment<Fragment${ac
     }
 
     @Override
-    protected void reRequest() {
-    }
-
-    @Override
     public void requestSuccess(BaseBean data, Object tag, int pageIndex, int pageCount) {
     }
 

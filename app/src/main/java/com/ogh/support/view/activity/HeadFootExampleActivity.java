@@ -31,10 +31,6 @@ public class HeadFootExampleActivity extends BaseSwipeActivity<LayoutHeadFootExa
     }
 
     @Override
-    protected void reRequest() {
-    }
-
-    @Override
     protected void init(Bundle savedInstanceState) {
         viewBinding.titlebar.setTitle("添加头部和脚部的示例");
         viewBinding.frameRecycleView.setLayoutManager(new LinearLayoutManager(mContext));

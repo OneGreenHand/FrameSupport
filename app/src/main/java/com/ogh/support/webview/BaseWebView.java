@@ -60,6 +60,7 @@ public class BaseWebView extends WebView {
         webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
         webSettings.setDomStorageEnabled(true);//DOM存储API是否可用
         webSettings.setDatabaseEnabled(true);//数据库存储API是否可用
+        webSettings.setAllowFileAccess(true);//使用 File 协议
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)//支持同时加载Https和Http混合模式  
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不缓存

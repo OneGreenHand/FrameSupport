@@ -27,6 +27,7 @@ android {
 dependencies {
     def dependencies = rootProject.ext.deps
     // Support libraries
+    api dependencies.suport.gson
     api dependencies.suport.appcompat
     api dependencies.suport.design
     api dependencies.suport.swiperefreshlayout

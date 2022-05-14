@@ -49,6 +49,36 @@ public class GlideImageUtil {
     }
 
     /**
+     * 播放Gif图
+     */
+    public static void showGifImage(Context context, String url, ImageView view) {
+        if (isDestroy(context))
+            return;
+        Glide.with(context)
+                .asGif()
+                .load(url)
+                .into(view);
+    }
+
+    /**
+     * 播放Gif图
+     */
+    public static void showGif2Image(Context context, String url, ImageView view) {
+        if (TextUtils.isEmpty(url) || isDestroy(context))
+            return;
+        if (url.endsWith(".gif")) {
+            Glide.with(context)
+                    .asGif()
+                    .load(url)
+                    .into(view);
+        } else {
+            Glide.with(context)
+                    .load(url)
+                    .into(view);
+        }
+    }
+
+    /**
      * 加载图片(跳过缓存,一般是频繁更换的图片)
      */
     public static void showImageNoCache(Context context, String url, ImageView view) {
@@ -73,18 +103,20 @@ public class GlideImageUtil {
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                        if (resource == null)
+                            return;
                         view.setImageBitmap(resource);
-                        //获取原图的宽高
-                        int width = resource.getWidth();
+                        int width = resource.getWidth();//获取原图的宽高
                         int height = resource.getHeight();
                         //获取imageView的宽
                         int imageViewWidth = view.getWidth();
-                        //计算缩放比例
-                        float sy = (float) (imageViewWidth * 0.1) / (float) (width * 0.1);
-                        //计算图片等比例放大后的高
-                        int imageViewHeight = (int) (height * sy);
                         ViewGroup.LayoutParams params = view.getLayoutParams();
-                        params.height = imageViewHeight;
+                        if (imageViewWidth <= 0)//修复等比例缩放bug
+                            imageViewWidth = params.width;
+                        //计算缩放比例
+                        float sy = (float) (imageViewWidth * 0.2) / (float) (width * 0.2);
+                        //计算图片等比例放大后的高
+                        params.height = (int) (height * sy);
                         view.setLayoutParams(params);
                     }
                 });

@@ -18,7 +18,7 @@ ext {
             retrofit           : "2.9.0",
             okhttp_logging     : "4.9.3",
             utilcode           : "1.31.0",
-            immersionbar       : "3.2.1",
+            immersionbar       : "3.2.2",
             walle              : "1.1.7",
             autodispose        : "2.1.1",
             rxandroid          : "3.0.0",
@@ -27,29 +27,30 @@ ext {
 
     // 依赖具体版本
     deps = [
-            suport                 : [
-                    design            : 'com.google.android.material:material:1.5.0',
+            suport             : [
+                    gson              : 'com.google.code.gson:gson:2.9.0',
+                    design            : 'com.google.android.material:material:1.6.0',
                     appcompat         : 'androidx.appcompat:appcompat:1.4.1',
                     swiperefreshlayout: 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
-                    viewbinding       : 'androidx.databinding:viewbinding:7.1.2',
-                    recyclerview       : 'androidx.recyclerview:recyclerview:1.2.1',
+                    viewbinding       : 'androidx.databinding:viewbinding:7.2.0',
+                    recyclerview      : 'androidx.recyclerview:recyclerview:1.2.1',
             ],
-            retrofit2              : [
+            retrofit2          : [
                     retrofit       : "com.squareup.retrofit2:retrofit:${depVersion.retrofit}",
                     adapter_rxjava3: "com.squareup.retrofit2:adapter-rxjava3:${depVersion.retrofit}",
                     converter_gson : "com.squareup.retrofit2:converter-gson:${depVersion.retrofit}",
             ],
             //RecyclerViewAdapter
-            RecyclerViewAdapter    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depVersion.RecyclerViewAdapter}",
+            RecyclerViewAdapter: "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depVersion.RecyclerViewAdapter}",
             //工具类
-            utilcode               : "com.blankj:utilcodex:${depVersion.utilcode}",
+            utilcode           : "com.blankj:utilcodex:${depVersion.utilcode}",
             //沉浸式状态栏(activity)
-            immersionbar           : "com.geyifeng.immersionbar:immersionbar:${depVersion.immersionbar}",
+            immersionbar       : "com.geyifeng.immersionbar:immersionbar:${depVersion.immersionbar}",
             //walle读取渠道号
-            walle                  : "com.meituan.android.walle:library:${depVersion.walle}",
+            walle              : "com.meituan.android.walle:library:${depVersion.walle}",
             //绑定生命周期(RxJava)
             autodispose        : "com.uber.autodispose2:autodispose-androidx-lifecycle:${depVersion.autodispose}",
             rxandroid          : "io.reactivex.rxjava3:rxandroid:${depVersion.rxandroid}",
-            okhttp_logging         : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp_logging}",
+            okhttp_logging     : "com.squareup.okhttp3:logging-interceptor:${depVersion.okhttp_logging}",
     ]
 }

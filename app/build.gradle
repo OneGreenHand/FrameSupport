@@ -15,9 +15,10 @@ android {
         versionName version.versionName
         multiDexEnabled true
         ndk {
-            abiFilters 'armeabi-v7a','arm64-v8a'
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
-        manifestPlaceholders = [CHANNEL: "MeiZu",]//可用于三方sdk使用，例如极光推送的参数，可在AndroidManifest中使用，最后获取到这个参数
+        manifestPlaceholders = [CHANNEL: "MeiZu",]
+//可用于三方sdk使用，例如极光推送的参数，可在AndroidManifest中使用，最后获取到这个参数
     }
     signingConfigs {
         release {
@@ -36,10 +37,10 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            debuggable false//是否允许调试
-            minifyEnabled false//是否开启代码混淆
-            zipAlignEnabled false//是否优化apk文件，将apk文件中未压缩的数据在4个字节边界上对齐
-            shrinkResources false//是否去除无用资源，任何在编译过程中没有用到的资源或者代码都会被删除，可以有效减小apk体积
+            debuggable true//是否允许调试
+            minifyEnabled true//是否开启代码混淆
+            zipAlignEnabled true//是否优化apk文件，将apk文件中未压缩的数据在4个字节边界上对齐
+            shrinkResources true//是否去除无用资源，任何在编译过程中没有用到的资源或者代码都会被删除，可以有效减小apk体积
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -59,30 +60,26 @@ android {
 //            jniLibs.srcDirs = ['src/main/jniLibs']
 //        }
 //    }
-    buildFeatures{
-        viewBinding=true
+//    repositories {//依赖aar必须填写这个
+//        flatDir {
+//            dirs 'libs'
+//        }
+//    }
+    buildFeatures {
+        viewBinding = true
     }
     dexOptions {//解决编译内存溢出问题
         dexInProcess true
         preDexLibraries true
         javaMaxHeapSize "8g"
     }
-    repositories {//依赖aar必须填写这个
-        flatDir {
-            dirs 'libs'
-        }
-    }
 }
 
 dependencies {
     def dependencies = rootProject.ext.deps
     implementation project(':frame')
-    //测试用的
-    implementation 'androidx.test.ext:junit:1.1.3'
     //分Dex
     implementation 'androidx.multidex:multidex:2.0.1'
-    //LeakCanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
     //屏幕适配
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     //walle读取渠道号
@@ -95,8 +92,8 @@ dependencies {
         exclude group: 'androidx.appcompat.app'
     }
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+    //支付宝
+    implementation 'com.alipay.sdk:alipaysdk-android:+@aar'
     //微信支付
-    implementation "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+"
-    // 支付宝支付
-    implementation(name: 'alipaysdk-15.8.03.210428205839', ext: 'aar')
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android:+'
 }

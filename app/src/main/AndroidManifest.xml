@@ -14,11 +14,6 @@
 
     <!--三方可见性适配-->
     <queries>
-        <package android:name="com.eg.android.AlipayGphone" /><!--支付宝-->
-        <package android:name="hk.alipay.wallet" /> <!--AlipayHK-->
-        <package android:name="com.tencent.mm" /> <!--微信-->
-        <package android:name="com.tencent.mobileqq" /> <!--QQ-->
-        <package android:name="com.tencent.tim" />   <!--Tim-->
         <intent><!--好像是万能写法-->
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
@@ -100,6 +95,7 @@
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
+            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 微信支付 -->

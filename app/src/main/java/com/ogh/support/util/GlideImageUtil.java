@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
@@ -114,9 +115,34 @@ public class GlideImageUtil {
                         if (imageViewWidth <= 0)//修复等比例缩放bug
                             imageViewWidth = params.width;
                         //计算缩放比例
-                        float sy = (float) (imageViewWidth * 0.2) / (float) (width * 0.2);
+                        float sy = (float) (imageViewWidth * 0.1) / (float) (width * 0.1);
                         //计算图片等比例放大后的高
                         params.height = (int) (height * sy);
+                        view.setLayoutParams(params);
+                    }
+                });
+    }
+
+    /**
+     * 等比例缩放图片
+     */
+    public static void showWrapImage2(Context context, String url, ImageView view) {
+        if (isDestroy(context))
+            return;
+        Glide.with(context)
+                .asBitmap()
+                .load(url)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                        view.setImageBitmap(resource);
+                        ViewGroup.LayoutParams params = view.getLayoutParams();
+                        params.width = resource.getWidth();
+                        int height = resource.getHeight();
+                        int maxHeight = SizeUtils.dp2px(350);
+                        if (height > maxHeight)
+                            height = maxHeight;
+                        params.height = height;
                         view.setLayoutParams(params);
                     }
                 });

@@ -10,10 +10,38 @@ import com.frame.util.CustomClickListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import io.reactivex.rxjava3.disposables.Disposable;
+
 public class BaseQuickHolder extends BaseViewHolder {
 
     public BaseQuickHolder(View view) {
         super(view);
+    }
+
+    private Disposable mDisposable;
+
+    /**
+     * 设置倒计时
+     */
+    public void addDisposable(Disposable disposable) {
+        mDisposable = disposable;
+    }
+
+    /**
+     * 获取计时
+     */
+    public Disposable getDisposable() {
+        return mDisposable;
+    }
+
+    /**
+     * 销毁倒计时
+     */
+    public void disDisposable() {
+        if (mDisposable != null && !mDisposable.isDisposed()) {
+            mDisposable.dispose();
+            mDisposable = null;
+        }
     }
 
     /**

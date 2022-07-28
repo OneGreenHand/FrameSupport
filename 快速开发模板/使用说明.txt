@@ -1,3 +1,3 @@
-仅兼容Android Studio 4.0.2及以下
+仅适用于Android Studio 4.0.2及以下
 将FrameActivity文件夹放置于AS安装目录下的\plugins\android\lib\templates\activities目录
-重启Stuido,创建activity就能看到该模板
+重启Studio,选择创建activity就能看到该模板

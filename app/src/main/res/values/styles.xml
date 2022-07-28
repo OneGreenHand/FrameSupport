@@ -8,6 +8,11 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
+    <!--CheckBox样式-->
+    <style name="Common_Check_Box_Style" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/c_DADADA</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
     <!--解决微信支付回调页面闪动问题-->
     <style name="wx_theme" parent="AppTheme">
         <item name="android:windowBackground">@android:color/transparent</item>

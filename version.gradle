@@ -28,11 +28,11 @@ ext {
     // 依赖具体版本
     deps = [
             suport             : [
-                    gson              : 'com.google.code.gson:gson:2.9.0',
+                    gson              : 'com.google.code.gson:gson:2.9.1',
                     design            : 'com.google.android.material:material:1.6.1',
                     appcompat         : 'androidx.appcompat:appcompat:1.4.2',
                     swiperefreshlayout: 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
-                    viewbinding       : 'androidx.databinding:viewbinding:7.2.1',
+                    viewbinding       : 'androidx.databinding:viewbinding:7.2.2',
                     recyclerview      : 'androidx.recyclerview:recyclerview:1.2.1',
             ],
             retrofit2          : [

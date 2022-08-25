@@ -86,37 +86,28 @@ public class PriceUtil {
         return s;
     }
 
-    public static Spannable setLeftPriceSp(String company, int font1, int font2, int color, String text) {//￥99(单色)
-        Spannable sp = new SpannableString(company + text);
-        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, company.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(font2, true), company.length(), company.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(color), 0, company.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    public static Spannable setPriceSp(String text1, String text2, int font, int color1, int color2) {//双色同字号
+        Spannable sp = new SpannableString(text1 + text2);
+        sp.setSpan(new AbsoluteSizeSpan(font, true), 0, text1.length() + text2.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color1), 0, text1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color2), text1.length(), text1.length() + text2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sp;
     }
 
-    public static Spannable setLeftPriceSp(String company, int font1, int font2, int color1, int color2, String text) {//￥99(双色)
-        Spannable sp = new SpannableString(company + text);
-        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, company.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(font2, true), company.length(), company.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(color1), 0, company.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(color2), company.length(), company.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    public static Spannable setPriceSp2(String text1, String text2, int font1, int font2, int color) {//单色不同字号
+        Spannable sp = new SpannableString(text1 + text2);
+        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, text1.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(font2, true), text1.length(), text1.length() + text2.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color), 0, text1.length() + text2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sp;
     }
 
-    public static Spannable setRightPriceSp(String text, String company, int font1, int font2, int color) {//99金币(单色)
-        Spannable sp = new SpannableString(text + company);
-        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(font2, true), text.length(), company.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(color), 0, company.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return sp;
-    }
-
-    public static Spannable setRightPriceSp(String text, int font1, int font2, int color1, int color2, String company) {//99金币(双色)
-        Spannable sp = new SpannableString(text + company);
-        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(font2, true), text.length(), company.length() + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(color1), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(color2), text.length(), company.length() + text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    public static Spannable setPriceSp(String text1, String text2, int font1, int font2, int color1, int color2) {//双色不同字号
+        Spannable sp = new SpannableString(text1 + text2);
+        sp.setSpan(new AbsoluteSizeSpan(font1, true), 0, text1.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(font2, true), text1.length(), text1.length() + text2.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color1), 0, text1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(color2), text1.length(), text1.length() + text2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sp;
     }
 }

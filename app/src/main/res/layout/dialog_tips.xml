@@ -10,7 +10,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@mipmap/img_dialog_tips"
+        android:drawableStart="@mipmap/img_dialog_tips"
         android:drawablePadding="10dp"
         android:text="@string/tips"
         android:textColor="@color/c_333333"

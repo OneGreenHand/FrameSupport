@@ -11,8 +11,8 @@
         android:id="@+id/img_finish"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:paddingLeft="20dp"
-        android:paddingRight="15dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="15dp"
         tools:src="@mipmap/back_white" />
 
     <TextView
@@ -32,8 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textColor="@color/c_FFFFFF"
         android:textSize="@dimen/font_14sp"
         android:visibility="gone"

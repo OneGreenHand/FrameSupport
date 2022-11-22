@@ -7,6 +7,7 @@
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
+        <!--        <item name="android:textDirection">locale</item>-->
     </style>
     <!--CheckBox样式-->
     <style name="Common_Check_Box_Style" parent="Theme.AppCompat.Light">
@@ -40,7 +41,4 @@
         <item name="android:textDirection">locale</item>
     </style>
 
-    <style name="ETl_Text">
-        <item name="android:textDirection">locale</item>
-    </style>
 </resources>

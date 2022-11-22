@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.frame.util.CustomClickListener;
@@ -19,14 +20,14 @@ import com.ogh.support.R;
  * @describe 通用标题栏
  */
 public class TitleBarLayout extends LinearLayout {
-    private int backgroundColor = getResources().getColor(R.color.colorPrimary);//背景颜色
-    private int backImage = R.mipmap.back_white;//左侧返回图标
+    private int backgroundColor = Color.WHITE;//背景颜色
+    private int backImage = R.mipmap.back_black;//左侧返回图标
     private boolean backShow = true;//返回图标是否显示
     private String tText = getResources().getString(R.string.app_name);//标题文字
-    private int tTextColor = Color.WHITE;//标题文字颜色
+    private int tTextColor = Color.BLACK;//标题文字颜色
     private boolean rTextIsShow;//右侧文字是否显示
     private String rText;//右侧文字
-    private int rTextColor = Color.WHITE;//右侧文字颜色
+    private int rTextColor = Color.BLACK;//右侧文字颜色
     //控件
     private TextView title;
     private TextView other;
@@ -51,14 +52,14 @@ public class TitleBarLayout extends LinearLayout {
     private void initView(Context context, AttributeSet attrs) {
         if (attrs != null) {
             TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TitleBarLayout);
-            backgroundColor = array.getColor(R.styleable.TitleBarLayout_TblBackgroundColor, getResources().getColor(R.color.colorPrimary));
+            backgroundColor = array.getColor(R.styleable.TitleBarLayout_TblBackgroundColor, Color.WHITE);
             backShow = array.getBoolean(R.styleable.TitleBarLayout_TblBackShow, true);
-            backImage = array.getResourceId(R.styleable.TitleBarLayout_TblBackImage, R.mipmap.back_white);
+            backImage = array.getResourceId(R.styleable.TitleBarLayout_TblBackImage, R.mipmap.back_black);
             tText = array.getString(R.styleable.TitleBarLayout_TblText);
-            tTextColor = array.getColor(R.styleable.TitleBarLayout_TblTextColor, Color.WHITE);
+            tTextColor = array.getColor(R.styleable.TitleBarLayout_TblTextColor, Color.BLACK);
             rTextIsShow = array.getBoolean(R.styleable.TitleBarLayout_TblRTextShow, false);
             rText = array.getString(R.styleable.TitleBarLayout_TblRText);
-            rTextColor = array.getColor(R.styleable.TitleBarLayout_TblRTextColor, Color.WHITE);
+            rTextColor = array.getColor(R.styleable.TitleBarLayout_TblRTextColor, Color.BLACK);
             array.recycle();
         }
         findId();
@@ -66,7 +67,7 @@ public class TitleBarLayout extends LinearLayout {
 
     private void findId() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_titlebar, this);
-        LinearLayout layout_title = view.findViewById(R.id.layout_title);
+        RelativeLayout layout_title = view.findViewById(R.id.layout_title);
         ImageView imgFinish = view.findViewById(R.id.img_finish);
         title = view.findViewById(R.id.app_title);
         other = view.findViewById(R.id.other);

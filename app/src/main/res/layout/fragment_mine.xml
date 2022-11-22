@@ -11,6 +11,7 @@
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:paddingTop="15dp"
+        android:visibility="gone"
         android:paddingBottom="15dp"
         android:text="网络请求示例一: 无数据空布局显示"
         android:textColor="@color/c_FFFFFF" />
@@ -22,6 +23,7 @@
         android:background="@color/c_999999"
         android:gravity="center"
         android:paddingTop="15dp"
+        android:visibility="gone"
         android:paddingBottom="15dp"
         android:text="网络请求示例二: 添加头部和底部"
         android:textColor="@color/c_FFFFFF" />
@@ -33,6 +35,7 @@
         android:background="@color/c_FF0000"
         android:gravity="center"
         android:paddingTop="15dp"
+        android:visibility="gone"
         android:paddingBottom="15dp"
         android:text="网络请求示例三: 下拉刷新和上拉加载"
         android:textColor="@color/c_FFFFFF" />

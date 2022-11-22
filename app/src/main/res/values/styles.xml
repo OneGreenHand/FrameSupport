@@ -36,7 +36,7 @@
         <item name="android:background">@null</item>
         <!-- 适配RTL -->
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:gravity">start</item>
+        <item name="android:gravity">start|center_vertical</item>
         <item name="android:textDirection">locale</item>
     </style>
 

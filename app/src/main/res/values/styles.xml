@@ -7,7 +7,6 @@
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
-        <!--        <item name="android:textDirection">locale</item>-->
     </style>
     <!--CheckBox样式-->
     <style name="Common_Check_Box_Style" parent="Theme.AppCompat.Light">
@@ -36,8 +35,6 @@
         <item name="android:textCursorDrawable">@drawable/shape_input_cursor</item>
         <item name="android:background">@null</item>
         <!-- 适配RTL -->
-        <item name="android:textAlignment">viewStart</item>
-        <item name="android:gravity">start|center_vertical</item>
         <item name="android:textDirection">locale</item>
     </style>
 
